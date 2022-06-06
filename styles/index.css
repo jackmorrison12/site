@@ -1,10 +1,3 @@
-/* Tailwind Setup */
-/* purgecss start ignore */
-@tailwind base;
-@tailwind components;
-/* purgecss end ignore */
-@tailwind utilities;
-
 /*
   CSS Reset - Based on following blog post:
   https://www.joshwcomeau.com/css/custom-css-reset/
