@@ -45,3 +45,10 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/*
+  Fonts
+*/
+html {
+  font-family: 'Poppins', sans-serif;
+}
