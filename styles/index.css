@@ -52,3 +52,108 @@ h6 {
 html {
   font-family: 'Poppins', sans-serif;
 }
+
+/* 
+  Colours 
+*/
+@import '@radix-ui/colors/mint.css';
+@import '@radix-ui/colors/gray.css';
+@import '@radix-ui/colors/mintDark.css';
+@import '@radix-ui/colors/grayDark.css';
+@import '@radix-ui/colors/pink.css';
+@import '@radix-ui/colors/blue.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/teal.css';
+
+:root {
+  --accentBase: var(--mint1);
+  --accentBgSubtle: var(--mint2);
+  --accentBg: var(--mint3);
+  --accentBgHover: var(--mint4);
+  --accentBgActive: var(--mint5);
+  --accentLine: var(--mint6);
+  --accentBorder: var(--mint7);
+  --accentBorderHover: var(--mint8);
+  --accentSolid: var(--mint9);
+  --accentSolidHover: var(--mint10);
+  --accentText: var(--mint11);
+  --accentTextContrast: var(--mint12);
+
+  --greyBase: var(--gray1);
+  --greyBgSubtle: var(--gray2);
+  --greyBg: var(--gray3);
+  --greyBgHover: var(--gray4);
+  --greyBgActive: var(--gray5);
+  --greyLine: var(--gray6);
+  --greyBorder: var(--gray7);
+  --greyBorderHover: var(--gray8);
+  --greySolid: var(--gray9);
+  --greySolidHover: var(--gray10);
+  --greyText: var(--gray11);
+  --greyTextContrast: var(--gray12);
+}
+
+.blue-pink-theme {
+  --accentBase: var(--pink1);
+  --accentBgSubtle: var(--pink2);
+  --accentBg: var(--pink3);
+  --accentBgHover: var(--pink4);
+  --accentBgActive: var(--pink5);
+  --accentLine: var(--pink6);
+  --accentBorder: var(--pink7);
+  --accentBorderHover: var(--pink8);
+  --accentSolid: var(--pink9);
+  --accentSolidHover: var(--pink10);
+  --accentText: var(--pink11);
+  --accentTextContrast: var(--pink12);
+
+  --greyBase: var(--blue12);
+  --greyBgSubtle: var(--blue11);
+  --greyBg: var(--blue10);
+  --greyBgHover: var(--blue9);
+  --greyBgActive: var(--blue8);
+  --greyLine: var(--blue7);
+  --greyBorder: var(--blue6);
+  --greyBorderHover: var(--blue5);
+  --greySolid: var(--blue4);
+  --greySolidHover: var(--blue3);
+  --greyText: var(--blue2);
+  --greyTextContrast: var(--blue1);
+}
+
+.green-orange-theme {
+  --accentBase: var(--pink1);
+  --accentBgSubtle: var(--orange2);
+  --accentBg: var(--orange3);
+  --accentBgHover: var(--orange4);
+  --accentBgActive: var(--orange5);
+  --accentLine: var(--orange6);
+  --accentBorder: var(--orange7);
+  --accentBorderHover: var(--orange8);
+  --accentSolid: var(--orange9);
+  --accentSolidHover: var(--orange10);
+  --accentText: var(--orange11);
+  --accentTextContrast: var(--orange12);
+
+  --greyBase: var(--teal12);
+  --greyBgSubtle: var(--teal11);
+  --greyBg: var(--teal10);
+  --greyBgHover: var(--teal9);
+  --greyBgActive: var(--teal8);
+  --greyLine: var(--teal7);
+  --greyBorder: var(--teal6);
+  --greyBorderHover: var(--teal5);
+  --greySolid: var(--teal4);
+  --greySolidHover: var(--teal3);
+  --greyText: var(--teal2);
+  --greyTextContrast: var(--teal1);
+}
+
+html {
+  background-color: var(--greyBase);
+  color: var(--greyTextContrast);
+}
+
+a {
+  color: var(--accentSolid);
+}
