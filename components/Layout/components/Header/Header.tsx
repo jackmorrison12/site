@@ -29,7 +29,7 @@ const Header = ({ title }: HeaderProps) => {
         {navViewable && (
           <nav className={styles.nav}>
             {headerLinks.map((link) => (
-              <Link href={link.url}>
+              <Link href={link.url} key={link.url}>
                 <a className={`${styles.link} ${router.pathname === link.url ? styles.activeLink : ''}`}>
                   {link.emoji} {link.name}
                 </a>
