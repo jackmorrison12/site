@@ -1,0 +1,38 @@
+.title {
+  display: grid;
+  grid-template-columns: 10fr 1fr 1fr;
+  grid-template-rows: auto;
+  /* background-color: var(--greyBgSubtle); */
+  padding: 15px;
+  align-items: center;
+}
+
+.nav {
+  display: grid;
+  /* at least 95px */
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+  justify-items: center;
+  /* background-color: var(--greyBgSubtle); */
+  grid-gap: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+.link {
+  text-decoration-line: none;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.link:hover {
+  background-color: var(--greyBgHover);
+}
+
+.activeLink {
+  background-color: var(--greyBgActive);
+}

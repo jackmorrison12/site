@@ -1,0 +1,25 @@
+.app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+}
+
+.app > header {
+  grid-area: header;
+  border-bottom: 1px solid var(--greyLine);
+}
+
+.app > main {
+  grid-area: main;
+  padding: 15px 5px 10px 5px;
+}
+
+.app > footer {
+  grid-area: footer;
+  border-top: 1px solid var(--greyLine);
+}
