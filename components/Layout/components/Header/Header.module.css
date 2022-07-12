@@ -1,23 +1,24 @@
+.header {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .title {
   display: grid;
   grid-template-columns: 10fr 1fr 1fr;
   grid-template-rows: auto;
   /* background-color: var(--greyBgSubtle); */
-  padding: 15px;
+  padding: 5px;
   align-items: center;
 }
 
 .nav {
   display: grid;
-  /* at least 95px */
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   justify-items: center;
-  /* background-color: var(--greyBgSubtle); */
-  grid-gap: 80px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
+  column-gap: 40px;
+  padding-bottom: 5px;
 }
 
 .link {
@@ -35,4 +36,29 @@
 
 .activeLink {
   background-color: var(--greyBgActive);
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+  .nav {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Laptop/Desktop */
+@media (min-width: 75em) {
+  .nav {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }

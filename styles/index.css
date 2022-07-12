@@ -13,6 +13,8 @@
 html,
 body {
   height: 100%;
+  max-width: 1440px;
+  margin: auto;
 }
 body {
   line-height: 1.5;

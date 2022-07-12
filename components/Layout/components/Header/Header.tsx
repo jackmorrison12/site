@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { HeaderProps } from './Header.types';
@@ -8,10 +8,12 @@ import { headerLinks } from './Header.data';
 
 import { useRouter } from 'next/router';
 
-const Header = ({ title }: HeaderProps) => {
-  const router = useRouter();
+import { Squash as Hamburger } from 'hamburger-react';
+import { useTheme } from 'next-themes';
+import { useHeader } from './Header.hooks';
 
-  const [navViewable, setNavViewable] = useState(false);
+const Header = ({ title }: HeaderProps) => {
+  const { router, navViewable, setNavViewable, mounted, theme, setTheme, themes } = useHeader();
 
   return (
     <>
@@ -23,8 +25,23 @@ const Header = ({ title }: HeaderProps) => {
       <header className={styles.header}>
         <div className={styles.title}>
           <h3>{title ?? 'Jack Morrison'}</h3>
-          <div>Theme</div>
-          <button onClick={() => setNavViewable(!navViewable)}>Hamburger</button>
+          {mounted && (
+            <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+              {themes.map((t) => (
+                <option value={t}>{t}</option>
+              ))}
+            </select>
+          )}
+          <div style={{ marginLeft: 'auto' }}>
+            <Hamburger
+              toggled={navViewable}
+              toggle={setNavViewable}
+              size={20}
+              duration={0.2}
+              color={'var(--greyText)'}
+              rounded
+            />
+          </div>
         </div>
         {navViewable && (
           <nav className={styles.nav}>
