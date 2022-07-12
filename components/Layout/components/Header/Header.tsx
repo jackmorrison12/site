@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { HeaderProps } from './Header.types';
+import { Squash as Hamburger } from 'hamburger-react';
 
 import styles from './Header.module.css';
 import { headerLinks } from './Header.data';
-
-import { useRouter } from 'next/router';
-
-import { Squash as Hamburger } from 'hamburger-react';
-import { useTheme } from 'next-themes';
 import { useHeader } from './Header.hooks';
+import { HeaderProps } from './Header.types';
 
 const Header = ({ title }: HeaderProps) => {
   const { router, navViewable, setNavViewable, mounted, theme, setTheme, themes } = useHeader();
@@ -28,7 +24,9 @@ const Header = ({ title }: HeaderProps) => {
           {mounted && (
             <select value={theme} onChange={(e) => setTheme(e.target.value)}>
               {themes.map((t) => (
-                <option value={t}>{t}</option>
+                <option key={t} value={t}>
+                  {t}
+                </option>
               ))}
             </select>
           )}
