@@ -6,11 +6,11 @@ import styles from './Footer.module.css';
 const Footer = () => (
   <footer className={styles.footer}>
     <div className={styles.intro}>
-      <h3>Hey, I'm Jack 👋</h3>
+      <h3>Hey, I&apos;m Jack 👋</h3>
       <p>
-        Congrats, you've made it all the way down to the bottom 🎉 Down here you can find all of those fun easter egg
-        links, as well as the boring ones every site has. I've also picked out some of the ones people find most
-        popular.
+        Congrats, you&apos;ve made it all the way down to the bottom 🎉 Down here you can find all of those fun easter
+        egg links, as well as the boring ones every site has. I&apos;ve also picked out some of the ones people find
+        most popular.
       </p>
     </div>
     <div className={styles.useful}>
