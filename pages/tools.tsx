@@ -1,10 +1,10 @@
 import Layout from '../components/Layout/Layout';
 
-const FairUsePage = () => (
-  <Layout title="Fair Use Policy">
-    <h1>Fair Use Policy</h1>
-    <p>Who can use the code and how to reference it</p>
+const ToolsPage = () => (
+  <Layout title="Tools Used">
+    <h1>Tools Used</h1>
+    <p>How did I build this site?</p>
   </Layout>
 );
 
-export default FairUsePage;
+export default ToolsPage;

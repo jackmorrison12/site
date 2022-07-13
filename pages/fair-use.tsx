@@ -1,10 +1,10 @@
 import Layout from '../components/Layout/Layout';
 
-const CreditsPage = () => (
-  <Layout title="Credits">
-    <h1>Credits</h1>
-    <p>Credits for the site</p>
+const FairUsePage = () => (
+  <Layout title="Fair Use Policy">
+    <h1>Fair Use Policy</h1>
+    <p>Who can use the code and how to reference it</p>
   </Layout>
 );
 
-export default CreditsPage;
+export default FairUsePage;
