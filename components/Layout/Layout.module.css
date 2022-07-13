@@ -1,0 +1,33 @@
+.app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+}
+
+.app > header {
+  grid-area: header;
+  border-bottom: 1px solid var(--greyLine);
+}
+
+.app > main {
+  grid-area: main;
+  padding: 10px 5px 10px 5px;
+}
+
+.app > footer {
+  grid-area: footer;
+  border-top: 1px solid var(--greyLine);
+}
+
+@media (min-width: 48em) {
+  .app > main {
+    grid-area: main;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

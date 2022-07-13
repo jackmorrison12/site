@@ -1,0 +1,37 @@
+.footer {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-rows: 3fr 2fr 1fr;
+  grid-template-areas:
+    'intro popular recent useful'
+    'socials popular recent useful'
+    'disclaimer disclaimer disclaimer disclaimer';
+}
+
+.intro {
+  grid-area: intro;
+}
+
+.socials {
+  grid-area: socials;
+}
+
+.popular {
+  grid-area: popular;
+}
+
+.recent {
+  grid-area: recent;
+}
+
+.useful {
+  grid-area: useful;
+}
+
+.disclaimer {
+  grid-area: disclaimer;
+  text-align: center;
+  font-size: small;
+  color: var(--greyText);
+}

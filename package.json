@@ -9,11 +9,13 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "dependencies": {
+    "@radix-ui/colors": "^0.1.8",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "hamburger-react": "^2.5.0",
     "next": "latest",
     "next-themes": "^0.2.0",
     "prettier": "^2.5.1",
