@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppProps, NextWebVitalsMetric } from 'next/app';
+import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
-import { GoogleAnalytics, usePageViews, event } from 'nextjs-google-analytics';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 import '../styles/index.css';
 
