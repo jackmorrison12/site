@@ -6,7 +6,6 @@ import { GoogleAnalytics, usePageViews, event } from 'nextjs-google-analytics';
 import '../styles/index.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  usePageViews();
   return (
     <>
       <GoogleAnalytics />
