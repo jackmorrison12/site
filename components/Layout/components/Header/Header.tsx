@@ -9,7 +9,7 @@ import { useHeader } from './Header.hooks';
 import { HeaderProps } from './Header.types';
 
 const Header = ({ title }: HeaderProps) => {
-  const { router, navViewable, setNavViewable, mounted, theme, setTheme, themes } = useHeader();
+  const _ = useHeader();
 
   return (
     <>
@@ -21,9 +21,9 @@ const Header = ({ title }: HeaderProps) => {
       <header className={styles.header}>
         <div className={styles.title}>
           <h3>{title ?? 'Jack Morrison'}</h3>
-          {mounted && (
-            <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-              {themes.map((t) => (
+          {_.mounted && (
+            <select value={_.theme} onChange={(e) => _.setTheme(e.target.value)}>
+              {_.themes.map((t) => (
                 <option key={t} value={t}>
                   {t}
                 </option>
@@ -32,8 +32,8 @@ const Header = ({ title }: HeaderProps) => {
           )}
           <div style={{ marginLeft: 'auto' }}>
             <Hamburger
-              toggled={navViewable}
-              toggle={setNavViewable}
+              toggled={_.navViewable}
+              toggle={_.setNavViewable}
               size={20}
               duration={0.2}
               color={'var(--greyText)'}
@@ -41,11 +41,11 @@ const Header = ({ title }: HeaderProps) => {
             />
           </div>
         </div>
-        {navViewable && (
+        {_.navViewable && (
           <nav className={styles.nav}>
             {headerLinks.map((link) => (
               <Link href={link.url} key={link.url}>
-                <a className={`${styles.link} ${router.pathname === link.url ? styles.activeLink : ''}`}>
+                <a className={`${styles.link} ${_.router.pathname === link.url ? styles.activeLink : ''}`}>
                   {link.emoji} {link.name}
                 </a>
               </Link>
