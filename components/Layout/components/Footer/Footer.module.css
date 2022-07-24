@@ -1,16 +1,38 @@
 .footer {
   padding: 15px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-template-rows: 3fr 2fr 1fr;
+  grid-template-columns: 4fr 1fr 2fr 2fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
-    'intro popular recent useful'
-    'socials popular recent useful'
+    'intro useful popular socials'
     'disclaimer disclaimer disclaimer disclaimer';
+  column-gap: 10px;
+  row-gap: 30px;
+}
+
+.footer p {
+  font-size: small;
+  padding-bottom: 5px;
+}
+.footer a {
+  color: var(--greyTextContrast);
+  text-decoration-color: var(--greyTextContrast);
+}
+
+.footer ul > li {
+  font-size: small;
+}
+
+.footer h4 {
+  padding-bottom: 10px;
 }
 
 .intro {
   grid-area: intro;
+  padding-right: 50px;
+}
+.intro h3 {
+  padding-bottom: 10px;
 }
 
 .socials {
@@ -19,10 +41,6 @@
 
 .popular {
   grid-area: popular;
-}
-
-.recent {
-  grid-area: recent;
 }
 
 .useful {
@@ -34,4 +52,23 @@
   text-align: center;
   font-size: small;
   color: var(--greyText);
+}
+
+/* Phone Portrait */
+@media (max-width: 48em) {
+  .footer {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      'intro'
+      'useful'
+      'popular'
+      'socials'
+      'disclaimer';
+    row-gap: 20px;
+  }
+
+  .intro {
+    padding-right: 0px;
+  }
 }
