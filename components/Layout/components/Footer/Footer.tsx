@@ -45,7 +45,7 @@ const Footer = () => (
       <p>Cool project I worked on</p>
     </div>
     <div className={styles.socials}>
-      <h4>Please talk to me</h4>
+      <h4>Socials</h4>
     </div>
     <div className={styles.disclaimer}>© {new Date().getFullYear()} Jack Morrison</div>
   </footer>
