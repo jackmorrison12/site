@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Layout from '../../components/Layout/Layout';
 
-export default () => (
+const ProjectsPage = () => (
   <Layout title="Projects">
     <h1>Projects</h1>
     <p>This page will host my Projects</p>
@@ -12,3 +12,5 @@ export default () => (
     </p>
   </Layout>
 );
+
+export default ProjectsPage;

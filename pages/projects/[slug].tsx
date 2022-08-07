@@ -14,7 +14,7 @@ type Props = {
   errors?: string;
 };
 
-export default ({ mdxSource, frontmatter, errors }: Props) => {
+const ProjectPage = ({ mdxSource, frontmatter, errors }: Props) => {
   if (!mdxSource || !frontmatter || errors) {
     return (
       <Layout title="Error">
@@ -35,6 +35,8 @@ export default ({ mdxSource, frontmatter, errors }: Props) => {
     </Layout>
   );
 };
+
+export default ProjectPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const files = fs.readdirSync('content/projects');
