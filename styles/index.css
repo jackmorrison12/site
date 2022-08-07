@@ -154,6 +154,7 @@ html {
 html {
   background-color: var(--greyBase);
   color: var(--greyTextContrast);
+  accent-color: var(--accentSolid);
 }
 
 a {

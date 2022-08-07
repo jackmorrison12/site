@@ -20,7 +20,9 @@ const Header = ({ title }: HeaderProps) => {
       </Head>
       <header className={styles.header}>
         <div className={styles.title}>
-          <h3>{title ?? 'Jack Morrison'}</h3>
+          <h3>
+            <Link href="/">Jack Morrison</Link>
+          </h3>
           {_.mounted && (
             <select value={_.theme} onChange={(e) => _.setTheme(e.target.value)}>
               {_.themes.map((t) => (
