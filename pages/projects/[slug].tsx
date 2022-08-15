@@ -7,6 +7,7 @@ import Layout from '../../components/Layout/Layout';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { getProject } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
+import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
 
 type Props = {
   mdxSource?: MDXRemoteSerializeResult;
@@ -27,10 +28,7 @@ const ProjectPage = ({ mdxSource, frontmatter, errors }: Props) => {
 
   return (
     <Layout title={frontmatter.title}>
-      {new Date(Date.parse(frontmatter.startDate)).toLocaleString('en-GB', {
-        year: 'numeric',
-        month: 'long',
-      })}
+      <ProjectHeader project={frontmatter} />
       <MDXRemote {...mdxSource} />
     </Layout>
   );

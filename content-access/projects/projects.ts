@@ -20,6 +20,12 @@ function getProjectSlugs(): Array<{ params: { slug: string } }> {
   }));
 }
 
+export function getProjects(): Project[] {
+  return getProjectSlugs()
+    .map((slug) => ({ ...getProjectFrontmatter(slug.params.slug), slug: slug.params.slug }))
+    .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+}
+
 function getProjectFrontmatter(slug: string): Project {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const file = fs.readFileSync(fullPath, 'utf-8');

@@ -1,0 +1,40 @@
+.layout {
+  display: grid;
+  grid-template-areas: 'info icon';
+  grid-template-columns: 4fr 1fr;
+}
+
+.line {
+  border-bottom: 5px var(--accentLine) solid;
+  max-width: 30%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.info {
+  grid-area: info;
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  background-color: var(--accentBg);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--accentBgHover);
+    transform: scale(1.05);
+  }
+}

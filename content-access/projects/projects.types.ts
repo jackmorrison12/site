@@ -7,6 +7,7 @@ enum ProjectType {
 
 export type Project = {
   title: string;
+  slug?: string;
   type: ProjectType;
   onHomepage: boolean;
   onCV: boolean;
