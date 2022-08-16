@@ -23,7 +23,9 @@ const ProjectHeader = ({ project }: { project: Project }) => (
       </h3>
       <div className={styles.tagContainer}>
         {project.tags.map((t) => (
-          <div className={styles.tag}>{t}</div>
+          <div key={t} className={styles.tag}>
+            {t}
+          </div>
         ))}
       </div>
       <div className={styles.line} />
