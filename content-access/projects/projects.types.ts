@@ -18,7 +18,7 @@ export type Project = {
   description: string;
   startDate: string;
   endDate: string;
-  sources?: { name: string; url: string; iconImg: string };
+  sources?: { name: string; url: string; iconImg: string }[];
   tags: string[];
   highlights?: string[];
 };

@@ -1,0 +1,24 @@
+.wrapper {
+  padding: 30px 10px 30px 10px;
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .wrapper {
+    padding: 30px 50px 30px 50px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+  .wrapper {
+    padding: 30px 50px 30px 50px;
+  }
+}
+
+/* Laptop/Desktop */
+@media (min-width: 75em) {
+  .wrapper {
+    padding: 50px 100px 50px 100px;
+  }
+}

@@ -8,6 +8,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { getProject } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
 import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
+import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
 
 type Props = {
   mdxSource?: MDXRemoteSerializeResult;
@@ -29,7 +30,9 @@ const ProjectPage = ({ mdxSource, frontmatter, errors }: Props) => {
   return (
     <Layout title={frontmatter.title}>
       <ProjectHeader project={frontmatter} />
-      <MDXRemote {...mdxSource} />
+      <TextWrapper>
+        <MDXRemote {...mdxSource} />
+      </TextWrapper>
     </Layout>
   );
 };
