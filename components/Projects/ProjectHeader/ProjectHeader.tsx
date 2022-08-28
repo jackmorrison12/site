@@ -4,7 +4,6 @@ import { useProjectHeader } from './ProjectHeader.hooks';
 
 import styles from './ProjectHeader.module.scss';
 import Image from 'next/image';
-import { relative } from 'path';
 import Link from 'next/link';
 
 const ProjectHeader = ({ project }: { project: Project }) => {
@@ -27,11 +26,9 @@ const ProjectHeader = ({ project }: { project: Project }) => {
             </div>
           ))}
           {project.sources?.map((t) => (
-            <Link href={t.url}>
+            <Link href={t.url} key={t.name}>
               <a className={styles.link}>
-                <div key={t.name} className={styles.tag}>
-                  {t.name}
-                </div>
+                <div className={styles.tag}>{t.name}</div>
               </a>
             </Link>
           ))}
