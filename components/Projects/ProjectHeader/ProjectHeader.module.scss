@@ -1,7 +1,11 @@
+.mobileHide {
+  display: none !important;
+}
+
 .layout {
   display: grid;
-  grid-template-areas: 'info icon';
-  grid-template-columns: 5fr 1fr;
+  grid-template-areas: 'info' 'icon';
+  grid-template-rows: 1ft 1fr;
   gap: 10px;
   background-color: var(--accentBg);
   border-radius: 10px;
@@ -54,4 +58,31 @@
 
 .link {
   text-decoration-line: none;
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .layout {
+    display: grid;
+    grid-template-areas: 'info icon';
+    grid-template-columns: 5fr 1fr;
+    gap: 10px;
+    background-color: var(--accentBg);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .mobileShow {
+    display: none !important;
+  }
+  .mobileHide {
+    display: flex !important;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+}
+
+/* Laptop/Desktop */
+@media (min-width: 75em) {
 }

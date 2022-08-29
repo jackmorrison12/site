@@ -35,8 +35,11 @@ const ProjectHeader = ({ project }: { project: Project }) => {
         </div>
       </div>
       <div className={styles.icon}>
-        <div className={styles.iconWrapper}>
+        <div className={`${styles.iconWrapper} ${styles.mobileHide}`}>
           <Image src={project.heroImg} width="500px" height="500px" />
+        </div>
+        <div className={`${styles.iconWrapper} ${styles.mobileShow}`}>
+          <Image src={project.bannerImg} width="1000px" height="500px" />
         </div>
       </div>
     </div>
