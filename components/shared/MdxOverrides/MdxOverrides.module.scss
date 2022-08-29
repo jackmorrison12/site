@@ -1,0 +1,18 @@
+.h2 {
+  background-color: var(--accentSolid);
+}
+
+.imgCaptionWrapper {
+  display: grid;
+  grid-template-areas: 'caption' 'image';
+  grid-template-rows: auto auto;
+  padding: 10px 0 10px 0;
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .imgCaptionWrapper {
+    grid-template-areas: 'caption image';
+    grid-template-columns: 1fr 1fr;
+  }
+}

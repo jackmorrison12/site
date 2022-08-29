@@ -6,7 +6,7 @@ import matter from 'gray-matter';
 import { Project } from './projects.types';
 
 const PATH = 'content/projects';
-const FILE_EXTN = '.md';
+const FILE_EXTN = '.mdx';
 
 function getProjectFilePaths(): string[] {
   return fs.readdirSync(PATH);

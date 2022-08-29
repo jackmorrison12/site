@@ -11,6 +11,7 @@ import { ImageProps } from '../../content-access';
 import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
 import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
 import BackLink from '../../components/shared/BackLink/BackLink';
+import { mdxOverrides } from '../../components/shared/MdxOverrides/MdxOverrides';
 
 type Props = {
   mdxSource?: MDXRemoteSerializeResult;
@@ -37,7 +38,7 @@ const ProjectPage = ({ mdxSource, frontmatter, errors, imageProps }: Props) => {
       <BackLink text="All Projects" />
       <ProjectHeader project={frontmatter} imageProps={imageProps} />
       <TextWrapper>
-        <MDXRemote {...mdxSource} components={{ Image }} />
+        <MDXRemote {...mdxSource} components={{ Image, ...mdxOverrides }} />
       </TextWrapper>
     </Layout>
   );
@@ -49,7 +50,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const files = fs.readdirSync('content/projects');
   const paths = files.map((fileName) => ({
     params: {
-      slug: fileName.replace('.md', ''),
+      slug: fileName.replace('.mdx', ''),
     },
   }));
 
