@@ -7,9 +7,15 @@
   grid-template-areas: 'info' 'icon';
   grid-template-rows: 1ft 1fr;
   gap: 10px;
-  background-color: var(--accentBg);
+  background-color: var(--accentSolid);
+  color: var(--greyBase);
   border-radius: 10px;
   padding: 20px;
+  opacity: 1;
+  background-image: radial-gradient(var(--greySolidHover) 0.6px, transparent 0.4px),
+    radial-gradient(var(--greySolidHover) 0.3px, var(--accentSolid) 0.4px);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
 }
 
 .info {
@@ -45,13 +51,13 @@
 .tag {
   border-radius: 5px;
   padding: 2px 5px;
-  background-color: var(--accentSolid);
-  color: var(--greyBase);
+  background-color: var(--accentBase);
+  color: var(--greyTextContrast);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: var(--accentSolidHover);
+    background-color: var(--accentBgSubtle);
     transform: scale(1.05);
   }
 }
@@ -63,13 +69,8 @@
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
   .layout {
-    display: grid;
     grid-template-areas: 'info icon';
     grid-template-columns: 5fr 1fr;
-    gap: 10px;
-    background-color: var(--accentBg);
-    border-radius: 10px;
-    padding: 20px;
   }
   .mobileShow {
     display: none !important;
