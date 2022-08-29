@@ -10,6 +10,7 @@ import { Project } from '../../content-access/projects/projects.types';
 import { ImageProps } from '../../content-access';
 import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
 import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
+import BackLink from '../../components/shared/BackLink/BackLink';
 
 type Props = {
   mdxSource?: MDXRemoteSerializeResult;
@@ -33,6 +34,7 @@ const ProjectPage = ({ mdxSource, frontmatter, errors, imageProps }: Props) => {
 
   return (
     <Layout title={frontmatter.title}>
+      <BackLink text="All Projects" />
       <ProjectHeader project={frontmatter} imageProps={imageProps} />
       <TextWrapper>
         <MDXRemote {...mdxSource} components={{ Image }} />

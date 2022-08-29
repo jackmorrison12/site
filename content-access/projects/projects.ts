@@ -41,5 +41,8 @@ export async function getProject(slug: string): Promise<{ mdxSource: MDXRemoteSe
 
   const mdxSource = await serialize(file, { parseFrontmatter: true });
 
-  return { mdxSource, frontmatter: mdxSource.frontmatter as unknown as Project };
+  const frontmatter = mdxSource.frontmatter as unknown as Project;
+  frontmatter.slug = slug;
+
+  return { mdxSource, frontmatter };
 }
