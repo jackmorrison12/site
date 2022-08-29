@@ -1,12 +1,21 @@
 import React from 'react';
 import { Project } from '../../../content-access/projects/projects.types';
 import { useProjectHeader } from './ProjectHeader.hooks';
+import { ImageProps } from '../../../content-access';
 
 import styles from './ProjectHeader.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const ProjectHeader = ({ project }: { project: Project }) => {
+const ProjectHeader = ({
+  project,
+  imageProps,
+}: {
+  project: Project;
+  imageProps: {
+    [key: string]: ImageProps;
+  };
+}) => {
   const $ = useProjectHeader({ project });
 
   return (
@@ -36,10 +45,10 @@ const ProjectHeader = ({ project }: { project: Project }) => {
       </div>
       <div className={styles.icon}>
         <div className={`${styles.iconWrapper} ${styles.mobileHide}`}>
-          <Image src={project.heroImg} width="500px" height="500px" />
+          <Image {...imageProps['hero']} />
         </div>
         <div className={`${styles.iconWrapper} ${styles.mobileShow}`}>
-          <Image src={project.bannerImg} width="1000px" height="500px" />
+          <Image {...imageProps['banner']} />
         </div>
       </div>
     </div>
