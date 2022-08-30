@@ -12,7 +12,7 @@ function getProjectFilePaths(): string[] {
   return fs.readdirSync(PATH);
 }
 
-function getProjectSlugs(): Array<{ params: { slug: string } }> {
+export function getProjectSlugs(): Array<{ params: { slug: string } }> {
   return getProjectFilePaths().map((fileName) => ({
     params: {
       slug: fileName.replace(FILE_EXTN, ''),
@@ -22,15 +22,17 @@ function getProjectSlugs(): Array<{ params: { slug: string } }> {
 
 export function getProjects(): Project[] {
   return getProjectSlugs()
-    .map((slug) => ({ ...getProjectFrontmatter(slug.params.slug), slug: slug.params.slug }))
+    .map((slug) => ({ ...getProjectFrontmatter(slug.params.slug), slug: `/projects/${slug.params.slug}` }))
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 }
 
-function getProjectFrontmatter(slug: string): Project {
+export function getProjectFrontmatter(slug: string): Project {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const file = fs.readFileSync(fullPath, 'utf-8');
 
   const { data } = matter(file);
+
+  data.slug = `/projects/${slug}`;
 
   return data as unknown as Project;
 }
@@ -42,7 +44,7 @@ export async function getProject(slug: string): Promise<{ mdxSource: MDXRemoteSe
   const mdxSource = await serialize(file, { parseFrontmatter: true });
 
   const frontmatter = mdxSource.frontmatter as unknown as Project;
-  frontmatter.slug = slug;
+  frontmatter.slug = `/projects/${slug}`;
 
   return { mdxSource, frontmatter };
 }

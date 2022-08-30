@@ -15,7 +15,7 @@ const ProjectsPage = ({ projects }: Props) => (
     <ul>
       {projects.map((p) => (
         <li key={p.slug}>
-          <Link href={'projects/' + p.slug ?? '#'}>
+          <Link href={p.slug ?? '#'}>
             <a>{p.title}</a>
           </Link>
         </li>

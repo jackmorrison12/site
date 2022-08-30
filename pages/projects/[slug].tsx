@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
 
 import Layout from '../../components/Layout/Layout';
-import { getProject } from '../../content-access/projects/projects';
+import { getProject, getProjectSlugs } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
 import { ImageProps } from '../../content-access';
 import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
@@ -47,13 +47,7 @@ const ProjectPage = ({ mdxSource, frontmatter, errors, imageProps }: Props) => {
 export default ProjectPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync('content/projects');
-  const paths = files.map((fileName) => ({
-    params: {
-      slug: fileName.replace('.mdx', ''),
-    },
-  }));
-
+  const paths = getProjectSlugs();
   return { paths, fallback: false };
 };
 
