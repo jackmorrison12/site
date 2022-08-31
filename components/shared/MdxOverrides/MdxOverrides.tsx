@@ -7,15 +7,24 @@ export const H2Override = ({ children }: { children?: any }) => (
   </h2>
 );
 
-export const ImgWithCaption = ({ children, imgSrc, imgAlt }: { children?: any; imgSrc: string; imgAlt: string }) => (
-  <div className={styles.imgCaptionWrapper}>
-    <div style={{ gridArea: 'caption', marginTop: 'auto', marginBottom: 'auto' }}>{children}</div>
-    <div style={{ gridArea: 'image', position: 'relative' }}>
-      <div style={{ overflow: 'hidden', borderRadius: '10px', display: 'flex' }}>
-        <Image src={imgSrc} height="540" width="960" alt={imgAlt} objectFit="scale-down" />
+export const ImgWithCaption = ({
+  children,
+  imgProps,
+}: {
+  children?: any;
+  imgProps: { src: string; alt?: string; height: string; width: string };
+}) => {
+  console.log(imgProps);
+  return (
+    <div className={styles.imgCaptionWrapper}>
+      <div className={styles.caption}>{children}</div>
+      <div className={styles.imageSection}>
+        <div className={styles.imageWrapper}>
+          <Image {...imgProps} objectFit="scale-down" />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const mdxOverrides = { h2: H2Override, ImgWithCaption };

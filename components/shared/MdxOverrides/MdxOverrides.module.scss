@@ -6,7 +6,25 @@
   display: grid;
   grid-template-areas: 'caption' 'image';
   grid-template-rows: auto auto;
-  padding: 10px 0 10px 0;
+  padding: 20px 0 20px 0;
+  gap: 10px;
+}
+
+.caption {
+  grid-area: caption;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.imageSection {
+  grid-area: image;
+  position: relative;
+}
+
+.imageWrapper {
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
 }
 
 /* Phone Landscape/Tablet Portrait */
