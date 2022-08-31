@@ -1,5 +1,18 @@
-.h2 {
+.mark {
   background-color: var(--accentSolid);
+}
+
+.p {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.accent {
+  color: var(--accentSolid);
+}
+
+.footnote {
+  font-size: smaller;
 }
 
 .imgCaptionWrapper {
@@ -16,6 +29,11 @@
   margin-bottom: auto;
 }
 
+.doubleImgSection {
+  grid-area: caption;
+  position: relative;
+}
+
 .imageSection {
   grid-area: image;
   position: relative;
@@ -25,6 +43,7 @@
   overflow: hidden;
   border-radius: 10px;
   display: flex;
+  height: 100%;
 }
 
 /* Phone Landscape/Tablet Portrait */

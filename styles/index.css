@@ -124,18 +124,18 @@ html {
 }
 
 .green-orange-theme {
-  --accentBase: var(--pink1);
-  --accentBgSubtle: var(--orange2);
-  --accentBg: var(--orange3);
-  --accentBgHover: var(--orange4);
-  --accentBgActive: var(--orange5);
-  --accentLine: var(--orange6);
-  --accentBorder: var(--orange7);
-  --accentBorderHover: var(--orange8);
-  --accentSolid: var(--orange9);
-  --accentSolidHover: var(--orange10);
-  --accentText: var(--orange11);
-  --accentTextContrast: var(--orange12);
+  --accentBase: var(--orange12);
+  --accentBgSubtle: var(--orange11);
+  --accentBg: var(--orange10);
+  --accentBgHover: var(--orange9);
+  --accentBgActive: var(--orange8);
+  --accentLine: var(--orange7);
+  --accentBorder: var(--orange6);
+  --accentBorderHover: var(--orange5);
+  --accentSolid: var(--orange4);
+  --accentSolidHover: var(--orange3);
+  --accentText: var(--orange2);
+  --accentTextContrast: var(--orange1);
 
   --greyBase: var(--teal12);
   --greyBgSubtle: var(--teal11);
@@ -159,4 +159,11 @@ html {
 
 a {
   color: var(--accentText);
+}
+
+iframe {
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
