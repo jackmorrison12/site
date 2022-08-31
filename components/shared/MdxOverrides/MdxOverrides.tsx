@@ -13,18 +13,14 @@ export const ImgWithCaption = ({
 }: {
   children?: any;
   imgProps: { src: string; alt?: string; height: string; width: string };
-}) => {
-  console.log(imgProps);
-  return (
-    <div className={styles.imgCaptionWrapper}>
-      <div className={styles.caption}>{children}</div>
-      <div className={styles.imageSection}>
-        <div className={styles.imageWrapper}>
-          <Image {...imgProps} objectFit="scale-down" />
-        </div>
+}) => (
+  <div className={styles.imgCaptionWrapper}>
+    <div className={styles.caption}>{children}</div>
+    <div className={styles.imageSection}>
+      <div className={styles.imageWrapper}>
+        <Image {...imgProps} objectFit="scale-down" />
       </div>
     </div>
-  );
-};
-
+  </div>
+);
 export const mdxOverrides = { h2: H2Override, ImgWithCaption };
