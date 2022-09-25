@@ -11,10 +11,6 @@
   color: var(--greyBase);
   border-radius: 10px;
   padding: 20px;
-  background-image: radial-gradient(var(--greySolidHover) 0.6px, transparent 0.4px),
-    radial-gradient(var(--greySolidHover) 0.3px, var(--accentSolid) 0.4px);
-  background-size: 16px 16px;
-  background-position: 0 0, 8px 8px;
 }
 
 .info {

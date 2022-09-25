@@ -1,6 +1,9 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
+
+import styles from './index.module.scss';
+
 import Layout from '../../components/Layout/Layout';
+import ProjectSummary from '../../components/Projects/ProjectSummary/ProjectSummary';
 
 import { getProjects } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
@@ -11,23 +14,23 @@ type Props = {
 
 const ProjectsPage = ({ projects }: Props) => (
   <Layout title="Projects">
-    <h1>Projects</h1>
-    <ul>
-      {projects.map((p) => (
-        <li key={p.slug}>
-          <Link href={p.slug ?? '#'}>
-            <a>{p.title}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className={styles.layout}>
+      <div className={styles.titleWrapper}>
+        <span className={styles.title}>Some things I&apos;ve made</span>
+      </div>
+      <div className={styles.projectsWrapper}>
+        {projects.map((p) => (
+          <ProjectSummary project={p} key={p.slug} />
+        ))}
+      </div>
+    </div>
   </Layout>
 );
 
 export default ProjectsPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getProjects();
+  const projects = await getProjects().filter((p) => !p.isHidden);
 
   return {
     props: {

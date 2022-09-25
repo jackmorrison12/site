@@ -7,6 +7,11 @@
   margin-block-end: 1em;
 }
 
+.a {
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
 .accent {
   color: var(--accentSolid);
 }

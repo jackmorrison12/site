@@ -1,0 +1,31 @@
+.layout {
+  display: grid;
+  grid-template-areas: 'title projects';
+  grid-template-columns: 1fr 5fr;
+}
+
+.titleWrapper {
+  grid: 'title';
+  position: sticky;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: xxx-large;
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  text-align: center;
+  color: var(--accentSolid);
+  font-weight: bold;
+}
+
+.projectsWrapper {
+  grid: 'projects';
+  display: flex;
+  flex-wrap: wrap;
+}

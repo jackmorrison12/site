@@ -59,6 +59,7 @@ html {
   Colours 
 */
 @import '@radix-ui/colors/mint.css';
+@import '@radix-ui/colors/orange.css';
 @import '@radix-ui/colors/gray.css';
 @import '@radix-ui/colors/mintDark.css';
 @import '@radix-ui/colors/grayDark.css';
@@ -66,6 +67,21 @@ html {
 @import '@radix-ui/colors/blue.css';
 @import '@radix-ui/colors/orange.css';
 @import '@radix-ui/colors/teal.css';
+
+/* 
+
+  TODO: 
+
+  - Fix colours for blue and green themes
+  - Get rid of the stupid names, and just have:
+    - base[1-12] + baseContrast (e.g. white on dark, black on light)
+    - primary[1-12] + primaryContract
+    - secondary[1-12] + secondaryContrast
+    - accent[1-12] + accentContrast
+
+    - where 1 = lightest, 12 is darkest
+
+*/
 
 :root {
   --accentBase: var(--mint1);
@@ -93,10 +109,52 @@ html {
   --greySolidHover: var(--gray10);
   --greyText: var(--gray11);
   --greyTextContrast: var(--gray12);
+
+  /* NEW */
+
+  /* lightest */
+  --base1: var(--gray1);
+  --base2: var(--gray2);
+  --base3: var(--gray3);
+  --base4: var(--gray4);
+  --base5: var(--gray5);
+  --base6: var(--gray6);
+  --base7: var(--gray7);
+  --base8: var(--gray8);
+  --base8: var(--gray9);
+  --base10: var(--gray10);
+  --base11: var(--gray11);
+  --base12: var(--gray12);
+
+  --primary1: var(--mint1);
+  --primary2: var(--mint2);
+  --primary3: var(--mint3);
+  --primary4: var(--mint4);
+  --primary5: var(--mint5);
+  --primary6: var(--mint6);
+  --primary7: var(--mint7);
+  --primary8: var(--mint8);
+  --primary9: var(--mint9);
+  --primary10: var(--mint10);
+  --primary11: var(--mint11);
+  --primary12: var(--mint12);
+
+  --secondary1: var(--orange1);
+  --secondary2: var(--orange2);
+  --secondary3: var(--orange3);
+  --secondary4: var(--orange4);
+  --secondary5: var(--orange5);
+  --secondary6: var(--orange6);
+  --secondary7: var(--orange7);
+  --secondary8: var(--orange8);
+  --secondary9: var(--orange9);
+  --secondary10: var(--orange10);
+  --secondary11: var(--orange11);
+  --secondary12: var(--orange12);
 }
 
 .blue-pink-theme {
-  --accentBase: var(--pink1);
+  /* --accentBase: var(--pink1);
   --accentBgSubtle: var(--pink2);
   --accentBg: var(--pink3);
   --accentBgHover: var(--pink4);
@@ -107,9 +165,22 @@ html {
   --accentSolid: var(--pink9);
   --accentSolidHover: var(--pink10);
   --accentText: var(--pink11);
-  --accentTextContrast: var(--pink12);
+  --accentTextContrast: var(--pink12); */
 
-  --greyBase: var(--blue12);
+  --accentBase: hsl(318, 25%, 9.6%);
+  --accentBgSubtle: hsl(319, 32.2%, 11.6%);
+  --accentBg: hsl(319, 41%, 16%);
+  --accentBgHover: hsl(320, 45.4%, 18.7%);
+  --accentBgActive: hsl(320, 49%, 21.1%);
+  --accentLine: hsl(321, 53.6%, 24.4%);
+  --accentBorder: hsl(321, 61.1%, 29.7%);
+  --accentBorderHover: hsl(322, 74.9%, 37.5%);
+  --accentSolid: hsl(322, 65%, 54.5%);
+  --accentSolidHover: hsl(323, 72.8%, 59.2%);
+  --accentText: hsl(325, 90%, 66.4%);
+  --accentTextContrast: hsl(322, 90%, 95.8%);
+
+  /* --greyBase: var(--blue12);
   --greyBgSubtle: var(--blue11);
   --greyBg: var(--blue10);
   --greyBgHover: var(--blue9);
@@ -120,7 +191,20 @@ html {
   --greySolid: var(--blue4);
   --greySolidHover: var(--blue3);
   --greyText: var(--blue2);
-  --greyTextContrast: var(--blue1);
+  --greyTextContrast: var(--blue1); */
+
+  --greyBase: hsl(212, 35%, 9.2%);
+  --greyBgSubtle: hsl(216, 50%, 11.8%);
+  --greyBg: hsl(214, 59.4%, 15.3%);
+  --greyBgHover: hsl(214, 65.8%, 17.9%);
+  --greyBgActive: hsl(213, 71.2%, 20.2%);
+  --greyLine: hsl(212, 77.4%, 23.1%);
+  --greyBorder: hsl(211, 85.1%, 27.4%);
+  --greyBorderHover: hsl(211, 89.7%, 34.1%);
+  --greySolid: hsl(206, 100%, 50%);
+  --greySolidHover: hsl(209, 100%, 60.6%);
+  --greyText: hsl(210, 100%, 66.1%);
+  --greyTextContrast: hsl(206, 98%, 95.8%);
 }
 
 .green-orange-theme {
@@ -159,6 +243,7 @@ html {
 
 a {
   color: var(--accentText);
+  text-decoration-line: none;
 }
 
 iframe {

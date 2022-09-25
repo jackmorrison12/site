@@ -1,0 +1,71 @@
+.mobileHide {
+  display: none !important;
+}
+
+.layout {
+  margin: 10px;
+  min-width: 300px;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  color: var(--greyBase);
+}
+
+.innerLayout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  width: 90%;
+  margin: auto;
+  transform: translate(0px, 20px);
+}
+
+.infoWrapper {
+  background-color: var(--greyBgSubtle);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+  padding-top: 40px;
+  flex-grow: 1;
+  color: var(--greyTextContrast);
+}
+
+.header {
+  line-height: 40px;
+  color: var(--accentSolid);
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0 10px 0;
+  gap: 5px;
+}
+
+.tag {
+  border-radius: 5px;
+  padding: 2px 5px;
+  background-color: var(--accentSolid);
+  color: var(--greyBase);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--accentSolidHover);
+    transform: scale(1.05);
+  }
+}
+
+.link {
+  text-decoration-line: none;
+}
+
+/* Phone Landscape/Tablet Portrait */
+// @media (min-width: 48em) {
+// }

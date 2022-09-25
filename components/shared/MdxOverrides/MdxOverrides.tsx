@@ -51,4 +51,6 @@ export const DoubleImg = ({
   </div>
 );
 
-export const mdxOverrides = { h2: H2Override, ImgWithCaption, DoubleImg, Accent, Footnote, p: POverride };
+export const AOverride = ({ children }: { children?: any }) => <a className={styles.a}>{children}</a>;
+
+export const mdxOverrides = { h2: H2Override, ImgWithCaption, DoubleImg, Accent, Footnote, p: POverride, a: AOverride };
