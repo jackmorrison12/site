@@ -14,15 +14,13 @@ type Props = {
 
 const ProjectsPage = ({ projects }: Props) => (
   <Layout title="Projects">
-    <div className={styles.layout}>
-      <div className={styles.titleWrapper}>
-        <span className={styles.title}>Some things I&apos;ve made</span>
-      </div>
-      <div className={styles.projectsWrapper}>
-        {projects.map((p) => (
-          <ProjectSummary project={p} key={p.slug} />
-        ))}
-      </div>
+    <div className={styles.titleWrapper}>
+      <span className={styles.title}>PROJECTS</span>
+    </div>
+    <div className={styles.projectsWrapper}>
+      {projects.map((p) => (
+        <ProjectSummary project={p} key={p.slug} />
+      ))}
     </div>
   </Layout>
 );

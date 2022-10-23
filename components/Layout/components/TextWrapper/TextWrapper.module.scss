@@ -1,0 +1,65 @@
+.wrapper {
+  padding: 30px 10px 30px 10px;
+}
+
+// .content {
+//   --gap: clamp(1rem, 6vw, 3rem);
+//   --full: minmax(var(--gap), 1fr);
+//   --content: min(80ch, 100% - var(--gap) * 2);
+//   --popout: minmax(0, 2rem);
+//   --feature: minmax(0, 5rem);
+//   --wide: minmax(0, 20rem);
+
+//   display: grid;
+//   grid-template-columns:
+//     [full-start] var(--full)
+//     [wide-start] var(--wide)
+//     [feature-start] var(--feature)
+//     [popout-start] var(--popout)
+//     [content-start] var(--content) [content-end]
+//     var(--popout) [popout-end]
+//     var(--feature) [feature-end]
+//     var(--wide) [wide-end]
+//     var(--full) [full-end];
+// }
+
+// .content > * {
+//   grid-column: content;
+// }
+
+// .popout {
+//   grid-column: popout;
+// }
+
+// .feature {
+//   grid-column: feature;
+// }
+
+// .full {
+//   grid-column: full;
+// }
+
+// .wide {
+//   grid-column: wide;
+// }
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .wrapper {
+    padding: 30px 50px 30px 50px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+  .wrapper {
+    padding: 30px 50px 30px 50px;
+  }
+}
+
+/* Laptop/Desktop */
+@media (min-width: 75em) {
+  .wrapper {
+    padding: 50px 100px 50px 100px;
+  }
+}

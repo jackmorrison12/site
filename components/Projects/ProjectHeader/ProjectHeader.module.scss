@@ -61,7 +61,7 @@
   text-decoration-line: none;
 }
 
-/* Phone Landscape/Tablet Portrait */
+/* Larger than Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
   .layout {
     grid-template-areas: 'info icon';
