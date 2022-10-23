@@ -1,0 +1,60 @@
+.mark {
+  background-color: var(--accentSolid);
+}
+
+.p {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.a {
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.accent {
+  color: var(--accentSolid);
+}
+
+.footnote {
+  font-size: smaller;
+}
+
+.imgCaptionWrapper {
+  display: grid;
+  grid-template-areas: 'caption' 'image';
+  grid-template-rows: auto auto;
+  padding: 20px 0 20px 0;
+  gap: 10px;
+}
+
+.caption {
+  grid-area: caption;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.doubleImgSection {
+  grid-area: caption;
+  position: relative;
+}
+
+.imageSection {
+  grid-area: image;
+  position: relative;
+}
+
+.imageWrapper {
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  height: 100%;
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .imgCaptionWrapper {
+    grid-template-areas: 'caption image';
+    grid-template-columns: 1fr 1fr;
+  }
+}

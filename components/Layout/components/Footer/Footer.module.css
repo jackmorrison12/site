@@ -1,4 +1,6 @@
 .footer {
+  max-width: 1400px;
+  margin: auto;
   padding: 15px;
   display: grid;
   grid-template-columns: 4fr 1fr 2fr 2fr;
