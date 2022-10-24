@@ -18,6 +18,7 @@
   grid-area: main;
   padding: 10px 0px;
   overflow-x: hidden;
+  grid-auto-rows: min-content;
 }
 
 .app > footer {
