@@ -1,11 +1,7 @@
-.mobileHide {
-  display: none !important;
-}
-
 .layout {
   margin: 10px;
   min-width: 300px;
-  flex-basis: 0;
+  flex-basis: 21%;
   flex-grow: 1;
   flex-shrink: 1;
   color: var(--greyBase);
@@ -67,5 +63,8 @@
 }
 
 /* Phone Landscape/Tablet Portrait */
-// @media (min-width: 48em) {
-// }
+@media (max-width: 30em) {
+  .layout {
+    min-width: 200px;
+  }
+}
