@@ -1,0 +1,21 @@
+.cvWrapper {
+  width: 210mm;
+  min-height: 290mm;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8rem;
+}
+
+.summaryWrapper {
+  flex: 1;
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.mainWrapper {
+  flex: 2;
+  color: #1c1c1c;
+}
