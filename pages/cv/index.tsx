@@ -26,7 +26,7 @@ const CVPage = ({ projects }: Props) => (
         <i>2017-2022</i>
         <ul>
           <li>Final Grade: First </li>
-          <li>IC Skydiving Secretary '20/21</li>
+          <li>IC Skydiving Secretary &apos;20/21</li>
         </ul>
         <h3>Westcliff High School for Boys Sixth Form</h3>
         <i>2015-2017</i>
@@ -78,14 +78,14 @@ const CVPage = ({ projects }: Props) => (
         </p>
         <h3>Teaching</h3>
         <p>
-          I taught an 'Introduction to Python' course to a class of 15 year old students, as well as a Robotics course
-          to a group of Primary School children
+          I taught an &apos;Introduction to Python&apos; course to a class of 15 year old students, as well as a
+          Robotics course to a group of Primary School children
         </p>
       </div>
       <div className={styles.mainWrapper}>
         <h2>Projects</h2>
         {projects.map((item) => (
-          <div>
+          <div key={item.slug}>
             <a href={'https://jackmorrison.xyz' + item.slug}>
               <h3>{item.title}</h3>
             </a>
@@ -96,7 +96,7 @@ const CVPage = ({ projects }: Props) => (
             {item.highlights && (
               <ul>
                 {item.highlights.map((highlight) => (
-                  <li>{highlight}</li>
+                  <li key={highlight}>{highlight}</li>
                 ))}
               </ul>
             )}
