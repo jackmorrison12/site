@@ -6,11 +6,11 @@
   @return $c;
 }
 
-.projectsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-}
+// .projectsWrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-content: flex-start;
+// }
 
 .titleWrapper {
   overflow: hidden;
@@ -27,14 +27,14 @@
 }
 
 .title::before {
-  content: repeat('PROJECTS', 100);
+  content: repeat('LIVE', 100);
   color: transparent;
-  left: -789.75ch;
+  left: -313.32ch;
   position: absolute;
 }
 
 .title::after {
-  content: repeat('PROJECTS', 100);
+  content: repeat('LIVE', 100);
   color: transparent;
 }
 
