@@ -1,5 +1,4 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import fs from 'fs';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';

@@ -84,7 +84,7 @@ const MePage = () => {
         }}
       >
         <div>
-          <p style={{ fontSize: '2rem', fontWeight: '600' }}>Hey, I'm Jack 👋</p>
+          <p style={{ fontSize: '2rem', fontWeight: '600' }}>Hey, I&apos;m Jack 👋</p>
           <p>How much are you interested?</p>
           <input
             type="range"
@@ -108,71 +108,71 @@ const MePage = () => {
         {bioLength === BioLength.short && (
           <>
             <p className={styles.summary}>
-              I'm a Software Engineer at Bloomberg in London. I'm an Imperial College London alumni. I enjoy making
-              music, travelling, and skydiving.
+              I&apos;m a Software Engineer at Bloomberg in London. I&apos;m an Imperial College London alumni. I enjoy
+              making music, travelling, and skydiving.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
             <div className={styles.factsWrapper}>
               <div className={styles.fact}>
-                I've fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
+                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
               </div>
-              <div className={styles.fact}>I've travelled to {NUM_COUNTRIES} countries ✈️</div>
-              <div className={styles.fact}>I've contributed to {NUM_OS} open source projects (so far...) 👨‍💻</div>
+              <div className={styles.fact}>I&apos;ve travelled to {NUM_COUNTRIES} countries ✈️</div>
+              <div className={styles.fact}>I&apos;ve contributed to {NUM_OS} open source projects (so far...) 👨‍💻</div>
             </div>
           </>
         )}
         {bioLength === BioLength.medium && (
           <>
             <p className={styles.summary}>
-              Hey, I'm Jack. I'm currently working as a Software Engineer at Bloomberg in London, working on their Web
-              and API enterprise data product: DATA {'<GO>'}.
+              Hey, I&apos;m Jack. I&apos;m currently working as a Software Engineer at Bloomberg in London, working on
+              their Web and API enterprise data product: DATA {'<GO>'}.
             </p>
             <p className={styles.summary}>
-              I graduated from Imperial College London back in 2021. I did my Master's dissertation on personalised,
-              context-aware music recommendation systems.
+              I graduated from Imperial College London back in 2021. I did my Master&apos;s dissertation on
+              personalised, context-aware music recommendation systems.
             </p>
             <p className={styles.summary}>
               In my free time, I enjoy skydiving. I started learning back in 2019 and so far have completed{' '}
-              {NUM_SKYDIVES} jumps! I also enjoy travelling - I've been to {NUM_COUNTRIES} countries so far. I also like
-              to play around making music. I also play the piano, and so enjoy combining these.
+              {NUM_SKYDIVES} jumps! I also enjoy travelling - I&apos;ve been to {NUM_COUNTRIES} countries so far. I also
+              like to play around making music. I also play the piano, and so enjoy combining these.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
             <div className={styles.factsWrapper}>
               <div className={styles.fact}>
-                I've fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
+                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
               </div>
-              <div className={styles.fact}>I've travelled to 27 countries ✈️</div>
-              <div className={styles.fact}>I've contributed to 2 open source projects (so far...) 👨‍💻</div>
+              <div className={styles.fact}>I&apos;ve travelled to 27 countries ✈️</div>
+              <div className={styles.fact}>I&apos;ve contributed to 2 open source projects (so far...) 👨‍💻</div>
             </div>
           </>
         )}
         {bioLength === BioLength.long && (
           <>
             <p className={styles.summary}>
-              Hey, I'm Jack. I'm currently working as a Software Engineer at Bloomberg in London, working on their Web
-              and API enterprise data product: DATA {'<GO>'}. This is a full stack application, so I get to work with a
-              range of technologies and languages, mainly Python, React and TypeScript.
+              Hey, I&apos;m Jack. I&apos;m currently working as a Software Engineer at Bloomberg in London, working on
+              their Web and API enterprise data product: DATA {'<GO>'}. This is a full stack application, so I get to
+              work with a range of technologies and languages, mainly Python, React and TypeScript.
             </p>
             <p className={styles.summary}>
               I graduated from Imperial College London back in 2021. I had a great time, getting to work on a lot of fun
               projects, from designing and building an operating system and programming language, to creating a
               life-size arcade machine for the game Snake. I also worked on a project researching CRDTs, and completed
-              my Master's dissertation on personalised, context-aware music recommendation systems. I was also the
+              my Master&apos;s dissertation on personalised, context-aware music recommendation systems. I was also the
               Secretary of the Skydiving society from 2020-2021.
             </p>
             <p className={styles.summary}>
               In my free time, I enjoy skydiving. I started learning back in 2019 and so far have completed{' '}
-              {NUM_SKYDIVES} jumps! I also enjoy travelling - I've been to {NUM_COUNTRIES} countries so far. I also like
-              to play around making music. I also play the piano, and so enjoy combining these. I've played around with
-              Logic Pro and Cubase.
+              {NUM_SKYDIVES} jumps! I also enjoy travelling - I&apos;ve been to {NUM_COUNTRIES} countries so far. I also
+              like to play around making music. I also play the piano, and so enjoy combining these. I&apos;ve played
+              around with Logic Pro and Cubase.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
             <div className={styles.factsWrapper}>
               <div className={styles.fact}>
-                I've fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
+                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
               </div>
-              <div className={styles.fact}>I've travelled to 27 countries ✈️</div>
-              <div className={styles.fact}>I've contributed to 2 open source projects (so far...) 👨‍💻</div>
+              <div className={styles.fact}>I&apos;ve travelled to 27 countries ✈️</div>
+              <div className={styles.fact}>I&apos;ve contributed to 2 open source projects (so far...) 👨‍💻</div>
             </div>
           </>
         )}
@@ -191,7 +191,10 @@ const MePage = () => {
         }}
       >
         {images.slice(0, 12).map((i: StaticImageData) => (
-          <div style={{ flexBasis: '16.66667%', maxWidth: '16.66667%', flexGrow: 0, flexShrink: 0, display: 'flex' }}>
+          <div
+            key={i.src}
+            style={{ flexBasis: '16.66667%', maxWidth: '16.66667%', flexGrow: 0, flexShrink: 0, display: 'flex' }}
+          >
             <Image src={i} width="800" height="800" objectFit="cover" placeholder="blur" />
           </div>
         ))}

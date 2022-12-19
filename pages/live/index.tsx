@@ -17,7 +17,7 @@ const LivePage = () => (
     <div className={styles.titleWrapper}>
       <span className={styles.title}>LIVE</span>
     </div>
-    <p>Live data on what I'm up to!</p>
+    <p>Live data on what I&apos;m up to!</p>
 
     {/* <div className={styles.projectsWrapper}>
       {blogPosts.map((p) => (
