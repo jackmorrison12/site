@@ -70,21 +70,9 @@ const MePage = () => {
           </div>
         ))}
       </div> */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          placeContent: 'center',
-          gap: '40px',
-          background: 'var(--accentBg)',
-          margin: 'auto',
-          borderRadius: '10px',
-          border: '4px solid var(--accentBorder)',
-          padding: '20px 40px',
-        }}
-      >
+      <div className={styles.hero}>
         <div>
-          <p style={{ fontSize: '2rem', fontWeight: '600' }}>Hey, I&apos;m Jack 👋</p>
+          <p className={styles.heroTitle}>Hey, I&apos;m Jack 👋</p>
           <p>How much are you interested?</p>
           <input
             type="range"
@@ -99,11 +87,10 @@ const MePage = () => {
             }
           />
         </div>
-        <div style={{ display: 'flex', borderRadius: '10px', overflow: 'hidden', height: '100px', width: '100px' }}>
+        <div className={styles.heroImage}>
           <Image src={avatar} width="800" height="800" placeholder="blur" />
         </div>
       </div>
-      {/* <h1 style={{ paddingTop: '20px' }}>Who am I?</h1> */}
       <TextWrapper>
         {bioLength === BioLength.short && (
           <>
@@ -112,13 +99,6 @@ const MePage = () => {
               making music, travelling, and skydiving.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
-            <div className={styles.factsWrapper}>
-              <div className={styles.fact}>
-                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
-              </div>
-              <div className={styles.fact}>I&apos;ve travelled to {NUM_COUNTRIES} countries ✈️</div>
-              <div className={styles.fact}>I&apos;ve contributed to {NUM_OS} open source projects (so far...) 👨‍💻</div>
-            </div>
           </>
         )}
         {bioLength === BioLength.medium && (
@@ -137,13 +117,6 @@ const MePage = () => {
               like to play around making music. I also play the piano, and so enjoy combining these.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
-            <div className={styles.factsWrapper}>
-              <div className={styles.fact}>
-                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
-              </div>
-              <div className={styles.fact}>I&apos;ve travelled to 27 countries ✈️</div>
-              <div className={styles.fact}>I&apos;ve contributed to 2 open source projects (so far...) 👨‍💻</div>
-            </div>
           </>
         )}
         {bioLength === BioLength.long && (
@@ -167,34 +140,19 @@ const MePage = () => {
               around with Logic Pro and Cubase.
             </p>
             <p className={styles.subtitle}>Here are some fun facts about me:</p>
-            <div className={styles.factsWrapper}>
-              <div className={styles.fact}>
-                I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
-              </div>
-              <div className={styles.fact}>I&apos;ve travelled to 27 countries ✈️</div>
-              <div className={styles.fact}>I&apos;ve contributed to 2 open source projects (so far...) 👨‍💻</div>
-            </div>
           </>
         )}
+        <div className={styles.factsWrapper}>
+          <div className={styles.fact}>
+            I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons 🪂
+          </div>
+          <div className={styles.fact}>I&apos;ve travelled to {NUM_COUNTRIES} countries ✈️</div>
+          <div className={styles.fact}>I&apos;ve contributed to {NUM_OS} open source projects (so far...) 👨‍💻</div>
+        </div>
       </TextWrapper>
-      <div
-        style={{
-          paddingTop: '20px',
-          marginBottom: '-10px',
-          display: 'flex',
-          flexDirection: 'row',
-          flex: '0 1 auto',
-          flexWrap: 'wrap',
-          // opacity: '0.4',
-          gridColumn: 'full',
-          // marginTop: '-10px',
-        }}
-      >
+      <div className={styles.imageGrid}>
         {images.slice(0, 12).map((i: StaticImageData) => (
-          <div
-            key={i.src}
-            style={{ flexBasis: '16.66667%', maxWidth: '16.66667%', flexGrow: 0, flexShrink: 0, display: 'flex' }}
-          >
+          <div key={i.src} className={styles.image}>
             <Image src={i} width="800" height="800" objectFit="cover" placeholder="blur" />
           </div>
         ))}
@@ -204,13 +162,3 @@ const MePage = () => {
 };
 
 export default MePage;
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const projects = await getProjects().filter((p) => !p.isHidden);
-
-//   return {
-//     props: {
-//       projects,
-//     },
-//   };
-// };

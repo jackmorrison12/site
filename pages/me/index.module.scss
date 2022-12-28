@@ -56,6 +56,31 @@
   flex-direction: column;
 }
 
+.hero {
+  display: flex;
+  align-items: center;
+  place-content: center;
+  gap: 40px;
+  background: var(--accentBg);
+  margin: auto;
+  border-radius: 10px;
+  border: 4px solid var(--accentBorder);
+  padding: 20px 40px;
+}
+
+.heroTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.heroImage {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+}
+
 .summary {
   font-size: 2rem;
   font-weight: 600;
@@ -67,9 +92,39 @@
   padding-bottom: 20px;
 }
 
+.imageGrid {
+  padding-top: 20px;
+  margin-bottom: -10px;
+  display: flex;
+  flex-direction: row;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  // opacity: 0.4;
+  grid-column: full;
+  // marginTop: -10px;
+}
+
+.image {
+  flex-basis: 16.66667%;
+  max-width: 16.66667%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+}
+
 /* Phone Landscape/Tablet Portrait */
 @media (max-width: 48em) {
   .title {
     font-size: 2rem;
+  }
+  .summary {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .fact {
+    flex-basis: 80%;
+    max-width: 80%;
   }
 }
