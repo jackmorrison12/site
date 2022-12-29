@@ -2,7 +2,7 @@
 
 import styles from './index.module.scss';
 
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout';
 // import ProjectSummary from '../../components/Projects/ProjectSummary/ProjectSummary';
 
 // import { getProjects } from '../../content-access/projects/projects';

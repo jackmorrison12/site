@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 import styles from './index.module.scss';
 
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout';
 import { useState } from 'react';
-import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
+import TextWrapper from '../../components/Layout/TextWrapper/TextWrapper';
 import avatar from '../../content/about-me/avatar.jpg';
 
 function importAll(r: __WebpackModuleApi.RequireContext): any {
