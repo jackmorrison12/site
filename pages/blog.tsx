@@ -1,8 +1,7 @@
 // import { GetStaticProps } from 'next';
 
-import styles from './index.module.scss';
-
-import { Layout } from '../../components/Layout';
+import { Layout } from '../components/Layout';
+import { Title } from '../components/shared/Title';
 // import ProjectSummary from '../../components/Projects/ProjectSummary/ProjectSummary';
 
 // import { getProjects } from '../../content-access/projects/projects';
@@ -14,9 +13,7 @@ import { Layout } from '../../components/Layout';
 
 const BlogPage = () => (
   <Layout title="Blog">
-    <div className={styles.titleWrapper}>
-      <span className={styles.title}>BLOG</span>
-    </div>
+    <Title value="BLOG" offset="-411.65" />
     <p>This is where I can put any interesting musings</p>
 
     {/* <div className={styles.projectsWrapper}>

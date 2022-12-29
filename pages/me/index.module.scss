@@ -1,37 +1,3 @@
-@function repeat($character, $n) {
-  $c: '';
-  @for $i from 1 through $n {
-    $c: $c + $character;
-  }
-  @return $c;
-}
-
-.titleWrapper {
-  overflow: hidden;
-  overflow: visible;
-}
-
-.title {
-  -webkit-text-stroke: 1px var(--accentSolid);
-  color: var(--accentSolid);
-  font-size: 6rem;
-  font-weight: 700;
-  overflow: visible;
-  position: relative;
-}
-
-.title::before {
-  content: repeat('ABOUTME', 100);
-  color: transparent;
-  left: -757.2ch;
-  position: absolute;
-}
-
-.title::after {
-  content: repeat('ABOUTME', 100);
-  color: transparent;
-}
-
 .factsWrapper {
   display: flex;
   flex-direction: row;
@@ -114,9 +80,6 @@
 
 /* Phone Landscape/Tablet Portrait */
 @media (max-width: 48em) {
-  .title {
-    font-size: 2rem;
-  }
   .summary {
     font-size: 1rem;
   }
