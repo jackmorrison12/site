@@ -48,13 +48,13 @@
 }
 
 .summary {
-  font-size: 2rem;
+  font-size: clamp(1rem, 2.5vw, 2rem);
   font-weight: 600;
   padding-bottom: 20px;
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   padding-bottom: 20px;
 }
 
@@ -80,12 +80,6 @@
 
 /* Phone Landscape/Tablet Portrait */
 @media (max-width: 48em) {
-  .summary {
-    font-size: 1rem;
-  }
-  .subtitle {
-    font-size: 1rem;
-  }
   .fact {
     flex-basis: 80%;
     max-width: 80%;

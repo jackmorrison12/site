@@ -153,6 +153,7 @@ html {
 }
 
 .blue-pink-theme {
+  color-scheme: dark;
   /* --accentBase: var(--pink1);
   --accentBgSubtle: var(--pink2);
   --accentBg: var(--pink3);
@@ -207,6 +208,8 @@ html {
 }
 
 .green-orange-theme {
+  color-scheme: dark;
+
   --accentBase: var(--orange12);
   --accentBgSubtle: var(--orange11);
   --accentBg: var(--orange10);
