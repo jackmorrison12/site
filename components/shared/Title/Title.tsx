@@ -7,8 +7,8 @@ const StyledTitle = styled.div<{ $title: string; $offset: string }>`
   overflow: visible;
 
   span {
-    -webkit-text-stroke: 1px var(--accentSolid);
-    color: var(--accentSolid);
+    -webkit-text-stroke: 1px ${(props) => props.theme.colours.primary.default};
+    color: ${(props) => props.theme.colours.primary.default};
     font-size: 6rem;
     font-weight: 700;
     overflow: visible;
