@@ -70,6 +70,7 @@ export type Theme = {
     text: ColourSpectrum;
     primary: ThemeColourSpectrum & ColourRange;
     secondary: ThemeColourSpectrum & ColourRange;
+    legacyGrey: ColourRange;
   };
   fontSizes: {
     h1: REM;

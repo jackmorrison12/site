@@ -8,6 +8,12 @@ const generateTheme = (theme: Theme) => {
   return Object.keys(flattened).reduce((prev, curr) => (prev += `--${curr}: ${flattened[curr]};`), '');
 };
 
+/**
+ * This is to be deprecated - it's to keep the theming working in the old CSS modules
+ * @deprecated
+ * @param theme The theme to generate the CSS for
+ * @returns Some CSS
+ */
 const generateLegacyTheme = (theme: Theme) => `        
 --accentBase: ${theme.colours.primary[1]};
 --accentBgSubtle: ${theme.colours.primary[2]};
@@ -22,31 +28,31 @@ const generateLegacyTheme = (theme: Theme) => `
 --accentText: ${theme.colours.primary[11]};
 --accentTextContrast: ${theme.colours.primary[12]};
 
---gray1: hsl(0, 0%, 8.5%);
---gray2: hsl(0, 0%, 11.0%);
---gray3: hsl(0, 0%, 13.6%);
---gray4: hsl(0, 0%, 15.8%);
---gray5: hsl(0, 0%, 17.9%);
---gray6: hsl(0, 0%, 20.5%);
---gray7: hsl(0, 0%, 24.3%);
---gray8: hsl(0, 0%, 31.2%);
---gray9: hsl(0, 0%, 43.9%);
---gray10: hsl(0, 0%, 49.4%);
---gray11: hsl(0, 0%, 62.8%);
---gray12: hsl(0, 0%, 93.0%);
+--gray1: ${theme.colours.legacyGrey[1]};
+--gray2: ${theme.colours.legacyGrey[2]};
+--gray3: ${theme.colours.legacyGrey[3]};
+--gray4: ${theme.colours.legacyGrey[4]};
+--gray5: ${theme.colours.legacyGrey[5]};
+--gray6: ${theme.colours.legacyGrey[6]};
+--gray7: ${theme.colours.legacyGrey[7]};
+--gray8: ${theme.colours.legacyGrey[8]};
+--gray9: ${theme.colours.legacyGrey[9]};
+--gray10: ${theme.colours.legacyGrey[10]};
+--gray11: ${theme.colours.legacyGrey[11]};
+--gray12: ${theme.colours.legacyGrey[12]};
 
---greyBase: ${theme.colours.background.default};
---greyBgSubtle: var(--gray2);
---greyBg: var(--gray3);
---greyBgHover: var(--gray4);
---greyBgActive: var(--gray5);
---greyLine: ${theme.colours.background.soft};
---greyBorder: var(--gray7);
---greyBorderHover: var(--gray8);
---greySolid: ${theme.colours.background.softest};
---greySolidHover: var(--gray10);
---greyText: var(--gray11);
---greyTextContrast: ${theme.colours.text.default};
+--greyBase: ${theme.colours.legacyGrey[1]};
+--greyBgSubtle: ${theme.colours.legacyGrey[2]};
+--greyBg: ${theme.colours.legacyGrey[3]};
+--greyBgHover: ${theme.colours.legacyGrey[4]};
+--greyBgActive: ${theme.colours.legacyGrey[5]};
+--greyLine: ${theme.colours.legacyGrey[6]};
+--greyBorder: ${theme.colours.legacyGrey[7]};
+--greyBorderHover: ${theme.colours.legacyGrey[8]};
+--greySolid: ${theme.colours.legacyGrey[9]};
+--greySolidHover: ${theme.colours.legacyGrey[10]};
+--greyText: ${theme.colours.legacyGrey[11]};
+--greyTextContrast: ${theme.colours.legacyGrey[12]};
 
 `;
 

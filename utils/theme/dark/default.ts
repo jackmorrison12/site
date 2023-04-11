@@ -1,5 +1,6 @@
 import { DefaultThemeWithoutColours } from '../default';
 import { generateSpectrum, Theme } from '../theme.types';
+import { grey } from './colours/grey';
 import { mintGreen } from './colours/mintGreen';
 import { orange } from './colours/orange';
 
@@ -28,6 +29,7 @@ export const DefaultDarkTheme: Theme = {
       ...orange,
       ...generateSpectrum(orange),
     },
+    legacyGrey: { ...grey },
   },
 };
 
