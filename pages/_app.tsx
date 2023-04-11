@@ -15,7 +15,7 @@ import _ from 'lodash';
 function MyApp({ Component, pageProps }: AppProps) {
   let themeTemplate = {} as Theme;
 
-  const generateTheme = (theme: any, currPath: string = '') => {
+  const generateTheme = (theme: any, currPath = '') => {
     Object.keys(theme).forEach((key) => {
       if (typeof theme[key as keyof typeof theme] === 'object' && theme[key as keyof typeof theme] !== null) {
         generateTheme(theme[key], currPath === '' ? currPath + key : currPath + '_' + key);

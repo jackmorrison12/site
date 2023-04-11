@@ -1,4 +1,6 @@
-export const mintGreen = {
+import { ColourRange } from '../../theme.types';
+
+export const mintGreen: ColourRange = {
   1: 'hsl(173, 50%, 6.6%)',
   2: 'hsl(176, 73%, 7.3%)',
   3: 'hsl(175, 79.3%, 8.9%)',

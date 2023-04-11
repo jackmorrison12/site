@@ -1,4 +1,6 @@
-export const orange = {
+import { ColourRange } from '../../theme.types';
+
+export const orange: ColourRange = {
   1: 'hsl(30, 70%, 7.2%)',
   2: 'hsl(28, 100%, 8.4%)',
   3: 'hsl(26, 91.1%, 11.6%)',
