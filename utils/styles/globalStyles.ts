@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { DefaultDarkTheme, DefaultLightTheme } from '../theme';
+import { DefaultDarkTheme, DefaultLightTheme, BluePinkDarkTheme, GreenOrangeDarkTheme } from '../theme';
 import { Theme } from '../theme/theme.types';
 import { flatten } from 'flat';
 
@@ -116,8 +116,21 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .dark-theme{
+        color-scheme: dark;
         ${generateLegacyTheme(DefaultDarkTheme)}
         ${generateTheme(DefaultDarkTheme)}
+    }
+
+    .blue-pink-theme{
+        color-scheme: dark;
+        ${generateLegacyTheme(BluePinkDarkTheme)}
+        ${generateTheme(BluePinkDarkTheme)}
+    }
+
+    .green-orange-theme{
+        color-scheme: dark;
+        ${generateLegacyTheme(GreenOrangeDarkTheme)}
+        ${generateTheme(GreenOrangeDarkTheme)}
     }
 
     html {

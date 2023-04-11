@@ -8,6 +8,7 @@ export const DefaultLightTheme: Theme = {
   ...DefaultThemeWithoutColours,
   colours: {
     background: {
+      // Needs to be set
       default: 'hsl(0, 0%, 8.5%)',
       soft: 'hsl(0, 0%, 20.5%)',
       softest: 'hsl(0, 0%, 43.9%)',
@@ -15,6 +16,7 @@ export const DefaultLightTheme: Theme = {
       heaviest: 'hsl(0, 0%, 0%)',
     },
     text: {
+      // Needs to be set
       default: 'hsl(0, 0%, 93%)',
       soft: 'hsl(0, 0%, 85.8%)',
       softest: 'hsl(0, 0%, 56.1%)',
