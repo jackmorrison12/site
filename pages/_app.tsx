@@ -11,25 +11,9 @@ import { DefaultLightTheme } from '../utils/theme';
 import { Theme } from '../utils/theme/theme.types';
 
 import _ from 'lodash';
+import { getThemeTemplate } from '../utils/theme/themeTemplate';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  let themeTemplate = {} as Theme;
-
-  const generateTheme = (theme: any, currPath = '') => {
-    Object.keys(theme).forEach((key) => {
-      if (typeof theme[key as keyof typeof theme] === 'object' && theme[key as keyof typeof theme] !== null) {
-        generateTheme(theme[key], currPath === '' ? currPath + key : currPath + '_' + key);
-      } else {
-        themeTemplate = _.merge(
-          themeTemplate,
-          unflatten({ [currPath + '_' + key]: 'var(--' + currPath + '_' + key + ')' }, { delimiter: '_' }),
-        );
-      }
-    });
-  };
-
-  generateTheme(DefaultLightTheme);
-
   return (
     <>
       <GoogleAnalytics />
@@ -44,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         themes={['light', 'dark', 'greenOrange', 'bluePink']}
       >
         <GlobalStyle />
-        <SCThemeProvider theme={themeTemplate}>
+        <SCThemeProvider theme={getThemeTemplate()}>
           <Component {...pageProps} />
         </SCThemeProvider>
       </ThemeProvider>
