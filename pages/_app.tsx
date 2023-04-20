@@ -6,11 +6,6 @@ import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { GlobalStyle } from '../utils/styles/globalStyles';
 
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
-import { unflatten } from 'flat';
-import { DefaultLightTheme } from '../utils/theme';
-import { Theme } from '../utils/theme/theme.types';
-
-import _ from 'lodash';
 import { getThemeTemplate } from '../utils/theme/themeTemplate';
 
 function MyApp({ Component, pageProps }: AppProps) {
