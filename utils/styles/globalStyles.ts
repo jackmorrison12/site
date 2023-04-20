@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { DefaultDarkTheme, DefaultLightTheme, BluePinkDarkTheme, GreenOrangeDarkTheme } from '../theme';
+import { themes } from '../theme';
 import { Theme } from '../theme/theme.types';
 import { flatten } from 'flat';
 
@@ -109,29 +109,19 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     }
 
-    /* These are legacy styles for the css modules - new StyledComponents will use the theme object */
-    :root {
-        ${generateLegacyTheme(DefaultLightTheme)}
-        ${generateTheme(DefaultLightTheme)}
-    }
-
-    .dark-theme{
-        color-scheme: dark;
-        ${generateLegacyTheme(DefaultDarkTheme)}
-        ${generateTheme(DefaultDarkTheme)}
-    }
-
-    .blue-pink-theme{
-        color-scheme: dark;
-        ${generateLegacyTheme(BluePinkDarkTheme)}
-        ${generateTheme(BluePinkDarkTheme)}
-    }
-
-    .green-orange-theme{
-        color-scheme: dark;
-        ${generateLegacyTheme(GreenOrangeDarkTheme)}
-        ${generateTheme(GreenOrangeDarkTheme)}
-    }
+    /* generateLegacyTheme generates legacy styles for the css modules - 
+       new StyledComponents will use generateTheme and the theme object */
+    ${themes.reduce(
+      (a, v) =>
+        a +
+        (v.isRoot ? ':root' : `.${v.className}`) +
+        '{' +
+        (v.isDark ? 'color-scheme: dark;' : '') +
+        generateLegacyTheme(v.theme) +
+        generateTheme(v.theme) +
+        '}',
+      '',
+    )}
 
     html {
         /* We need to get this from the theme */

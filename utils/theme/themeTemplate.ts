@@ -1,7 +1,11 @@
+/**
+ * This file exports a method to generate the theme object for Styled Components
+ */
+
 import { unflatten } from 'flat';
-import { DefaultLightTheme } from './light/default';
 import { Theme } from './theme.types';
 import _ from 'lodash';
+import { themes } from './exportedThemes';
 
 export const getThemeTemplate = () => {
   let themeTemplate = {} as Theme;
@@ -19,6 +23,6 @@ export const getThemeTemplate = () => {
     });
   };
 
-  generateTheme(DefaultLightTheme);
+  generateTheme(themes[0].theme);
   return themeTemplate;
 };
