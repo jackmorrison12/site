@@ -1,5 +1,5 @@
 // import { GetStaticProps } from 'next';
-import Image from 'next/legacy/image';
+import Image, { StaticImageData } from 'next/legacy/image';
 
 import styles from './index.module.scss';
 
