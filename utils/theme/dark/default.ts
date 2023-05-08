@@ -8,14 +8,16 @@ export const DefaultDarkTheme: Theme = {
   ...DefaultThemeWithoutColours,
   colours: {
     background: {
-      default: 'hsl(0, 0%, 8.5%)',
-      soft: 'hsl(0, 0%, 20.5%)',
-      softest: 'hsl(0, 0%, 43.9%)',
+      default: grey[1],
+      soft: grey[6],
+      softest: grey[9],
+      // TODO: Set these
       heavy: 'hsl(0, 0%, 4%)',
       heaviest: 'hsl(0, 0%, 0%)',
     },
     text: {
-      default: 'hsl(0, 0%, 93%)',
+      default: grey[12],
+      // TODO: Set these
       soft: 'hsl(0, 0%, 85.8%)',
       softest: 'hsl(0, 0%, 56.1%)',
       heavy: 'hsl(0, 0%, 99.0%)',
