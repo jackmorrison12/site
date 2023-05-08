@@ -5,9 +5,7 @@ const _404Page = () => (
   <Layout title="404">
     <h1>404: Page Not Found</h1>
     <p>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
+      <Link href="/">Home</Link>
     </p>
   </Layout>
 );
