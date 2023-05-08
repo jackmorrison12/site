@@ -18,29 +18,25 @@ const ProjectHeader = ({
 }) => {
   return (
     <div className={styles.layout} key={project.slug}>
-      <Link href={project.slug ?? '#'}>
-        <a>
-          <div className={styles.innerLayout}>
-            <div className={styles.imageWrapper}>
-              <Image src={project.bannerImg} width="3000" height="1500" />
-            </div>
-            <div className={styles.infoWrapper}>
-              <h1 className={styles.header}>{project.title}</h1>
-              <p>
-                <i>{project.description}</i>
-              </p>
-              <div className={styles.tagContainer}>
-                {project.tags.map((t) => (
-                  <Link href={`/tags/${slugify(t, { lower: true })}`} key={t}>
-                    <a className={styles.link}>
-                      <div className={styles.tag}>{t}</div>
-                    </a>
-                  </Link>
-                ))}
-              </div>
+      <Link href={project.slug ?? '#'} passHref>
+        <div className={styles.innerLayout}>
+          <div className={styles.imageWrapper}>
+            <Image alt={`${project.title} Banner Image`} src={project.bannerImg} width="3000" height="1500" />
+          </div>
+          <div className={styles.infoWrapper}>
+            <h1 className={styles.header}>{project.title}</h1>
+            <p>
+              <i>{project.description}</i>
+            </p>
+            <div className={styles.tagContainer}>
+              {project.tags.map((t) => (
+                <Link href={`/tags/${slugify(t, { lower: true })}`} key={t} className={styles.link} passHref>
+                  <div className={styles.tag}>{t}</div>
+                </Link>
+              ))}
             </div>
           </div>
-        </a>
+        </div>
       </Link>
     </div>
   );

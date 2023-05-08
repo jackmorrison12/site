@@ -16,25 +16,17 @@ const Footer = () => (
       </div>
       <div className={styles.useful}>
         <h4>Useful</h4>
-        <Link href="/credits">
-          <a>
-            <p>Credits</p>
-          </a>
+        <Link href="/credits" passHref>
+          <p>Credits</p>
         </Link>
-        <Link href="/tools">
-          <a>
-            <p>Tools Used</p>
-          </a>
+        <Link href="/tools" passHref>
+          <p>Tools Used</p>
         </Link>
-        <Link href="/fair-use">
-          <a>
-            <p>Fair Use Policy</p>
-          </a>
+        <Link href="/fair-use" passHref>
+          <p>Fair Use Policy</p>
         </Link>
-        <Link href="/archive">
-          <a>
-            <p>Site Archive</p>
-          </a>
+        <Link href="/archive" passHref>
+          <p>Site Archive</p>
         </Link>
       </div>
       <div className={styles.popular}>

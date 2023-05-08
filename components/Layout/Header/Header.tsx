@@ -46,10 +46,12 @@ const Header = ({ title }: HeaderProps) => {
         {_.navViewable && (
           <nav className={styles.nav}>
             {headerLinks.map((link) => (
-              <Link href={link.url} key={link.url}>
-                <a className={`${styles.link} ${_.router.pathname === link.url ? styles.activeLink : ''}`}>
-                  {link.emoji} {link.name}
-                </a>
+              <Link
+                href={link.url}
+                key={link.url}
+                className={`${styles.link} ${_.router.pathname === link.url ? styles.activeLink : ''}`}
+              >
+                {link.emoji} {link.name}
               </Link>
             ))}
           </nav>
