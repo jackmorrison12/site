@@ -1,5 +1,5 @@
 import styles from './MdxOverrides.module.scss';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 export const H2Override = ({ children }: { children?: any }) => (
   <h2>

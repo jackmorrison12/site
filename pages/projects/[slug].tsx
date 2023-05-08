@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { getPlaiceholder } from 'plaiceholder';
 
 import { Layout } from '../../components/Layout';

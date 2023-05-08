@@ -4,7 +4,7 @@ import { useProjectHeader } from './ProjectHeader.hooks';
 import { ImageProps } from '../../../content-access';
 
 import styles from './ProjectHeader.module.scss';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import slugify from 'slugify';
 
