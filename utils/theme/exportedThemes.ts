@@ -9,18 +9,18 @@ import { DefaultLightTheme } from './light/default';
 
 export const themes = [
   {
-    theme: DefaultDarkTheme,
-    className: 'dark-theme',
-    isDark: true,
-    isRoot: false,
-    themeName: 'dark',
-  },
-  {
     theme: DefaultLightTheme,
     className: 'light-theme',
     isDark: false,
     isRoot: true,
     themeName: 'light',
+  },
+  {
+    theme: DefaultDarkTheme,
+    className: 'dark-theme',
+    isDark: true,
+    isRoot: false,
+    themeName: 'dark',
   },
   {
     theme: BluePinkDarkTheme,
