@@ -3,10 +3,11 @@ import Image from 'next/image';
 
 import styles from './index.module.scss';
 
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout';
 import { useState } from 'react';
-import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
+import TextWrapper from '../../components/Layout/TextWrapper/TextWrapper';
 import avatar from '../../content/about-me/avatar.jpg';
+import { Title } from '../../components/shared/Title';
 
 function importAll(r: __WebpackModuleApi.RequireContext): any {
   return r.keys().map(r);
@@ -27,9 +28,7 @@ const MePage = () => {
   const [bioLength, setBioLength] = useState(BioLength.short);
   return (
     <Layout title="Me">
-      <div className={styles.titleWrapper}>
-        <span className={styles.title}>ME</span>
-      </div>
+      <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
       {/* <div
         style={{
           display: 'flex',

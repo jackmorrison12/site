@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout';
 import { Project } from '../../content-access/projects/projects.types';
 import { getTag, getTagSlugs } from '../../content-access/tags/tags';
 

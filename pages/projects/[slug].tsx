@@ -3,12 +3,12 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
 import { getPlaiceholder } from 'plaiceholder';
 
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout';
 import { getProject, getProjectSlugs } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
 import { ImageProps } from '../../content-access';
 import ProjectHeader from '../../components/Projects/ProjectHeader/ProjectHeader';
-import TextWrapper from '../../components/Layout/components/TextWrapper/TextWrapper';
+import TextWrapper from '../../components/Layout/TextWrapper/TextWrapper';
 import BackLink from '../../components/shared/BackLink/BackLink';
 import { mdxOverrides } from '../../components/shared/MdxOverrides/MdxOverrides';
 
