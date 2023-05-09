@@ -6,9 +6,7 @@ const CVPage = () => (
     <h1>CV</h1>
     <p>This page will host my CV in react</p>
     <p>
-      <Link href="/">
-        <a>Go home</a>
-      </Link>
+      <Link href="/">Go home</Link>
     </p>
   </Layout>
 );

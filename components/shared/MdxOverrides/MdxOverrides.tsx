@@ -1,5 +1,5 @@
 import styles from './MdxOverrides.module.scss';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 export const H2Override = ({ children }: { children?: any }) => (
   <h2>
@@ -18,7 +18,7 @@ export const ImgWithCaption = ({
   imgProps,
 }: {
   children?: any;
-  imgProps: { src: string; alt?: string; height: string; width: string };
+  imgProps: { src: string; alt?: string; height: number; width: number };
 }) => (
   <div className={styles.imgCaptionWrapper}>
     <div className={styles.caption}>{children}</div>
@@ -34,8 +34,8 @@ export const DoubleImg = ({
   img1Props,
   img2Props,
 }: {
-  img1Props: { src: string; alt?: string; height: string; width: string };
-  img2Props: { src: string; alt?: string; height: string; width: string };
+  img1Props: { src: string; alt?: string; height: number; width: number };
+  img2Props: { src: string; alt?: string; height: number; width: number };
 }) => (
   <div className={styles.imgCaptionWrapper}>
     <div className={styles.doubleImgSection}>

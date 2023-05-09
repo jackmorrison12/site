@@ -27,8 +27,8 @@ const TagPage = ({ errors, items, tag }: Props) => {
       <h1>{tag}</h1>
       {items.map((i) => (
         <p key={i.title}>
-          <Link href={i.slug}>
-            <a>{i.title}</a>
+          <Link href={i.slug} legacyBehavior>
+            {i.title}
           </Link>
         </p>
       ))}

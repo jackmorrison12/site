@@ -4,9 +4,7 @@ import styles from './BackLink.module.scss';
 const BackLink = ({ text }: { text: string }) => (
   <p className={styles.wrapper}>
     {'<'}
-    <Link href="/projects">
-      <a>{text}</a>
-    </Link>
+    <Link href="/projects">{text}</Link>
   </p>
 );
 

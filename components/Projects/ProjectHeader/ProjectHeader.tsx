@@ -4,7 +4,7 @@ import { useProjectHeader } from './ProjectHeader.hooks';
 import { ImageProps } from '../../../content-access';
 
 import styles from './ProjectHeader.module.scss';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import slugify from 'slugify';
 
@@ -31,17 +31,13 @@ const ProjectHeader = ({
         </h3>
         <div className={styles.tagContainer}>
           {project.tags.map((t) => (
-            <Link href={`/tags/${slugify(t, { lower: true })}`} key={t}>
-              <a className={styles.link}>
-                <div className={styles.tag}>{t}</div>
-              </a>
+            <Link href={`/tags/${slugify(t, { lower: true })}`} key={t} className={styles.link} passHref>
+              <div className={styles.tag}>{t}</div>
             </Link>
           ))}
           {project.sources?.map((t) => (
-            <Link href={t.url} key={t.name}>
-              <a className={styles.link}>
-                <div className={styles.tag}>{t.name}</div>
-              </a>
+            <Link href={t.url} key={t.name} className={styles.link} passHref>
+              <div className={styles.tag}>{t.name}</div>
             </Link>
           ))}
         </div>
