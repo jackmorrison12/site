@@ -1,4 +1,3 @@
-import { Metadata, ResolvingMetadata } from 'next';
 import { Title } from '../../components/shared/Title';
 
 export default async function Page() {
