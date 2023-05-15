@@ -9,9 +9,11 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.1.2",
-    "@next/mdx": "^12.2.3",
+    "@mdx-js/loader": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
+    "@next/mdx": "^12.3.4",
     "@radix-ui/colors": "^0.1.8",
+    "@types/mdx": "^2.0.5",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.5.0",
@@ -31,7 +33,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.54.4",
     "slugify": "^1.6.5",
-    "styled-components": "^5.3.6"
+    "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.0.7",
