@@ -1,7 +1,13 @@
+import { Title } from '../../components/shared/Title';
 import Tools from './tools.mdx';
 
 export default function Page() {
-  return <Tools />;
+  return (
+    <>
+      <Title value="TOOLS" offset="-409.38" />
+      <Tools />
+    </>
+  );
 }
 export const metadata = {
   title: 'Tools Used',
