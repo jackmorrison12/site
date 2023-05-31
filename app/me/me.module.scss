@@ -54,6 +54,12 @@
 
 .twt {
   grid-area: twt;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .gh {

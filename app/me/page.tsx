@@ -1,7 +1,8 @@
 import { Title } from '../../components/shared/Title';
 import styles from './me.module.scss';
 import Image from 'next/image';
-import SVGIMG from './imperial-logo.svg';
+import SVGIMG from './logos/imperial.svg';
+import { TwitterIcon } from './logos/twitter';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
@@ -23,7 +24,9 @@ export default async function Page() {
         <div className={`${styles.box} ${styles.os}`}>
           👨‍💻 I&apos;ve contributed to {NUM_OS} open source projects (so far...)
         </div>
-        <div className={`${styles.box} ${styles.twt}`}>Twt</div>
+        <div className={`${styles.box} ${styles.twt}`}>
+          <TwitterIcon />
+        </div>
         <div className={`${styles.box} ${styles.gh}`}>gh</div>
         <div className={`${styles.box} ${styles.linkedin}`}>LI</div>
         <div className={`${styles.box} ${styles.insta}`}>IN</div>
