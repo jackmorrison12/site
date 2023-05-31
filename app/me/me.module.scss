@@ -1,0 +1,135 @@
+.layout {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-columns: repeat(4, minmax(1px, 1fr));
+  grid-template-rows: repeat(12, 7rem);
+  grid-template-areas: 
+  "intro     intro     intro     intro"
+  "intro     intro     intro     intro"
+  "imperial  imperial  bbg       bbg"
+  "imperial  imperial  bbg       bbg"
+  "os        os        twt       linkedin"
+  "os        os        gh        insta"
+  "about     about     about     about"
+  "about     about     about     about"
+  "lastfm    music     music     weather"
+  "spotify   music     music     weather"
+  "countries countries skydiving skydiving"
+  "countries countries skydiving skydiving";
+}
+
+.box {
+  background-color: var(--colours_primary_background_default);
+  padding: 20px 40px;
+  border-radius: 10px;
+  // height: 13rem;
+  // font-size: 1.25rem;
+  // font-weight: var(--fontWeights_thick);
+  // display: flex;
+  // align-items: end;
+  // flex-flow: wrap;
+}
+
+.intro {
+  grid-area: intro;
+}
+
+.imperial {
+  grid-area: imperial;
+  background-color: #EBEEEE;
+  color: #003E74;
+  // text-align: center;
+  font-weight: var(--fontWeights_thick);
+  font-size: 1.5rem;
+}
+
+.bbg {
+  grid-area: bbg;
+}
+
+.os {
+  grid-area: os;
+}
+
+.twt {
+  grid-area: twt;
+}
+
+.gh {
+  grid-area: gh;
+}
+
+.linkedin {
+  grid-area: linkedin;
+}
+
+.insta {
+  grid-area: insta;
+}
+
+.about {
+  grid-area: about;
+}
+
+.lastfm {
+  grid-area: lastfm;
+}
+
+.spotify {
+  grid-area: spotify;
+}
+
+.music {
+  grid-area: music;
+}
+
+.countries {
+  grid-area: countries;
+}
+
+.skydiving {
+  grid-area: skydiving;
+  // background-image: url('https://i.pinimg.com/originals/6b/be/ef/6bbeef0bc53a87ad09ac1c7c7591128e.png');
+  // background-position: center; /* Center the image */
+  // background-repeat: no-repeat; /* Do not repeat the image */
+  // background-size: cover; /* Resize the background image to cover the entire container */
+  background-color: hsl(192, 82%, 56%);
+  color: var(--colours_background_default);
+}
+
+.weather {
+  grid-area: weather;
+}
+
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .layout {
+    grid-template-columns: repeat(6, 7rem);
+    grid-template-rows: repeat(8, 7rem);
+    grid-template-areas: 
+      "intro     intro     intro   intro imperial  imperial"
+      "intro     intro     intro   intro imperial  imperial"
+      "bbg       bbg       os      os    twt       linkedin"
+      "bbg       bbg       os      os    gh        insta"
+      "about     about     about   about countries countries"
+      "about     about     about   about countries countries"
+      "skydiving skydiving lastfm  music music     weather"
+      "skydiving skydiving spotify music music     weather";
+   }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+  .layout {
+    grid-template-columns: repeat(8, 7rem);
+    grid-template-rows: repeat(6, 7rem);
+    grid-template-areas: 
+      "intro   intro intro intro     imperial  imperial  bbg       bbg"
+      "intro   intro intro intro     imperial  imperial  bbg       bbg"
+      "os      os    twt   linkedin  about     about     about     about"
+      "os      os    gh    insta     about     about     about     about"
+      "lastfm  music music countries countries skydiving skydiving weather"
+      "spotify music music countries countries skydiving skydiving weather";  }
+}
