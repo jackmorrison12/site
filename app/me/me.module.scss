@@ -64,14 +64,32 @@
 
 .gh {
   grid-area: gh;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .linkedin {
   grid-area: linkedin;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .insta {
   grid-area: insta;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .about {
@@ -80,10 +98,22 @@
 
 .lastfm {
   grid-area: lastfm;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .spotify {
   grid-area: spotify;
+  background-color: hsl(203, 89%, 53%);
+  color: var(--colours_background_default);
+  display: flex;
+  svg {
+    width: 100%;
+  }
 }
 
 .music {

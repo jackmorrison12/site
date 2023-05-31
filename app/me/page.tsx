@@ -3,6 +3,11 @@ import styles from './me.module.scss';
 import Image from 'next/image';
 import SVGIMG from './logos/imperial.svg';
 import { TwitterIcon } from './logos/twitter';
+import { GitHubIcon } from './logos/github';
+import { LinkedInIcon } from './logos/linkedin';
+import { InstagramIcon } from './logos/instagram';
+import { LastFmIcon } from './logos/lastfm';
+import { SpotifyIcon } from './logos/spotify';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
@@ -27,12 +32,22 @@ export default async function Page() {
         <div className={`${styles.box} ${styles.twt}`}>
           <TwitterIcon />
         </div>
-        <div className={`${styles.box} ${styles.gh}`}>gh</div>
-        <div className={`${styles.box} ${styles.linkedin}`}>LI</div>
-        <div className={`${styles.box} ${styles.insta}`}>IN</div>
+        <div className={`${styles.box} ${styles.gh}`}>
+          <GitHubIcon />
+        </div>
+        <div className={`${styles.box} ${styles.linkedin}`}>
+          <LinkedInIcon />
+        </div>
+        <div className={`${styles.box} ${styles.insta}`}>
+          <InstagramIcon />
+        </div>
         <div className={`${styles.box} ${styles.about}`}>About me</div>
-        <div className={`${styles.box} ${styles.lastfm}`}>lfm</div>
-        <div className={`${styles.box} ${styles.spotify}`}>spt</div>
+        <div className={`${styles.box} ${styles.lastfm}`}>
+          <LastFmIcon />
+        </div>
+        <div className={`${styles.box} ${styles.spotify}`}>
+          <SpotifyIcon />
+        </div>
         <div className={`${styles.box} ${styles.music}`}>music</div>
         <div className={`${styles.box} ${styles.countries}`}>✈️ I&apos;ve travelled to {NUM_COUNTRIES} countries</div>
         <div className={`${styles.box} ${styles.skydiving}`}>
