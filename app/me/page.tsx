@@ -29,25 +29,25 @@ export default async function Page() {
         <div className={`${styles.box} ${styles.os}`}>
           👨‍💻 I&apos;ve contributed to {NUM_OS} open source projects (so far...)
         </div>
-        <div className={`${styles.box} ${styles.twt}`}>
+        <a href="https://twitter.com/jsm_99" className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
-        </div>
-        <div className={`${styles.box} ${styles.gh}`}>
+        </a>
+        <a href="https://github.com/jackmorrison12" className={`${styles.icon} ${styles.gh}`}>
           <GitHubIcon />
-        </div>
-        <div className={`${styles.box} ${styles.linkedin}`}>
+        </a>
+        <a href="https://www.linkedin.com/in/jackmorrison12/" className={`${styles.icon} ${styles.linkedin}`}>
           <LinkedInIcon />
-        </div>
-        <div className={`${styles.box} ${styles.insta}`}>
+        </a>
+        <a href="https://www.instagram.com/jackmorrison12/" className={`${styles.icon} ${styles.insta}`}>
           <InstagramIcon />
-        </div>
+        </a>
         <div className={`${styles.box} ${styles.about}`}>About me</div>
-        <div className={`${styles.box} ${styles.lastfm}`}>
+        <a href="https://www.last.fm/user/Jackmorrison12" className={`${styles.icon} ${styles.lastfm}`}>
           <LastFmIcon />
-        </div>
-        <div className={`${styles.box} ${styles.spotify}`}>
+        </a>
+        <a href="https://open.spotify.com/user/112282925" className={`${styles.icon} ${styles.spotify}`}>
           <SpotifyIcon />
-        </div>
+        </a>
         <div className={`${styles.box} ${styles.music}`}>music</div>
         <div className={`${styles.box} ${styles.countries}`}>✈️ I&apos;ve travelled to {NUM_COUNTRIES} countries</div>
         <div className={`${styles.box} ${styles.skydiving}`}>

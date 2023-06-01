@@ -31,6 +31,23 @@
   // flex-flow: wrap;
 }
 
+.icon {
+  padding: clamp(1px, 30%, 30px);
+  border-radius: 10px;
+  cursor: pointer;
+  transform: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  svg {
+    width: 100%;
+  }
+  color: white;
+  display: flex;
+}
+
+.icon:hover {
+  transform: scale(0.95);
+}
+
 .intro {
   grid-area: intro;
 }
@@ -54,42 +71,44 @@
 
 .twt {
   grid-area: twt;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background: hsl(203, 89%, 53%);
+}
+
+.twt:hover {
+  color: hsl(203, 89%, 53%);
+  background: hsl(203, 89%, 83%);
 }
 
 .gh {
   grid-area: gh;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background:black;
+}
+
+.gh:hover {
+  color:black;
+  background:lightgrey;
 }
 
 .linkedin {
   grid-area: linkedin;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background: hsl(201, 100%, 35%);
+}
+
+.linkedin:hover {
+  color: hsl(201, 100%, 35%);
+  background: hsl(201, 100%, 85%);
 }
 
 .insta {
   grid-area: insta;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background-color: #f09433; 
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+.insta:hover {
+  color: white;
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+
 }
 
 .about {
@@ -98,22 +117,22 @@
 
 .lastfm {
   grid-area: lastfm;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background: hsl(3, 94%, 43%);
+}
+
+.lastfm:hover {
+  color: hsl(3, 94%, 43%);
+  background: hsl(3, 94%, 89%);
 }
 
 .spotify {
   grid-area: spotify;
-  background-color: hsl(203, 89%, 53%);
-  color: var(--colours_background_default);
-  display: flex;
-  svg {
-    width: 100%;
-  }
+  background: hsl(141, 73%, 42%);
+}
+
+.spotify:hover {
+  color: hsl(141, 73%, 42%);
+  background: hsl(141, 73%, 82%);
 }
 
 .music {
