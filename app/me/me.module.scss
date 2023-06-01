@@ -44,8 +44,9 @@
 .intro {
   grid-area: intro;
   display: grid;
-  grid-template-areas: "text image";
-  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "image"
+                       "text";
+  grid-template-rows: 1fr 1fr;
 }
 
 .introText {
@@ -183,6 +184,11 @@
       "skydiving skydiving lastfm  music music     weather"
       "skydiving skydiving spotify music music     weather";
    }
+
+   .intro {
+    grid-template-areas: "text image";
+    grid-template-columns: 3fr 1fr;
+  }
 }
 
 /* Tablet Landscape */
@@ -196,5 +202,11 @@
       "os      os    twt   linkedin  about     about     about     about"
       "os      os    gh    insta     about     about     about     about"
       "lastfm  music music countries countries skydiving skydiving weather"
-      "spotify music music countries countries skydiving skydiving weather";  }
+      "spotify music music countries countries skydiving skydiving weather";  
+  }
+
+  .intro {
+    grid-template-areas: "text image";
+    grid-template-columns: 3fr 1fr;
+  }
 }
