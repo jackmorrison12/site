@@ -1,13 +1,13 @@
 import { Title } from '../../components/shared/Title';
 import styles from './me.module.scss';
-import Image from 'next/image';
-import SVGIMG from './logos/imperial.svg';
 import { TwitterIcon } from './logos/twitter';
 import { GitHubIcon } from './logos/github';
 import { LinkedInIcon } from './logos/linkedin';
 import { InstagramIcon } from './logos/instagram';
 import { LastFmIcon } from './logos/lastfm';
 import { SpotifyIcon } from './logos/spotify';
+import { ImperialLogo } from './logos/imperial';
+import { BloombergLogo } from './logos/bloomberg';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
@@ -19,13 +19,12 @@ export default async function Page() {
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
       <div className={styles.layout}>
         <div className={`${styles.box} ${styles.intro}`}>I&apos;m a software engineer at Bloomberg in London</div>
-        <div className={`${styles.box} ${styles.imperial}`}>
-          <p>I studied</p>
-          <p>Computing</p>
-          <p>@</p>
-          <Image src={SVGIMG} alt={'Imperial College London Logo'} height={55} />
+        <div className={`${styles.box} ${styles.bbg}`}>
+          <BloombergLogo />
         </div>
-        <div className={`${styles.box} ${styles.bbg}`}>I&apos;m a SWE at Bloomberg</div>
+        <div className={`${styles.box} ${styles.imperial}`}>
+          <ImperialLogo />
+        </div>
         <div className={`${styles.box} ${styles.os}`}>
           👨‍💻 I&apos;ve contributed to {NUM_OS} open source projects (so far...)
         </div>

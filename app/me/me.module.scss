@@ -7,8 +7,7 @@
   grid-template-areas: 
   "intro     intro     intro     intro"
   "intro     intro     intro     intro"
-  "imperial  imperial  bbg       bbg"
-  "imperial  imperial  bbg       bbg"
+  "bbg       bbg       imperial  imperial"
   "os        os        twt       linkedin"
   "os        os        gh        insta"
   "about     about     about     about"
@@ -23,12 +22,6 @@
   background-color: var(--colours_primary_background_default);
   padding: 20px 40px;
   border-radius: 10px;
-  // height: 13rem;
-  // font-size: 1.25rem;
-  // font-weight: var(--fontWeights_thick);
-  // display: flex;
-  // align-items: end;
-  // flex-flow: wrap;
 }
 
 .icon {
@@ -55,14 +48,21 @@
 .imperial {
   grid-area: imperial;
   background-color: #EBEEEE;
-  color: #003E74;
-  // text-align: center;
-  font-weight: var(--fontWeights_thick);
-  font-size: 1.5rem;
+  display: flex;
+  svg {
+    width: 100%;
+  }
+  padding: clamp(1px, 20%, 30px);
 }
 
 .bbg {
   grid-area: bbg;
+  background-color: black;
+  display: flex;
+  svg {
+    width: 100%;
+  }
+  padding: clamp(1px, 20%, 30px);
 }
 
 .os {
@@ -108,7 +108,6 @@
 .insta:hover {
   color: white;
   background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
-
 }
 
 .about {
@@ -164,10 +163,10 @@
     grid-template-columns: repeat(6, 7rem);
     grid-template-rows: repeat(8, 7rem);
     grid-template-areas: 
-      "intro     intro     intro   intro imperial  imperial"
-      "intro     intro     intro   intro imperial  imperial"
+      "intro     intro     intro   intro intro     intro"
+      "intro     intro     intro   intro intro     intro"
       "bbg       bbg       os      os    twt       linkedin"
-      "bbg       bbg       os      os    gh        insta"
+      "imperial  imperial  os      os    gh        insta"
       "about     about     about   about countries countries"
       "about     about     about   about countries countries"
       "skydiving skydiving lastfm  music music     weather"
@@ -181,8 +180,8 @@
     grid-template-columns: repeat(8, 7rem);
     grid-template-rows: repeat(6, 7rem);
     grid-template-areas: 
-      "intro   intro intro intro     imperial  imperial  bbg       bbg"
-      "intro   intro intro intro     imperial  imperial  bbg       bbg"
+      "intro   intro intro intro     intro     intro     bbg       bbg"
+      "intro   intro intro intro     intro     intro     imperial  imperial"
       "os      os    twt   linkedin  about     about     about     about"
       "os      os    gh    insta     about     about     about     about"
       "lastfm  music music countries countries skydiving skydiving weather"
