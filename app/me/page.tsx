@@ -18,7 +18,13 @@ export default async function Page() {
     <>
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
       <div className={styles.layout}>
-        <div className={`${styles.box} ${styles.intro}`}>I&apos;m a software engineer at Bloomberg in London</div>
+        <div className={`${styles.box} ${styles.intro}`}>
+          <div className={styles.introText}>
+            <p>Hey, I&apos;m Jack!</p>
+            <p>A 24 year old Software Engineer at Bloomberg</p>
+          </div>
+          <div className={styles.introImage}>img</div>
+        </div>
         <div className={`${styles.box} ${styles.bbg}`}>
           <BloombergLogo />
         </div>

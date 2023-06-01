@@ -43,6 +43,17 @@
 
 .intro {
   grid-area: intro;
+  display: grid;
+  grid-template-areas: "text image";
+  grid-template-columns: 3fr 1fr;
+}
+
+.introText {
+  grid-area: text;
+}
+
+.introImage {
+  grid-area: image;
 }
 
 .imperial {
