@@ -25,11 +25,17 @@ export default async function Page() {
           </div>
           <div className={styles.introImage}>img</div>
         </div>
-        <div className={`${styles.box} ${styles.bbg}`}>
+        <div className={`${styles.box} ${styles.bbg} ${styles.overlayParent}`}>
           <BloombergLogo />
+          <div className={styles.overlayWrapper}>
+            <p className={styles.overlayContent}>I&apos;ve been a Software Engineer at Bloomberg since 2021!</p>
+          </div>
         </div>
-        <div className={`${styles.box} ${styles.imperial}`}>
+        <div className={`${styles.box} ${styles.imperial} ${styles.overlayParent}`}>
           <ImperialLogo />
+          <div className={styles.overlayWrapper}>
+            <p className={styles.overlayContent}>I graduated from Imperial in 2021!</p>
+          </div>
         </div>
         <div className={`${styles.box} ${styles.os}`}>
           👨‍💻 I&apos;ve contributed to {NUM_OS} open source projects (so far...)

@@ -1,3 +1,5 @@
+// Generic styles
+
 .layout {
   display: grid;
   gap: 10px;
@@ -40,6 +42,44 @@
 .icon:hover {
   transform: scale(0.95);
 }
+
+.overlayParent {
+  position: relative;
+}
+
+.overlayWrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: opacity .2s, visibility .2s;
+  padding: 10px;
+}
+
+.overlayParent:hover .overlayWrapper {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlayContent {
+  transition: .2s;
+  text-align: center;
+}
+
+.overlayParent:hover .overlayContent {
+  transform: translateY(0);
+}
+
+// Individual styles
 
 .intro {
   grid-area: intro;
