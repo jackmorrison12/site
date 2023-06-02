@@ -21,7 +21,7 @@ export default async function Page() {
       <div className={styles.layout}>
         <div className={`${styles.box} ${styles.intro}`}>
           <div className={styles.introText}>
-            <p>Hey, I&apos;m Jack!</p>
+            <h4>Hey, I&apos;m Jack!</h4>
             <p>A 24 year old Software Engineer at Bloomberg</p>
           </div>
           <div className={styles.introImage}>img</div>
@@ -57,12 +57,13 @@ export default async function Page() {
         </a>
         <div className={`${styles.box} ${styles.about}`}>
           {/* TODO: This text should change size to fit in the box, not the other way around */}
+          {/* TODO: link gg quote */}
           <h4>
-            Who Am I? <i>That&apos;s a secret I&apos;ll never tell</i>
+            Who Am I? <i>Now that&apos;s a secret I&apos;ll never tell...</i>
           </h4>
           <p>
-            Hi 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few years ago now, but
-            have been programming since long before then.
+            ...just kidding, hey 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few
+            years ago now, but have been programming since long before then.
           </p>
           <br />
           <p>
