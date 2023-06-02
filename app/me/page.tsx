@@ -39,9 +39,9 @@ export default async function Page() {
           </div>
         </div>
         <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}>
-          <p className={styles.osNumber}>{NUM_OS}</p>
+          <p className={styles.bigNumber}>{NUM_OS}</p>
           <p>open source projects contributed to</p>
-          <p className={styles.osFooter}>(so far... 👨‍💻)</p>
+          <p className={styles.smallFooter}>(so far... 👨‍💻)</p>
         </Link>
         <a href="https://twitter.com/jsm_99" className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
@@ -63,7 +63,12 @@ export default async function Page() {
           <SpotifyIcon />
         </a>
         <div className={`${styles.box} ${styles.music}`}>music</div>
-        <div className={`${styles.box} ${styles.countries}`}>✈️ I&apos;ve travelled to {NUM_COUNTRIES} countries</div>
+        <div className={`${styles.box} ${styles.countries}`}>
+          {/* ✈️ I&apos;ve travelled to {NUM_COUNTRIES} countries */}
+          <p>I&apos;ve travelled to</p>
+          <p className={styles.bigNumber}>{NUM_COUNTRIES}</p>
+          <p>countries ✈️</p>
+        </div>
         <div className={`${styles.box} ${styles.skydiving}`}>
           {/* <span>🪂</span> */}
           <p>I enjoy skydiving!</p>

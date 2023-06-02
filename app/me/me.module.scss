@@ -140,12 +140,12 @@
   color: white;
 }
 
-.osNumber {
+.bigNumber {
   font-size: var(--fontSizes_xxl);
   font-weight: var(--fontWeights_thick)
 }
 
-.osFooter {
+.smallFooter {
   font-size: var(--fontSizes_tiny);
 }
 
@@ -220,6 +220,12 @@
 
 .countries {
   grid-area: countries;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 35, 145, 0.7);
+
 }
 
 .skydiving {
