@@ -225,7 +225,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 35, 145, 0.7);
-
+  text-align: center;
 }
 
 .skydiving {
@@ -249,14 +249,14 @@
     grid-template-columns: repeat(6, 7rem);
     grid-template-rows: repeat(8, 7rem);
     grid-template-areas: 
-      "intro     intro     intro   intro intro     intro"
-      "intro     intro     intro   intro intro     intro"
-      "bbg       bbg       os      os    twt       linkedin"
-      "imperial  imperial  os      os    gh        insta"
-      "about     about     about   about countries countries"
-      "about     about     about   about countries countries"
-      "skydiving skydiving lastfm  music music     weather"
-      "skydiving skydiving spotify music music     weather";
+      "intro     intro     intro   intro    bbg       bbg"
+      "intro     intro     intro   intro    imperial  imperial"
+      " os       os        twt     linkedin countries countries"
+      "os        os        gh      insta    countries countries"
+      "about     about     about   about    about     about"
+      "about     about     about   about    about     about"
+      "skydiving skydiving lastfm  music    music     weather"
+      "skydiving skydiving spotify music    music     weather";
    }
 
    .intro {
@@ -275,10 +275,10 @@
     grid-template-columns: repeat(8, 7rem);
     grid-template-rows: repeat(6, 7rem);
     grid-template-areas: 
-      "intro   intro intro intro     intro     intro     bbg       bbg"
-      "intro   intro intro intro     intro     intro     imperial  imperial"
-      "os      os    twt   linkedin  about     about     about     about"
-      "os      os    gh    insta     about     about     about     about"
+      "intro   intro intro intro     bbg       bbg       twt       linkedin"
+      "intro   intro intro intro     imperial  imperial  gh        insta"
+      "os      os    about about     about     about     about     about"
+      "os      os    about about     about     about     about     about"
       "lastfm  music music countries countries skydiving skydiving weather"
       "spotify music music countries countries skydiving skydiving weather";  
   }

@@ -55,7 +55,21 @@ export default async function Page() {
         <a href="https://www.instagram.com/jackmorrison12/" className={`${styles.icon} ${styles.insta}`}>
           <InstagramIcon />
         </a>
-        <div className={`${styles.box} ${styles.about}`}>About me</div>
+        <div className={`${styles.box} ${styles.about}`}>
+          {/* TODO: This text should change size to fit in the box, not the other way around */}
+          <h4>
+            Who Am I? <i>That&apos;s a secret I&apos;ll never tell</i>
+          </h4>
+          <p>
+            Hi 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few years ago now, but
+            have been programming since long before then.
+          </p>
+          <br />
+          <p>
+            As you can see from these widgets around me, in my free time, I like music (both listening and making it),
+            travelling, and I&apos;ve also recently started throwing myself out of planes for fun! 🪂
+          </p>
+        </div>
         <a href="https://www.last.fm/user/Jackmorrison12" className={`${styles.icon} ${styles.lastfm}`}>
           <LastFmIcon />
         </a>
