@@ -9,6 +9,11 @@ import { SpotifyIcon } from './logos/spotify';
 import { ImperialLogo } from './logos/imperial';
 import { BloombergLogo } from './logos/bloomberg';
 import Link from 'next/link';
+import Image from 'next/image';
+import avatar from '../../content/about-me/avatar.jpg';
+import pic2 from '../../content/about-me/img/g.jpeg';
+import pic3 from '../../content/about-me/img/i.jpeg';
+import pic4 from '../../content/about-me/img/j.jpeg';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
@@ -20,11 +25,26 @@ export default async function Page() {
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
       <div className={styles.layout}>
         <div className={`${styles.box} ${styles.intro}`}>
-          <div className={styles.introText}>
-            <h4>Hey, I&apos;m Jack!</h4>
-            <p>A 24 year old Software Engineer at Bloomberg</p>
-          </div>
-          <div className={styles.introImage}>img</div>
+          <h3>Hey, I&apos;m Jack! 👋</h3>
+          <p>A 24 year old Software Engineer @ Bloomberg</p>
+        </div>
+        <div className={`${styles.pic} ${styles.pic1}`}>
+          <Image src={avatar} fill={true} placeholder="blur" alt={'My Avatar'} />
+        </div>
+        <div className={`${styles.pic} ${styles.pic2}`}>
+          <Image
+            src={pic2}
+            fill={true}
+            placeholder="blur"
+            objectFit="cover"
+            alt={'Myself and some friends at IC Hack 2019'}
+          />
+        </div>
+        <div className={`${styles.pic} ${styles.pic3}`}>
+          <Image src={pic3} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
+        </div>
+        <div className={`${styles.pic} ${styles.pic4}`}>
+          <Image src={pic4} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
         </div>
         <div className={`${styles.box} ${styles.bbg} ${styles.overlayParent}`}>
           <BloombergLogo />
