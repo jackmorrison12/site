@@ -5,14 +5,13 @@
   gap: 10px;
   justify-content: center;
   grid-template-columns: repeat(4, minmax(1px, 1fr));
-  grid-template-rows: 7rem 20.4vw 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem 7rem;
+  grid-template-rows: 7rem 20.4vw 7rem minmax(auto, 7rem) minmax(auto, 7rem) auto 7rem 7rem 7rem 7rem;
   grid-template-areas: 
   "intro     intro     intro     intro"
   "pic1      pic2      pic3      pic4"
   "bbg       bbg       imperial  imperial"
   "os        os        twt       linkedin"
   "os        os        gh        insta"
-  "about     about     about     about"
   "about     about     about     about"
   "lastfm    music     music     weather"
   "spotify   music     music     weather"
