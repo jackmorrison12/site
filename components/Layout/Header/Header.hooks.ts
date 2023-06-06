@@ -1,10 +1,10 @@
 import { useTheme } from 'next-themes';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { event } from 'nextjs-google-analytics';
 
 export const useHeader = () => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const [navViewable, setNavViewable] = useState(false);
 
@@ -24,7 +24,7 @@ export const useHeader = () => {
   }, []);
 
   return {
-    router,
+    pathname,
     navViewable,
     setNavViewable,
     mounted,

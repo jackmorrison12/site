@@ -58,15 +58,6 @@
   color: var(--greyBase);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: var(--accentSolidHover);
-    transform: scale(1.05);
-  }
-}
-
-.link {
-  text-decoration-line: none;
 }
 
 /* Phone Landscape/Tablet Portrait */

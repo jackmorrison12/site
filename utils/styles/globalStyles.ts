@@ -1,3 +1,5 @@
+'use client';
+
 import { createGlobalStyle } from 'styled-components';
 import { themes } from '../theme';
 import { generateLegacyTheme, generateTheme } from './generateTheme';

@@ -1,0 +1,289 @@
+// Generic styles
+
+.layout {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-columns: repeat(4, minmax(1px, 1fr));
+  grid-template-rows: 7rem 20.4vw 7rem auto minmax(auto, 7rem) minmax(auto, 7rem) 7rem 7rem 7rem 7rem;
+  grid-template-areas: 
+  "intro     intro     intro     intro"
+  "pic1      pic2      pic3      pic4"
+  "bbg       bbg       imperial  imperial"
+  "about     about     about     about"
+  "os        os        twt       linkedin"
+  "os        os        gh        insta"
+  "lastfm    music     music     weather"
+  "spotify   music     music     weather"
+  "countries countries skydiving skydiving"
+  "countries countries skydiving skydiving";
+}
+
+.box {
+  background-color: var(--colours_primary_background_default);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+  transform: all .3s ease-in-out, color 0s;
+  transition: all .3s ease-in-out, color 0s;
+}
+
+.clickable:hover {
+  transform: scale(0.95)
+}
+
+.icon {
+  padding: clamp(1px, 30%, 30px);
+  border-radius: 10px;
+  cursor: pointer;
+  transform: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  svg {
+    width: 100%;
+  }
+  color: white;
+  display: flex;
+}
+
+.icon:hover {
+  transform: scale(0.95);
+}
+
+.overlayParent {
+  position: relative;
+}
+
+.overlayWrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  // TODO: Make this the primary colour's bg value, with 0.7 opacity
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: opacity .2s, visibility .2s;
+  padding: 10px;
+}
+
+.overlayParent:hover .overlayWrapper {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlayContent {
+  transition: .2s;
+  text-align: center;
+}
+
+.overlayParent:hover .overlayContent {
+  transform: translateY(0);
+}
+
+// Individual styles
+
+.intro {
+  grid-area: intro;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.pic {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pic1 {
+  grid-area: pic1;
+}
+
+.imperial {
+  grid-area: imperial;
+  background-color: #EBEEEE;
+  display: flex;
+  svg {
+    width: 100%;
+  }
+  padding: clamp(1px, 20%, 30px);
+}
+
+.bbg {
+  grid-area: bbg;
+  background-color: black;
+  display: flex;
+  svg {
+    width: 100%;
+  }
+  padding: clamp(1px, 20%, 30px);
+}
+
+.os {
+  grid-area: os;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 226, 35, 0.7);
+  color: var(--colours_text_default);
+}
+
+.bigNumber {
+  font-size: var(--fontSizes_xxl);
+  font-weight: var(--fontWeights_thick)
+}
+
+.smallFooter {
+  font-size: var(--fontSizes_tiny);
+}
+
+.twt {
+  grid-area: twt;
+  background: hsl(203, 89%, 53%);
+}
+
+.twt:hover {
+  color: hsl(203, 89%, 53%);
+  background: hsl(203, 89%, 83%);
+}
+
+.gh {
+  grid-area: gh;
+  background:black;
+}
+
+.gh:hover {
+  color:black;
+  background:lightgrey;
+}
+
+.linkedin {
+  grid-area: linkedin;
+  background: hsl(201, 100%, 35%);
+}
+
+.linkedin:hover {
+  color: hsl(201, 100%, 35%);
+  background: hsl(201, 100%, 85%);
+}
+
+.insta {
+  grid-area: insta;
+  background-color: #f09433; 
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+.insta:hover {
+  color: white;
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+.about {
+  grid-area: about;
+}
+
+.lastfm {
+  grid-area: lastfm;
+  background: hsl(3, 94%, 43%);
+}
+
+.lastfm:hover {
+  color: hsl(3, 94%, 43%);
+  background: hsl(3, 94%, 89%);
+}
+
+.spotify {
+  grid-area: spotify;
+  background: hsl(141, 73%, 42%);
+}
+
+.spotify:hover {
+  color: hsl(141, 73%, 42%);
+  background: hsl(141, 73%, 82%);
+}
+
+.music {
+  grid-area: music;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  align-items: end;
+}
+
+.countries {
+  grid-area: countries;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 35, 145, 0.7);
+  text-align: center;
+}
+
+.skydiving {
+  grid-area: skydiving;
+  background-color: rgba(35, 204, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.weather {
+  grid-area: weather;
+}
+
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+  .layout {
+    grid-template-columns: repeat(6, 7rem);
+    grid-template-rows: repeat(8, 7rem);
+    grid-template-areas: 
+      "intro     intro     intro   intro    bbg       bbg"
+      "pic1      pic2      pic3    pic4     imperial  imperial"
+      " os       os        twt     linkedin countries countries"
+      "os        os        gh      insta    countries countries"
+      "about     about     about   about    about     about"
+      "about     about     about   about    about     about"
+      "skydiving skydiving lastfm  music    music     weather"
+      "skydiving skydiving spotify music    music     weather";
+   }
+
+  .box {
+    padding: 20px 40px;
+  }
+
+  .music {
+    padding-bottom: 40px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+  .layout {
+    grid-template-columns: repeat(8, 7rem);
+    grid-template-rows: repeat(6, 7rem);
+    grid-template-areas: 
+      "intro   intro intro intro     bbg       bbg       twt       linkedin"
+      "pic1    pic2  pic3  pic4      imperial  imperial  gh        insta"
+      "os      os    about about     about     about     about     about"
+      "os      os    about about     about     about     about     about"
+      "lastfm  music music countries countries skydiving skydiving weather"
+      "spotify music music countries countries skydiving skydiving weather";  
+  }
+
+}

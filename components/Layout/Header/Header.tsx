@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -23,7 +25,8 @@ const Header = ({ title }: HeaderProps) => {
           <h3>
             <Link href="/">Jack Morrison</Link>
           </h3>
-          {_.mounted && (
+          {/* TODO: Pull this into a separate component so only that is client */}
+          {_.mounted ? (
             <select value={_.theme} onChange={(e) => _.setTheme(e.target.value)}>
               {_.themes.map((t) => (
                 <option key={t} value={t}>
@@ -31,6 +34,8 @@ const Header = ({ title }: HeaderProps) => {
                 </option>
               ))}
             </select>
+          ) : (
+            <div>Themes Loading...</div>
           )}
           <div style={{ marginLeft: 'auto' }}>
             <Hamburger
@@ -49,7 +54,7 @@ const Header = ({ title }: HeaderProps) => {
               <Link
                 href={link.url}
                 key={link.url}
-                className={`${styles.link} ${_.router.pathname === link.url ? styles.activeLink : ''}`}
+                className={`${styles.link} ${_.pathname === link.url ? styles.activeLink : ''}`}
               >
                 {link.emoji} {link.name}
               </Link>

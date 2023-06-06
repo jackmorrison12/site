@@ -30,9 +30,9 @@ const ProjectHeader = ({
             </p>
             <div className={styles.tagContainer}>
               {project.tags.map((t) => (
-                <Link href={`/tags/${slugify(t, { lower: true })}`} key={t} className={styles.link} passHref>
-                  <div className={styles.tag}>{t}</div>
-                </Link>
+                <div key={t} className={styles.tag}>
+                  {t}
+                </div>
               ))}
             </div>
           </div>
