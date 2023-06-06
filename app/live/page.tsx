@@ -36,16 +36,18 @@ async function getTopTracks({
   );
 
   if (!res.ok) {
-    console.error(res);
+    console.error(`Failed to fetch top tracks: ${res}`);
     throw new Error('Failed to fetch top tracks');
   }
 
+  console.log(`Fetched top tracks: ${res}`);
   // TODO use Zod/Zodios to auto check this
   return res.json() as Promise<TopTracksResponse>;
 }
 
 export default async function Page() {
   const data = await getTopTracks({ limit: '3' });
+  console.log(`Top tracks retrieved: ${data}`);
   return (
     <>
       <Title value="LIVE" offset="-313.32" />
