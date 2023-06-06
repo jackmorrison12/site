@@ -10,6 +10,7 @@ import { ImperialLogo } from './logos/imperial';
 import { BloombergLogo } from './logos/bloomberg';
 import Link from 'next/link';
 import Image from 'next/image';
+// TODO: Update these imports
 import avatar from '../../content/about-me/avatar.jpg';
 import pic2 from '../../content/about-me/img/g.jpeg';
 import pic3 from '../../content/about-me/img/i.jpeg';
