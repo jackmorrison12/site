@@ -97,17 +97,21 @@ export default async function Page() {
         <a href="https://open.spotify.com/user/112282925" className={`${styles.icon} ${styles.spotify}`}>
           <SpotifyIcon />
         </a>
-        <div className={`${styles.box} ${styles.music}`}>music</div>
+        <a
+          href="https://open.spotify.com/playlist/1xeyXfpQSG60DufhtTyyq0"
+          className={`${styles.box} ${styles.music} ${styles.clickable}`}
+        >
+          My current favourite songs 🎶
+        </a>
         <div className={`${styles.box} ${styles.countries}`}>
-          {/* ✈️ I&apos;ve travelled to {NUM_COUNTRIES} countries */}
           <p>I&apos;ve travelled to</p>
           <p className={styles.bigNumber}>{NUM_COUNTRIES}</p>
           <p>countries ✈️</p>
         </div>
         <div className={`${styles.box} ${styles.skydiving}`}>
-          {/* <span>🪂</span> */}
-          <p>I enjoy skydiving!</p>
-          <p>I&apos;ve fallen the equivalent of {((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)} marathons</p>
+          <p>I&apos;ve skydived the equivalent of</p>
+          <p className={styles.bigNumber}>{((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)}</p>
+          <p> marathons 🪂</p>
         </div>
         <div className={`${styles.box} ${styles.weather}`}>wth</div>
       </div>
