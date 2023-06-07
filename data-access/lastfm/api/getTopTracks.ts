@@ -5,8 +5,8 @@ import { z } from 'zod';
 type TopTracksRequest = {
   user?: string;
   period?: 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
-  limit?: string;
-  page?: string;
+  limit?: number;
+  page?: number;
 };
 
 class LastFMError extends Error {}
@@ -22,25 +22,28 @@ const topTracksSchema = z.object({
         artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
         url: z.string(),
         duration: z.coerce.number(),
-        '@attr': z.object({ rank: z.string() }),
-        playcount: z.string(),
+        '@attr': z.object({ rank: z.coerce.number() }),
+        playcount: z.coerce.number(),
       }),
     ),
     '@attr': z.object({
-      user: z.literal('Jackmorrison12'),
-      totalPages: z.string(),
-      page: z.string(),
-      perPage: z.string(),
-      total: z.string(),
+      user: z.string(),
+      totalPages: z.coerce.number(),
+      page: z.coerce.number(),
+      perPage: z.coerce.number(),
+      total: z.coerce.number(),
     }),
   }),
 });
 
 export const getTopTracks = async ({ user = 'jackmorrison12', period, limit, page }: TopTracksRequest) => {
-  // TODO update fetch params to be run once every few mins
-  const url = `${LASTFM_BASE_URL}?method=user.gettoptracks&user=${user}&api_key=${
-    process.env.LASTFM_API_KEY
-  }&format=json${period ? `&period=${period}` : ''}${limit ? `&limit=${limit}` : ''}${page ? `&page=${page}` : ''}`;
+  const url = `${LASTFM_BASE_URL}?method=user.gettoptracks
+    &user=${user}
+    &api_key=${process.env.LASTFM_API_KEY}
+    &format=json
+    ${period ? `&period=${period}` : ''}
+    ${limit ? `&limit=${limit}` : ''}
+    ${page ? `&page=${page}` : ''}`;
 
   const res = await fetch(url, { next: { revalidate: 60 * 3 } });
 
@@ -52,7 +55,7 @@ export const getTopTracks = async ({ user = 'jackmorrison12', period, limit, pag
   const parsedResult = topTracksSchema.safeParse(await res.json());
 
   if (!parsedResult.success) {
-    console.error(`Failed to parse lastfm API response: ${parsedResult.error.issues}`);
+    console.error(`Failed to parse lastfm top tracks API response: ${parsedResult.error.issues}`);
     throw new LastFMError();
   }
 
