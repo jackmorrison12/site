@@ -1,3 +1,4 @@
+import 'server-only';
 import { LASTFM_BASE_URL } from './urls';
 import { z } from 'zod';
 
@@ -41,7 +42,7 @@ export const getTopTracks = async ({ user = 'jackmorrison12', period, limit, pag
     process.env.LASTFM_API_KEY
   }&format=json${period ? `&period=${period}` : ''}${limit ? `&limit=${limit}` : ''}${page ? `&page=${page}` : ''}`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { next: { revalidate: 60 * 3 } });
 
   if (!res.ok) {
     console.error(`Failed to fetch top tracks: ${JSON.stringify(res)}`);
