@@ -32,7 +32,8 @@
     "react-dom": "^18.2.0",
     "sass": "^1.54.4",
     "slugify": "^1.6.5",
-    "styled-components": "^6.0.0-rc.1"
+    "styled-components": "^6.0.0-rc.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.0.7",
