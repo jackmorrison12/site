@@ -216,7 +216,7 @@
 
 .music {
   grid-area: music;
-  color: white;
+  color: var(--colours_text_default);
   display: flex;
   align-items: end;
   background-size: cover;
