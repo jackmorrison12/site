@@ -1,6 +1,7 @@
 import 'server-only';
 import { LASTFM_BASE_URL } from './urls';
 import { z } from 'zod';
+import _ from 'lodash';
 
 type RecentTracksRequest = {
   user?: string;
@@ -16,18 +17,38 @@ const Track = z.object({
   streamable: z.coerce.number().pipe(z.coerce.boolean()),
   mbid: z.string(),
   name: z.string(),
-  image: z.array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() })),
+  image: z
+    .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() }))
+    .transform((imgArray) => {
+      return _.transform(
+        imgArray,
+        (result, value) => {
+          result[value.size] = value['#text'];
+        },
+        {} as Record<'small' | 'medium' | 'large' | 'extralarge', string>,
+      );
+    }),
   artist: z.object({
-    url: z.string(),
+    url: z.string().url(),
     name: z.string(),
     mbid: z.string(),
-    image: z.array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() })),
+    image: z
+      .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() }))
+      .transform((imgArray) => {
+        return _.transform(
+          imgArray,
+          (result, value) => {
+            result[value.size] = value['#text'];
+          },
+          {} as Record<'small' | 'medium' | 'large' | 'extralarge', string>,
+        );
+      }),
   }),
   date: z
     .object({ uts: z.string(), '#text': z.coerce.date() })
     .optional()
     .transform((date) => (date ? date['#text'] : undefined)),
-  url: z.string(),
+  url: z.string().url(),
   '@attr': z.object({ nowplaying: z.coerce.boolean() }).optional(),
   album: z.object({ mbid: z.string(), '#text': z.string() }),
   loved: z.coerce.number().pipe(z.coerce.boolean()),

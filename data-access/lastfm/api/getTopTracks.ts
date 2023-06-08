@@ -1,6 +1,7 @@
 import 'server-only';
 import { LASTFM_BASE_URL } from './urls';
 import { z } from 'zod';
+import _ from 'lodash';
 
 type TopTracksRequest = {
   user?: string;
@@ -18,9 +19,19 @@ const topTracksSchema = z.object({
         streamable: z.object({ fulltrack: z.string(), '#text': z.string() }),
         mbid: z.string(),
         name: z.string(),
-        image: z.array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() })),
-        artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
-        url: z.string(),
+        image: z
+          .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() }))
+          .transform((imgArray) => {
+            return _.transform(
+              imgArray,
+              (result, value) => {
+                result[value.size] = value['#text'];
+              },
+              {} as Record<'small' | 'medium' | 'large' | 'extralarge', string>,
+            );
+          }),
+        artist: z.object({ url: z.string().url(), name: z.string(), mbid: z.string() }),
+        url: z.string().url(),
         duration: z.coerce.number(),
         '@attr': z.object({ rank: z.coerce.number() }),
         playcount: z.coerce.number(),
@@ -55,7 +66,7 @@ export const getTopTracks = async ({ user = 'jackmorrison12', period, limit, pag
   const parsedResult = topTracksSchema.safeParse(await res.json());
 
   if (!parsedResult.success) {
-    console.error(`Failed to parse lastfm top tracks API response: ${parsedResult.error.issues}`);
+    console.error(`Failed to parse lastfm top tracks API response: ${JSON.stringify(parsedResult.error.issues)}`);
     throw new LastFMError();
   }
 
