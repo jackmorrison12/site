@@ -15,12 +15,16 @@ import avatar from '../../content/about-me/avatar.jpg';
 import pic2 from '../../content/about-me/img/g.jpeg';
 import pic3 from '../../content/about-me/img/i.jpeg';
 import pic4 from '../../content/about-me/img/j.jpeg';
+import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
+import { getTrackInfo } from '../../data-access/lastfm/api/getTrackInfo';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
   const NUM_COUNTRIES = 27;
   const NUM_OS = 2;
   const FT_IN_MARATHON = 138336;
+  const topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
+  const trackInfo = await getTrackInfo({ track: topTrack.name, artist: topTrack.artist.name });
   return (
     <>
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
@@ -98,11 +102,19 @@ export default async function Page() {
         <a href="https://open.spotify.com/user/112282925" className={`${styles.icon} ${styles.spotify}`}>
           <SpotifyIcon />
         </a>
-        <a
-          href="https://open.spotify.com/playlist/1xeyXfpQSG60DufhtTyyq0"
-          className={`${styles.box} ${styles.music} ${styles.clickable}`}
-        >
-          My current favourite songs 🎶
+        {/* TODO: This is a hack to get the image into the before selector, since you can't
+                  pass variables into CSS modules, and I don't want to duplicate the code
+                  into a styles component */}
+        <style>{`.music::before { background-image: url(${trackInfo.track.album.image.extralarge})}`}</style>
+        <a href={topTrack.url} className={`${styles.box} ${styles.music} ${styles.clickable} music`}>
+          <div className={styles.musicText}>
+            <p className={styles.musicTitle}>Top track this week:</p>
+            <div>
+              <p>{topTrack.name}</p>
+              <p className={styles.musicArtist}>{topTrack.artist.name}</p>
+              <p className={styles.musicListens}>{topTrack.playcount} listens</p>
+            </div>
+          </div>
         </a>
         <div className={`${styles.box} ${styles.countries}`}>
           <p>I&apos;ve travelled to</p>
