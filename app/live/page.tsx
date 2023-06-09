@@ -6,7 +6,6 @@ import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
 export default async function Page() {
   const topTracks = await getTopTracks({ limit: 10 });
   const recentTracks = await getRecentTracks({});
-
   const events = await getEvents({ perPage: 10 });
 
   return (
