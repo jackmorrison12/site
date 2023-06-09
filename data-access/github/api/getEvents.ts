@@ -28,7 +28,6 @@ ${page ? `&page=${page}` : ''}`;
     throw new Error('Failed to fetch GitHub events');
   }
 
-  //   return res.json();
   const parsedResult = eventSchema.safeParse(await res.json());
 
   if (!parsedResult.success) {
