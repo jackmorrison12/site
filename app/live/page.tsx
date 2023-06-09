@@ -8,7 +8,6 @@ export default async function Page() {
   const recentTracks = await getRecentTracks({});
 
   const events = await getEvents({ perPage: 10 });
-  console.log(events);
 
   return (
     <>
