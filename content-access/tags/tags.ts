@@ -10,7 +10,7 @@ function getAllFilePathsWithTags(): string[] {
   return PATHS.map((p) => fs.readdirSync(p).map((f) => `${p}/${f}`)).flat();
 }
 
-export function getTagSlugs(): Array<{ params: { slug: string } }> {
+export function getTagSlugs(): Array<{ slug: string }> {
   const tagSlugs = new Set<string>();
 
   getAllFilePathsWithTags().forEach((fileName) => {
@@ -18,7 +18,7 @@ export function getTagSlugs(): Array<{ params: { slug: string } }> {
     tags?.forEach((t) => tagSlugs.add(slugify(t, { lower: true })));
   });
 
-  return Array.from(tagSlugs).map((t) => ({ params: { slug: t } }));
+  return Array.from(tagSlugs).map((t) => ({ slug: t }));
 }
 
 export function getTagSlugToTitleMap(): { [key: string]: string } {
