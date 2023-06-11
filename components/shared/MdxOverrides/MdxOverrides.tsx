@@ -1,23 +1,24 @@
+import { ReactNode } from 'react';
 import styles from './MdxOverrides.module.scss';
 import Image from 'next/legacy/image';
 
-export const H2Override = ({ children }: { children?: any }) => (
+export const H2Override = ({ children }: { children?: ReactNode }) => (
   <h2>
     <mark className={styles.mark}>{children}</mark>
   </h2>
 );
 
-export const POverride = ({ children }: { children?: any }) => <p className={styles.p}>{children}</p>;
+export const POverride = ({ children }: { children?: ReactNode }) => <p className={styles.p}>{children}</p>;
 
-export const Accent = ({ children }: { children?: any }) => <span className={styles.accent}>{children}</span>;
+export const Accent = ({ children }: { children?: ReactNode }) => <span className={styles.accent}>{children}</span>;
 
-export const Footnote = ({ children }: { children?: any }) => <span className={styles.footnote}>{children}</span>;
+export const Footnote = ({ children }: { children?: ReactNode }) => <span className={styles.footnote}>{children}</span>;
 
 export const ImgWithCaption = ({
   children,
   imgProps,
 }: {
-  children?: any;
+  children?: ReactNode;
   imgProps: { src: string; alt?: string; height: number; width: number };
 }) => (
   <div className={styles.imgCaptionWrapper}>
@@ -51,6 +52,6 @@ export const DoubleImg = ({
   </div>
 );
 
-export const AOverride = ({ children }: { children?: any }) => <a className={styles.a}>{children}</a>;
+export const AOverride = ({ children }: { children?: ReactNode }) => <a className={styles.a}>{children}</a>;
 
 export const mdxOverrides = { h2: H2Override, ImgWithCaption, DoubleImg, Accent, Footnote, p: POverride, a: AOverride };
