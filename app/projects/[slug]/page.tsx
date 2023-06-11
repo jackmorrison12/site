@@ -37,7 +37,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <BackLink text="All Projects" />
       <ProjectHeader project={project.frontmatter} imageProps={imageProps} />
       <TextWrapper>
-        {/* @ts-expect-error Server Component */}
         <MDXRemote
           source={project.rawMDX}
           components={{ Image, ...mdxOverrides }}
