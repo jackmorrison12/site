@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import Layout from '../../components/Layout/Layout';
+import { Layout } from '../../components/Layout/Layout';
 import { getProjects } from '../../content-access/projects/projects';
 import { Project } from '../../content-access/projects/projects.types';
 import styles from './index.module.scss';
