@@ -1,11 +1,9 @@
 import React from 'react';
 import { Project } from '../../../content-access/projects/projects.types';
-import { ImageProps } from '../../../content-access';
 
 import styles from './ProjectSummary.module.scss';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import slugify from 'slugify';
 
 const ProjectHeader = ({
   project,
