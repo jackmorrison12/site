@@ -33,37 +33,26 @@ export default async function Page() {
             <li>EPQ (Computer Assisted Proofs) - A</li>
           </ul>
           <h2>Technical Experience</h2>
-          <h3>Proficient</h3>
+          <h3>Languages</h3>
           <ul>
-            <li>Java</li>
-            <li>Swift</li>
-            <li>JavaScript</li>
+            <li>TypeScript</li>
             <li>Python</li>
+            <li>HTML & CSS</li>
+            <li>JavaScript</li>
             <li>C</li>
-            <li>PHP</li>
-            <li>HTML</li>
-            <li>CSS</li>
+            <li>Swift</li>
           </ul>
-          <h4>Familiar</h4>
+          <h3>Tools & Frameworks</h3>
           <ul>
-            <li>Go</li>
-            <li>C++</li>
-            <li>Kotlin</li>
-            <li>Haskell</li>
-          </ul>
-          <h4>Tools {'&'} Frameworks</h4>
-          <ul>
-            <li>Git React</li>
+            <li>React</li>
             <li>SQL</li>
-            <li>Gatsby.js</li>
-            <li>Node.js</li>
-            <li>GraphQL</li>
-            <li>Vue.js</li>
-            <li>Docker</li>
-            <li>Netlify</li>
-            <li>Vim</li>
             <li>MongoDB</li>
-            <li>LaTeX</li>
+            <li>Next.js</li>
+            <li>Git</li>
+            <li>Docker</li>
+            <li>Solr</li>
+            <li>Kafka</li>
+            <li>FastAPI</li>
           </ul>
           <h2>Skills</h2>
           <h3>German Language Proficiency</h3>
@@ -81,6 +70,47 @@ export default async function Page() {
           </p>
         </div>
         <div className={styles.mainWrapper}>
+          <h2>Experience</h2>
+          <h3>Bloomberg</h3>
+          <h4>Software Engineer</h4>
+          <h4>September 2021 - Present</h4>
+          <ul>
+            <li>Currently working on Bloomberg&apos;s Web and API enterprise data product: DATA{'<GO>'}</li>
+            <li>Working full stack using a modern React/TypeScript frontend and Python backend</li>
+            <li>
+              Leading multiple large-scale multi-team projects, including migrating our site to cloud-based hosting
+            </li>
+            <li>Member of the Bloomberg Web UI standards committee</li>
+          </ul>
+          <h3>Nextjump</h3>
+          <h4>Software Engineer</h4>
+          <h4>June - September 2019, July - October 2020</h4>
+          <ul>
+            <li>
+              Worked on mission-critical features, improving existing and creating new systems to prepare for increased
+              site traffic and revenue in Q4 2020
+            </li>
+            <li>Owned multiple full-stack projects created using Vue.js, PHP and Go</li>
+            <li>
+              Collaborated remotely with a team of engineers, UX designers and business associates to research and
+              implement solutions on how to improve UX
+            </li>
+            <li>
+              Ran the UK Office&apos;s &apos;Adopt-a-School&apos; scheme, teaching robotics, teamwork and public
+              speaking to underprivileged children
+            </li>{' '}
+          </ul>
+          <h3>Facebook</h3>
+          <h4>Hack-a-Project Participant</h4>
+          <h4>October - November 2018</h4>
+          <ul>
+            <li>
+              Participated in an programme at Facebook with the goal of creating an application to &apos;Bring
+              Communities Together&apos;
+            </li>
+            <li> Used the scrum agile methodology, working in 2-week sprints</li>
+            <li>Created MentorMe, a mentoring app made using React.js and Node.js</li>
+          </ul>
           <h2>Projects</h2>
           {projects.map((item) => (
             <div key={item.slug}>
