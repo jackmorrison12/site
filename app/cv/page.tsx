@@ -11,13 +11,21 @@ export default async function Page() {
       <div className={styles.cvWrapper}>
         <div className={styles.summaryWrapper}>
           <h1>Jack Morrison</h1>
-          <ul>
-            <li>jack1morrison@sky.com</li>
-            <li>+447775 101 516</li>
-            <li>github.com/jackmorrison12</li>
-            <li>linkedin.com/in/jackmorrison12</li>
-            <li>jackmorrison.xyz</li>
-          </ul>
+          <a href="mailto:jack1morrison@sky.com">
+            <p>jack1morrison@sky.com</p>
+          </a>
+          <a href="sms:+447775101516">
+            <p>+447775 101 516</p>
+          </a>
+          <a href="https://github.com/jackmorrison12">
+            <p>github.com/jackmorrison12</p>
+          </a>
+          <a href="https://linkedin.com/in/jackmorrison12">
+            <p>linkedin.com/in/jackmorrison12</p>
+          </a>
+          <a href="https://jackmorrison.xyz">
+            <p>jackmorrison.xyz</p>
+          </a>
           <h2>Education</h2>
           <h3>Imperial College London</h3>
           <h4>MEng Computing</h4>
@@ -34,26 +42,26 @@ export default async function Page() {
           </ul>
           <h2>Technical Experience</h2>
           <h3>Languages</h3>
-          <ul>
-            <li>TypeScript</li>
-            <li>Python</li>
-            <li>HTML & CSS</li>
-            <li>JavaScript</li>
-            <li>C</li>
-            <li>Swift</li>
-          </ul>
+          <div className={styles.pillWrapper}>
+            <div className={styles.pill}>TypeScript</div>
+            <div className={styles.pill}>Python</div>
+            <div className={styles.pill}>HTML & CSS</div>
+            <div className={styles.pill}>JavaScript</div>
+            <div className={styles.pill}>C</div>
+            <div className={styles.pill}>Swift</div>
+          </div>
           <h3>Tools & Frameworks</h3>
-          <ul>
-            <li>React</li>
-            <li>SQL</li>
-            <li>MongoDB</li>
-            <li>Next.js</li>
-            <li>Git</li>
-            <li>Docker</li>
-            <li>Solr</li>
-            <li>Kafka</li>
-            <li>FastAPI</li>
-          </ul>
+          <div className={styles.pillWrapper}>
+            <div className={styles.pill}>React</div>
+            <div className={styles.pill}>SQL</div>
+            <div className={styles.pill}>MongoDB</div>
+            <div className={styles.pill}>Next.js</div>
+            <div className={styles.pill}>Git</div>
+            <div className={styles.pill}>Docker</div>
+            <div className={styles.pill}>Solr</div>
+            <div className={styles.pill}>Kafka</div>
+            <div className={styles.pill}>FastAPI</div>
+          </div>
           <h2>Skills</h2>
           <h3>German Language Proficiency</h3>
           <p>I have achieved B1+ standard of the Common European Framework of Reference alongside my degree studies</p>
