@@ -24,6 +24,7 @@
   
   ul > li {
     text-indent: -10px;
+    padding-bottom: 2px;
   }
   ul > li:before {
     content: "- ";
@@ -81,6 +82,10 @@
       background-color: var(--colours_primary_text_default);
       color: black;
     }
+
+    ul {padding-bottom: 20px;}
+
+    > p {padding-bottom: 20px;}
 
   }
 

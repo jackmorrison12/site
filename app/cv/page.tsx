@@ -9,6 +9,11 @@ export default async function Page() {
     .filter((j) => j.onCV)
     .sort((a, b) => (new Date(a.startDate) > new Date(b.startDate) ? 0 : 1));
 
+  const dateToString = (date: string) =>
+    !isNaN(new Date(date).valueOf())
+      ? new Date(date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+      : date;
+
   return (
     <>
       <Title value="CV" offset="-151.03" />
@@ -52,9 +57,11 @@ export default async function Page() {
             <div className={styles.pillWrapper}>
               <div className={styles.pill}>TypeScript</div>
               <div className={styles.pill}>Python</div>
-              <div className={styles.pill}>HTML & CSS</div>
+              <div className={styles.pill}>HTML</div>
+              <div className={styles.pill}>CSS</div>
               <div className={styles.pill}>JavaScript</div>
               <div className={styles.pill}>C</div>
+              <div className={styles.pill}>C++</div>
               <div className={styles.pill}>Swift</div>
             </div>
             <h3>Tools & Frameworks</h3>
@@ -97,15 +104,7 @@ export default async function Page() {
                   <i>{job.position}</i>
                   <div />
                   <b>
-                    {new Date(Date.parse(job.startDate)).toLocaleString('en-GB', {
-                      year: 'numeric',
-                      month: 'long',
-                    })}{' '}
-                    -{' '}
-                    {new Date(Date.parse(job.endDate)).toLocaleString('en-GB', {
-                      year: 'numeric',
-                      month: 'long',
-                    })}
+                    {dateToString(job.startDate)} - {dateToString(job.endDate)}
                   </b>
                 </div>
                 <ul>
@@ -124,8 +123,7 @@ export default async function Page() {
                   </a>
                   <div />
                   <b>
-                    {new Date(item.startDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} -{' '}
-                    {new Date(item.endDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    {dateToString(item.startDate)} - {dateToString(item.endDate)}
                   </b>
                 </div>
                 {item.highlights && (
