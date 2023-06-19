@@ -2,6 +2,7 @@ import { Title } from '../../components/shared/Title';
 import { getJobs } from '../../content-access/jobs/jobs';
 import { getProjects } from '../../content-access/projects/projects';
 import styles from './cv.module.scss';
+import { SaveFile } from './save-file';
 
 export default async function Page() {
   const projects = await getProjects().filter((p) => p.onCV);
@@ -17,7 +18,22 @@ export default async function Page() {
   return (
     <>
       <Title value="CV" offset="-151.03" />
+      <div className={styles.overflowNotification}>
+        <p>Looks like my CV is a bit big for this screen!</p>
+        <p>You can</p>
+        <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
+          <button>download it</button>
+        </a>
+        <p>or just scroll side to side</p>
+      </div>
       <div className={styles.overflowHandler}>
+        <div className={styles.buttonWrapper}>
+          <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
+            <button className={styles.downloadButton}>
+              <SaveFile />
+            </button>
+          </a>
+        </div>
         <div className={styles.cvWrapper}>
           <div className={styles.summaryWrapper}>
             <div className={styles.title}>

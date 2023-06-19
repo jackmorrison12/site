@@ -1,8 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 .overflowHandler {
   overflow-x: scroll;
 }
 
+.overflowNotification {
+  background-color: var(--colours_primary_background_default);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  width: clamp(1px, 100%, 400px);
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.buttonWrapper {
+  width: 210mm;
+  margin: auto;
+  height: 25px;
+}
+
+.downloadButton {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  margin-left: calc(210mm - 25px);
+  background-color: var(--colours_primary_background_default);
+  border-color: var(--colours_primary_background_default);
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    padding: 5px;
+    fill: currentColor;
+    color: var(--colours_primary_text_default)
+  }
+}
+
+@media (min-width: calc(210mm + (2 * clamp(1rem, 6vw, 3rem)))) {
+  .overflowNotification {
+    display: none;
+  }
+
+  .downloadButton {
+    display: flex;
+  }
+}
+
+
 .cvWrapper {
+  font-family: 'Poppins', sans-serif;
   width: 210mm;
   height: 297mm;
   background-color: white;
@@ -21,12 +73,13 @@
     list-style-type: none;
     padding-left: 20px;
   }
-  
-  ul > li {
+
+  ul>li {
     text-indent: -10px;
     padding-bottom: 2px;
   }
-  ul > li:before {
+
+  ul>li:before {
     content: "- ";
   }
 
@@ -49,15 +102,15 @@
     .title {
       padding-bottom: 10px;
 
-      h1{
+      h1 {
         padding-bottom: 10px;
       }
 
-      a{
+      a {
         line-height: 20px;
       }
     }
-    
+
     a {
       color: var(--colours_primary_text_default);
       font-weight: var(--fontWeights_thick)
@@ -83,9 +136,13 @@
       color: black;
     }
 
-    ul {padding-bottom: 20px;}
+    ul {
+      padding-bottom: 20px;
+    }
 
-    > p {padding-bottom: 20px;}
+    >p {
+      padding-bottom: 20px;
+    }
 
   }
 
@@ -114,9 +171,13 @@
         font-size: 14px;
       }
 
-      b{ text-align: right}
+      b {
+        text-align: right
+      }
 
-      div {flex: 1;}
+      div {
+        flex: 1;
+      }
 
       a {
         color: #1c1c1c;
