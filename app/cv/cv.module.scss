@@ -33,6 +33,7 @@
   background-color: var(--colours_primary_background_default);
   border-color: var(--colours_primary_background_default);
   cursor: pointer;
+  padding: 6px;
 
   svg {
     width: 100%;
@@ -80,6 +81,7 @@
   width: 50px;
   background-color: transparent;
   border: none;
+  padding: 6px;
   cursor: pointer;
 
   color: var(--colours_text_default);
