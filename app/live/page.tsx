@@ -25,8 +25,12 @@ export default async function Page() {
     if (
       currentEvent.type === 'PushEvent' &&
       e.type === 'PushEvent' &&
-      new Date(currentEvent.created_at!).getDate() === new Date(e.created_at!).getDate() &&
-      currentEvent.repo.id === e.repo.id
+      currentEvent.created_at &&
+      e.created_at &&
+      new Date(currentEvent.created_at).getDate() === new Date(e.created_at).getDate() &&
+      currentEvent.repo.id === e.repo.id &&
+      typeof currentEvent.payload.size === 'number' &&
+      typeof e.payload.size === 'number'
     ) {
       currentEvent.payload.size += e.payload.size;
     } else {
@@ -37,7 +41,7 @@ export default async function Page() {
   // console.log(events.length);
   // console.log(squashedEvents.length);
 
-  const eventToMessage = (e) => {
+  const eventToMessage = (e: typeof events[0]) => {
     switch (e.type) {
       case 'PushEvent':
         return `Pushed ${e.payload.size} commits to ${e.public ? e.repo.name : 'a private repo'}`;
@@ -86,7 +90,9 @@ export default async function Page() {
 
   const finalEvents = squashedEvents.map((e) => ({ ...e, message: eventToMessage(e) }));
 
-  const groupedEvents = _.groupBy(finalEvents, (e) => format(new Date(e.created_at), 'do LLLL yyyy'));
+  const groupedEvents = _.groupBy(finalEvents, (e) =>
+    e.created_at ? format(new Date(e.created_at), 'do LLLL yyyy') : '',
+  );
   // console.log(groupedEvents);
 
   // console.log(Object.entries(groupedEvents).map(([date, e]) => e));
@@ -105,7 +111,8 @@ export default async function Page() {
             <ul>
               {events.map((e) => (
                 <li key={e.id}>
-                  {format(new Date(e.created_at), 'h:mm aaa')}: {e.message}
+                  {e.created_at ? `${format(new Date(e.created_at), 'h:mm aaa')}: ` : ''}
+                  {e.message}
                 </li>
               ))}
             </ul>
