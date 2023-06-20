@@ -34,8 +34,8 @@ export default async function Page() {
       currentEvent = e;
     }
   });
-  console.log(events.length);
-  console.log(squashedEvents.length);
+  // console.log(events.length);
+  // console.log(squashedEvents.length);
 
   const eventToMessage = (e) => {
     switch (e.type) {
@@ -87,9 +87,9 @@ export default async function Page() {
   const finalEvents = squashedEvents.map((e) => ({ ...e, message: eventToMessage(e) }));
 
   const groupedEvents = _.groupBy(finalEvents, (e) => format(new Date(e.created_at), 'do LLLL yyyy'));
-  console.log(groupedEvents);
+  // console.log(groupedEvents);
 
-  console.log(Object.entries(groupedEvents).map(([date, e]) => e));
+  // console.log(Object.entries(groupedEvents).map(([date, e]) => e));
 
   return (
     <>
