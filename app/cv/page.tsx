@@ -2,7 +2,8 @@ import { Title } from '../../components/shared/Title';
 import { getJobs } from '../../content-access/jobs/jobs';
 import { getProjects } from '../../content-access/projects/projects';
 import styles from './cv.module.scss';
-import { SaveFile } from './save-file';
+import { SaveFile } from './SaveFile';
+import { ScrollLeftRight } from './ScrollLeftRight';
 
 export default async function Page() {
   const projects = await getProjects().filter((p) => p.onCV);
@@ -20,16 +21,26 @@ export default async function Page() {
       <Title value="CV" offset="-151.03" />
       <div className={styles.overflowNotification}>
         <p>Looks like my CV is a bit big for this screen!</p>
-        <p>You can</p>
-        <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
-          <button>download it</button>
-        </a>
-        <p>or just scroll side to side</p>
+        <div className={styles.iconWrapper}>
+          <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
+            <button className={styles.downloadButtonMobile}>
+              <SaveFile />
+            </button>
+            <p className={styles.label}>download</p>
+          </a>
+          <p>or</p>
+          <div className={styles.labelWrapper}>
+            <div className={styles.scrollButtonMobile}>
+              <ScrollLeftRight />
+            </div>
+            <p className={styles.label}>scroll</p>
+          </div>
+        </div>
       </div>
       <div className={styles.overflowHandler}>
         <div className={styles.buttonWrapper}>
           <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
-            <button className={styles.downloadButton}>
+            <button className={`${styles.downloadButton} ${styles.mobileHide}`}>
               <SaveFile />
             </button>
           </a>

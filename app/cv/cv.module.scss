@@ -42,6 +42,55 @@
   }
 }
 
+.iconWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.labelWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--colours_text_default)
+}
+
+.label {
+  font-size: var(--fontSizes_tiny)
+}
+
+.scrollButtonMobile {
+  height: 50px;
+  width: 50px;
+
+  svg {
+    padding: 5px;
+    fill: currentColor;
+  }
+}
+
+.downloadButtonMobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  color: var(--colours_text_default);
+
+  svg {
+    width: 100%;
+    padding: 5px;
+    fill: currentColor;
+  }
+}
+
 @media (min-width: calc(210mm + (2 * clamp(1rem, 6vw, 3rem)))) {
   .overflowNotification {
     display: none;
