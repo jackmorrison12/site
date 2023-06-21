@@ -3,7 +3,6 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { Title } from '../../components/shared/Title';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
 import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
-import _ from 'lodash';
 import { useLivePage } from './live.hooks';
 
 export default async function Page() {
