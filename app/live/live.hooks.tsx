@@ -4,8 +4,7 @@ import { format } from 'date-fns';
 import { getEvents } from '../../data-access/github/api/getEvents';
 
 export const useLivePage = async () => {
-  const events = await getEvents({ perPage: 20 });
-  console.log(events);
+  const events = await getEvents({ perPage: 30 });
 
   const squashedEvents: typeof events = [];
   let currentEvent: typeof events[0] | undefined;
