@@ -1,124 +1,73 @@
 import { format } from 'date-fns';
 
 import { Title } from '../../components/shared/Title';
-import { getEvents } from '../../data-access/github/api/getEvents';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
 import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
 import _ from 'lodash';
+import { useLivePage } from './live.hooks';
 
 export default async function Page() {
   const topTracks = await getTopTracks({ limit: 10 });
   const recentTracks = await getRecentTracks({});
-  const events = await getEvents({ perPage: 100 });
-  const filteredEvents = events.filter((e) => e.public);
-  // console.log(filteredEvents);
 
-  const squashedEvents: typeof filteredEvents = [];
-  let currentEvent: typeof filteredEvents[0] | undefined;
-
-  events.forEach((e) => {
-    if (!currentEvent) {
-      currentEvent = e;
-      return;
-    }
-    // Merge push events
-    if (
-      currentEvent.type === 'PushEvent' &&
-      e.type === 'PushEvent' &&
-      currentEvent.created_at &&
-      e.created_at &&
-      new Date(currentEvent.created_at).getDate() === new Date(e.created_at).getDate() &&
-      currentEvent.repo.id === e.repo.id &&
-      typeof currentEvent.payload.size === 'number' &&
-      typeof e.payload.size === 'number'
-    ) {
-      currentEvent.payload.size += e.payload.size;
-    } else {
-      squashedEvents.push(currentEvent);
-      currentEvent = e;
-    }
-  });
-  // console.log(events.length);
-  // console.log(squashedEvents.length);
-
-  const eventToMessage = (e: typeof events[0]) => {
-    switch (e.type) {
-      case 'PushEvent':
-        return `Pushed ${e.payload.size} commits to ${e.public ? e.repo.name : 'a private repo'}`;
-      case 'DeleteEvent': {
-        switch (e.payload.ref_type) {
-          case 'repository':
-            return e.public ? `Deleted a repo called ${e.repo.name}` : 'Created a private repo';
-          case 'branch':
-            return e.public
-              ? `Deleted branch ${e.payload.ref} in ${e.repo.name}`
-              : 'Deleted a branch in a private repo';
-          case 'tag':
-            return e.public ? `Deleted tag ${e.payload.ref} in ${e.repo.name}` : 'Deleted a tag in a private repo';
-        }
-      }
-      case 'CommitCommentEvent':
-        return 'CommitCommentEvent';
-      case 'CreateEvent': {
-        switch (e.payload.ref_type) {
-          case 'repository':
-            return e.public ? `Created a repo called ${e.repo.name}` : 'Created a private repo';
-          case 'branch':
-            return e.public
-              ? `Created branch ${e.payload.ref} in ${e.repo.name}`
-              : 'Created a branch in a private repo';
-          case 'tag':
-            return e.public ? `Created tag ${e.payload.ref} in ${e.repo.name}` : 'Created a tag in a private repo';
-        }
-      }
-      case 'ForkEvent':
-        return 'ForkEvent';
-      case 'IssueCommentEvent':
-        return 'IssueCommentEvent';
-      case 'IssuesEvent':
-        return 'IssuesEvent';
-      case 'PublicEvent':
-        return 'PublicEvent';
-      case 'PullRequestEvent':
-        return 'PullRequestEvent';
-      case 'PullRequestReviewCommentEvent':
-        return 'PullRequestReviewCommentEvent';
-      case 'WatchEvent':
-        return 'WatchEvent';
-    }
-  };
-
-  const finalEvents = squashedEvents.map((e) => ({ ...e, message: eventToMessage(e) }));
-
-  const groupedEvents = _.groupBy(finalEvents, (e) =>
-    e.created_at ? format(new Date(e.created_at), 'do LLLL yyyy') : '',
-  );
-  // console.log(groupedEvents);
-
-  // console.log(Object.entries(groupedEvents).map(([date, e]) => e));
+  const { events } = await useLivePage();
 
   return (
     <>
       <Title value="LIVE" offset="-313.32" />
-      <p>GitHub Events</p>
-      <ul>
-        {Object.entries(groupedEvents).map(([date, events]) => (
-          // <li key={e.id}>
-          //   {format(new Date(e.created_at), 'do LLLL yyyy @ h:mm aaa')}: {e.message}
-          // </li>
-          <li key={date}>
-            {date}:
-            <ul>
-              {events.map((e) => (
-                <li key={e.id}>
-                  {e.created_at ? `${format(new Date(e.created_at), 'h:mm aaa')}: ` : ''}
-                  {e.message}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+
+      <div
+        style={{
+          width: '300px',
+          height: '400px',
+          backgroundColor: 'red',
+          color: 'white',
+          borderRadius: '20px',
+          padding: '20px',
+          // overflow: 'scroll',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+        }}
+      >
+        <h3>Recent GitHub Activity</h3>
+        <div style={{ overflow: 'scroll', flex: '1' }}>
+          {Object.entries(events).map(([date, evts]) => (
+            <div key={date} style={{ paddingBottom: '10px' }}>
+              <p
+                style={{
+                  fontSize: 'var(--fontSizes_tiny)',
+                  fontWeight: 'var(--fontWeights_thick)',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {date}
+              </p>
+              {evts.map(
+                (e) =>
+                  e.message && (
+                    <div
+                      key={e.id}
+                      style={{ display: 'flex', flexDirection: 'row', gap: '10px', paddingBottom: '5px' }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 'var(--fontSizes_tiny)',
+                          fontWeight: 'var(--fontWeights_thick)',
+                          paddingLeft: '10px',
+                          flex: 'none',
+                        }}
+                      >
+                        {e.created_at ? `${format(new Date(e.created_at), 'h:mm aa')} ` : ''}
+                      </p>
+                      <p style={{ fontSize: 'var(--fontSizes_small)' }}>{e.message}</p>
+                    </div>
+                  ),
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
       <p>Recent tracks</p>
       <ul>
         {recentTracks.recenttracks.track.map((t) => (
