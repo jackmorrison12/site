@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 import { getEvents } from '../../data-access/github/api/getEvents';
 
@@ -288,7 +288,7 @@ export const useLivePage = async () => {
   const finalEvents = squashedEvents.map((e) => ({ ...e, message: eventToMessage(e) }));
 
   const groupedEvents = _.groupBy(finalEvents, (e) =>
-    e.created_at ? format(new Date(e.created_at), 'do LLLL yyyy') : '',
+    e.created_at ? formatInTimeZone(new Date(e.created_at), 'Europe/London', 'do LLLL yyyy') : '',
   );
 
   return { events: groupedEvents };

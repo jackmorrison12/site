@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 import { Title } from '../../components/shared/Title';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
@@ -18,7 +18,7 @@ export default async function Page() {
 
       <div
         style={{
-          width: '300px',
+          width: '320px',
           height: '400px',
           backgroundColor: 'red',
           color: 'white',
@@ -30,7 +30,12 @@ export default async function Page() {
           gap: '10px',
         }}
       >
-        <h3>Recent GitHub Activity</h3>
+        <h3>
+          Recent GitHub Activity{' '}
+          <span style={{ fontSize: 'var(--fontSizes_tiny)' }}>
+            (in {formatInTimeZone(new Date(), 'Europe/London', 'z') === 'GMT' ? 'GMT' : 'BST'})
+          </span>
+        </h3>
         <div style={{ overflow: 'scroll', flex: '1' }}>
           {Object.entries(events).map(([date, evts]) => (
             <div key={date} style={{ paddingBottom: '10px' }}>
@@ -58,7 +63,7 @@ export default async function Page() {
                           flex: 'none',
                         }}
                       >
-                        {e.created_at ? `${format(new Date(e.created_at), 'h:mm aa')} ` : ''}
+                        {e.created_at ? `${formatInTimeZone(new Date(e.created_at), 'Europe/London', 'h:mm aa')} ` : ''}
                       </p>
                       <p style={{ fontSize: 'var(--fontSizes_small)' }}>{e.message}</p>
                     </div>
