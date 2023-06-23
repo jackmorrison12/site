@@ -22,8 +22,6 @@ export default async function Page() {
   const currentDate = new Date(utcToZonedTime(new Date(), 'Europe/London').toDateString());
   currentDate.setDate(currentDate.getDate() - dayOfWeek);
 
-  console.log(new Date(currentDate.getTime() - ONE_WEEK));
-
   // Get the current monday 7 format it
 
   // dd/mm for the last NUM_WEEKS mondays
@@ -66,7 +64,6 @@ export default async function Page() {
     }),
   );
   const data = data2d[0].map((_, colIndex) => data2d.map((row) => row[colIndex] ?? 0));
-  console.log(data);
 
   return (
     <>
