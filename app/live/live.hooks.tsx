@@ -203,7 +203,15 @@ export const useLivePage = async () => {
         }
         return 'IssuesEvent';
       case 'PublicEvent':
-        return 'PublicEvent';
+        return (
+          <span>
+            Made{' '}
+            <a href={`https://github.com/${e.repo.name}`}>
+              <b>{e.repo.name}</b>
+            </a>{' '}
+            public!
+          </span>
+        );
       case 'PullRequestEvent':
         switch (e.payload.action) {
           case 'opened':
