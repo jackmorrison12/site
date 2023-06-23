@@ -19,7 +19,7 @@ export const Heatmap = ({ data, xLabels, yLabels }: { data: any; xLabels: string
     })}
     cellStyle={(_x, _y, ratio) => ({
       background: `var(--colours_primary_default)`,
-      borderColor: '3px solid var(--colours_background_default)',
+      borderColor: 'var(--colours_background_default)',
       borderWidth: '3px',
       borderStyle: 'solid',
       borderRadius: '6px',
