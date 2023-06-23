@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
 import { getEvents } from '../../data-access/github/api/getEvents';
 
@@ -19,7 +19,8 @@ export const useLivePage = async () => {
       e.type === 'PushEvent' &&
       currentEvent.created_at &&
       e.created_at &&
-      new Date(currentEvent.created_at).getDate() === new Date(e.created_at).getDate() &&
+      new Date(utcToZonedTime(currentEvent.created_at, 'Europe/London').toDateString()).getDate() ===
+        new Date(utcToZonedTime(e.created_at, 'Europe/London').toDateString()).getDate() &&
       currentEvent.repo.id === e.repo.id &&
       typeof currentEvent.payload.size === 'number' &&
       typeof e.payload.size === 'number'
