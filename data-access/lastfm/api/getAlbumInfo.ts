@@ -26,16 +26,18 @@ const albumInfoSchema = z.object({
           {} as Record<'small' | 'medium' | 'large' | 'extralarge' | 'mega' | '', string>,
         );
       }),
-    tracks: z.object({
-      track: z.object({
-        streamable: z.object({ fulltrack: z.coerce.number().pipe(z.coerce.boolean()), '#text': z.string() }),
-        duration: z.number(),
-        url: z.string(),
-        name: z.string(),
-        '@attr': z.object({ rank: z.number() }),
-        artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
-      }),
-    }),
+    tracks: z
+      .object({
+        track: z.object({
+          streamable: z.object({ fulltrack: z.coerce.number().pipe(z.coerce.boolean()), '#text': z.string() }),
+          duration: z.number(),
+          url: z.string(),
+          name: z.string(),
+          '@attr': z.object({ rank: z.number() }),
+          artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
+        }),
+      })
+      .optional(),
     listeners: z.coerce.number(),
     playcount: z.coerce.number(),
     url: z.string().url(),
