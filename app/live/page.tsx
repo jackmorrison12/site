@@ -7,6 +7,7 @@ import { useLivePage } from './live.hooks';
 import { getEvents } from '../../data-access/github/api/getEvents';
 import _ from 'lodash';
 import { Heatmap } from './Heatmap';
+import { GitHubIcon } from '../me/logos/github';
 
 export default async function Page() {
   const topTracks = await getTopTracks({ limit: 10 });
@@ -70,12 +71,20 @@ export default async function Page() {
       <Title value="LIVE" offset="-313.32" />
       <div
         style={{
-          backgroundColor: 'var(--colours_secondary_background_default)',
+          backgroundColor: 'var(--colours_secondary_default)',
           width: 'fit-content',
           padding: '20px',
           borderRadius: '10px',
         }}
       >
+        <div
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', paddingBottom: '10px' }}
+        >
+          <div style={{ width: '30px' }}>
+            <GitHubIcon />
+          </div>
+          <h3>Recent Activity</h3>
+        </div>
         <Heatmap data={data} xLabels={xLabels} yLabels={yLabels} />
       </div>
       <div
