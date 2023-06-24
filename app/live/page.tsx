@@ -47,7 +47,7 @@ export default async function Page() {
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
   });
 
-  const daysShown = (NUM_WEEKS - 1) * 7 + dayOfWeek;
+  const daysShown = (NUM_WEEKS - 1) * 7 + dayOfWeek + 1;
 
   const data1d = new Array(daysShown).fill(0);
 
