@@ -68,9 +68,16 @@ export default async function Page() {
   return (
     <>
       <Title value="LIVE" offset="-313.32" />
-
-      <Heatmap data={data} xLabels={xLabels} yLabels={yLabels} />
-
+      <div
+        style={{
+          backgroundColor: 'var(--colours_secondary_background_default)',
+          width: 'fit-content',
+          padding: '20px',
+          borderRadius: '10px',
+        }}
+      >
+        <Heatmap data={data} xLabels={xLabels} yLabels={yLabels} />
+      </div>
       <div
         style={{
           width: '320px',

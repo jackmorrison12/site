@@ -18,22 +18,24 @@ const trackInfoSchema = z.object({
     listeners: z.coerce.number(),
     playcount: z.coerce.number(),
     artist: z.object({ url: z.string(), name: z.string(), mbid: z.string().optional() }),
-    album: z.object({
-      artist: z.string(),
-      title: z.string(),
-      url: z.string().url(),
-      image: z
-        .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() }))
-        .transform((imgArray) => {
-          return _.transform(
-            imgArray,
-            (result, value) => {
-              result[value.size] = value['#text'];
-            },
-            {} as Record<'small' | 'medium' | 'large' | 'extralarge', string>,
-          );
-        }),
-    }),
+    album: z
+      .object({
+        artist: z.string(),
+        title: z.string(),
+        url: z.string().url(),
+        image: z
+          .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge']), '#text': z.string() }))
+          .transform((imgArray) => {
+            return _.transform(
+              imgArray,
+              (result, value) => {
+                result[value.size] = value['#text'];
+              },
+              {} as Record<'small' | 'medium' | 'large' | 'extralarge', string>,
+            );
+          }),
+      })
+      .optional(),
     userplaycount: z.coerce.number(),
     userloved: z.coerce.number().pipe(z.coerce.boolean()),
     toptags: z.object({ tag: z.array(z.object({ name: z.string(), url: z.string().url() })) }),
