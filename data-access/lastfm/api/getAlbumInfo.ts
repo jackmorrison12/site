@@ -60,7 +60,7 @@ ${'artist' in req ? `&artist=${req.artist}` : ''}`;
     throw new Error(`Failed to fetch album info for ${JSON.stringify(req)}`);
   }
 
-  const parsedResult = albumInfoSchema.safeParse(res.json());
+  const parsedResult = albumInfoSchema.safeParse(await res.json());
 
   if (!parsedResult.success) {
     console.error(`Failed to parse lastfm album info API response: ${JSON.stringify(parsedResult.error.issues)}`);
