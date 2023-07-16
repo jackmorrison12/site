@@ -1,17 +1,17 @@
 import { formatInTimeZone } from 'date-fns-tz';
 
-import { useLivePage } from '../../live/live.hooks';
+import { useLivePage } from './githubTimeline.hooks';
+
+import styles from './github.module.scss';
 
 export default async function Page() {
-  const { events } = await useLivePage();
+  const { events, timezone } = await useLivePage();
 
   return (
     <>
       <h1>
-        Recent GitHub Activity{' '}
-        <span style={{ fontSize: 'var(--fontSizes_small)' }}>
-          (in {formatInTimeZone(new Date(), 'Europe/London', 'z') === 'GMT' ? 'GMT' : 'BST'})
-        </span>
+        Recent GitHub Activity
+        <span className={styles.timezone}>in {timezone}</span>
       </h1>
       <div style={{ display: 'flex', flexDirection: 'row', paddingTop: '20px' }}>
         <div

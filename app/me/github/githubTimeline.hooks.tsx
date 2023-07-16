@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
-import { getEvents } from '../../data-access/github/api/getEvents';
+import { getEvents } from '../../../data-access/github/api/getEvents';
 
 export const useLivePage = async () => {
   const events = await getEvents({ perPage: 100 });
@@ -300,5 +300,7 @@ export const useLivePage = async () => {
     e.created_at ? formatInTimeZone(new Date(e.created_at), 'Europe/London', 'do LLLL yyyy') : '',
   );
 
-  return { events: groupedEvents };
+  const timezone = formatInTimeZone(new Date(), 'Europe/London', 'z') === 'GMT' ? 'GMT' : 'BST';
+
+  return { events: groupedEvents, timezone };
 };
