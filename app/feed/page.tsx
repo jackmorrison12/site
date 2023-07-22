@@ -4,6 +4,7 @@ import { GitHubIcon } from '../me/logos/github';
 import { Heatmap } from './Heatmap';
 import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
+import { LastFmIcon } from '../me/logos/lastfm';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
@@ -67,26 +68,9 @@ export default async function Page() {
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">
-            <div
-              className={styles.github}
-              style={{
-                backgroundColor: 'var(--colours_secondary_default)',
-                width: 'fit-content',
-                padding: '20px',
-                borderRadius: '10px',
-                color: 'var(--colours_text_default)',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: '10px',
-                  paddingBottom: '10px',
-                }}
-              >
-                <div style={{ width: '30px' }}>
+            <div className={styles.github}>
+              <div className={styles.activityTitle}>
+                <div className={styles.icon}>
                   <GitHubIcon />
                 </div>
                 <h3>Recent Activity</h3>
@@ -94,7 +78,14 @@ export default async function Page() {
               <Heatmap data={data} xLabels={xLabels} yLabels={yLabels} />
             </div>
           </Link>
-          <div className={styles.lastfm}>LastFM Activity</div>
+          <div className={styles.lastfm}>
+            <div className={styles.activityTitle}>
+              <div className={styles.icon}>
+                <LastFmIcon />
+              </div>
+              <h3>Recent Activity</h3>
+            </div>
+          </div>
         </div>
       </div>
     </>

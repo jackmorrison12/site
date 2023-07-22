@@ -30,6 +30,9 @@
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  background-color: var(--colours_secondary_default);
+  width: fit-content;
+  color: var(--colours_text_default);
 }
 
 .lastfm {
@@ -37,6 +40,18 @@
   background-color: orange;
   border-radius: 20px;
   padding: 20px;
+}
+
+.activityTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+
+  .icon {
+    width: 30px;
+  }
 }
 
 
