@@ -68,7 +68,7 @@ export default async function Page() {
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">
-            <div className={styles.github}>
+            <div className={`${styles.github} ${styles.clickable}`}>
               <div className={styles.activityTitle}>
                 <div className={styles.icon}>
                   <GitHubIcon />

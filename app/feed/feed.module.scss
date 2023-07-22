@@ -54,6 +54,16 @@
   }
 }
 
+.clickable {
+  cursor: pointer;
+  transform: all .3s ease-in-out, color 0s;
+  transition: all .3s ease-in-out, color 0s;
+}
+
+.clickable:hover {
+  transform: scale(0.95)
+}
+
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
