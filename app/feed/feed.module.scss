@@ -1,0 +1,53 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.main {
+  flex: 3;
+
+  h1 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: var(--colours_background_default);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.sidebar {
+  flex: 1;
+  position: -webkit-sticky;
+  position: sticky;
+  padding-top: 10px;
+  top: 20px;
+  height: 0;
+}
+
+.github {
+  height: 200px;
+  background-color: pink;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.lastfm {
+  height: 200px;
+  background-color: orange;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+
+}

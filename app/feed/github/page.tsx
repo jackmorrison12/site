@@ -1,11 +1,11 @@
 import { formatInTimeZone } from 'date-fns-tz';
 
-import { useLivePage } from './githubTimeline.hooks';
+import { useGithubTimeline } from './githubTimeline.hooks';
 
 import styles from './github.module.scss';
 
 export default async function Page() {
-  const { events, timezone } = await useLivePage();
+  const { events, timezone } = await useGithubTimeline();
 
   return (
     <>

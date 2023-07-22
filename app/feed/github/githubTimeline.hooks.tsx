@@ -3,7 +3,7 @@ import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
 import { getEvents } from '../../../data-access/github/api/getEvents';
 
-export const useLivePage = async () => {
+export const useGithubTimeline = async () => {
   const events = await getEvents({ perPage: 100 });
 
   const squashedEvents: typeof events = [];
