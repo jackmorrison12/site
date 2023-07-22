@@ -5,9 +5,12 @@ import { Heatmap } from './Heatmap';
 import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { LastFmIcon } from '../me/logos/lastfm';
+import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
+
+  const { toptracks } = await getTopTracks({ period: '7day' });
 
   return (
     <>
@@ -85,6 +88,11 @@ export default async function Page() {
               </div>
               <h3>Recent Activity</h3>
             </div>
+            {toptracks.track.slice(0, 3).map((t) => (
+              <p key={t.mbid}>
+                {t.name} ({t.playcount} streams)
+              </p>
+            ))}
           </div>
         </div>
       </div>
