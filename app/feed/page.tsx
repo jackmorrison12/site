@@ -1,16 +1,17 @@
 import Link from 'next/link';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { Title } from '../../components/shared/Title';
 import { GitHubIcon } from '../me/logos/github';
 import { Heatmap } from './Heatmap';
 import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { LastFmIcon } from '../me/logos/lastfm';
-import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
+import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
 
-  const { toptracks } = await getTopTracks({ period: '7day' });
+  const { recenttracks } = await getRecentTracks({ limit: 5 });
 
   return (
     <>
@@ -88,10 +89,14 @@ export default async function Page() {
               </div>
               <h3>Recent Activity</h3>
             </div>
-            {toptracks.track.slice(0, 3).map((t) => (
-              <p key={t.mbid}>
-                {t.name} ({t.playcount} streams)
-              </p>
+            {recenttracks.track.slice(0, 3).map((t) => (
+              <div key={t.mbid} style={{ display: 'flex', gap: '20px' }}>
+                <img src={t.image.extralarge} style={{ height: '50px' }} />
+                <p key={t.mbid}>
+                  {t.name} - {t.artist.name}
+                  {t.date ? ` (${formatDistanceToNowStrict(t.date, { addSuffix: true })})` : ''}
+                </p>
+              </div>
             ))}
           </div>
         </div>

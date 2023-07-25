@@ -45,9 +45,9 @@ const Track = z.object({
       }),
   }),
   date: z
-    .object({ uts: z.string(), '#text': z.coerce.date() })
+    .object({ uts: z.coerce.number(), '#text': z.string() })
     .optional()
-    .transform((date) => (date ? date['#text'] : undefined)),
+    .transform((date) => (date ? new Date(date.uts * 1000) : undefined)),
   url: z.string().url(),
   '@attr': z.object({ nowplaying: z.coerce.boolean() }).optional(),
   album: z.object({ mbid: z.string(), '#text': z.string() }),
