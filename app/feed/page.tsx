@@ -82,60 +82,62 @@ export default async function Page() {
               <Heatmap data={data} xLabels={xLabels} yLabels={yLabels} />
             </div>
           </Link>
-          <div className={styles.lastfm}>
-            <div className={styles.activityTitle}>
-              <div className={styles.icon}>
-                <LastFmIcon />
-              </div>
-              <h3>Recent Activity</h3>
-            </div>
-            {recenttracks.track.slice(0, 3).map((t) => (
-              <div key={t.mbid} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <img src={t.image.extralarge} style={{ height: '60px' }} />
-                <div style={{ overflow: 'hidden' }}>
-                  <p
-                    key={t.mbid}
-                    style={{
-                      marginTop: 'auto',
-                      marginBottom: 'auto',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      fontWeight: 'var(--fontWeights_thick)',
-                    }}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    key={t.mbid}
-                    style={{
-                      marginTop: 'auto',
-                      marginBottom: 'auto',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      fontSize: 'var(--fontSizes_small)',
-                    }}
-                  >
-                    {t.artist.name}
-                  </p>
-                  <p
-                    key={t.mbid}
-                    style={{
-                      marginTop: 'auto',
-                      marginBottom: 'auto',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      fontSize: 'var(--fontSizes_small)',
-                    }}
-                  >
-                    {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
-                  </p>
+          <Link passHref href="/feed/lastfm">
+            <div className={`${styles.lastfm} ${styles.clickable}`}>
+              <div className={styles.activityTitle}>
+                <div className={styles.icon}>
+                  <LastFmIcon />
                 </div>
+                <h3>Recent Activity</h3>
               </div>
-            ))}
-          </div>
+              {recenttracks.track.slice(0, 3).map((t) => (
+                <div key={t.mbid} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  <img src={t.image.extralarge} style={{ height: '60px' }} />
+                  <div style={{ overflow: 'hidden' }}>
+                    <p
+                      key={t.mbid}
+                      style={{
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        fontWeight: 'var(--fontWeights_thick)',
+                      }}
+                    >
+                      {t.name}
+                    </p>
+                    <p
+                      key={t.mbid}
+                      style={{
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        fontSize: 'var(--fontSizes_small)',
+                      }}
+                    >
+                      {t.artist.name}
+                    </p>
+                    <p
+                      key={t.mbid}
+                      style={{
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        fontSize: 'var(--fontSizes_small)',
+                      }}
+                    >
+                      {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Link>
         </div>
       </div>
     </>
