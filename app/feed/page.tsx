@@ -90,12 +90,49 @@ export default async function Page() {
               <h3>Recent Activity</h3>
             </div>
             {recenttracks.track.slice(0, 3).map((t) => (
-              <div key={t.mbid} style={{ display: 'flex', gap: '20px' }}>
-                <img src={t.image.extralarge} style={{ height: '50px' }} />
-                <p key={t.mbid}>
-                  {t.name} - {t.artist.name}
-                  {t.date ? ` (${formatDistanceToNowStrict(t.date, { addSuffix: true })})` : ''}
-                </p>
+              <div key={t.mbid} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <img src={t.image.extralarge} style={{ height: '60px' }} />
+                <div style={{ overflow: 'hidden' }}>
+                  <p
+                    key={t.mbid}
+                    style={{
+                      marginTop: 'auto',
+                      marginBottom: 'auto',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      fontWeight: 'var(--fontWeights_thick)',
+                    }}
+                  >
+                    {t.name}
+                  </p>
+                  <p
+                    key={t.mbid}
+                    style={{
+                      marginTop: 'auto',
+                      marginBottom: 'auto',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      fontSize: 'var(--fontSizes_small)',
+                    }}
+                  >
+                    {t.artist.name}
+                  </p>
+                  <p
+                    key={t.mbid}
+                    style={{
+                      marginTop: 'auto',
+                      marginBottom: 'auto',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      fontSize: 'var(--fontSizes_small)',
+                    }}
+                  >
+                    {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
