@@ -9,6 +9,14 @@ const nextConfig = {
     // Enables the styled-components SWC transform
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lastfm.freetls.fastly.net',
+      },
+    ],
+  },
 };
 
 const withMDX = require('@next/mdx')();

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { Title } from '../../components/shared/Title';
@@ -44,46 +45,16 @@ export default async function Page() {
                 <h3>Recent Activity</h3>
               </div>
               {recenttracks.track.slice(0, 3).map((t) => (
-                <div key={t.mbid} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <img src={t.image.extralarge} style={{ height: '60px' }} />
-                  <div style={{ overflow: 'hidden' }}>
-                    <p
-                      key={t.mbid}
-                      style={{
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        fontWeight: 'var(--fontWeights_thick)',
-                      }}
-                    >
+                <div key={t.mbid} className={styles.trackWrapper}>
+                  <Image src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
+                  <div className={styles.textWrapper}>
+                    <p key={t.mbid} className={styles.name}>
                       {t.name}
                     </p>
-                    <p
-                      key={t.mbid}
-                      style={{
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        fontSize: 'var(--fontSizes_small)',
-                      }}
-                    >
+                    <p key={t.mbid} className={styles.artist}>
                       {t.artist.name}
                     </p>
-                    <p
-                      key={t.mbid}
-                      style={{
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        fontSize: 'var(--fontSizes_small)',
-                      }}
-                    >
+                    <p key={t.mbid} className={styles.date}>
                       {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
                     </p>
                   </div>

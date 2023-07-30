@@ -12,8 +12,6 @@ export const useHeatmap = async () => {
   const currentDate = new Date(utcToZonedTime(new Date(), 'Europe/London').toDateString());
   currentDate.setDate(currentDate.getDate() - dayOfWeek);
 
-  // Get the current monday 7 format it
-
   // dd/mm for the last NUM_WEEKS mondays
   const xLabels = new Array(NUM_WEEKS)
     .fill(0)

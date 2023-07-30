@@ -65,6 +65,44 @@
   transform: scale(0.95)
 }
 
+.trackWrapper {
+  display: flex;
+  gap: 10px; 
+  align-items: center;
+
+  .textWrapper {
+    overflow: hidden;
+
+    .name {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-weight: var(--fontWeights_thick);
+    }
+
+
+    .artist {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: var(--fontSizes_small);
+    }
+
+    .time{
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: var(--fontSizes_small);
+    }
+  }
+}
+
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
