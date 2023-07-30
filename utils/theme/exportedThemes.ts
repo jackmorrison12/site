@@ -37,3 +37,7 @@ export const themes = [
     themeName: 'greenOrange',
   },
 ];
+
+export const isThemeDark: Record<(typeof themes)[number]['themeName'], boolean> = {};
+
+themes.forEach((t) => (isThemeDark[t.themeName] = t.isDark));

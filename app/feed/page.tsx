@@ -10,6 +10,7 @@ import { LastFmIcon } from '../me/logos/lastfm';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
 import { getTweets } from '../../data-access/feed/tweets';
 import { Tweet } from 'react-tweet';
+import { TweetThemeProvider } from './TweetThemeProvider';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
@@ -25,7 +26,9 @@ export default async function Page() {
         <div className={styles.main}>
           <h1>Recent Activity</h1>
           {tweets.map((t) => (
-            <Tweet key={t.tweetId} id={t.tweet_id} />
+            <TweetThemeProvider key={t.tweetId}>
+              <Tweet id={t.tweet_id} />
+            </TweetThemeProvider>
           ))}
         </div>
         <div className={styles.sidebar}>
