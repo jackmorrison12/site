@@ -6,8 +6,10 @@ import { getEvents } from '../../../data-access/github/api/getEvents';
 export const useGithubTimeline = async () => {
   const events = await getEvents({ perPage: 100 });
 
+  type Event = (typeof events)[0];
+
   const squashedEvents: typeof events = [];
-  let currentEvent: (typeof events)[0] | undefined;
+  let currentEvent: Event | undefined;
 
   events.forEach((e) => {
     if (!currentEvent) {
@@ -31,9 +33,9 @@ export const useGithubTimeline = async () => {
       currentEvent = e;
     }
   });
-  squashedEvents.push(currentEvent as (typeof events)[0]);
+  squashedEvents.push(currentEvent as Event);
 
-  const eventToMessage = (e: (typeof events)[0]) => {
+  const eventToMessage = (e: Event) => {
     switch (e.type) {
       case 'PushEvent':
         return (
