@@ -1,9 +1,4 @@
-.wrapper {
-
-}
-
 .main {
-
   h1 {
     position: -webkit-sticky;
     position: sticky;
@@ -16,7 +11,6 @@
 
 .sidebar {
   padding-top: 10px;
-  top: 20px;
 }
 
 .github {
@@ -121,22 +115,12 @@
 
   .main {
     flex: 3;
-
-    h1 {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      background-color: var(--colours_background_default);
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
   }
 
   .sidebar {
     flex: 1;
     position: -webkit-sticky;
     position: sticky;
-    padding-top: 10px;
     top: 20px;
     height: fit-content;
   }
