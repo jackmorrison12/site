@@ -1,5 +1,5 @@
 .app {
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content minmax(min-content, auto) min-content;
@@ -17,7 +17,7 @@
 .app > main {
   grid-area: main;
   padding: 10px 0px;
-  overflow-x: hidden;
+  overflow-x: clip;
   grid-auto-rows: min-content;
 }
 

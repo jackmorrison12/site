@@ -26,6 +26,7 @@ export const DefaultDarkTheme: Theme = {
     primary: {
       ...mintGreen,
       ...generateSpectrum(mintGreen),
+      text: { ...generateSpectrum(mintGreen).text, contrast: grey[1] },
     },
     secondary: {
       ...orange,

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
 import { getTrackInfo } from '../../data-access/lastfm/api/getTrackInfo';
 import styles from './me.module.scss';
+import { getAlbumInfo } from '../../data-access/lastfm/api/getAlbumInfo';
 
 export const TopTrack = () => (
   <Suspense
@@ -15,14 +16,17 @@ export const TopTrack = () => (
 const TopTrackAsync = async () => {
   const topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
   const trackInfo = await getTrackInfo({ track: topTrack.name, artist: topTrack.artist.name });
+  const albumInfo = await getAlbumInfo({ album: topTrack.name, artist: topTrack.artist.name });
+
+  const imageUrl = trackInfo.track.album?.image.extralarge ?? albumInfo.album.image.extralarge;
 
   return (
-    <a className={`${styles.box} ${styles.music} ${styles.clickable} music`}>
+    <a className={`${styles.box} ${styles.music} ${styles.clickable} music`} href={trackInfo.track.url}>
       <div className={styles.musicText}>
         {/* TODO: This is a hack to get the image into the before selector, since you can't
                   pass variables into CSS modules, and I don't want to duplicate the code
-                  into a styles component */}
-        <style>{`.music::before { background-image: url(${trackInfo.track.album.image.extralarge})}`}</style>
+                  into a styled component */}
+        <style>{`.music::before { background-image: url(${imageUrl})}`}</style>
         <p className={styles.musicTitle}>Top track this week:</p>
         <div>
           <p>{topTrack.name}</p>

@@ -1,0 +1,136 @@
+.main {
+  h1 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: var(--colours_background_default);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.sidebar {
+  padding-top: 10px;
+}
+
+.github {
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: var(--colours_secondary_default);
+  color: var(--colours_text_default);
+  overflow: scroll;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lastfm {
+  background-color: var(--colours_primary_default);
+  border-radius: 10px;
+  padding: 20px;
+  color: var(--colours_primary_text_contrast);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activityTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+
+  .icon {
+    width: 30px;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+  transform: all .3s ease-in-out, color 0s;
+  transition: all .3s ease-in-out, color 0s;
+}
+
+.clickable:hover {
+  transform: scale(0.95)
+}
+
+.trackWrapper {
+  display: flex;
+  gap: 10px; 
+  align-items: center;
+
+  .textWrapper {
+    overflow: hidden;
+
+    .name {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-weight: var(--fontWeights_thick);
+    }
+
+
+    .artist {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: var(--fontSizes_small);
+    }
+
+    .time{
+      margin-top: auto;
+      margin-bottom: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: var(--fontSizes_small);
+    }
+  }
+}
+
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    contain: paint;
+  }
+
+  .main {
+    flex: 3;
+  }
+
+  .sidebar {
+    flex: 1;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  .github {
+    display: block;
+  }
+
+  .lastfm {
+    display: block;
+  }
+
+}
