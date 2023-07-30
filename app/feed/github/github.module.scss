@@ -1,3 +1,58 @@
 .timezone {
     font-size: var(--fontSizes_small)
 }
+
+.timelineWrapper {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+
+
+    .verticalLine {
+        height: 100%;
+        width: 5px;
+        background-color: var(--colours_primary_default);
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .contentGroup {
+        padding-bottom: 30px;
+
+        .dateGroup {
+            display: flex;
+            flex-direction: row;
+            right: 42.5px;
+            position: relative;
+            align-items: center;
+            gap: 10px;
+
+            .circle {
+                padding: 15px;
+                border-radius: 100px;
+                background-color: var(--colours_background_default);
+                border: 5px solid var(--colours_primary_default);
+            }
+
+            .date {
+                font-weight: var(--fontWeights_thick);
+                text-transform: uppercase;
+            }
+        }
+
+        .eventsGroup {
+            display: flex; 
+            flex-direction: row;
+            gap: 10px;
+            padding-bottom: 5px;
+
+            .time {
+                font-weight: var(--fontWeights_thick);
+                padding-left: 30px;
+                flex: none;
+                min-width: 80px;
+            }
+        }
+    }
+    
+}
