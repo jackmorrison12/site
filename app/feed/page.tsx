@@ -8,11 +8,15 @@ import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { LastFmIcon } from '../me/logos/lastfm';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
+import { getTweets } from '../../data-access/feed/tweets';
+import { Tweet } from 'react-tweet';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
 
   const { recenttracks } = await getRecentTracks({ limit: 5 });
+
+  const { tweets } = await getTweets();
 
   return (
     <>
@@ -20,9 +24,9 @@ export default async function Page() {
       <div className={styles.wrapper}>
         <div className={styles.main}>
           <h1>Recent Activity</h1>
-          <ul>
-            <li>item</li>
-          </ul>
+          {tweets.map((t) => (
+            <Tweet key={t.tweetId} id={t.tweet_id} />
+          ))}
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">
