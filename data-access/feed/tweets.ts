@@ -5,3 +5,6 @@ export const getTweets = async () => {
 
   return { tweets: rows };
 };
+
+export const addTweet = async ({ id, message }: { id: string; message?: string }) =>
+  await sql`INSERT INTO tweets VALUES (${id}, NOW(), ${message ?? 'NULL'})`;
