@@ -15,7 +15,9 @@ export const TopTrack = () => (
 );
 const TopTrackAsync = async () => {
   const topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
-  const trackInfo = await getTrackInfo({ track: topTrack.name, artist: topTrack.artist.name });
+  const trackInfo = await getTrackInfo(
+    topTrack.mbid ? { mbid: topTrack.mbid } : { track: topTrack.name, artist: topTrack.artist.name },
+  );
   const albumInfo = await getAlbumInfo({ album: topTrack.name, artist: topTrack.artist.name });
 
   const imageUrl = trackInfo.track.album?.image.extralarge ?? albumInfo.album.image.extralarge;

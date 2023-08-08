@@ -54,7 +54,7 @@ export default async function Page() {
               </div>
               {recenttracks.track.slice(0, 3).map((t) => (
                 <div key={t.mbid} className={styles.trackWrapper}>
-                  <Image src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
+                  <Image key={t.mbid} src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
                   <div className={styles.textWrapper}>
                     <p key={t.mbid} className={styles.name}>
                       {t.name}
