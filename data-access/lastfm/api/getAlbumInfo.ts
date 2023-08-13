@@ -9,11 +9,20 @@ type AlbumInfoRequest = {
 
 class LastFMError extends Error {}
 
+const track = z.object({
+  streamable: z.object({ fulltrack: z.coerce.number().pipe(z.coerce.boolean()), '#text': z.string() }),
+  duration: z.number().nullable(),
+  url: z.string(),
+  name: z.string(),
+  '@attr': z.object({ rank: z.number() }),
+  artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
+});
+
 const albumInfoSchema = z.object({
   album: z.object({
     artist: z.string(),
     mbid: z.string(),
-    tags: z.string(),
+    tags: z.string().or(z.object({ tag: z.array(z.object({ url: z.string(), name: z.string() })) })),
     name: z.string(),
     image: z
       .array(z.object({ size: z.enum(['small', 'medium', 'large', 'extralarge', 'mega', '']), '#text': z.string() }))
@@ -28,14 +37,7 @@ const albumInfoSchema = z.object({
       }),
     tracks: z
       .object({
-        track: z.object({
-          streamable: z.object({ fulltrack: z.coerce.number().pipe(z.coerce.boolean()), '#text': z.string() }),
-          duration: z.number(),
-          url: z.string(),
-          name: z.string(),
-          '@attr': z.object({ rank: z.number() }),
-          artist: z.object({ url: z.string(), name: z.string(), mbid: z.string() }),
-        }),
+        track: track.or(z.array(track)),
       })
       .optional(),
     listeners: z.coerce.number(),
