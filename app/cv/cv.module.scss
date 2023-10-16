@@ -208,7 +208,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
-      padding: 15px 0 10px;
+      padding: 15px 0 0px;
       line-height: 20px;
       align-items: center;
 
@@ -230,6 +230,20 @@
 
       a {
         color: #1c1c1c;
+      }
+    }
+
+    .subsubheader {
+      padding-bottom: 5px;
+      display: flex;
+
+      .left {
+        width: 50%;
+      }
+
+      .right {
+        width: 50%;
+        text-align: right;
       }
     }
 
