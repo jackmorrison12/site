@@ -7,5 +7,6 @@ export type Job = {
   url: string;
   startDate: string;
   endDate: string;
+  location: string;
   cvhighlights: string[];
 };
