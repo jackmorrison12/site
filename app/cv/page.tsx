@@ -128,11 +128,14 @@ export default async function Page() {
                   <a href={job.url}>
                     <h3>{job.company}</h3>
                   </a>
-                  <i>{job.position}</i>
                   <div />
                   <b>
                     {dateToString(job.startDate)} - {dateToString(job.endDate)}
                   </b>
+                </div>
+                <div className={styles.subsubheader}>
+                  <div className={styles.left}>{job.position}</div>
+                  <div className={styles.right}>{job.location}</div>
                 </div>
                 <ul>
                   {job.cvhighlights.map((highlight, i) => (
@@ -144,7 +147,7 @@ export default async function Page() {
             <h2>Projects</h2>
             {projects.map((item) => (
               <div key={item.slug}>
-                <div className={styles.subheader}>
+                <div className={`${styles.subheader} ${styles.subsubheader}`}>
                   <a href={'https://jackmorrison.xyz' + item.slug}>
                     <h3>{item.title}</h3>
                   </a>

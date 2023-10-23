@@ -39,7 +39,7 @@ const trackInfoSchema = z.object({
     userplaycount: z.coerce.number(),
     userloved: z.coerce.number().pipe(z.coerce.boolean()),
     toptags: z.object({ tag: z.array(z.object({ name: z.string(), url: z.string().url() })) }),
-    wiki: z.object({ published: z.coerce.date(), summary: z.string(), content: z.string() }),
+    wiki: z.object({ published: z.coerce.date(), summary: z.string(), content: z.string() }).optional(),
   }),
 });
 
