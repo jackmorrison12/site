@@ -8,11 +8,16 @@ import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { LastFmIcon } from '../me/logos/lastfm';
 import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
+import { getTweets } from '../../data-access/feed/tweets';
+import { Tweet } from 'react-tweet';
+import { TweetThemeProvider } from './TweetThemeProvider';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
 
   const { recenttracks } = await getRecentTracks({ limit: 5 });
+
+  const { tweets } = await getTweets();
 
   return (
     <>
@@ -20,9 +25,12 @@ export default async function Page() {
       <div className={styles.wrapper}>
         <div className={styles.main}>
           <h1>Recent Activity</h1>
-          <ul>
-            <li>item</li>
-          </ul>
+          {tweets.map((t) => (
+            <TweetThemeProvider key={t.tweetId}>
+              {t.message && <p>{t.message}</p>}
+              <Tweet id={t.tweet_id} />
+            </TweetThemeProvider>
+          ))}
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">
@@ -46,8 +54,8 @@ export default async function Page() {
               </div>
               {recenttracks.track.slice(0, 3).map((t) => (
                 <div key={t.mbid} className={styles.trackWrapper}>
-                  <Image src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
-                  <div className={styles.textWrapper}>
+                  <Image key={t.mbid} src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
+                  <div key={t.mbid} className={styles.textWrapper}>
                     <p key={t.mbid} className={styles.name}>
                       {t.name}
                     </p>

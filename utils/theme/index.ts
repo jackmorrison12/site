@@ -1,1 +1,1 @@
-export { themes } from './exportedThemes';
+export { themes, isThemeDark } from './exportedThemes';
