@@ -192,6 +192,9 @@
 
 .about {
   grid-area: about;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .lastfm {
