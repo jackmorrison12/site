@@ -60,7 +60,7 @@ export const getTopTracks = async ({ user = 'jackmorrison12', period, limit, pag
 
   if (!res.ok) {
     console.error(`Failed to fetch top tracks: ${JSON.stringify(res)}`);
-    throw new Error('Failed to fetch top tracks');
+    throw new Error(`Failed to fetch top tracks: ${JSON.stringify(res)}`);
   }
 
   const parsedResult = topTracksSchema.safeParse(await res.json());

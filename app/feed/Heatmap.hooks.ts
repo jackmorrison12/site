@@ -20,7 +20,12 @@ export const useHeatmap = async () => {
 
   const yLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  const evts = await getEvents({ perPage: 100 });
+  let evts = undefined;
+  try {
+    evts = await getEvents({ perPage: 100 });
+  } catch {
+    return { data: [], xLabels: [], yLabels: [] };
+  }
 
   const currentDay = new Date(utcToZonedTime(new Date(), 'Europe/London').toDateString()).valueOf();
 

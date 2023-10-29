@@ -12,7 +12,13 @@ import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
 
-  const { recenttracks } = await getRecentTracks({ limit: 5 });
+  let recenttracks = undefined;
+  try {
+    const response = await getRecentTracks({ limit: 5 });
+    recenttracks = response.recenttracks;
+  } catch {
+    recenttracks = { track: [] };
+  }
 
   return (
     <>
