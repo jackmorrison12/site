@@ -3,6 +3,7 @@ import { getTopTracks } from '../../data-access/lastfm/api/getTopTracks';
 import { getTrackInfo } from '../../data-access/lastfm/api/getTrackInfo';
 import styles from './me.module.scss';
 import { getAlbumInfo } from '../../data-access/lastfm/api/getAlbumInfo';
+import Link from 'next/link';
 
 export const TopTrack = () => (
   <Suspense
@@ -14,14 +15,43 @@ export const TopTrack = () => (
   </Suspense>
 );
 const TopTrackAsync = async () => {
-  const topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
-  const trackInfo = await getTrackInfo({ track: topTrack.name, artist: topTrack.artist.name });
-  const albumInfo = await getAlbumInfo({ album: topTrack.name, artist: topTrack.artist.name });
+  let topTrack = undefined;
+  try {
+    topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
+  } catch (e) {
+    return (
+      <Link href="/feed/lastfm" className={`${styles.music} ${styles.clickable} ${styles.musicLoader}`}>
+        <div>Music</div>
+      </Link>
+    );
+  }
+  let source: 'track' | 'album' | 'none' = 'none';
+  let trackInfo = undefined;
+  let albumInfo = undefined;
+  try {
+    trackInfo = await getTrackInfo({ track: topTrack.name, artist: topTrack.artist.name });
+    source = 'track';
+  } catch {
+    try {
+      albumInfo = await getAlbumInfo({ album: topTrack.name, artist: topTrack.artist.name });
+      source = 'album';
+    } catch {
+      source = 'none';
+    }
+  }
 
-  const imageUrl = trackInfo.track.album?.image.extralarge ?? albumInfo.album.image.extralarge;
+  const imageUrl =
+    source == 'track'
+      ? trackInfo?.track.album?.image.extralarge
+      : source == 'album'
+      ? albumInfo?.album.image.extralarge
+      : '';
 
   return (
-    <a className={`${styles.box} ${styles.music} ${styles.clickable} music`} href={trackInfo.track.url}>
+    <a
+      className={`${styles.box} ${styles.music} ${styles.clickable} music`}
+      href={trackInfo?.track.url ?? albumInfo?.album.url ?? ''}
+    >
       <div className={styles.musicText}>
         {/* TODO: This is a hack to get the image into the before selector, since you can't
                   pass variables into CSS modules, and I don't want to duplicate the code

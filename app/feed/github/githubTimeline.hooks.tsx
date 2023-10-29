@@ -4,7 +4,14 @@ import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 import { getEvents } from '../../../data-access/github/api/getEvents';
 
 export const useGithubTimeline = async () => {
-  const events = await getEvents({ perPage: 100 });
+  const timezone = formatInTimeZone(new Date(), 'Europe/London', 'z') === 'GMT' ? 'GMT' : 'BST';
+
+  let events = undefined;
+  try {
+    events = await getEvents({ perPage: 100 });
+  } catch {
+    return { events: [], timezone };
+  }
 
   type Event = (typeof events)[0];
 
@@ -301,8 +308,6 @@ export const useGithubTimeline = async () => {
   const groupedEvents = _.groupBy(finalEvents, (e) =>
     e.created_at ? formatInTimeZone(new Date(e.created_at), 'Europe/London', 'do LLLL yyyy') : '',
   );
-
-  const timezone = formatInTimeZone(new Date(), 'Europe/London', 'z') === 'GMT' ? 'GMT' : 'BST';
 
   return { events: groupedEvents, timezone };
 };

@@ -9,6 +9,7 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^9.7.2",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.4.2",
@@ -55,7 +56,8 @@
     "eslint-config-next": "^13.4.1",
     "eslint-plugin-react": "^7.28.0",
     "postcss-preset-env": "^7.1.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "webpack": "^5.89.0"
   },
   "husky": {
     "hooks": {

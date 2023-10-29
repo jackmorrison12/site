@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
@@ -19,5 +20,11 @@ const nextConfig = {
   },
 };
 
+const withPWA = require('@ducanh2912/next-pwa').default({
+  dest: 'public',
+  fallbacks: {
+    document: '/~offline',
+  },
+});
 const withMDX = require('@next/mdx')();
-module.exports = withMDX(nextConfig);
+module.exports = withPWA(withMDX(nextConfig));
