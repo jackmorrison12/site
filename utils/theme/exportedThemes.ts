@@ -36,4 +36,17 @@ export const themes = [
     isRoot: false,
     themeName: 'greenOrange',
   },
-];
+] as const;
+
+export const getThemeByName = (themeName: (typeof themes)[number]['themeName']) => {
+  switch (themeName) {
+    case 'light':
+      return DefaultLightTheme;
+    case 'dark':
+      return DefaultDarkTheme;
+    case 'bluePink':
+      return BluePinkDarkTheme;
+    case 'greenOrange':
+      return GreenOrangeDarkTheme;
+  }
+};
