@@ -28,7 +28,7 @@ export const ThemePicker: FC = () => {
   return mounted ? (
     <div className={styles.circleWrapper}>
       {!themesViewable && (
-        <div className={styles.clickable} key={resolvedTheme} onClick={() => setThemesViewable(true)}>
+        <button className={styles.clickable} key={resolvedTheme} onClick={() => setThemesViewable(true)}>
           <div
             className={styles.circle}
             style={{
@@ -37,11 +37,11 @@ export const ThemePicker: FC = () => {
               boxShadow: `0 0 0 0.3rem ${currentTheme.colours.secondary.default}`,
             }}
           />
-        </div>
+        </button>
       )}
       {themesViewable &&
         themes.map((t) => (
-          <div
+          <button
             key={t.themeName}
             className={styles.clickable}
             onClick={(e) => {
@@ -57,17 +57,19 @@ export const ThemePicker: FC = () => {
                 boxShadow: `0 0 0 0.3rem ${t.theme.colours.secondary.default}`,
               }}
             />
-          </div>
+          </button>
         ))}
     </div>
   ) : (
-    <div
-      className={styles.circle}
-      style={{
-        borderColor: 'var(--colours_primary_default)',
-        backgroundColor: 'var(--colours_background_default)',
-        boxShadow: '0 0 0 0.3rem var(--colours_secondary_default)',
-      }}
-    />
+    <button className={styles.clickable}>
+      <div
+        className={styles.circle}
+        style={{
+          borderColor: 'var(--colours_primary_default)',
+          backgroundColor: 'var(--colours_background_default)',
+          boxShadow: '0 0 0 0.3rem var(--colours_secondary_default)',
+        }}
+      />
+    </button>
   );
 };
