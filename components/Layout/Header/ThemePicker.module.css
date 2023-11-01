@@ -10,13 +10,11 @@
 .circleWrapper {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-    padding-right: 10px;
 }
 
 .clickable {
     cursor: pointer;
     background: none;
     border: none;
-    padding: 0;
+    padding: 10px;
 }
