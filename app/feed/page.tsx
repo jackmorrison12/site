@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { Title } from '../../components/shared/Title';
-import { GitHubIcon } from '../me/logos/github';
+import { Title } from 'components/shared/Title';
 import { Heatmap } from './Heatmap';
 import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
-import { LastFmIcon } from '../me/logos/lastfm';
-import { getRecentTracks } from '../../data-access/lastfm/api/getRecentTracks';
+import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
+import { GitHubIcon, LastFmIcon } from 'components/Logos';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
