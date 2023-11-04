@@ -42,23 +42,24 @@
 .socials {
   grid-area: socials;
 
-  .iconGrid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+}
 
-    .icon {
-      width: 40px;
-      cursor: pointer;
-      transform: all .3s ease-in-out;
-      transition: all .3s ease-in-out;
-    }
+.iconGrid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
-    .icon:hover {
-      transform: scale(0.95);
-      color: var(--colours_primary_default);
-    }
-  }
+.icon {
+  width: 40px;
+  cursor: pointer;
+  transform: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.icon:hover {
+  transform: scale(0.95);
+  color: var(--colours_primary_default);
 }
 
 .popular {
