@@ -44,7 +44,7 @@ export const ThemePicker: FC = () => {
           <button
             key={t.themeName}
             className={styles.clickable}
-            onClick={(e) => {
+            onClick={() => {
               setThemeWithTracking(t.themeName);
               setThemesViewable(false);
             }}

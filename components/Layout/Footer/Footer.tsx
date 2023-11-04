@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 
 import styles from './Footer.module.css';
+import { GitHubIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../../Logos';
+import { socials } from 'content/about-me';
 
 const Footer = () => (
   <footer>
@@ -39,6 +41,20 @@ const Footer = () => (
       </div>
       <div className={styles.socials}>
         <h4>Socials</h4>
+        <div className={styles.iconGrid}>
+          <a href={socials.twitter.url} className={styles.icon}>
+            <TwitterIcon />
+          </a>
+          <a href={socials.linkedin.url} className={styles.icon}>
+            <LinkedInIcon />
+          </a>
+          <a href={socials.github.url} className={styles.icon}>
+            <GitHubIcon />
+          </a>
+          <a href={socials.instagram.url} className={styles.icon}>
+            <InstagramIcon />
+          </a>
+        </div>
       </div>
       <div className={styles.disclaimer}>© {new Date().getFullYear()} Jack Morrison</div>
     </div>

@@ -1,21 +1,24 @@
-import { Title } from '../../components/shared/Title';
+import { Title } from 'components/shared/Title';
 import styles from './me.module.scss';
-import { TwitterIcon } from './logos/twitter';
-import { GitHubIcon } from './logos/github';
-import { LinkedInIcon } from './logos/linkedin';
-import { InstagramIcon } from './logos/instagram';
-import { LastFmIcon } from './logos/lastfm';
-import { SpotifyIcon } from './logos/spotify';
-import { ImperialLogo } from './logos/imperial';
-import { BloombergLogo } from './logos/bloomberg';
 import Link from 'next/link';
 import Image from 'next/image';
 // TODO: Update these imports
-import avatar from '../../content/about-me/avatar.jpg';
-import pic2 from '../../content/about-me/img/g.jpeg';
-import pic3 from '../../content/about-me/img/i.jpeg';
-import pic4 from '../../content/about-me/img/j.jpeg';
+import avatar from 'content/about-me/avatar.jpg';
+import pic2 from 'content/about-me/img/g.jpeg';
+import pic3 from 'content/about-me/img/i.jpeg';
+import pic4 from 'content/about-me/img/j.jpeg';
 import { TopTrack } from './TopTrack';
+import {
+  BloombergLogo,
+  GitHubIcon,
+  ImperialLogo,
+  InstagramIcon,
+  LastFmIcon,
+  LinkedInIcon,
+  SpotifyIcon,
+  TwitterIcon,
+} from 'components/Logos';
+import { socials } from 'content/about-me';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
@@ -65,16 +68,16 @@ export default async function Page() {
           <p>open source projects contributed to</p>
           <p className={styles.smallFooter}>(so far... 👨‍💻)</p>
         </Link>
-        <a href="https://twitter.com/jsm_99" className={`${styles.icon} ${styles.twt}`}>
+        <a href={socials.twitter.url} className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
         </a>
-        <a href="https://github.com/jackmorrison12" className={`${styles.icon} ${styles.gh}`}>
+        <a href={socials.github.url} className={`${styles.icon} ${styles.gh}`}>
           <GitHubIcon />
         </a>
-        <a href="https://www.linkedin.com/in/jackmorrison12/" className={`${styles.icon} ${styles.linkedin}`}>
+        <a href={socials.linkedin.url} className={`${styles.icon} ${styles.linkedin}`}>
           <LinkedInIcon />
         </a>
-        <a href="https://www.instagram.com/jackmorrison12/" className={`${styles.icon} ${styles.insta}`}>
+        <a href={socials.instagram.url} className={`${styles.icon} ${styles.insta}`}>
           <InstagramIcon />
         </a>
         <div className={`${styles.box} ${styles.about}`}>
@@ -91,10 +94,10 @@ export default async function Page() {
           <br />
           <p>Explore the widgets around here for more info!</p>
         </div>
-        <a href="https://www.last.fm/user/Jackmorrison12" className={`${styles.icon} ${styles.lastfm}`}>
+        <a href={socials.lastfm.url} className={`${styles.icon} ${styles.lastfm}`}>
           <LastFmIcon />
         </a>
-        <a href="https://open.spotify.com/user/112282925" className={`${styles.icon} ${styles.spotify}`}>
+        <a href={socials.spotify.url} className={`${styles.icon} ${styles.spotify}`}>
           <SpotifyIcon />
         </a>
         <TopTrack />
