@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <>
       <div className={styles.layout}>
-        <div style={{ gridArea: 'intro', display: 'flex', gap: '20px' }}>
+        <div className={styles.introLayout}>
           <div
             style={{ width: '200px', height: '200px', position: 'relative', overflow: 'hidden', borderRadius: '100px' }}
           >
@@ -31,6 +31,14 @@ export default async function Page() {
           </div>
         </div>
         <div className={styles.aboutLayout}>
+          <div
+            style={{
+              padding: '10px',
+              gridArea: 'title',
+            }}
+          >
+            <h2>About</h2>
+          </div>
           <Link
             href="/me/timeline#imperial"
             style={{
@@ -96,16 +104,54 @@ export default async function Page() {
         <div
           style={{
             gridArea: 'recent',
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
           }}
         >
-          <h2>Recent Updates</h2>
-          <div>Recent tweet/retweet</div>
-          <div>Write an article about</div>
-          <div>Made x commits this month</div>
-          <div>Listened to x songs today</div>
+          <div
+            style={{
+              padding: '10px',
+            }}
+          >
+            <h2>Recent Updates</h2>
+          </div>
+          <div
+            style={{
+              backgroundColor: 'var(--colours_primary_background_default)',
+              borderRadius: '10px',
+              padding: '10px',
+            }}
+          >
+            Recent tweet/retweet
+          </div>
+          <div
+            style={{
+              backgroundColor: 'var(--colours_primary_background_default)',
+              borderRadius: '10px',
+              padding: '10px',
+            }}
+          >
+            Write an article about
+          </div>
+          <div
+            style={{
+              backgroundColor: 'var(--colours_primary_background_default)',
+              borderRadius: '10px',
+              padding: '10px',
+            }}
+          >
+            Made x commits this month
+          </div>
+          <div
+            style={{
+              backgroundColor: 'var(--colours_primary_background_default)',
+              borderRadius: '10px',
+              padding: '10px',
+            }}
+          >
+            Listened to x songs today
+          </div>
         </div>
         <div
           style={{
@@ -117,14 +163,9 @@ export default async function Page() {
         >
           <div
             style={{
-              // backgroundColor: 'var(--colours_primary_background_default)',
-              // borderRadius: '10px',
               padding: '10px',
             }}
           >
-            {/* <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
-              <Pin />
-            </div> */}
             <h2>Pinned</h2>
           </div>
           <div

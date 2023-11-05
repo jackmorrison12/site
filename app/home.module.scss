@@ -3,11 +3,13 @@
     column-gap: 10px;
     row-gap: 20px;
     justify-content: center;
-    grid-template-columns: repeat(3, minmax(1px, 1fr));
-    grid-template-rows: auto auto;
+    grid-template-columns: minmax(1px, 1fr);
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
-        "intro intro  intro"
-        "about recent pinned";
+        "intro"
+        "about"
+        "pinned"
+        "recent";
 }
 
 
@@ -16,13 +18,23 @@
     display: grid;
     column-gap: 5px;
     row-gap: 5px;
-    // justify-content: center;
     grid-template-columns: repeat(1, auto);
     grid-template-rows: auto auto auto;
     grid-template-areas:
+        "title     title"
         "imperial  bbg"
         "skydiving skydiving"
         "more      more";
+}
+
+.introLayout {
+    grid-area: intro;
+    display: flex;
+    gap: 20px;        
+    padding-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .logo {
@@ -81,4 +93,41 @@
 .bigNumber {
     font-size: var(--fontSizes_xxl);
     font-weight: var(--fontWeights_thick)
-  }
+}
+
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+    .layout {
+        grid-template-columns: repeat(2, minmax(1px, 1fr));
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "intro  about"
+            "recent pinned";
+    }
+
+    .introLayout {
+        justify-content: end;
+    }
+
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+    .layout {
+        grid-template-columns: repeat(3, minmax(1px, 1fr));
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "intro intro  intro"
+            "about recent pinned";
+    }
+
+    .introLayout {
+        text-align: left;
+        flex-direction: row;
+        align-items: left;
+        justify-content: start;
+
+    }
+
+}
