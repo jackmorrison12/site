@@ -170,7 +170,7 @@ export default async function Page() {
           <Link
             href="/cv"
             style={{
-              backgroundColor: 'var(--colours_text_heaviest)',
+              backgroundColor: 'var(--colours_primary_background_default)',
               borderRadius: '10px',
               padding: '10px',
             }}
