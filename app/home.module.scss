@@ -19,18 +19,25 @@
     column-gap: 5px;
     row-gap: 5px;
     grid-template-columns: repeat(1, auto);
-    grid-template-rows: auto auto auto;
+    grid-template-rows: repeat(4, auto);
     grid-template-areas:
         "title     title"
         "imperial  bbg"
         "skydiving skydiving"
         "more      more";
+    height: auto;
+}
+
+.aboutTitle {
+    padding: 10px;
+    grid-area: title;
+    display: none;
 }
 
 .introLayout {
     grid-area: intro;
     display: flex;
-    gap: 20px;        
+    gap: 20px;
     padding-top: 10px;
     flex-direction: column;
     align-items: center;
@@ -128,6 +135,16 @@
         align-items: left;
         justify-content: start;
 
+    }
+
+
+    .aboutLayout {
+        height: min-content;
+
+    }
+
+    .aboutTitle {
+        display: block;
     }
 
 }

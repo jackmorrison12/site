@@ -5,7 +5,7 @@ import styles from './ProjectSummary.module.scss';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 
-const ProjectHeader = ({
+export const ProjectSummary = ({
   project,
 }: // imageProps,
 {
@@ -39,5 +39,3 @@ const ProjectHeader = ({
     </div>
   );
 };
-
-export default ProjectHeader;

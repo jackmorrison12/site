@@ -4,10 +4,14 @@ import styles from './home.module.scss';
 import Link from 'next/link';
 import { BloombergLogo, ImperialLogo } from 'components/Logos';
 import { Pin } from 'components/icons/Pin';
+import { getProjects } from 'content-access/projects/projects';
 
 export default async function Page() {
   const NUM_SKYDIVES = 23;
   const FT_IN_MARATHON = 138336;
+
+  const projects = getProjects().filter((p) => p.onHomepage);
+
   return (
     <>
       <div className={styles.layout}>
@@ -31,12 +35,7 @@ export default async function Page() {
           </div>
         </div>
         <div className={styles.aboutLayout}>
-          <div
-            style={{
-              padding: '10px',
-              gridArea: 'title',
-            }}
-          >
+          <div className={styles.aboutTitle}>
             <h2>About</h2>
           </div>
           <Link
@@ -168,9 +167,10 @@ export default async function Page() {
           >
             <h2>Pinned</h2>
           </div>
-          <div
+          <Link
+            href="/cv"
             style={{
-              backgroundColor: 'var(--colours_primary_background_default)',
+              backgroundColor: 'var(--colours_text_heaviest)',
               borderRadius: '10px',
               padding: '10px',
             }}
@@ -178,20 +178,52 @@ export default async function Page() {
             <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
               <Pin />
             </div>
-            <Link href="/cv">CV</Link>
-          </div>
-          <div
-            style={{
-              backgroundColor: 'var(--colours_primary_background_default)',
-              borderRadius: '10px',
-              padding: '10px',
-            }}
-          >
-            <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
-              <Pin />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <h1>CV</h1>
+              <h1>📄</h1>
             </div>
-            <Link href="/projects/osti">Osti</Link>
-          </div>
+          </Link>
+          {projects.map((p) => (
+            <Link
+              href={p.slug}
+              style={{
+                backgroundColor: 'var(--colours_primary_background_default)',
+                borderRadius: '10px',
+                padding: '10px',
+              }}
+              key={p.slug}
+            >
+              <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
+                <Pin />
+              </div>
+              <div style={{ display: 'grid', gap: '10px', gridTemplateColumns: '150px auto' }}>
+                <div
+                  style={{ borderRadius: '10px', overflow: 'hidden', width: '150px', height: '150px', margin: 'auto' }}
+                >
+                  <Image alt={`${p.title} Hero Image`} src={p.heroImg} width="150" height="150" />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <h1>{p.title}</h1>
+                  <p>{p.description}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', padding: '10px 0' }}>
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          borderRadius: '5px',
+                          padding: '2px 5px',
+                          backgroundColor: 'var(--colours_primary_default)',
+                          color: 'var(--colours_legacyGrey_1)',
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </>

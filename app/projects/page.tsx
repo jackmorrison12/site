@@ -1,6 +1,6 @@
 import styles from './projects.module.scss';
 
-import ProjectSummary from '../../components/Projects/ProjectSummary/ProjectSummary';
+import { ProjectSummary } from 'components/Projects/ProjectSummary/ProjectSummary';
 
 import { getProjects } from '../../content-access/projects/projects';
 import { Title } from '../../components/shared/Title';
