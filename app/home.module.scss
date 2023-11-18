@@ -34,6 +34,26 @@
     display: none;
 }
 
+.logo {
+    display: flex;
+    padding: clamp(1px, 20%, 30px);
+    border-radius: 10px;
+
+    svg {
+        width: 100%;
+    }
+}
+
+.imperial {
+    grid-area: imperial;
+    background-color: #EBEEEE;
+}
+
+.bloomberg {
+    grid-area: bbg;
+    background-color: black;
+}
+
 .introLayout {
     grid-area: intro;
     display: flex;
@@ -44,12 +64,22 @@
     text-align: center;
 }
 
-.logo {
-    display: flex;
+.introImage {
+    width: 200px; 
+    height: 200px; 
+    position: relative; 
+    overflow: hidden;
+    border-radius: 100px;
+}
 
-    svg {
-        width: 100%;
-    }
+.introText {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.textHighlight {
+    color: var(--colours_primary_default);
 }
 
 .skydiving {
