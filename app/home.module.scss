@@ -12,6 +12,23 @@
         "recent";
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                   Shared                                   */
+/* -------------------------------------------------------------------------- */
+
+.sectionTitle {
+    padding: 10px;
+}
+
+.card {
+    background-color: var(--colours_primary_background_default);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    About                                   */
+/* -------------------------------------------------------------------------- */
 
 .aboutLayout {
     grid-area: about;
@@ -84,6 +101,20 @@
 
 .skydiving {
     background: rgba(0, 176, 255, .7);
+    grid-area: skydiving;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.skydivingText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #cloud {
@@ -117,6 +148,13 @@
     right: 8px;
 }
 
+.aboutMore {
+    grid-area: more;
+    background-color: var(--colours_primary_background_default);
+    border-radius: 10px;
+    padding: 10px;
+}
+
 @keyframes move {
     0% {
         transform: translatex(0);
@@ -132,6 +170,32 @@
     font-weight: var(--fontWeights_thick)
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                   Recent                                   */
+/* -------------------------------------------------------------------------- */
+
+
+.recent {
+    grid-area: recent;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Pinned                                   */
+/* -------------------------------------------------------------------------- */
+
+.pinned {
+    grid-area: pinned;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Size styles                                */
+/* -------------------------------------------------------------------------- */
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {

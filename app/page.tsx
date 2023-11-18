@@ -41,119 +41,28 @@ export default async function Page() {
         <Link href="/me/timeline#bloomberg" className={`${styles.logo} ${styles.bloomberg}`}>
           <BloombergLogo />
         </Link>
-        <div
-          style={{
-            gridArea: 'skydiving',
-            borderRadius: '10px',
-            padding: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-evenly',
-          }}
-          className={styles.skydiving}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-            }}
-          >
+        <div className={styles.skydiving}>
+          <div className={styles.skydivingText}>
             <p>I&apos;ve skydived the equivalent of</p>
             <p className={styles.bigNumber}>{((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)}</p>
             <p> marathons 🪂</p>
           </div>
           <div id={styles.cloud}></div>
         </div>
-        <Link
-          href={'/me'}
-          style={{
-            gridArea: 'more',
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
+        <Link href={'/me'} className={styles.aboutMore}>
           Want to know more?
         </Link>
       </div>
-      <div
-        style={{
-          gridArea: 'recent',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-        }}
-      >
-        <div
-          style={{
-            padding: '10px',
-          }}
-        >
-          <h2>Recent Updates</h2>
-        </div>
-        <div
-          style={{
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
-          Recent tweet/retweet
-        </div>
-        <div
-          style={{
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
-          Write an article about
-        </div>
-        <div
-          style={{
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
-          Made x commits this month
-        </div>
-        <div
-          style={{
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
-          Listened to x songs today
-        </div>
+      <div className={styles.recent}>
+        <h2 className={styles.sectionTitle}>Recent Updates</h2>
+        <div className={styles.card}>Recent tweet/retweet</div>
+        <div className={styles.card}>Write an article about</div>
+        <div className={styles.card}>Made x commits this month</div>
+        <div className={styles.card}>Listened to x songs today</div>
       </div>
-      <div
-        style={{
-          gridArea: 'pinned',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-        }}
-      >
-        <div
-          style={{
-            padding: '10px',
-          }}
-        >
-          <h2>Pinned</h2>
-        </div>
-        <Link
-          href="/cv"
-          style={{
-            backgroundColor: 'var(--colours_primary_background_default)',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
+      <div className={styles.pinned}>
+        <h2 className={styles.sectionTitle}>Pinned</h2>
+        <Link href="/cv" className={styles.card}>
           <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
             <Pin />
           </div>
@@ -163,15 +72,7 @@ export default async function Page() {
           </div>
         </Link>
         {projects.map((p) => (
-          <Link
-            href={p.slug}
-            style={{
-              backgroundColor: 'var(--colours_primary_background_default)',
-              borderRadius: '10px',
-              padding: '10px',
-            }}
-            key={p.slug}
-          >
+          <Link href={p.slug} className={styles.card} key={p.slug}>
             <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
               <Pin />
             </div>
