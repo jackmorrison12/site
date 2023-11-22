@@ -82,16 +82,16 @@
 }
 
 .introImage {
-    width: 200px; 
-    height: 200px; 
-    position: relative; 
+    width: 200px;
+    height: 200px;
+    position: relative;
     overflow: hidden;
     border-radius: 100px;
 }
 
 .introText {
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -191,6 +191,52 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.pinIcon {
+    width: 30px;
+    margin-left: 100%;
+    translate: 0 -20px;
+    height: 0;
+}
+
+.cvWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectWrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 150px auto;
+}
+
+.projectImage {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+.projectText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.projectTagWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 0;
+}
+
+.projectTag {
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: var(--colours_primary_default);
+    color: var(--colours_legacyGrey_1);
 }
 
 /* -------------------------------------------------------------------------- */

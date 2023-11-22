@@ -6,6 +6,12 @@ import { BloombergLogo, ImperialLogo } from 'components/Logos';
 import { Pin } from 'components/icons/Pin';
 import { getProjects } from 'content-access/projects/projects';
 
+const PinIcon = () => (
+  <div className={styles.pinIcon}>
+    <Pin />
+  </div>
+);
+
 export default async function Page() {
   const NUM_SKYDIVES = 23;
   const FT_IN_MARATHON = 138336;
@@ -63,39 +69,25 @@ export default async function Page() {
       <div className={styles.pinned}>
         <h2 className={styles.sectionTitle}>Pinned</h2>
         <Link href="/cv" className={styles.card}>
-          <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
-            <Pin />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <PinIcon />
+          <div className={styles.cvWrapper}>
             <h1>CV</h1>
             <h1>📄</h1>
           </div>
         </Link>
         {projects.map((p) => (
           <Link href={p.slug} className={styles.card} key={p.slug}>
-            <div style={{ width: '30px', marginLeft: '100%', translate: '0 -20px', height: '0' }}>
-              <Pin />
-            </div>
-            <div style={{ display: 'grid', gap: '10px', gridTemplateColumns: '150px auto' }}>
-              <div
-                style={{ borderRadius: '10px', overflow: 'hidden', width: '150px', height: '150px', margin: 'auto' }}
-              >
+            <PinIcon />
+            <div className={styles.projectWrapper}>
+              <div className={styles.projectImage}>
                 <Image alt={`${p.title} Hero Image`} src={p.heroImg} width="150" height="150" />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className={styles.projectText}>
                 <h1>{p.title}</h1>
                 <p>{p.description}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', padding: '10px 0' }}>
+                <div className={styles.projectTagWrapper}>
                   {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        borderRadius: '5px',
-                        padding: '2px 5px',
-                        backgroundColor: 'var(--colours_primary_default)',
-                        color: 'var(--colours_legacyGrey_1)',
-                      }}
-                    >
+                    <span key={t} className={styles.projectTag}>
                       {t}
                     </span>
                   ))}
