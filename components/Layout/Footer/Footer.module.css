@@ -14,7 +14,6 @@
 
 .footer p {
   font-size: small;
-  padding-bottom: 5px;
 }
 
 .footer a {
@@ -68,6 +67,24 @@
 
 .useful {
   grid-area: useful;
+}
+
+
+.linksWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 0;
+}
+
+.link {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: var(--colours_primary_border_default) 2px solid;
+}
+
+.link:hover {
+  background-color: var(--colours_primary_background_hover);
 }
 
 .disclaimer {
