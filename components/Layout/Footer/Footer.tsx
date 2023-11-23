@@ -9,15 +9,14 @@ const Footer = () => (
   <footer>
     <div className={styles.footer}>
       <div className={styles.intro}>
-        <h3>Hey, I&apos;m Jack 👋</h3>
+        <h3>A quick disclaimer...</h3>
         <p>
-          Congrats, you&apos;ve made it all the way down to the bottom 🎉 Down here you can find all of those fun easter
-          egg links, as well as the boring ones every site has. I&apos;ve also picked out some of the ones people find
-          most popular.
+          I&apos;m a software engineer at Bloomberg. All views expressed on this site are my own, and do not represent
+          my employer.
         </p>
       </div>
       <div className={styles.useful}>
-        <h4>Useful</h4>
+        <h4>Fun(ish) Things</h4>
         <Link href="/credits" passHref>
           <p>Credits</p>
         </Link>
