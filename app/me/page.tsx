@@ -18,13 +18,11 @@ import {
   SpotifyIcon,
   TwitterIcon,
 } from 'components/Logos';
-import { socials } from 'content/about-me';
+import { FT_IN_MARATHON, NUM_SKYDIVES, socials } from 'content/about-me';
 
 export default async function Page() {
-  const NUM_SKYDIVES = 23;
   const NUM_COUNTRIES = 27;
   const NUM_OS = 2;
-  const FT_IN_MARATHON = 138336;
   return (
     <>
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
