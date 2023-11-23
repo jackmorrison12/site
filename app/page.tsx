@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BloombergLogo, ImperialLogo } from 'components/Logos';
 import { Pin } from 'components/icons/Pin';
 import { getProjects } from 'content-access/projects/projects';
+import { FT_IN_MARATHON, NUM_SKYDIVES } from 'content/about-me';
 
 const PinIcon = () => (
   <div className={styles.pinIcon}>
@@ -13,9 +14,6 @@ const PinIcon = () => (
 );
 
 export default async function Page() {
-  const NUM_SKYDIVES = 23;
-  const FT_IN_MARATHON = 138336;
-
   const projects = getProjects().filter((p) => p.onHomepage);
 
   return (
@@ -41,10 +39,10 @@ export default async function Page() {
         <div className={styles.aboutTitle}>
           <h2>About</h2>
         </div>
-        <Link href="/me/timeline#imperial" className={`${styles.logo} ${styles.imperial}`}>
+        <Link href="/me/timeline#imperial" className={`${styles.logo} ${styles.imperial} ${styles.clickable}`}>
           <ImperialLogo />
         </Link>
-        <Link href="/me/timeline#bloomberg" className={`${styles.logo} ${styles.bloomberg}`}>
+        <Link href="/me/timeline#bloomberg" className={`${styles.logo} ${styles.bloomberg} ${styles.clickable}`}>
           <BloombergLogo />
         </Link>
         <div className={styles.skydiving}>
@@ -55,20 +53,20 @@ export default async function Page() {
           </div>
           <div id={styles.cloud}></div>
         </div>
-        <Link href={'/me'} className={styles.aboutMore}>
+        <Link href={'/me'} className={`${styles.aboutMore} ${styles.clickable}`}>
           Want to know more?
         </Link>
       </div>
       <div className={styles.recent}>
         <h2 className={styles.sectionTitle}>Recent Updates</h2>
-        <div className={styles.card}>Recent tweet/retweet</div>
-        <div className={styles.card}>Write an article about</div>
-        <div className={styles.card}>Made x commits this month</div>
-        <div className={styles.card}>Listened to x songs today</div>
+        <div className={`${styles.card} ${styles.clickable}`}>Recent tweet/retweet</div>
+        <div className={`${styles.card} ${styles.clickable}`}>Write an article about</div>
+        <div className={`${styles.card} ${styles.clickable}`}>Made x commits this month</div>
+        <div className={`${styles.card} ${styles.clickable}`}>Listened to x songs today</div>
       </div>
       <div className={styles.pinned}>
         <h2 className={styles.sectionTitle}>Pinned</h2>
-        <Link href="/cv" className={styles.card}>
+        <Link href="/cv" className={`${styles.card} ${styles.clickable}`}>
           <PinIcon />
           <div className={styles.cvWrapper}>
             <h1>CV</h1>
@@ -76,7 +74,7 @@ export default async function Page() {
           </div>
         </Link>
         {projects.map((p) => (
-          <Link href={p.slug} className={styles.card} key={p.slug}>
+          <Link href={p.slug} className={`${styles.card} ${styles.clickable}`} key={p.slug}>
             <PinIcon />
             <div className={styles.projectWrapper}>
               <div className={styles.projectImage}>
