@@ -4,10 +4,8 @@ import { Title } from 'components/shared/Title';
 import { getEducations } from 'content-access/education/education';
 import { getJobs } from 'content-access/jobs/jobs';
 
-const dateToString = (date: string) =>
-  !isNaN(new Date(date).valueOf())
-    ? new Date(date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-    : date;
+import styles from './timeline.module.scss';
+import { Timeline } from './Timeline';
 
 export default async function Page() {
   const jobs = getJobs().map((j) => ({ type: 'JOB', ...j } as const));
@@ -20,23 +18,15 @@ export default async function Page() {
   return (
     <>
       <Title value="TIMELINE" offset="-669.62" />
-      {combined.map((j) =>
-        j.type === 'JOB' ? (
-          <div id={j.slug} key={j.slug}>
-            <h1>{j.company}</h1>
-            <h2>
-              {dateToString(j.startDate)} - {dateToString(j.endDate)}
-            </h2>
-          </div>
-        ) : (
-          <div id={j.slug} key={j.slug}>
-            <h1>{j.title}</h1>
-            <h2>
-              {dateToString(j.startDate)} - {dateToString(j.endDate)}
-            </h2>
-          </div>
-        ),
-      )}
+      {/* Filter by education or jobs - default to both */}
+      {/* How should I emphasise current? */}
+      {/* <button>Education</button>
+      <button>Jobs</button>
+      <button>Most recent</button >*/}
+      <div className={styles.timelineWrapper}>
+        <div className={styles.verticalLine} />
+        <Timeline items={combined} />
+      </div>
     </>
   );
 }
