@@ -2,9 +2,11 @@
 
 import { Education } from 'content-access/education/education.types';
 import { Job } from 'content-access/jobs/jobs.types';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import styles from './timeline.module.scss';
+
+import { useRouter, usePathname, useParams, useSearchParams } from 'next/navigation';
 
 const dateToString = (date: string) =>
   !isNaN(new Date(date).valueOf())
@@ -23,6 +25,22 @@ export const Timeline: FC<{
 
   const flipItem = (index: number) =>
     setIsOpen((prevState) => prevState.map((item, idx) => (idx === index ? !item : item)));
+
+  // This is a bit of a hack to get the scrolling working after opening a section
+  const [isInitial, setIsInitial] = useState(false);
+  useEffect(() => {
+    const hash = window.location.hash.split('#')[1];
+    console.log(hash);
+    const location = trimmedItems.findIndex((item) => item.slug === hash);
+    console.log(location);
+    if (location !== -1 && !isOpen[location] && !isInitial) {
+      setIsOpen((prevState) => prevState.map((item, idx) => (idx === location ? true : item)));
+      setIsInitial(true);
+    }
+    if (isOpen[location]) {
+      document.getElementById(hash)?.scrollIntoView();
+    }
+  }, [isInitial]);
 
   return (
     <div className={styles.timelineWrapper}>
