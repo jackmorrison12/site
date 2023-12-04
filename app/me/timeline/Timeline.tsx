@@ -58,8 +58,9 @@ export const Timeline: FC<{
                 </div>
                 <div className={styles.eventsGroup}>
                   <h1>
-                    {j.position} @ {j.company} in {j.location}
+                    {j.position} @ {j.company}
                   </h1>
+                  <h2>{j.location}</h2>
                   {isOpen[i] && (
                     <ul>
                       {j.cvhighlights.map((highlight, i) => (
@@ -78,9 +79,8 @@ export const Timeline: FC<{
                   </div>
                 </div>
                 <div className={styles.eventsGroup}>
-                  <h1>
-                    {j.title} - {j.subtitle}
-                  </h1>
+                  <h1>{j.title}</h1>
+                  <h2>{j.subtitle}</h2>
                   {isOpen[i] && (
                     <>
                       <h2>Grades:</h2>
