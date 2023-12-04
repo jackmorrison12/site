@@ -6,8 +6,6 @@ import { FC, useEffect, useState } from 'react';
 
 import styles from './timeline.module.scss';
 
-import { useRouter, usePathname, useParams, useSearchParams } from 'next/navigation';
-
 const dateToString = (date: string) =>
   !isNaN(new Date(date).valueOf())
     ? new Date(date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
