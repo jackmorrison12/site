@@ -49,18 +49,24 @@ export default async function Page() {
         <div className={`${styles.pic} ${styles.pic4}`}>
           <Image src={pic4} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
         </div>
-        <div className={`${styles.box} ${styles.bbg} ${styles.overlayParent}`}>
+        <Link
+          href="/me/timeline#bloomberg"
+          className={`${styles.box} ${styles.bbg} ${styles.overlayParent} ${styles.clickable}`}
+        >
           <BloombergLogo />
           <div className={styles.overlayWrapper}>
             <p className={styles.overlayContent}>I&apos;ve been a Software Engineer at Bloomberg since 2021!</p>
           </div>
-        </div>
-        <div className={`${styles.box} ${styles.imperial} ${styles.overlayParent}`}>
+        </Link>
+        <Link
+          href="/me/timeline#imperial"
+          className={`${styles.box} ${styles.imperial} ${styles.overlayParent}  ${styles.clickable}`}
+        >
           <ImperialLogo />
           <div className={styles.overlayWrapper}>
             <p className={styles.overlayContent}>I graduated from Imperial in 2021!</p>
           </div>
-        </div>
+        </Link>
         <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}>
           <p className={styles.bigNumber}>{NUM_OS}</p>
           <p>open source projects contributed to</p>
