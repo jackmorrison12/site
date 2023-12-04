@@ -8,25 +8,23 @@ import styles from './timeline.module.scss';
 import { Timeline } from './Timeline';
 
 export default async function Page() {
-  const jobs = getJobs().map((j) => ({ type: 'JOB', ...j } as const));
-  const educations = getEducations().map((e) => ({ type: 'EDUCATION', ...e } as const));
+  const jobs = getJobs()
+    .map((j) => ({ type: 'JOB', ...j } as const))
+    .filter((j) => !j.isHidden)
+    .sort((j1, j2) => (new Date(j1.endDate) > new Date(j2.endDate) ? -1 : 1));
 
-  const combined = [...jobs, ...educations]
-    .filter((c) => !c.isHidden)
-    .sort((c1, c2) => (new Date(c1.endDate) > new Date(c2.endDate) ? -1 : 1));
+  const educations = getEducations()
+    .map((e) => ({ type: 'EDUCATION', ...e } as const))
+    .filter((e) => !e.isHidden)
+    .sort((e1, e2) => (new Date(e1.endDate) > new Date(e2.endDate) ? -1 : 1));
 
   return (
     <>
       <Title value="TIMELINE" offset="-669.62" />
-      {/* Filter by education or jobs - default to both */}
-      {/* How should I emphasise current? */}
-      {/* <button>Education</button>
-      <button>Jobs</button>
-      <button>Most recent</button >*/}
-      <div className={styles.timelineWrapper}>
-        <div className={styles.verticalLine} />
-        <Timeline items={combined} />
-      </div>
+      <h1>💼 Experience</h1>
+      <Timeline items={jobs} itemstoDisplay={2} />
+      <h1 className={styles.title}>🎓 Education</h1>
+      <Timeline items={educations} itemstoDisplay={1} />
     </>
   );
 }

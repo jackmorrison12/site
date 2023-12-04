@@ -1,15 +1,11 @@
-.item {
-    // background-color: var(--colours_primary_background_default);
-    // border-radius: 20px;
-    // padding: 10px 20px;
-    // border: var(--colours_primary_border_default) 1px solid;
-    // margin-bottom: 20px;
+.title {
+    padding-top: 20px;
 }
 
 .timelineWrapper {
     display: flex;
     flex-direction: row;
-    padding-top: 20px;
+    padding: 20px 0;
 
     .verticalLine {
         height: 100%;
@@ -19,9 +15,25 @@
         margin-left: 20px;
     }
 
+    .button {
+        background-color: var(--colours_primary_default);
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+
+        transform: all .3s ease-in-out, color 0s;
+        transition: all .3s ease-in-out, color 0s;
+    }
+
+    .button:hover {
+        background-color: var(--colours_primary_hover);
+        transform: scale(0.97)
+    }
+
     .contentGroup {
         padding-bottom: 30px;
-
+        cursor: pointer;
 
         .dateGroup {
             display: flex;
@@ -49,10 +61,6 @@
         }
 
         .eventsGroup {
-            // display: flex; 
-            // flex-direction: row;
-            // gap: 10px;
-            // padding-bottom: 5px;
             padding: 10px 20px;
 
             .time {
@@ -63,5 +71,5 @@
             }
         }
     }
-    
+
 }
