@@ -44,7 +44,9 @@ const Header = ({ title }: HeaderProps) => {
               <Link
                 href={link.url}
                 key={link.url}
-                className={`${styles.link} ${_.pathname === link.url ? styles.activeLink : ''}`}
+                className={`${styles.link} ${
+                  (link.url === '/' ? _.pathname === link.url : _.pathname?.includes(link.url)) ? styles.activeLink : ''
+                }`}
               >
                 {link.emoji} {link.name}
               </Link>
