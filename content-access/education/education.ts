@@ -1,29 +1,29 @@
 import { join } from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
-import { Job } from './jobs.types';
+import { Education } from './education.types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const PATH = 'content/jobs';
+const PATH = 'content/education';
 const FILE_EXTN = '.mdx';
 
-function getJobFilePaths(): string[] {
+function getEducationFilePaths(): string[] {
   return fs.readdirSync(PATH);
 }
 
-export function getJobSlugs(): Array<{ slug: string }> {
-  return getJobFilePaths().map((fileName) => ({
+export function getEducationSlugs(): Array<{ slug: string }> {
+  return getEducationFilePaths().map((fileName) => ({
     slug: fileName.replace(FILE_EXTN, ''),
   }));
 }
 
-export function getJobs(): Job[] {
-  return getJobSlugs()
-    .map((slug) => ({ ...getJobFrontmatter(slug.slug), slug: slug.slug }))
+export function getEducations(): Education[] {
+  return getEducationSlugs()
+    .map((slug) => ({ ...getEducationFrontmatter(slug.slug), slug: slug.slug }))
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 }
 
-export function getJobFrontmatter(slug: string): Job {
+export function getEducationFrontmatter(slug: string): Education {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const file = fs.readFileSync(fullPath, 'utf-8');
 
@@ -31,14 +31,14 @@ export function getJobFrontmatter(slug: string): Job {
 
   data.slug = slug;
 
-  return data as unknown as Job;
+  return data as unknown as Education;
 }
 
-export async function getJob(slug: string): Promise<{ rawMDX: string; frontmatter: Job }> {
+export async function getEducation(slug: string): Promise<{ rawMDX: string; frontmatter: Education }> {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const rawMDX = fs.readFileSync(fullPath, 'utf-8');
 
-  const { frontmatter } = await compileMDX<Job>({
+  const { frontmatter } = await compileMDX<Education>({
     source: rawMDX,
     options: { parseFrontmatter: true },
   });

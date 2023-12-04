@@ -4,7 +4,7 @@ export default async function Page() {
   return (
     <>
       <Title value="CREDITS" offset="-551.74" />
-      <p>Credits for the site</p>
+      <a href="https://codepen.io/antoniasymeonidou/pen/BawKMqg">CSS Cloud</a>
     </>
   );
 }

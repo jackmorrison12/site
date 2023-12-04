@@ -1,0 +1,75 @@
+.title {
+    padding-top: 20px;
+}
+
+.timelineWrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0;
+
+    .verticalLine {
+        height: 100%;
+        width: 5px;
+        background-color: var(--colours_primary_default);
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .button {
+        background-color: var(--colours_primary_default);
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+
+        transform: all .3s ease-in-out, color 0s;
+        transition: all .3s ease-in-out, color 0s;
+    }
+
+    .button:hover {
+        background-color: var(--colours_primary_hover);
+        transform: scale(0.97)
+    }
+
+    .contentGroup {
+        padding-bottom: 30px;
+        cursor: pointer;
+
+        .dateGroup {
+            display: flex;
+            flex-direction: row;
+            right: 42.5px;
+            position: relative;
+            align-items: center;
+            gap: 10px;
+
+            .circle {
+                padding: 15px;
+                border-radius: 100px;
+                background-color: var(--colours_background_default);
+                border: 5px solid var(--colours_primary_default);
+            }
+
+            .fill {
+                background-color: var(--colours_primary_default);
+            }
+
+            .date {
+                font-weight: var(--fontWeights_thick);
+                text-transform: uppercase;
+            }
+        }
+
+        .eventsGroup {
+            padding: 10px 20px;
+
+            .time {
+                font-weight: var(--fontWeights_thick);
+                padding-left: 30px;
+                flex: none;
+                min-width: 80px;
+            }
+        }
+    }
+
+}
