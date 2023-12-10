@@ -30,11 +30,11 @@
     cursor: pointer;
     transform: all .3s ease-in-out, color 0s;
     transition: all .3s ease-in-out, color 0s;
-  }
-  
-  .clickable:hover {
+}
+
+.clickable:hover {
     transform: scale(0.97)
-  }
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                    About                                   */
@@ -163,6 +163,11 @@
     background-color: var(--colours_primary_background_default);
     border-radius: 10px;
     padding: 10px;
+    color: var(--greyTextContrast);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 @keyframes move {

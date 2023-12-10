@@ -54,7 +54,8 @@ export default async function Page() {
           <div id={styles.cloud}></div>
         </div>
         <Link href={'/me'} className={`${styles.aboutMore} ${styles.clickable}`}>
-          Want to know more?
+          <div>Want to know more?</div>
+          <div>➤</div>
         </Link>
       </div>
       <div className={styles.recent}>
