@@ -115,8 +115,14 @@ export default async function Page() {
           <p className={styles.bigNumber}>{((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)}</p>
           <p> marathons 🪂</p>
         </div>
-        <div className={`${styles.box} ${styles.emoji} ${styles.emoji1}`}>🏠 🇬🇧</div>
-        <div className={`${styles.box} ${styles.emoji} ${styles.emoji2}`}>📍 🗽</div>
+        <div className={`${styles.box} ${styles.emoji} ${styles.emoji1}`}>
+          <div>🏠</div>
+          <div>🇬🇧</div>
+        </div>
+        <div className={`${styles.box} ${styles.emoji} ${styles.emoji2}`}>
+          <div>📍</div>
+          <div>🗽</div>
+        </div>
       </div>
     </>
   );

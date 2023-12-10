@@ -294,6 +294,7 @@
 
 .emoji {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: var(--fontSizes_xl);
@@ -330,6 +331,11 @@
 
   .music {
     padding: 20px;
+  }
+
+  .emoji {
+    flex-direction: row;
+    gap: 10px;
   }
 }
 
