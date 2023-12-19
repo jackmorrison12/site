@@ -3,8 +3,9 @@ import slugify from 'slugify';
 import matter from 'gray-matter';
 import { getProjectFrontmatter } from '../projects/projects';
 import { Project } from '../projects/projects.types';
+import { join } from 'path';
 
-const PATHS = ['content/projects'];
+const PATHS = [join(process.cwd(), 'content/projects')];
 
 function getAllFilePathsWithTags(): string[] {
   return PATHS.map((p) => fs.readdirSync(p).map((f) => `${p}/${f}`)).flat();
