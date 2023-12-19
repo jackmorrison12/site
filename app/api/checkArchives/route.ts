@@ -12,8 +12,5 @@ export async function GET(request: Request) {
   const v2 = await fetch(`https://v2.jackmorrison.xyz/${path}`);
   const v4 = await fetch(`https://v4.jackmorrison.xyz/${path}`);
 
-  console.log('IN PATH');
-  console.log(v4.status);
-
   return NextResponse.json({ v0: v0.status, v1: v1.status, v2: v2.status, v4: v4.status });
 }

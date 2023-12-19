@@ -28,9 +28,7 @@ export const Timeline: FC<{
   const [isInitial, setIsInitial] = useState(false);
   useEffect(() => {
     const hash = window.location.hash.split('#')[1];
-    console.log(hash);
     const location = trimmedItems.findIndex((item) => item.slug === hash);
-    console.log(location);
     if (location !== -1 && !isOpen[location] && !isInitial) {
       setIsOpen((prevState) => prevState.map((item, idx) => (idx === location ? true : item)));
       setIsInitial(true);
