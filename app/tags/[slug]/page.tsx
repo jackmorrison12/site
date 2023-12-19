@@ -10,7 +10,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let tag = undefined;
   try {
     tag = await getTag(slug);
+    console.log(tag);
   } catch {
+    return notFound();
+  }
+
+  if (!tag.tag) {
     return notFound();
   }
 
