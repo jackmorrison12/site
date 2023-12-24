@@ -6,14 +6,13 @@
 }
 
 .sitesWrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto;
     gap: 40px;
     padding-top: 20px;
 }
 
 .site {
-    width: calc(100% - 40px);
     display: flex;
     gap: 20px;
     flex-direction: column;
@@ -29,8 +28,8 @@
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
 
-    .site {
-        width: calc(50% - 40px);
+    .sitesWrapper {
+        grid-template-columns: auto auto;
     }
 
 }
@@ -38,8 +37,8 @@
 /* Tablet Landscape */
 @media (min-width: 62em) {
 
-    .site {
-        width: calc(33% - 40px);
+    .sitesWrapper {
+        grid-template-columns: auto auto auto;
     }
 
 }
