@@ -1,0 +1,45 @@
+.wrapper {
+    p {
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+}
+
+.sitesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-top: 20px;
+}
+
+.site {
+    width: calc(100% - 40px);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.imageWrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1.6;
+    position: relative;
+}
+
+/* Phone Landscape/Tablet Portrait */
+@media (min-width: 48em) {
+
+    .site {
+        width: calc(50% - 40px);
+    }
+
+}
+
+/* Tablet Landscape */
+@media (min-width: 62em) {
+
+    .site {
+        width: calc(33% - 40px);
+    }
+
+}
