@@ -7,11 +7,7 @@ import { useQuery } from 'react-query';
 
 import styles from './not-found.module.scss';
 
-import v0 from 'public/img/archive/v0.png';
-import v1 from 'public/img/archive/v1.png';
-import v2 from 'public/img/archive/v2.png';
-import v3 from 'public/img/archive/v3.png';
-import v4 from 'public/img/archive/v4.png';
+import { archives } from 'content/archives';
 
 export default function NotFound() {
   const pathname = usePathname().slice(0);
@@ -31,7 +27,9 @@ export default function NotFound() {
     return (
       <>
         <Title value="404" offset="-865.96" bgOverride="NOTFOUND" />
-        <p>Looking at previous versions of my site...</p>
+        <h1>
+          Checking previous versions of my site for <Link href={pathname}>{pathname}</Link>...
+        </h1>
       </>
     );
   }
@@ -44,81 +42,55 @@ export default function NotFound() {
     return (
       <>
         <Title value="404" offset="-865.96" bgOverride="NOTFOUND" />
-        <h1>{pathname} can&apos;t be found</h1>
-        <p>
-          Return <Link href="/">home</Link>
-        </p>
+        <h1>
+          <Link href={pathname}>{pathname}</Link> can&apos;t be found here, or on any previous iteration of my site
+        </h1>
+        <b className={styles.readMore}>
+          <Link href="/archive">Learn more</Link> about previous iterations of this site, or{' '}
+          <Link href="/">return home</Link>
+        </b>
       </>
     );
   }
+
+  const results = archives
+    .map((a) => ({ ...a, status: data[`v${a.version}`] }))
+    .filter((r) => r.status === 200)
+    .sort((a, b) => (a.version > b.version ? -1 : 1));
 
   return (
     <>
       <Title value="404" offset="-865.96" bgOverride="NOTFOUND" />
       <>
-        <h1>{pathname} isn&apos;t available here, but it did exist on a previous version of my site...</h1>
-        <div className={styles.imagesWrapper}>
-          {data.v0 === 200 && (
-            <a href={`https://v0.jackmorrison.xyz${pathname}`} style={{ flexBasis: '30%' }}>
-              <Image
-                src={v0}
-                // fill={true}
-                placeholder="blur"
-                // objectFit="cover"
-                alt={'A picture of me at teamLab Tokyo'}
-                height={200}
-              />
-            </a>
-          )}
-          {data.v1 === 200 && (
-            <a href={`https://v1.jackmorrison.xyz${pathname}`} style={{ flexBasis: '30%' }}>
-              <Image
-                src={v1}
-                // fill={true}
-                placeholder="blur"
-                // objectFit="cover"
-                alt={'A picture of me at teamLab Tokyo'}
-                height={200}
-              />
-            </a>
-          )}
-          {data.v2 === 200 && (
-            <a href={`https://v2.jackmorrison.xyz${pathname}`} style={{ flexBasis: '30%' }}>
-              <Image
-                src={v2}
-                // fill={true}
-                placeholder="blur"
-                // objectFit="cover"
-                alt={'A picture of me at teamLab Tokyo'}
-                height={200}
-              />
-            </a>
-          )}
-          {data.v3 === 200 && (
-            <a href={`https://v3.jackmorrison.xyz${pathname}`} style={{ flexBasis: '30%' }}>
-              <Image
-                src={v3}
-                // fill={true}
-                placeholder="blur"
-                // objectFit="cover"
-                alt={'A picture of me at teamLab Tokyo'}
-                height={200}
-              />
-            </a>
-          )}
-          {data.v4 === 200 && (
-            <a href={`https://v4.jackmorrison.xyz${pathname}`} style={{ flexBasis: '30%' }}>
-              <Image
-                src={v4}
-                // fill={true}
-                placeholder="blur"
-                // objectFit="cover"
-                alt={'A picture of me at teamLab Tokyo'}
-                height={200}
-              />
-            </a>
-          )}
+        <h1>
+          <Link href={pathname}>{pathname}</Link> isn&apos;t available here, but it did exist on a previous version of
+          my site...
+        </h1>
+        <div className={styles.sitesWrapper}>
+          {results.map((a) => (
+            <div key={a.version} className={styles.site}>
+              <h2>
+                <a
+                  href={`https://v${a.version}.jackmorrison.xyz${pathname}`}
+                >{`v${a.version}.jackmorrison.xyz${pathname}`}</a>
+              </h2>
+              <h3>{a.date}</h3>
+              <a href={`https://v${a.version}.jackmorrison.xyz${pathname}`} className={styles.imageWrapper}>
+                <Image
+                  src={a.imageSrc}
+                  alt={`Version ${a.version} of my personal site`}
+                  objectFit="cover"
+                  fill={true}
+                />
+              </a>
+              <p>{a.summary}</p>
+            </div>
+          ))}
         </div>
+        <b>
+          <Link href="/archive">Learn more</Link> about previous iterations of this site, or{' '}
+          <Link href="/">return home</Link>{' '}
+        </b>
       </>
     </>
   );

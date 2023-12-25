@@ -14,7 +14,6 @@
 
 .site {
     display: flex;
-    gap: 20px;
     flex-direction: column;
 }
 
@@ -23,6 +22,7 @@
     overflow: hidden;
     aspect-ratio: 1.6;
     position: relative;
+    margin: 20px 0;
 }
 
 /* Phone Landscape/Tablet Portrait */
