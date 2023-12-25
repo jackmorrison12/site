@@ -4,6 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 import { themes } from '../theme';
 import { generateLegacyTheme, generateTheme } from './generateTheme';
 
+/*
+  CSS Reset - Based on following blog post:
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
 export const GlobalStyle = createGlobalStyle`
     *,
     *::before,
@@ -79,7 +83,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        color: var(--accentText);
+        color: var(--colours_primary_default);
         text-decoration-line: none;
     }
 
