@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { Job } from './jobs.types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const PATH = 'content/jobs';
+const PATH = join(process.cwd(), 'content/jobs');
 const FILE_EXTN = '.mdx';
 
 function getJobFilePaths(): string[] {

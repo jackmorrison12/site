@@ -6,14 +6,19 @@ import BackLink from '../../../components/shared/BackLink/BackLink';
 import { mdxOverrides } from '../../../components/shared/MdxOverrides/MdxOverrides';
 import { getProject, getProjectSlugs } from '../../../content-access/projects/projects';
 import Image from 'next/legacy/image';
+import { notFound } from 'next/navigation';
 
 export const generateStaticParams = getProjectSlugs;
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
 
-  const project = await getProject(slug);
-
+  let project = undefined;
+  try {
+    project = await getProject(slug);
+  } catch {
+    return notFound();
+  }
   const { base64: heroOptimised, img: heroImg } = await getPlaiceholder(project.frontmatter.heroImg, { size: 10 });
   const { base64: bannerOptimised, img: bannerImg } = await getPlaiceholder(project.frontmatter.bannerImg, {
     size: 10,

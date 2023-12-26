@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { getTag, getTagSlugs } from '../../../content-access/tags/tags';
 import Link from 'next/link';
 
@@ -6,7 +7,16 @@ export const generateStaticParams = getTagSlugs;
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
 
-  const tag = await getTag(slug);
+  let tag = undefined;
+  try {
+    tag = await getTag(slug);
+  } catch {
+    return notFound();
+  }
+
+  if (!tag.tag) {
+    return notFound();
+  }
 
   return (
     <>

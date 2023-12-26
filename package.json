@@ -35,6 +35,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-grid-heatmap": "git+https://github.com/jackmorrison12/react-grid-heatmap.git",
+    "react-query": "^3.39.3",
     "react-tweet": "^3.0.3",
     "sass": "^1.54.4",
     "server-only": "^0.0.1",

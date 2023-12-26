@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { Education } from './education.types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const PATH = 'content/education';
+const PATH = join(process.cwd(), 'content/education');
 const FILE_EXTN = '.mdx';
 
 function getEducationFilePaths(): string[] {

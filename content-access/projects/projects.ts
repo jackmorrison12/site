@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { Project } from './projects.types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const PATH = 'content/projects';
+const PATH = join(process.cwd(), 'content/projects');
 const FILE_EXTN = '.mdx';
 
 function getProjectFilePaths(): string[] {
