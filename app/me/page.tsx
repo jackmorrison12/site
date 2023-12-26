@@ -67,11 +67,14 @@ export default async function Page() {
             <p className={styles.overlayContent}>I graduated from Imperial in 2021!</p>
           </div>
         </Link>
-        <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}>
+        {/* TODO: Add back once OS page is ready */}
+        {/* <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}> */}
+        <div className={`${styles.box} ${styles.os}`}>
           <p className={styles.bigNumber}>{NUM_OS}</p>
           <p>open source projects contributed to</p>
           <p className={styles.smallFooter}>(so far... 👨‍💻)</p>
-        </Link>
+        </div>
+        {/* </Link> */}
         <a href={socials.twitter.url} className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
         </a>

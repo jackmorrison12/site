@@ -21,9 +21,9 @@ export const headerLinks: HeaderLink[] = [
     emoji: '🛠',
     url: '/projects',
   },
-  {
-    name: 'Feed',
-    emoji: '🔴',
-    url: '/feed',
-  },
+  // {
+  //   name: 'Feed',
+  //   emoji: '🔴',
+  //   url: '/feed',
+  // },
 ];

@@ -52,13 +52,13 @@
 /* Tablet Landscape */
 @media (min-width: 62em) {
   .nav {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 /* Laptop/Desktop */
 @media (min-width: 75em) {
   .nav {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
