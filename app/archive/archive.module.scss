@@ -29,7 +29,7 @@
 @media (min-width: 48em) {
 
     .sitesWrapper {
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 1fr;
     }
 
 }
@@ -38,7 +38,7 @@
 @media (min-width: 62em) {
 
     .sitesWrapper {
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
 }

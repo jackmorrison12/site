@@ -61,37 +61,30 @@ export default function NotFound() {
   return (
     <>
       <Title value="404" offset="-865.96" bgOverride="NOTFOUND" />
-      <>
-        <h1>
-          <Link href={pathname}>{pathname}</Link> isn&apos;t available here, but it did exist on a previous version of
-          my site...
-        </h1>
-        <div className={styles.sitesWrapper}>
-          {results.map((a) => (
-            <div key={a.version} className={styles.site}>
-              <h2>
-                <a
-                  href={`https://v${a.version}.jackmorrison.xyz${pathname}`}
-                >{`v${a.version}.jackmorrison.xyz${pathname}`}</a>
-              </h2>
-              <h3>{a.date}</h3>
-              <a href={`https://v${a.version}.jackmorrison.xyz${pathname}`} className={styles.imageWrapper}>
-                <Image
-                  src={a.imageSrc}
-                  alt={`Version ${a.version} of my personal site`}
-                  objectFit="cover"
-                  fill={true}
-                />
-              </a>
-              <p>{a.summary}</p>
-            </div>
-          ))}
-        </div>
-        <b>
-          <Link href="/archive">Learn more</Link> about previous iterations of this site, or{' '}
-          <Link href="/">return home</Link>{' '}
-        </b>
-      </>
+      <h1>
+        <Link href={pathname}>{pathname}</Link> isn&apos;t available here, but it did exist on a previous version of my
+        site...
+      </h1>
+      <div className={styles.sitesWrapper}>
+        {results.map((a) => (
+          <div key={a.version} className={styles.site}>
+            <h2>
+              <a
+                href={`https://v${a.version}.jackmorrison.xyz${pathname}`}
+              >{`v${a.version}.jackmorrison.xyz${pathname}`}</a>
+            </h2>
+            <h3>{a.date}</h3>
+            <a href={`https://v${a.version}.jackmorrison.xyz${pathname}`} className={styles.imageWrapper}>
+              <Image src={a.imageSrc} alt={`Version ${a.version} of my personal site`} objectFit="cover" fill={true} />
+            </a>
+            <p>{a.summary}</p>
+          </div>
+        ))}
+      </div>
+      <b>
+        <Link href="/archive">Learn more</Link> about previous iterations of this site, or{' '}
+        <Link href="/">return home</Link>{' '}
+      </b>
     </>
   );
 }
