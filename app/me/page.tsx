@@ -99,7 +99,10 @@ export default async function Page() {
             started throwing myself out of planes for fun! 🪂
           </p>
           <br />
-          <p>Explore the widgets around here for more info!</p>
+          <p>
+            Explore the widgets around here for more info!{' '}
+            <span className={styles.smallFooter}>(hint: some of them are clickable)</span>
+          </p>
         </div>
         <a href={socials.lastfm.url} className={`${styles.icon} ${styles.lastfm}`}>
           <LastFmIcon />
