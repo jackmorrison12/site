@@ -36,17 +36,17 @@ const Footer = () => (
         <h4>Popular</h4>
         {/* Generate these from analytics on build*/}
         <div className={styles.linksWrapper}>
-          <Link href="/" passHref className={styles.link}>
-            <p>Live</p>
+          <Link href="/cv" passHref className={styles.link}>
+            <p>CV</p>
           </Link>
-          <Link href="/" passHref className={styles.link}>
-            <p>Long Article Title 1</p>
+          <Link href="/projects/osti" passHref className={styles.link}>
+            <p>Osti</p>
           </Link>
-          <Link href="/" passHref className={styles.link}>
-            <p>Something else people seem to like</p>
+          <Link href="/projects/canvas" passHref className={styles.link}>
+            <p>Canvas</p>
           </Link>
-          <Link href="/" passHref className={styles.link}>
-            <p>Cool project I worked on</p>
+          <Link href="/me/timeline" passHref className={styles.link}>
+            <p>Timeline</p>
           </Link>
         </div>
       </div>
