@@ -30,7 +30,7 @@ export default async function Page() {
         </div>
         <div className={styles.introText}>
           <h1>
-            Hey 👋 I&apos;m <span className={styles.textHighlight}>Jack</span>
+            Hey 👋 I&apos;m <Link href="/me">Jack</Link>
           </h1>
           <h2>A software engineer @ Bloomberg</h2>
         </div>
