@@ -52,6 +52,10 @@ export const DoubleImg = ({
   </div>
 );
 
-export const AOverride = ({ children }: { children?: ReactNode }) => <a className={styles.a}>{children}</a>;
+export const AOverride = ({ children, ...rest }: { children?: ReactNode }) => (
+  <a {...rest} className={styles.a}>
+    {children}
+  </a>
+);
 
 export const mdxOverrides = { h2: H2Override, ImgWithCaption, DoubleImg, Accent, Footnote, p: POverride, a: AOverride };

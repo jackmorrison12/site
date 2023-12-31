@@ -24,9 +24,6 @@ const Footer = () => (
           <Link href="/tools" passHref className={styles.link}>
             <p>Tools Used</p>
           </Link>
-          <Link href="/fair-use" passHref className={styles.link}>
-            <p>Fair Use Policy</p>
-          </Link>
           <Link href="/archive" passHref className={styles.link}>
             <p>Site Archive</p>
           </Link>
