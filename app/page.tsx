@@ -2,7 +2,7 @@ import avatar from 'public/img/homepage_avatar.jpeg';
 import Image from 'next/image';
 import styles from './home.module.scss';
 import Link from 'next/link';
-import { BloombergLogo, ImperialLogo } from 'components/Logos';
+import { BloombergLogo, ImperialLogo, TwitterIcon } from 'components/Logos';
 import { Pin } from 'components/icons/Pin';
 import { getProjects } from 'content-access/projects/projects';
 import { FT_IN_MARATHON, NUM_SKYDIVES } from 'content/about-me';
@@ -53,17 +53,56 @@ export default async function Page() {
           </div>
           <div id={styles.cloud}></div>
         </div>
-        <Link href={'/me'} className={`${styles.aboutMore} ${styles.clickable}`}>
-          <div>Want to know more?</div>
-          <div>➤</div>
-        </Link>
       </div>
       <div className={styles.recent}>
         <h2 className={styles.sectionTitle}>Recent Updates</h2>
-        <div className={`${styles.card} ${styles.clickable}`}>Recent tweet/retweet</div>
-        <div className={`${styles.card} ${styles.clickable}`}>Write an article about</div>
-        <div className={`${styles.card} ${styles.clickable}`}>Made x commits this month</div>
-        <div className={`${styles.card} ${styles.clickable}`}>Listened to x songs today</div>
+        <div className={`${styles.card}`}>
+          <blockquote className="twitter-tweet" data-theme="dark">
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ minWidth: '1rem', paddingTop: '4px' }}>
+                <TwitterIcon />
+              </div>
+              <p lang="en" dir="ltr">
+                2nd year attending{' '}
+                <a href="https://twitter.com/hashtag/ReactAdvanced?src=hash&amp;ref_src=twsrc%5Etfw">#ReactAdvanced</a>{' '}
+                - lots of interesting talks so far &amp; can’t wait to play around with some of the tools &amp;
+                technologies mentioned! <a href="https://t.co/SJGG2NOYEI">pic.twitter.com/SJGG2NOYEI</a>
+              </p>
+            </div>
+            &mdash; Jack Morrison (@jsm_99){' '}
+            <a href="https://twitter.com/jsm_99/status/1715394631817474337?ref_src=twsrc%5Etfw">October 20, 2023</a>
+          </blockquote>
+        </div>
+        <div className={`${styles.card}`}>
+          <blockquote>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ minWidth: '1rem', paddingTop: '4px' }}>
+                <TwitterIcon />
+              </div>
+              <p lang="en" dir="ltr">
+                I found this a super useful/easy to understand intro into the (simplified) implementation of RSCs -
+                would defo recommend a read if you use React!{' '}
+                <blockquote>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ minWidth: '1rem', paddingTop: '4px' }}>
+                      <TwitterIcon />
+                    </div>
+                    <p lang="en" dir="ltr">
+                      RSC from Scratch. Part 1: Server Components{' '}
+                      <a href="https://github.com/reactwg/server-components/discussions/5">
+                        https://github.com/reactwg/server-components/discussions/5
+                      </a>
+                    </p>
+                  </div>
+                  &mdash; Dan Abramov (@dan_abramov){' '}
+                  <a href="https://twitter.com/dan_abramov/status/1664681506218864640">June 2, 2023</a>
+                </blockquote>
+              </p>
+            </div>
+            &mdash; Jack Morrison (@jsm_99){' '}
+            <a href="https://twitter.com/jsm_99/status/1664689369867796480?ref_src=twsrc%5Etfw">June 2, 2023</a>
+          </blockquote>
+        </div>
       </div>
       <div className={styles.pinned}>
         <h2 className={styles.sectionTitle}>Pinned</h2>
