@@ -46,12 +46,11 @@
     column-gap: 5px;
     row-gap: 5px;
     grid-template-columns: repeat(1, auto);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
     grid-template-areas:
         "title     title"
         "imperial  bbg"
-        "skydiving skydiving"
-        "more      more";
+        "skydiving skydiving";
     height: auto;
 }
 
@@ -156,19 +155,6 @@
     border-radius: 50%;
     top: -18px;
     right: 8px;
-}
-
-.aboutMore {
-    grid-area: more;
-    background-color: var(--colours_primary_background_default);
-    border-radius: 10px;
-    padding: 10px;
-    color: var(--greyTextContrast);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: var(--fontSizes_large)
 }
 
 @keyframes move {
