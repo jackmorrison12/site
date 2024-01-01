@@ -1,5 +1,7 @@
 'use client';
 
+import { event } from 'nextjs-google-analytics';
+
 import { Education } from 'content-access/education/education.types';
 import { Job } from 'content-access/jobs/jobs.types';
 import { FC, useEffect, useState } from 'react';
@@ -19,10 +21,24 @@ export const Timeline: FC<{
 
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const flipExpanded = () => {
+    event('timeline_show_more', {
+      category: 'button_click',
+      label: items[0].type,
+    });
+    setIsExpanded((prev) => !prev);
+  };
+
   const trimmedItems = isExpanded ? items : items.slice(0, itemstoDisplay);
 
   const flipItem = (index: number) =>
-    setIsOpen((prevState) => prevState.map((item, idx) => (idx === index ? !item : item)));
+    setIsOpen((prevState) => {
+      event('flip_timeline_item', {
+        category: 'expand_summary',
+        label: trimmedItems[index].slug,
+      });
+      return prevState.map((item, idx) => (idx === index ? !item : item));
+    });
 
   // This is a bit of a hack to get the scrolling working after opening a section
   const [isInitial, setIsInitial] = useState(false);
@@ -113,7 +129,7 @@ export const Timeline: FC<{
             )}
           </div>
         ))}
-        <button className={styles.button} onClick={() => setIsExpanded((prev) => !prev)}>
+        <button className={styles.button} onClick={flipExpanded}>
           Show {isExpanded ? 'Less' : 'More'}
         </button>
       </div>

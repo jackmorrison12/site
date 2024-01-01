@@ -14,3 +14,8 @@ export default async function Page() {
     </>
   );
 }
+
+export const metadata = {
+  title: 'LastFM',
+  description: 'My recent LastFM activity',
+};

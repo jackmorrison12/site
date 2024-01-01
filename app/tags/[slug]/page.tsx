@@ -29,3 +29,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
     </>
   );
 }
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  try {
+    const tag = await getTag(params.slug);
+    return {
+      title: tag.tag,
+      description: `Items tagged with ${tag.tag}`,
+    };
+  } catch {
+    return {
+      title: 'Unknown tag',
+      description: 'Unknown tag',
+    };
+  }
+}
