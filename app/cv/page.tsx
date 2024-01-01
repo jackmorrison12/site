@@ -4,6 +4,7 @@ import { getProjects } from '../../content-access/projects/projects';
 import styles from './cv.module.scss';
 import { SaveFile } from './SaveFile';
 import { ScrollLeftRight } from './ScrollLeftRight';
+import { ClientEvent } from 'utils/analytics/ClientEvent';
 
 export default async function Page() {
   const projects = await getProjects().filter((p) => p.onCV);
@@ -22,12 +23,14 @@ export default async function Page() {
       <div className={styles.overflowNotification}>
         <p>Looks like my CV is a bit big for this screen!</p>
         <div className={styles.iconWrapper}>
-          <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
-            <button className={styles.downloadButtonMobile}>
-              <SaveFile />
-            </button>
-            <p className={styles.label}>download</p>
-          </a>
+          <ClientEvent action="download_cv" category="button_click" label="mobile">
+            <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
+              <button className={styles.downloadButtonMobile}>
+                <SaveFile />
+              </button>
+              <p className={styles.label}>download</p>
+            </a>
+          </ClientEvent>
           <p>or</p>
           <div className={styles.labelWrapper}>
             <div className={styles.scrollButtonMobile}>
@@ -39,11 +42,13 @@ export default async function Page() {
       </div>
       <div className={styles.overflowHandler}>
         <div className={styles.buttonWrapper}>
-          <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
-            <button className={`${styles.downloadButton} ${styles.mobileHide}`}>
-              <SaveFile />
-            </button>
-          </a>
+          <ClientEvent action="download_cv" category="button_click" label="desktop">
+            <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf">
+              <button className={`${styles.downloadButton} ${styles.mobileHide}`}>
+                <SaveFile />
+              </button>
+            </a>
+          </ClientEvent>
         </div>
         <div className={styles.cvWrapper}>
           <div className={styles.summaryWrapper}>
