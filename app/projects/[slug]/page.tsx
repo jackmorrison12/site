@@ -51,3 +51,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
     </>
   );
 }
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  try {
+    const project = await getProject(params.slug);
+    return {
+      title: project.frontmatter.title,
+      description: project.frontmatter.description,
+    };
+  } catch {
+    return {
+      title: 'Unknown project',
+      description: 'Unknown project',
+    };
+  }
+}

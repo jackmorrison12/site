@@ -5,6 +5,7 @@ import { themes } from '../utils/theme';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import { getThemeTemplate } from '../utils/theme/themeTemplate';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Analytics from 'utils/analytics/GoogleAnalytics';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
@@ -16,7 +17,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       themes={themes.map((t) => t.themeName)}
     >
       <SCThemeProvider theme={getThemeTemplate()}>
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <Analytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''} />
+          {children}
+        </QueryClientProvider>
       </SCThemeProvider>
     </ThemeProvider>
   );

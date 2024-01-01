@@ -40,3 +40,8 @@ export default async function Page() {
     </>
   );
 }
+
+export const metadata = {
+  title: 'GitHub',
+  description: 'My recent GitHub activity',
+};
