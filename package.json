@@ -17,6 +17,7 @@
     "@radix-ui/colors": "^0.1.8",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
+    "@vercel/postgres": "^0.5.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "eslint": "^8.5.0",

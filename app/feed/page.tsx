@@ -7,6 +7,7 @@ import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
 import { GitHubIcon, LastFmIcon } from 'components/Logos';
+import { getTweets } from 'data-access/twitter/database/getTweet';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
@@ -19,6 +20,10 @@ export default async function Page() {
     recenttracks = { track: [] };
   }
 
+  const { tweets } = await getTweets();
+
+  console.log(tweets);
+
   return (
     <>
       <Title value="FEED" offset="-310.76" />
@@ -26,7 +31,12 @@ export default async function Page() {
         <div className={styles.main}>
           <h1>Recent Activity</h1>
           <ul>
-            <li>item</li>
+            {tweets.map((t) => (
+              <li key={t.tweet_id}>
+                {t.tweet_time_override ? t.tweet_time.toString() : t.created_on.toString()}:<br />
+                {t.body}
+              </li>
+            ))}
           </ul>
         </div>
         <div className={styles.sidebar}>
