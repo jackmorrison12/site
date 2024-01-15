@@ -1,4 +1,5 @@
 'use server';
+import { auth } from 'auth';
 import { insertTweet } from 'data-access/twitter/database/addTweet';
 import { z } from 'zod';
 
@@ -62,6 +63,11 @@ export async function addTweet({
   message?: string;
   tweetTimeOverride?: boolean;
 }) {
+  const res = await auth();
+  if (res?.user?.email !== 'jack1morrison@sky.com') {
+    return { error: 'You are not permissioned to do this. Your details have been noted', details: res?.user };
+  }
+
   const tweetData = await getTweetInfo(tweetId);
   let quotedTweetData = undefined;
   if (quotedTweetId) {

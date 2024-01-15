@@ -1,10 +1,13 @@
 'use client';
 
 import { addTweet } from 'data-access/twitter/api/addTweet';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 
 export default function Page() {
+  const session = useSession();
+
   const [tweetId, setTweetId] = useState<string | undefined>(undefined);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [quotedTweetId, setQuotedTweetId] = useState<string | undefined>(undefined);
@@ -23,9 +26,14 @@ export default function Page() {
     },
   });
 
+  if (session.data?.user?.email !== 'jack1morrison@sky.com') {
+    return <button onClick={() => signIn('github')}>Sign in</button>;
+  }
+
   return (
     <>
       <h1>Admin Dashboard</h1>
+      <button onClick={() => signOut()}>Sign out</button>
       <h2>Add a Tweet</h2>
       <div style={{ display: 'grid', gridTemplateColumns: '20% 40%', gap: '20px' }}>
         <label id="tweetId">Tweet ID/URL</label>
