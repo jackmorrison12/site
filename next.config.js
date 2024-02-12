@@ -5,6 +5,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
     mdxRs: true,
+    serverActions: true,
   },
   compiler: {
     // Enables the styled-components SWC transform
@@ -15,6 +16,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lastfm.freetls.fastly.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
       },
     ],
   },
