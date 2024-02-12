@@ -38,6 +38,33 @@ export default async function Page() {
               </li>
             ))}
           </ul>
+          <div style={{ padding: '40px' }}></div>
+          {tweets.map((t) => (
+            <div key={t.tweet_id}>
+              {t.message && <div>{t.message}</div>}
+              <div>
+                <span dangerouslySetInnerHTML={{ __html: t.enrichedBody }} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Image
+                  src={t.user_profile_image}
+                  alt={`Profile image for ${t.user_screen_name}`}
+                  width={40}
+                  height={40}
+                  style={{ borderRadius: '10px' }}
+                />
+                {t.user_name} (<a href={`https://twitter.com/${t.user_screen_name}`}>@{t.user_screen_name}</a>)
+              </div>
+              <a href={`https://twitter.com/${t.user_screen_name}/status/${t.tweet_id}`}>
+                {t.tweet_time_override ? t.tweet_time.toDateString() : t.created_on.toDateString()}
+              </a>
+              {t.images?.map((i) => (
+                <div key={i} style={{ position: 'relative', width: '100%', paddingBottom: '20%' }}>
+                  <Image src={i} alt={`Image`} objectFit="contain" fill={true} />
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">

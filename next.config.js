@@ -17,6 +17,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lastfm.freetls.fastly.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
+      },
     ],
   },
 };

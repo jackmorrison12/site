@@ -12,13 +12,11 @@ export default function Page() {
   const [message, setMessage] = useState<string | undefined>(undefined);
   const [quotedTweetId, setQuotedTweetId] = useState<string | undefined>(undefined);
   const [tweetTimeOverride, setTweetTimeOverride] = useState<boolean>(false);
+  const [showOnHomescreen, setShowOnHomescreen] = useState<boolean>(false);
 
   const mutation = useMutation({
     mutationFn: async (tweetId: string) => {
-      const res = await addTweet({ tweetId, message, quotedTweetId, tweetTimeOverride });
-      console.log('res');
-      console.log(res);
-      console.log('error' in res);
+      const res = await addTweet({ tweetId, message, quotedTweetId, tweetTimeOverride, showOnHomescreen });
       if ('error' in res) {
         throw new Error(res.error);
       }
@@ -53,6 +51,13 @@ export default function Page() {
           type="checkbox"
           checked={tweetTimeOverride}
           onChange={() => setTweetTimeOverride((prev) => !prev)}
+        />
+        <label id="showOnHomescreen">Show on homescreen?</label>
+        <input
+          name="showOnHomescreen"
+          type="checkbox"
+          checked={showOnHomescreen}
+          onChange={() => setShowOnHomescreen((prev) => !prev)}
         />
         <button
           disabled={!tweetId}

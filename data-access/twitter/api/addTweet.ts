@@ -57,11 +57,13 @@ export async function addTweet({
   quotedTweetId,
   message,
   tweetTimeOverride,
+  showOnHomescreen,
 }: {
   tweetId: string;
   quotedTweetId?: string;
   message?: string;
   tweetTimeOverride?: boolean;
+  showOnHomescreen?: boolean;
 }) {
   const res = await auth();
   if (res?.user?.email !== 'jack1morrison@sky.com') {
@@ -91,6 +93,7 @@ export async function addTweet({
     mediaDetails: JSON.stringify(tweetData.mediaDetails),
     quotedTweetId,
     tweetTimeOverride,
+    showOnHomescreen,
   });
 
   let quotedResult = undefined;
