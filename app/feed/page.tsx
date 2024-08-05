@@ -7,6 +7,7 @@ import { useHeatmap } from './Heatmap.hooks';
 import styles from './feed.module.scss';
 import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
 import { GitHubIcon, LastFmIcon } from 'components/Logos';
+import { getTweets } from 'data-access/twitter/database/getTweet';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
@@ -19,15 +20,43 @@ export default async function Page() {
     recenttracks = { track: [] };
   }
 
+  const { tweets } = await getTweets();
+
   return (
     <>
       <Title value="FEED" offset="-310.76" />
       <div className={styles.wrapper}>
         <div className={styles.main}>
           <h1>Recent Activity</h1>
-          <ul>
-            <li>item</li>
-          </ul>
+          <div></div>
+          {tweets.map((t) => (
+            <div key={t.tweet_id}>
+              {t.message && <div>{t.message}</div>}
+              <div>
+                <span dangerouslySetInnerHTML={{ __html: t.enrichedBody }} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Image
+                  src={t.user_profile_image}
+                  alt={`Profile image for ${t.user_screen_name}`}
+                  width={40}
+                  height={40}
+                  style={{ borderRadius: '10px' }}
+                />
+                {t.user_name} (<a href={`https://twitter.com/${t.user_screen_name}`}>@{t.user_screen_name}</a>)
+              </div>
+              <a href={`https://twitter.com/${t.user_screen_name}/status/${t.tweet_id}`}>
+                {t.tweet_time_override ? t.tweet_time.toDateString() : t.created_on.toDateString()}
+              </a>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {t.images?.map((i) => (
+                  <div key={i} style={{ position: 'relative', padding: '10%', width: '100%' }}>
+                    <Image src={i} alt={`Image`} objectFit="contain" fill={true} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
         <div className={styles.sidebar}>
           <Link passHref href="/feed/github">

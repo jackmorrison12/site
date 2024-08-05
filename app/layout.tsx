@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Layout } from '../components/Layout';
 import { GlobalStyle } from '../utils/styles/globalStyles';
 import { Providers } from './providers';
@@ -32,6 +32,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
+export const viewport: Viewport = {
+  themeColor: 'rgb(22, 22, 22)',
+  colorScheme: 'dark light',
+  initialScale: 1,
+  width: 'device-width',
+};
+
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
@@ -41,10 +48,8 @@ export const metadata: Metadata = {
   description: APP_DESCRIPTION,
   authors: { name: 'Jack Morrison', url: 'https://jackmorrison.xyz' },
   keywords: ['Software Engineer', 'Imperial College London', 'Bloomberg'],
-  viewport: { initialScale: 1, width: 'device-width' },
   other: { charSet: 'utf-8' },
   manifest: '/manifest.json',
-  themeColor: 'rgb(22, 22, 22)',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
