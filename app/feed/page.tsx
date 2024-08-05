@@ -22,23 +22,13 @@ export default async function Page() {
 
   const { tweets } = await getTweets();
 
-  console.log(tweets);
-
   return (
     <>
       <Title value="FEED" offset="-310.76" />
       <div className={styles.wrapper}>
         <div className={styles.main}>
           <h1>Recent Activity</h1>
-          <ul>
-            {tweets.map((t) => (
-              <li key={t.tweet_id}>
-                {t.tweet_time_override ? t.tweet_time.toString() : t.created_on.toString()}:<br />
-                {t.body}
-              </li>
-            ))}
-          </ul>
-          <div style={{ padding: '40px' }}></div>
+          <div></div>
           {tweets.map((t) => (
             <div key={t.tweet_id}>
               {t.message && <div>{t.message}</div>}
@@ -58,11 +48,13 @@ export default async function Page() {
               <a href={`https://twitter.com/${t.user_screen_name}/status/${t.tweet_id}`}>
                 {t.tweet_time_override ? t.tweet_time.toDateString() : t.created_on.toDateString()}
               </a>
-              {t.images?.map((i) => (
-                <div key={i} style={{ position: 'relative', width: '100%', paddingBottom: '20%' }}>
-                  <Image src={i} alt={`Image`} objectFit="contain" fill={true} />
-                </div>
-              ))}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {t.images?.map((i) => (
+                  <div key={i} style={{ position: 'relative', padding: '10%', width: '100%' }}>
+                    <Image src={i} alt={`Image`} objectFit="contain" fill={true} />
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
