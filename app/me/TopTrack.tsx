@@ -18,7 +18,7 @@ const TopTrackAsync = async () => {
   let topTrack = undefined;
   try {
     topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
-  } catch (e) {
+  } catch {
     return (
       <Link href="/feed/lastfm" className={`${styles.music} ${styles.clickable} ${styles.musicLoader}`}>
         <div>Music</div>

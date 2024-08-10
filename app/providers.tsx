@@ -7,8 +7,9 @@ import { getThemeTemplate } from '../utils/theme/themeTemplate';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Analytics from 'utils/analytics/GoogleAnalytics';
 import { SessionProvider } from 'next-auth/react';
+import { ReactNode } from 'react';
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
 
   return (

@@ -1,34 +1,16 @@
-import { sql } from '@vercel/postgres';
-
-const nullify = (value?: string) => (value && value !== 'NULL' ? value : undefined);
-
-type TweetResponse = {
-  tweet_id: string;
-  created_on: Date;
-  message?: string;
-  user_name: string;
-  user_profile_image: string;
-  user_screen_name: string;
-  entities?: string;
-  parent_tweet_id?: string;
-  media_details?: string;
-  tweet_time: Date;
-  body: string;
-  quoted_tweet_id?: string;
-  tweet_time_override: boolean;
-  show_on_homescreen: boolean;
-};
+import { desc } from 'drizzle-orm';
+import { db } from 'drizzle/db';
+import { tweets } from 'drizzle/schema';
 
 const insertAt = (str: string, sub: string, pos: number) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
 
 export const getTweets = async () => {
-  const { rows } = (await sql`SELECT * FROM tweets ORDER BY created_on DESC LIMIT 10`) as { rows: TweetResponse[] };
+  const rows = await db.query.tweets.findMany({ orderBy: [desc(tweets.createdOn)] });
 
   const enrichedTweets = rows.map((r) => {
-    const hashtags =
-      r.entities && nullify(r.entities)
-        ? (JSON.parse(r.entities) as { hashtags: Array<{ indices: [number, number]; text: string }> })
-        : undefined;
+    const hashtags = r.entities
+      ? (JSON.parse(r.entities) as { hashtags: Array<{ indices: [number, number]; text: string }> })
+      : undefined;
 
     let enrichedBody = r.body;
     let counter = 0;
@@ -40,13 +22,12 @@ export const getTweets = async () => {
       counter += 4;
     });
 
-    const images =
-      r.media_details && nullify(r.media_details)
-        ? (JSON.parse(r.media_details) as Array<{ media_url_https: string; type: string }>)
-            .filter((m) => m.type === 'photo')
-            .map((i) => i.media_url_https)
-        : undefined;
-    return { ...r, images, hashtags, enrichedBody, message: nullify(r.message) };
+    const images = r.mediaDetails
+      ? (JSON.parse(r.mediaDetails) as Array<{ media_url_https: string; type: string }>)
+          .filter((m) => m.type === 'photo')
+          .map((i) => i.media_url_https)
+      : undefined;
+    return { ...r, images, hashtags, enrichedBody };
   });
 
   return { tweets: enrichedTweets };

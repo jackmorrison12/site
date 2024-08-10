@@ -1,4 +1,5 @@
-import { sql } from '@vercel/postgres';
+import { db } from 'drizzle/db';
+import { tweets } from 'drizzle/schema';
 
 export const insertTweet = async ({
   id,
@@ -29,12 +30,19 @@ export const insertTweet = async ({
   tweetTimeOverride?: boolean;
   showOnHomescreen?: boolean;
 }) =>
-  await sql`INSERT INTO tweets 
-  (tweet_id, created_on, message, user_name, user_profile_image, user_screen_name, entities, parent_tweet_id, media_details, tweet_time, body, quoted_tweet_id, tweet_time_override, show_on_homescreen) 
-  VALUES (${id}, NOW(), ${message ?? 'NULL'}, ${userName}, ${userProfileImage}, ${userScreenName}, ${
-    entities ?? 'NULL'
-  }, ${parentTweetId ?? 'NULL'}, ${
-    mediaDetails ?? 'NULL'
-  }, to_timestamp(${tweetTime.valueOf()} / 1000.0), ${tweetBody} , ${quotedTweetId ?? 'NULL'}, ${
-    tweetTimeOverride ?? false
-  }, ${showOnHomescreen ?? false})`;
+  await db.insert(tweets).values({
+    tweetId: BigInt(id),
+    createdOn: new Date(),
+    message,
+    userName,
+    userProfileImage,
+    userScreenName,
+    entities,
+    parentTweetId,
+    mediaDetails,
+    tweetTime,
+    body: tweetBody,
+    quotedTweetId,
+    tweetTimeOverride,
+    showOnHomescreen,
+  });

@@ -1,9 +1,9 @@
 'use client';
 
 import { PDFExport as KendoPDFExport } from '@progress/kendo-react-pdf';
-import { useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 
-export const PDFExport = ({ children }: { children: React.ReactNode }) => {
+export const PDFExport = ({ children }: { children: ReactNode }) => {
   const cvRef = useRef<KendoPDFExport>(null);
   const downloadCV = () => {
     if (cvRef.current) {
