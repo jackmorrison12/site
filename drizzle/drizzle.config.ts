@@ -5,7 +5,8 @@ export default defineConfig({
   schema: './drizzle/schema.ts',
   dialect: 'postgresql',
   dbCredentials: {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    url: process.env.POSTGRES_URL!,
+    url:
+      process.env.POSTGRES_URL ??
+      'postgres://default:d8ZmBa2MpLrO@ep-still-snowflake-98407531-pooler.eu-central-1.postgres.vercel-storage.com/verceldb',
   },
 });
