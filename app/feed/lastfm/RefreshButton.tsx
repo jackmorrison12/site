@@ -16,7 +16,7 @@ export const RefreshButton = () => {
     : mutation.isError
     ? 'Error refreshing'
     : mutation.isSuccess
-    ? 'Refreshed'
+    ? `Refreshed ${mutation.data.total} songs`
     : 'Refresh';
 
   return (

@@ -10,7 +10,8 @@ export const updateLastFmData = async () => {
   const lastListen = (await db.select({ time: listens.time }).from(listens).orderBy(desc(listens.time)).limit(1))[0]
     .time;
 
-  const { totalPages, total } = (await getRecentTracks({ page: 1, from: lastListen })).recenttracks['@attr'];
+  const { totalPages, total } = (await getRecentTracks({ page: 1, from: new Date(lastListen.getTime() + 1000) }))
+    .recenttracks['@attr'];
 
   let pageNumber = 1;
 
