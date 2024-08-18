@@ -21,7 +21,7 @@
   text-decoration-color: var(--greyTextContrast);
 }
 
-.footer ul>li {
+.footer ul > li {
   font-size: small;
 }
 
@@ -40,7 +40,6 @@
 
 .socials {
   grid-area: socials;
-
 }
 
 .iconGrid {
@@ -52,8 +51,8 @@
 .icon {
   width: 40px;
   cursor: pointer;
-  transform: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
+  transform: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .icon:hover {
@@ -68,7 +67,6 @@
 .useful {
   grid-area: useful;
 }
-
 
 .linksWrapper {
   display: flex;

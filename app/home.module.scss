@@ -1,15 +1,15 @@
 .layout {
-    display: grid;
-    column-gap: 10px;
-    row-gap: 20px;
-    justify-content: center;
-    grid-template-columns: minmax(1px, 1fr);
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-        "intro"
-        "about"
-        "pinned"
-        "recent";
+  display: grid;
+  column-gap: 10px;
+  row-gap: 20px;
+  justify-content: center;
+  grid-template-columns: minmax(1px, 1fr);
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    'intro'
+    'about'
+    'pinned'
+    'recent';
 }
 
 /* -------------------------------------------------------------------------- */
@@ -17,23 +17,23 @@
 /* -------------------------------------------------------------------------- */
 
 .sectionTitle {
-    padding: 10px;
+  padding: 10px;
 }
 
 .card {
-    background-color: var(--colours_primary_background_default);
-    border-radius: 10px;
-    padding: 10px;
+  background-color: var(--colours_primary_background_default);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .clickable {
-    cursor: pointer;
-    transform: all .3s ease-in-out, color 0s;
-    transition: all .3s ease-in-out, color 0s;
+  cursor: pointer;
+  transform: all 0.3s ease-in-out, color 0s;
+  transition: all 0.3s ease-in-out, color 0s;
 }
 
 .clickable:hover {
-    transform: scale(0.97)
+  transform: scale(0.97);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -41,147 +41,146 @@
 /* -------------------------------------------------------------------------- */
 
 .aboutLayout {
-    grid-area: about;
-    display: grid;
-    column-gap: 5px;
-    row-gap: 5px;
-    grid-template-columns: repeat(1, auto);
-    grid-template-rows: repeat(3, auto);
-    grid-template-areas:
-        "title     title"
-        "imperial  bbg"
-        "skydiving skydiving";
-    height: auto;
+  grid-area: about;
+  display: grid;
+  column-gap: 5px;
+  row-gap: 5px;
+  grid-template-columns: repeat(1, auto);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    'title     title'
+    'imperial  bbg'
+    'skydiving skydiving';
+  height: auto;
 }
 
 .aboutTitle {
-    padding: 10px;
-    grid-area: title;
-    display: none;
+  padding: 10px;
+  grid-area: title;
+  display: none;
 }
 
 .logo {
-    display: flex;
-    padding: clamp(1px, 20%, 30px);
-    border-radius: 10px;
+  display: flex;
+  padding: clamp(1px, 20%, 30px);
+  border-radius: 10px;
 
-    svg {
-        width: 100%;
-    }
+  svg {
+    width: 100%;
+  }
 }
 
 .imperial {
-    grid-area: imperial;
-    background-color: #EBEEEE;
+  grid-area: imperial;
+  background-color: #ebeeee;
 }
 
 .bloomberg {
-    grid-area: bbg;
-    background-color: black;
+  grid-area: bbg;
+  background-color: black;
 }
 
 .introLayout {
-    grid-area: intro;
-    display: flex;
-    gap: 20px;
-    padding-top: 10px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  grid-area: intro;
+  display: flex;
+  gap: 20px;
+  padding-top: 10px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .introImage {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 100px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100px;
 }
 
 .introText {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .textHighlight {
-    color: var(--colours_primary_default);
+  color: var(--colours_primary_default);
 }
 
 .skydiving {
-    background: rgba(0, 176, 255, .7);
-    grid-area: skydiving;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  background: rgba(0, 176, 255, 0.7);
+  grid-area: skydiving;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .skydivingText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 #cloud {
-    background: rgba(255, 255, 255);
-    width: 60px;
-    height: 20px;
-    border-radius: 30px;
-    box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
-    animation: move 3s infinite;
+  background: rgba(255, 255, 255);
+  width: 60px;
+  height: 20px;
+  border-radius: 30px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  animation: move 3s infinite;
 }
 
 #cloud:after {
-    content: '';
-    background: rgba(255, 255, 255);
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    top: -10px;
-    left: 10px;
+  content: '';
+  background: rgba(255, 255, 255);
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: -10px;
+  left: 10px;
 }
 
 #cloud:before {
-    content: '';
-    background: rgba(255, 255, 255);
-    position: absolute;
-    width: 34px;
-    height: 30px;
-    border-radius: 50%;
-    top: -18px;
-    right: 8px;
+  content: '';
+  background: rgba(255, 255, 255);
+  position: absolute;
+  width: 34px;
+  height: 30px;
+  border-radius: 50%;
+  top: -18px;
+  right: 8px;
 }
 
 @keyframes move {
-    0% {
-        transform: translatex(0);
-    }
+  0% {
+    transform: translatex(0);
+  }
 
-    50% {
-        transform: translatex(-8px);
-    }
+  50% {
+    transform: translatex(-8px);
+  }
 }
 
 .bigNumber {
-    font-size: var(--fontSizes_xxl);
-    font-weight: var(--fontWeights_thick)
+  font-size: var(--fontSizes_xxl);
+  font-weight: var(--fontWeights_thick);
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Recent                                   */
 /* -------------------------------------------------------------------------- */
 
-
 .recent {
-    grid-area: recent;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  grid-area: recent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -189,56 +188,56 @@
 /* -------------------------------------------------------------------------- */
 
 .pinned {
-    grid-area: pinned;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  grid-area: pinned;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .pinIcon {
-    width: 30px;
-    margin-left: 100%;
-    translate: 0 -20px;
-    height: 0;
+  width: 30px;
+  margin-left: 100%;
+  translate: 0 -20px;
+  height: 0;
 }
 
 .cvWrapper {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .projectWrapper {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: 150px auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 150px auto;
 }
 
 .projectImage {
-    border-radius: 10px;
-    overflow: hidden;
-    width: 150px;
-    height: 150px;
-    margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  margin: auto;
 }
 
 .projectText {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .projectTagWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 0;
 }
 
 .projectTag {
-    border-radius: 5px;
-    padding: 2px 5px;
-    background-color: var(--colours_primary_default);
-    color: var(--colours_legacyGrey_1);
+  border-radius: 5px;
+  padding: 2px 5px;
+  background-color: var(--colours_primary_default);
+  color: var(--colours_legacyGrey_1);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -247,46 +246,41 @@
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
-    .layout {
-        grid-template-columns: repeat(2, minmax(1px, 1fr));
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            "intro  about"
-            "recent pinned";
-    }
+  .layout {
+    grid-template-columns: repeat(2, minmax(1px, 1fr));
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'intro  about'
+      'recent pinned';
+  }
 
-    .introLayout {
-        justify-content: end;
-    }
-
+  .introLayout {
+    justify-content: end;
+  }
 }
 
 /* Tablet Landscape */
 @media (min-width: 62em) {
-    .layout {
-        grid-template-columns: repeat(3, minmax(1px, 1fr));
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            "intro intro  intro"
-            "about recent pinned";
-    }
+  .layout {
+    grid-template-columns: repeat(3, minmax(1px, 1fr));
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'intro intro  intro'
+      'about recent pinned';
+  }
 
-    .introLayout {
-        text-align: left;
-        flex-direction: row;
-        align-items: left;
-        justify-content: start;
+  .introLayout {
+    text-align: left;
+    flex-direction: row;
+    align-items: left;
+    justify-content: start;
+  }
 
-    }
+  .aboutLayout {
+    height: min-content;
+  }
 
-
-    .aboutLayout {
-        height: min-content;
-
-    }
-
-    .aboutTitle {
-        display: block;
-    }
-
+  .aboutTitle {
+    display: block;
+  }
 }

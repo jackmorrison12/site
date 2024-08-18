@@ -1,44 +1,40 @@
 .wrapper {
-    p {
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-    }
+  p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
 }
 
 .sitesWrapper {
-    display: grid;
-    grid-template-columns: auto;
-    gap: 40px;
-    padding-top: 20px;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 40px;
+  padding-top: 20px;
 }
 
 .site {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .imageWrapper {
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 1.6;
-    position: relative;
-    margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1.6;
+  position: relative;
+  margin: 20px 0;
 }
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
-
-    .sitesWrapper {
-        grid-template-columns: 1fr 1fr;
-    }
-
+  .sitesWrapper {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* Tablet Landscape */
 @media (min-width: 62em) {
-
-    .sitesWrapper {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
+  .sitesWrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

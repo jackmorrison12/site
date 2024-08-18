@@ -1,16 +1,16 @@
 {
-    "name": "Jack Morrison",
-    "short_name": "Jack Morrison",
-    "icons": [
-      {
-        "src": "/img/icon.png",
-        "sizes": "702x702",
-        "type": "image/png"
-      }
-    ],
-    "theme_color": "#000000",
-    "background_color": "#000000",
-    "start_url": "/",
-    "display": "standalone",
-    "orientation": "portrait"
-  }
+  "name": "Jack Morrison",
+  "short_name": "Jack Morrison",
+  "icons": [
+    {
+      "src": "/img/icon.png",
+      "sizes": "702x702",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

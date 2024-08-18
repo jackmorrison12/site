@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .overflowHandler {
   overflow-x: auto;
@@ -39,7 +39,7 @@
     width: 100%;
     padding: 5px;
     fill: currentColor;
-    color: var(--colours_primary_text_default)
+    color: var(--colours_primary_text_default);
   }
 }
 
@@ -56,11 +56,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--colours_text_default)
+  color: var(--colours_text_default);
 }
 
 .label {
-  font-size: var(--fontSizes_tiny)
+  font-size: var(--fontSizes_tiny);
 }
 
 .scrollButtonMobile {
@@ -103,7 +103,6 @@
   }
 }
 
-
 .cvWrapper {
   font-family: 'Poppins', sans-serif;
   width: 210mm;
@@ -125,13 +124,13 @@
     padding-left: 20px;
   }
 
-  ul>li {
+  ul > li {
     text-indent: -10px;
     padding-bottom: 2px;
   }
 
-  ul>li:before {
-    content: "- ";
+  ul > li:before {
+    content: '- ';
   }
 
   h2 {
@@ -164,7 +163,7 @@
 
     a {
       color: var(--colours_primary_text_default);
-      font-weight: var(--fontWeights_thick)
+      font-weight: var(--fontWeights_thick);
     }
 
     h1 {
@@ -189,10 +188,9 @@
       padding-bottom: 20px;
     }
 
-    >p {
+    > p {
       padding-bottom: 20px;
     }
-
   }
 
   .mainWrapper {
@@ -221,7 +219,7 @@
       }
 
       b {
-        text-align: right
+        text-align: right;
       }
 
       div {
@@ -246,7 +244,5 @@
         text-align: right;
       }
     }
-
   }
-
 }
