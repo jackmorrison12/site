@@ -1,6 +1,7 @@
 'use client';
 
 import { event } from 'nextjs-google-analytics';
+import { ReactNode } from 'react';
 
 export const ClientEvent = ({
   children,
@@ -8,7 +9,7 @@ export const ClientEvent = ({
   category,
   label,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   action: string;
   category: string;
   label: string;

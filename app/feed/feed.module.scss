@@ -51,17 +51,17 @@
 
 .clickable {
   cursor: pointer;
-  transform: all .3s ease-in-out, color 0s;
-  transition: all .3s ease-in-out, color 0s;
+  transform: all 0.3s ease-in-out, color 0s;
+  transition: all 0.3s ease-in-out, color 0s;
 }
 
 .clickable:hover {
-  transform: scale(0.95)
+  transform: scale(0.95);
 }
 
 .trackWrapper {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
   align-items: center;
 
   .textWrapper {
@@ -76,7 +76,6 @@
       font-weight: var(--fontWeights_thick);
     }
 
-
     .artist {
       margin-top: auto;
       margin-bottom: auto;
@@ -86,7 +85,7 @@
       font-size: var(--fontSizes_small);
     }
 
-    .time{
+    .time {
       margin-top: auto;
       margin-bottom: auto;
       text-overflow: ellipsis;
@@ -97,15 +96,12 @@
   }
 }
 
-
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
-
 }
 
 /* Tablet Landscape */
 @media (min-width: 62em) {
-
   .wrapper {
     display: flex;
     justify-content: space-between;
@@ -132,5 +128,4 @@
   .lastfm {
     display: block;
   }
-
 }

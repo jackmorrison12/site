@@ -61,90 +61,94 @@ export const useGithubTimeline = async () => {
             )}
           </span>
         );
-      case 'DeleteEvent': {
-        switch (e.payload.ref_type) {
-          case 'repository':
-            return e.public ? (
-              <span>
-                Deleted repo <b>{e.repo.name}</b>
-              </span>
-            ) : (
-              'Deleted a private repo'
-            );
-          case 'branch':
-            return e.public ? (
-              <span>
-                Deleted branch <b>{e.payload.ref as string}</b> in{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
-                </b>
-              </span>
-            ) : (
-              'Deleted a branch in a private repo'
-            );
-          case 'tag':
-            return e.public ? (
-              <span>
-                Deleted tag <b>{e.payload.ref as string}</b> in{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
-                </b>
-              </span>
-            ) : (
-              'Deleted a tag in a private repo'
-            );
+      case 'DeleteEvent':
+        {
+          switch (e.payload.ref_type) {
+            case 'repository':
+              return e.public ? (
+                <span>
+                  Deleted repo <b>{e.repo.name}</b>
+                </span>
+              ) : (
+                'Deleted a private repo'
+              );
+            case 'branch':
+              return e.public ? (
+                <span>
+                  Deleted branch <b>{e.payload.ref as string}</b> in{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
+                  </b>
+                </span>
+              ) : (
+                'Deleted a branch in a private repo'
+              );
+            case 'tag':
+              return e.public ? (
+                <span>
+                  Deleted tag <b>{e.payload.ref as string}</b> in{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
+                  </b>
+                </span>
+              ) : (
+                'Deleted a tag in a private repo'
+              );
+          }
         }
-      }
+        break;
       case 'CommitCommentEvent':
         // TODO implement commit comment event
         return null;
-      case 'CreateEvent': {
-        switch (e.payload.ref_type) {
-          case 'repository':
-            return e.public ? (
-              <span>
-                Created{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
-                </b>
-              </span>
-            ) : (
-              'Created a private repo'
-            );
-          case 'branch':
-            return e.public ? (
-              <span>
-                Created branch{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}/tree/${e.payload.ref}`}>{e.payload.ref as string}</a>
-                </b>{' '}
-                in{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
-                </b>
-              </span>
-            ) : (
-              'Created a branch in a private repo'
-            );
-          case 'tag':
-            return e.public ? (
-              <span>
-                Created tag{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}/releases/tag/${e.payload.ref}`}>
-                    {e.payload.ref as string}
-                  </a>
-                </b>{' '}
-                in{' '}
-                <b>
-                  <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
-                </b>
-              </span>
-            ) : (
-              'Created a tag in a private repo'
-            );
+      case 'CreateEvent':
+        {
+          switch (e.payload.ref_type) {
+            case 'repository':
+              return e.public ? (
+                <span>
+                  Created{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
+                  </b>
+                </span>
+              ) : (
+                'Created a private repo'
+              );
+            case 'branch':
+              return e.public ? (
+                <span>
+                  Created branch{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}/tree/${e.payload.ref}`}>{e.payload.ref as string}</a>
+                  </b>{' '}
+                  in{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
+                  </b>
+                </span>
+              ) : (
+                'Created a branch in a private repo'
+              );
+            case 'tag':
+              return e.public ? (
+                <span>
+                  Created tag{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}/releases/tag/${e.payload.ref}`}>
+                      {e.payload.ref as string}
+                    </a>
+                  </b>{' '}
+                  in{' '}
+                  <b>
+                    <a href={`https://github.com/${e.repo.name}`}>{e.repo.name}</a>
+                  </b>
+                </span>
+              ) : (
+                'Created a tag in a private repo'
+              );
+          }
         }
-      }
+        break;
       case 'ForkEvent':
         // TODO implement fork events
         return null;
@@ -288,6 +292,7 @@ export const useGithubTimeline = async () => {
             // TODO PR synchronize
             return null;
         }
+        break;
       case 'PullRequestReviewCommentEvent':
         // TODO Implement PR review comment
         return null;

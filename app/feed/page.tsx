@@ -30,23 +30,25 @@ export default async function Page() {
           <h1>Recent Activity</h1>
           <div></div>
           {tweets.map((t) => (
-            <div key={t.tweet_id}>
+            <div key={t.tweetId}>
               {t.message && <div>{t.message}</div>}
               <div>
                 <span dangerouslySetInnerHTML={{ __html: t.enrichedBody }} />
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Image
-                  src={t.user_profile_image}
-                  alt={`Profile image for ${t.user_screen_name}`}
-                  width={40}
-                  height={40}
-                  style={{ borderRadius: '10px' }}
-                />
-                {t.user_name} (<a href={`https://twitter.com/${t.user_screen_name}`}>@{t.user_screen_name}</a>)
+                {t.userProfileImage && (
+                  <Image
+                    src={t.userProfileImage}
+                    alt={`Profile image for ${t.userScreenName}`}
+                    width={40}
+                    height={40}
+                    style={{ borderRadius: '10px' }}
+                  />
+                )}
+                {t.userName} (<a href={`https://twitter.com/${t.userScreenName}`}>@{t.userScreenName}</a>)
               </div>
-              <a href={`https://twitter.com/${t.user_screen_name}/status/${t.tweet_id}`}>
-                {t.tweet_time_override ? t.tweet_time.toDateString() : t.created_on.toDateString()}
+              <a href={`https://twitter.com/${t.userScreenName}/status/${t.tweetId}`}>
+                {t.tweetTimeOverride && t.tweetTime ? t.tweetTime.toDateString() : t.createdOn.toDateString()}
               </a>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {t.images?.map((i) => (

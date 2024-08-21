@@ -1,42 +1,38 @@
 .sitesWrapper {
-    display: grid;
-    grid-template-columns: auto;
-    gap: 40px;
-    padding: 20px 0;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 40px;
+  padding: 20px 0;
 }
 
 .site {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .imageWrapper {
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 1.6;
-    position: relative;
-    margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1.6;
+  position: relative;
+  margin: 20px 0;
 }
 
 .readMore {
-    padding-top: 20px
+  padding-top: 20px;
 }
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
-
-    .sitesWrapper {
-        grid-template-columns: 1fr 1fr;
-    }
-
+  .sitesWrapper {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* Tablet Landscape */
 @media (min-width: 62em) {
-
-    .sitesWrapper {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
+  .sitesWrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

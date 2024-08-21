@@ -1,6 +1,7 @@
 'use client';
 import { HeatMapGrid } from 'react-grid-heatmap';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Heatmap = ({ data, xLabels, yLabels }: { data: any; xLabels: string[]; yLabels: string[] }) => (
   <HeatMapGrid
     data={data}

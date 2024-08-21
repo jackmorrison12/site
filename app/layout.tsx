@@ -5,6 +5,7 @@ import { Providers } from './providers';
 import StyledComponentsRegistry from './registry';
 
 import { Poppins } from 'next/font/google';
+import { ReactNode } from 'react';
 
 const APP_NAME = 'Jack Morrison';
 const APP_DEFAULT_TITLE = 'Jack Morrison';
@@ -17,7 +18,7 @@ const poppins = Poppins({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={poppins.className} suppressHydrationWarning>
       <body>
