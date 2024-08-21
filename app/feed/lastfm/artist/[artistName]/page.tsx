@@ -35,8 +35,9 @@ export default async function Page({ params }: { params: { artistName: string } 
   return (
     <div>
       <h1>Top songs by {artistName}</h1>
-      {topTracks.map((t) => (
+      {topTracks.map((t, i) => (
         <div key={t.id} className={styles.trackWrapper}>
+          {i + 1}
           {t.imageUrl && <Image src={t.imageUrl} width={50} height={50} alt={`Cover art for ${t.name}`} />}
           {t.name} - {t.artist} - {t.count} listens
         </div>

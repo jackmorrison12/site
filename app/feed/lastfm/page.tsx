@@ -48,18 +48,18 @@ export default async function Page() {
       <div className={styles.listsWrapper}>
         <div>
           <h2>Top Tracks</h2>
-          {topTracks.map((t) => (
+          {topTracks.map((t, i) => (
             <div key={t.id} className={styles.trackWrapper}>
-              {t.imageUrl && <Image src={t.imageUrl} width={50} height={50} alt={`Cover art for ${t.name}`} />}
+              {i + 1} {t.imageUrl && <Image src={t.imageUrl} width={50} height={50} alt={`Cover art for ${t.name}`} />}
               {t.name} - <Link href={`/feed/lastfm/artist/${t.artist}`}>{t.artist}</Link> - {t.count} listens
             </div>
           ))}
         </div>
         <div>
           <h2>Top Artists</h2>
-          {topArtists.map((a) => (
+          {topArtists.map((a, i) => (
             <div key={a.artist}>
-              <Link href={`/feed/lastfm/artist/${a.artist}`}>{a.artist}</Link> - {a.sum} listens
+              {i + 1} - <Link href={`/feed/lastfm/artist/${a.artist}`}>{a.artist}</Link> - {a.sum} listens
             </div>
           ))}
         </div>
