@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from './lastfmArtist.module.scss';
 import { AnyPgColumn } from 'drizzle-orm/pg-core';
 
-export function lower(col: AnyPgColumn): SQL {
+function lower(col: AnyPgColumn): SQL {
   return sql`lower(${col})`;
 }
 
