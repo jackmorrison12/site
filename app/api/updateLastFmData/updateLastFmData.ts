@@ -6,12 +6,15 @@ import { db } from 'drizzle/db';
 import { listens, tracks } from 'drizzle/schema';
 import { revalidatePath } from 'next/cache';
 
-export const updateLastFmData = async () => {
+const DAY = 1000 * 60 * 60 * 24;
+
+export const updateLastFmData = async ({ days }: { days?: number }) => {
   const lastListen = (await db.select({ time: listens.time }).from(listens).orderBy(desc(listens.time)).limit(1))[0]
     .time;
 
-  const { totalPages, total } = (await getRecentTracks({ page: 1, from: new Date(lastListen.getTime() + 1000) }))
-    .recenttracks['@attr'];
+  const fromTime = days ? lastListen.getTime() - days * DAY : lastListen.getTime() + 1000;
+
+  const { totalPages, total } = (await getRecentTracks({ page: 1, from: new Date(fromTime) })).recenttracks['@attr'];
 
   let pageNumber = 1;
 
