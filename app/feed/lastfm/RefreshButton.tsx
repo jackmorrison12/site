@@ -1,10 +1,13 @@
 'use client';
 
 import { updateLastFmData } from 'app/api/updateLastFmData/updateLastFmData';
+import { signOut, useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 import { useMutation } from 'react-query';
 
 export const RefreshButton = () => {
+  const session = useSession();
+
   const mutation = useMutation({
     mutationFn: async ({ days }: { days: number | undefined }) => {
       const res = await updateLastFmData({ days });
@@ -22,6 +25,10 @@ export const RefreshButton = () => {
 
   const [days, setDays] = useState<number | undefined>(undefined);
 
+  if (session.data?.user?.email !== 'jack1morrison@sky.com') {
+    return null;
+  }
+
   return (
     <>
       <button disabled={mutation.isSuccess || mutation.isError} onClick={() => mutation.mutate({ days })}>
@@ -34,6 +41,7 @@ export const RefreshButton = () => {
         onInput={(event: ChangeEvent<HTMLInputElement>) => setDays(parseInt(event.target.value))}
       />
       <div>{days}</div>
+      <button onClick={() => signOut()}>Sign out</button>
     </>
   );
 };

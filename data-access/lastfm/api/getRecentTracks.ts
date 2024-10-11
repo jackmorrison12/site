@@ -57,7 +57,7 @@ const Track = z.object({
 const recentTracksSchema = Track.or(
   z.object({
     recenttracks: z.object({
-      track: z.array(Track),
+      track: Track.or(z.array(Track)),
       '@attr': z.object({
         user: z.string(),
         totalPages: z.coerce.number(),
@@ -91,7 +91,7 @@ export const getRecentTracks = async ({ user = 'jackmorrison12', limit, page, fr
     throw new Error('Failed to fetch recent tracks');
   }
 
-  const parsedResult = recentTracksSchema.safeParse(await res.json());
+  const parsedResult = recentTracksSchema.safeParse(res.json());
 
   if (!parsedResult.success) {
     console.error(`Failed to parse lastfm recent tracks API response: ${JSON.stringify(parsedResult.error.issues)}`);
