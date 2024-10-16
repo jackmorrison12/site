@@ -4,6 +4,7 @@ import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
 import { desc } from 'drizzle-orm';
 import { db } from 'drizzle/db';
 import { listens, tracks } from 'drizzle/schema';
+import _ from 'lodash';
 import { revalidatePath } from 'next/cache';
 
 const DAY = 1000 * 60 * 60 * 24;
@@ -22,7 +23,7 @@ export const updateLastFmData = async ({ days }: { days?: number }) => {
     console.log('Syncing page %d of %d', pageNumber, totalPages);
     const recentTrackResult = await getRecentTracks({ page: pageNumber });
 
-    const trackInfos = recentTrackResult.recenttracks.track
+    const trackInfos = _.castArray(recentTrackResult.recenttracks.track)
       .map((track) => ({
         id: track.name.replaceAll(' ', '_') + '__' + track.artist.name.replaceAll(' ', '_'),
         mbid: track.mbid !== '' ? track.mbid : undefined,
