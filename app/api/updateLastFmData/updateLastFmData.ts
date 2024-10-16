@@ -4,14 +4,18 @@ import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
 import { desc } from 'drizzle-orm';
 import { db } from 'drizzle/db';
 import { listens, tracks } from 'drizzle/schema';
+import _ from 'lodash';
 import { revalidatePath } from 'next/cache';
 
-export const updateLastFmData = async () => {
+const DAY = 1000 * 60 * 60 * 24;
+
+export const updateLastFmData = async ({ days }: { days?: number }) => {
   const lastListen = (await db.select({ time: listens.time }).from(listens).orderBy(desc(listens.time)).limit(1))[0]
     .time;
 
-  const { totalPages, total } = (await getRecentTracks({ page: 1, from: new Date(lastListen.getTime() + 1000) }))
-    .recenttracks['@attr'];
+  const fromTime = days ? lastListen.getTime() - days * DAY : lastListen.getTime() + 1000;
+
+  const { totalPages, total } = (await getRecentTracks({ page: 1, from: new Date(fromTime) })).recenttracks['@attr'];
 
   let pageNumber = 1;
 
@@ -19,7 +23,7 @@ export const updateLastFmData = async () => {
     console.log('Syncing page %d of %d', pageNumber, totalPages);
     const recentTrackResult = await getRecentTracks({ page: pageNumber });
 
-    const trackInfos = recentTrackResult.recenttracks.track
+    const trackInfos = _.castArray(recentTrackResult.recenttracks.track)
       .map((track) => ({
         id: track.name.replaceAll(' ', '_') + '__' + track.artist.name.replaceAll(' ', '_'),
         mbid: track.mbid !== '' ? track.mbid : undefined,
