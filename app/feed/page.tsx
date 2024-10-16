@@ -8,6 +8,7 @@ import styles from './feed.module.scss';
 import { getRecentTracks } from 'data-access/lastfm/api/getRecentTracks';
 import { GitHubIcon, LastFmIcon } from 'components/Logos';
 import { getTweets } from 'data-access/twitter/database/getTweet';
+import _ from 'lodash';
 
 export default async function Page() {
   const { data, xLabels, yLabels } = await useHeatmap();
@@ -80,22 +81,24 @@ export default async function Page() {
                 </div>
                 <h3>Recent Activity</h3>
               </div>
-              {recenttracks.track.slice(0, 3).map((t) => (
-                <div key={t.mbid} className={styles.trackWrapper}>
-                  <Image src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
-                  <div className={styles.textWrapper}>
-                    <p key={t.mbid} className={styles.name}>
-                      {t.name}
-                    </p>
-                    <p key={t.mbid} className={styles.artist}>
-                      {t.artist.name}
-                    </p>
-                    <p key={t.mbid} className={styles.date}>
-                      {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
-                    </p>
+              {_.castArray(recenttracks.track)
+                .slice(0, 3)
+                .map((t) => (
+                  <div key={t.mbid} className={styles.trackWrapper}>
+                    <Image src={t.image.extralarge} alt={`Artwork for ${t.name}`} height={60} width={60} />
+                    <div className={styles.textWrapper}>
+                      <p key={t.mbid} className={styles.name}>
+                        {t.name}
+                      </p>
+                      <p key={t.mbid} className={styles.artist}>
+                        {t.artist.name}
+                      </p>
+                      <p key={t.mbid} className={styles.date}>
+                        {t.date ? ` ${formatDistanceToNowStrict(t.date, { addSuffix: true })}` : ' Now Playing...'}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </Link>
         </div>
