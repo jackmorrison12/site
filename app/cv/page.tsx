@@ -57,8 +57,11 @@ export default async function Page() {
               <a href="mailto:jack1morrison@sky.com">
                 <p>jack1morrison@sky.com</p>
               </a>
+              <a href="sms:+16464276698">
+                <p>+1 646 427 6698</p>
+              </a>
               <a href="sms:+447775101516">
-                <p>+447775 101 516</p>
+                <p>+44 7775 101 516</p>
               </a>
               <a href="https://github.com/jackmorrison12">
                 <p>github.com/jackmorrison12</p>
@@ -107,6 +110,8 @@ export default async function Page() {
               <div className={styles.pill}>Solr</div>
               <div className={styles.pill}>Kafka</div>
               <div className={styles.pill}>FastAPI</div>
+              <div className={styles.pill}>Celery</div>
+              <div className={styles.pill}>IAM</div>
             </div>
             <h2>Skills</h2>
             <h3>German Language Proficiency</h3>
@@ -127,12 +132,18 @@ export default async function Page() {
           </div>
           <div className={styles.mainWrapper}>
             <h2>Experience</h2>
-            {jobs.map((job) => (
+            {jobs.map((job, i) => (
               <div key={job.slug}>
-                <div className={styles.subheader}>
-                  <a href={job.url}>
-                    <h3>{job.company}</h3>
-                  </a>
+                <div
+                  className={`${styles.subheader} ${
+                    !(i === 0 || job.company !== jobs[i - 1].company) ? styles.nopad : ''
+                  }`}
+                >
+                  {(i === 0 || job.company !== jobs[i - 1].company) && (
+                    <a href={job.url}>
+                      <h3>{job.company}</h3>
+                    </a>
+                  )}
                   <div />
                   <b>
                     {dateToString(job.startDate)} - {dateToString(job.endDate)}
