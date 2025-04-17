@@ -231,12 +231,18 @@
       }
     }
 
+    .nopad {
+      padding: 0;
+    }
+
     .subsubheader {
       padding-bottom: 5px;
       display: flex;
 
       .left {
         width: 50%;
+        font-weight: bold;
+        padding-left: 10px;
       }
 
       .right {
