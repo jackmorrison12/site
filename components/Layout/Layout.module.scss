@@ -1,12 +1,13 @@
 .app {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   grid-template-rows: min-content minmax(min-content, auto) min-content;
   grid-template-areas:
     'header'
     'main'
     'footer';
+  overflow-x: hidden;
 }
 
 .app > header {
@@ -19,6 +20,7 @@
   padding: 10px 0px;
   overflow-x: clip;
   grid-auto-rows: min-content;
+  width: 100vw;
 }
 
 .app > footer {

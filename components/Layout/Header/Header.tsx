@@ -9,6 +9,7 @@ import styles from './Header.module.css';
 import { headerLinks } from './Header.data';
 import { useHeader } from './Header.hooks';
 import { HeaderProps } from './Header.types';
+import { ThemePicker } from './ThemePicker';
 
 const Header = ({ title }: HeaderProps) => {
   const _ = useHeader();
@@ -25,18 +26,7 @@ const Header = ({ title }: HeaderProps) => {
           <h3>
             <Link href="/">Jack Morrison</Link>
           </h3>
-          {/* TODO: Pull this into a separate component so only that is client */}
-          {_.mounted ? (
-            <select value={_.theme} onChange={(e) => _.setTheme(e.target.value)}>
-              {_.themes.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <div>Themes Loading...</div>
-          )}
+          <ThemePicker />
           <div style={{ marginLeft: 'auto' }}>
             <Hamburger
               toggled={_.navViewable}
@@ -54,7 +44,9 @@ const Header = ({ title }: HeaderProps) => {
               <Link
                 href={link.url}
                 key={link.url}
-                className={`${styles.link} ${_.pathname === link.url ? styles.activeLink : ''}`}
+                className={`${styles.link} ${
+                  (link.url === '/' ? _.pathname === link.url : _.pathname?.includes(link.url)) ? styles.activeLink : ''
+                }`}
               >
                 {link.emoji} {link.name}
               </Link>

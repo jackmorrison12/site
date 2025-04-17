@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { Job } from './jobs.types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const PATH = 'content/jobs';
+const PATH = join(process.cwd(), 'content/jobs');
 const FILE_EXTN = '.mdx';
 
 function getJobFilePaths(): string[] {
@@ -19,7 +19,7 @@ export function getJobSlugs(): Array<{ slug: string }> {
 
 export function getJobs(): Job[] {
   return getJobSlugs()
-    .map((slug) => ({ ...getJobFrontmatter(slug.slug), slug: `/jobs/${slug.slug}` }))
+    .map((slug) => ({ ...getJobFrontmatter(slug.slug), slug: slug.slug }))
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 }
 
@@ -29,7 +29,7 @@ export function getJobFrontmatter(slug: string): Job {
 
   const { data } = matter(file);
 
-  data.slug = `/jobs/${slug}`;
+  data.slug = slug;
 
   return data as unknown as Job;
 }
@@ -43,7 +43,7 @@ export async function getJob(slug: string): Promise<{ rawMDX: string; frontmatte
     options: { parseFrontmatter: true },
   });
 
-  frontmatter.slug = `/jobs/${slug}`;
+  frontmatter.slug = slug;
 
   return { rawMDX, frontmatter };
 }

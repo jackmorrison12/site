@@ -1,27 +1,28 @@
-import { Title } from '../../components/shared/Title';
+import { Title } from 'components/shared/Title';
 import styles from './me.module.scss';
-import { TwitterIcon } from './logos/twitter';
-import { GitHubIcon } from './logos/github';
-import { LinkedInIcon } from './logos/linkedin';
-import { InstagramIcon } from './logos/instagram';
-import { LastFmIcon } from './logos/lastfm';
-import { SpotifyIcon } from './logos/spotify';
-import { ImperialLogo } from './logos/imperial';
-import { BloombergLogo } from './logos/bloomberg';
 import Link from 'next/link';
 import Image from 'next/image';
 // TODO: Update these imports
-import avatar from '../../content/about-me/avatar.jpg';
-import pic2 from '../../content/about-me/img/g.jpeg';
-import pic3 from '../../content/about-me/img/i.jpeg';
-import pic4 from '../../content/about-me/img/j.jpeg';
+import avatar from 'content/about-me/avatar.jpg';
+import pic2 from 'content/about-me/img/g.jpeg';
+import pic3 from 'content/about-me/img/i.jpeg';
+import pic4 from 'content/about-me/img/j.jpeg';
 import { TopTrack } from './TopTrack';
+import {
+  BloombergLogo,
+  GitHubIcon,
+  ImperialLogo,
+  InstagramIcon,
+  LastFmIcon,
+  LinkedInIcon,
+  SpotifyIcon,
+  TwitterIcon,
+} from 'components/Logos';
+import { FT_IN_MARATHON, NUM_SKYDIVES, socials } from 'content/about-me';
 
 export default async function Page() {
-  const NUM_SKYDIVES = 23;
   const NUM_COUNTRIES = 27;
   const NUM_OS = 2;
-  const FT_IN_MARATHON = 138336;
   return (
     <>
       <Title value="ME" offset="-757.2" bgOverride="ABOUTME" />
@@ -48,55 +49,65 @@ export default async function Page() {
         <div className={`${styles.pic} ${styles.pic4}`}>
           <Image src={pic4} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
         </div>
-        <div className={`${styles.box} ${styles.bbg} ${styles.overlayParent}`}>
+        <Link
+          href="/me/timeline#bloomberg"
+          className={`${styles.box} ${styles.bbg} ${styles.overlayParent} ${styles.clickable}`}
+        >
           <BloombergLogo />
           <div className={styles.overlayWrapper}>
             <p className={styles.overlayContent}>I&apos;ve been a Software Engineer at Bloomberg since 2021!</p>
           </div>
-        </div>
-        <div className={`${styles.box} ${styles.imperial} ${styles.overlayParent}`}>
+        </Link>
+        <Link
+          href="/me/timeline#imperial"
+          className={`${styles.box} ${styles.imperial} ${styles.overlayParent}  ${styles.clickable}`}
+        >
           <ImperialLogo />
           <div className={styles.overlayWrapper}>
             <p className={styles.overlayContent}>I graduated from Imperial in 2021!</p>
           </div>
-        </div>
-        <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}>
+        </Link>
+        {/* TODO: Add back once OS page is ready */}
+        {/* <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}> */}
+        <div className={`${styles.box} ${styles.os}`}>
           <p className={styles.bigNumber}>{NUM_OS}</p>
           <p>open source projects contributed to</p>
           <p className={styles.smallFooter}>(so far... 👨‍💻)</p>
-        </Link>
-        <a href="https://twitter.com/jsm_99" className={`${styles.icon} ${styles.twt}`}>
+        </div>
+        {/* </Link> */}
+        <a href={socials.twitter.url} className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
         </a>
-        <a href="https://github.com/jackmorrison12" className={`${styles.icon} ${styles.gh}`}>
+        <a href={socials.github.url} className={`${styles.icon} ${styles.gh}`}>
           <GitHubIcon />
         </a>
-        <a href="https://www.linkedin.com/in/jackmorrison12/" className={`${styles.icon} ${styles.linkedin}`}>
+        <a href={socials.linkedin.url} className={`${styles.icon} ${styles.linkedin}`}>
           <LinkedInIcon />
         </a>
-        <a href="https://www.instagram.com/jackmorrison12/" className={`${styles.icon} ${styles.insta}`}>
+        <a href={socials.instagram.url} className={`${styles.icon} ${styles.insta}`}>
           <InstagramIcon />
         </a>
         <div className={`${styles.box} ${styles.about}`}>
           {/* TODO: This text should change size to fit in the box, not the other way around */}
-          {/* TODO: link gg quote */}
-          <h4>
-            Who Am I? <i>Now that&apos;s a secret I&apos;ll never tell...</i>
-          </h4>
           <p>
-            ...just kidding, hey 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few
-            years ago now, but have been programming since long before then.
+            Hey 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few years ago now, but
+            have been programming since long before then.
           </p>
           <br />
           <p>
-            As you can see from these widgets around me, in my free time, I like music (both listening and making it),
-            travelling, and I&apos;ve also recently started throwing myself out of planes for fun! 🪂
+            In my free time, I like music (both listening and making it), travelling, and I&apos;ve also recently
+            started throwing myself out of planes for fun! 🪂
+          </p>
+          <br />
+          <p>
+            Explore the widgets around here for more info!{' '}
+            <span className={styles.smallFooter}>(hint: some of them are clickable)</span>
           </p>
         </div>
-        <a href="https://www.last.fm/user/Jackmorrison12" className={`${styles.icon} ${styles.lastfm}`}>
+        <a href={socials.lastfm.url} className={`${styles.icon} ${styles.lastfm}`}>
           <LastFmIcon />
         </a>
-        <a href="https://open.spotify.com/user/112282925" className={`${styles.icon} ${styles.spotify}`}>
+        <a href={socials.spotify.url} className={`${styles.icon} ${styles.spotify}`}>
           <SpotifyIcon />
         </a>
         <TopTrack />
@@ -110,7 +121,14 @@ export default async function Page() {
           <p className={styles.bigNumber}>{((NUM_SKYDIVES * 15000) / FT_IN_MARATHON).toFixed(2)}</p>
           <p> marathons 🪂</p>
         </div>
-        <div className={`${styles.box} ${styles.weather}`}>wth</div>
+        <div className={`${styles.box} ${styles.emoji} ${styles.emoji1}`}>
+          <div>🏠</div>
+          <div>🇬🇧</div>
+        </div>
+        <div className={`${styles.box} ${styles.emoji} ${styles.emoji2}`}>
+          <div>📍</div>
+          <div>🗽</div>
+        </div>
       </div>
     </>
   );

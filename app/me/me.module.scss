@@ -6,17 +6,17 @@
   justify-content: center;
   grid-template-columns: repeat(4, minmax(1px, 1fr));
   grid-template-rows: 7rem 20.4vw 7rem auto minmax(auto, 7rem) minmax(auto, 7rem) 7rem 7rem 7rem 7rem;
-  grid-template-areas: 
-  "intro     intro     intro     intro"
-  "pic1      pic2      pic3      pic4"
-  "bbg       bbg       imperial  imperial"
-  "about     about     about     about"
-  "os        os        twt       linkedin"
-  "os        os        gh        insta"
-  "lastfm    music     music     weather"
-  "spotify   music     music     weather"
-  "countries countries skydiving skydiving"
-  "countries countries skydiving skydiving";
+  grid-template-areas:
+    'intro     intro     intro     intro'
+    'pic1      pic2      pic3      pic4'
+    'bbg       bbg       imperial  imperial'
+    'about     about     about     about'
+    'os        os        twt       linkedin'
+    'os        os        gh        insta'
+    'lastfm    music     music     emoji1'
+    'spotify   music     music     emoji2'
+    'countries countries skydiving skydiving'
+    'countries countries skydiving skydiving';
 }
 
 .box {
@@ -27,23 +27,25 @@
 
 .clickable {
   cursor: pointer;
-  transform: all .3s ease-in-out, color 0s;
-  transition: all .3s ease-in-out, color 0s;
+  transform: all 0.3s ease-in-out, color 0s;
+  transition: all 0.3s ease-in-out, color 0s;
 }
 
 .clickable:hover {
-  transform: scale(0.95)
+  transform: scale(0.95);
 }
 
 .icon {
   padding: clamp(1px, 30%, 30px);
   border-radius: 10px;
   cursor: pointer;
-  transform: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
+  transform: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
   svg {
     width: 100%;
   }
+
   color: white;
   display: flex;
 }
@@ -71,7 +73,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  transition: opacity .2s, visibility .2s;
+  transition: opacity 0.2s, visibility 0.2s;
   padding: 10px;
 }
 
@@ -81,7 +83,7 @@
 }
 
 .overlayContent {
-  transition: .2s;
+  transition: 0.2s;
   text-align: center;
 }
 
@@ -111,11 +113,13 @@
 
 .imperial {
   grid-area: imperial;
-  background-color: #EBEEEE;
+  background-color: #ebeeee;
   display: flex;
+
   svg {
     width: 100%;
   }
+
   padding: clamp(1px, 20%, 30px);
 }
 
@@ -123,9 +127,11 @@
   grid-area: bbg;
   background-color: black;
   display: flex;
+
   svg {
     width: 100%;
   }
+
   padding: clamp(1px, 20%, 30px);
 }
 
@@ -142,7 +148,7 @@
 
 .bigNumber {
   font-size: var(--fontSizes_xxl);
-  font-weight: var(--fontWeights_thick)
+  font-weight: var(--fontWeights_thick);
 }
 
 .smallFooter {
@@ -161,12 +167,12 @@
 
 .gh {
   grid-area: gh;
-  background:black;
+  background: black;
 }
 
 .gh:hover {
-  color:black;
-  background:lightgrey;
+  color: black;
+  background: lightgrey;
 }
 
 .linkedin {
@@ -181,17 +187,34 @@
 
 .insta {
   grid-area: insta;
-  background-color: #f09433; 
-  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+  background-color: #f09433;
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
+    radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+    linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
 }
 
 .insta:hover {
   color: white;
-  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
+    radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+    linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
 }
 
 .about {
   grid-area: about;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .lastfm {
@@ -220,8 +243,8 @@
   display: flex;
   align-items: end;
   background-size: cover;
-  background-position: center; 
-  position: relative; 
+  background-position: center;
+  position: relative;
   background-color: var(--colours_primary_background_default);
   border-radius: 10px;
 }
@@ -230,8 +253,8 @@
   background-color: var(--colours_primary_background_default);
 }
 
-.music::before {    
-  content: "";
+.music::before {
+  content: '';
   background-size: cover;
   position: absolute;
   top: 0px;
@@ -252,15 +275,15 @@
 
 .musicTitle {
   font-size: var(--fontSizes_tiny);
-  font-weight: var(--fontWeights_thick)
+  font-weight: var(--fontWeights_thick);
 }
 
 .musicArtist {
-  font-size: var(--fontSizes_small)
+  font-size: var(--fontSizes_small);
 }
 
 .musicListens {
-  font-size: var(--fontSizes_tiny)
+  font-size: var(--fontSizes_tiny);
 }
 
 .countries {
@@ -283,26 +306,37 @@
   text-align: center;
 }
 
-.weather {
-  grid-area: weather;
+.emoji {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--fontSizes_xl);
 }
 
+.emoji1 {
+  grid-area: emoji1;
+}
+
+.emoji2 {
+  grid-area: emoji2;
+}
 
 /* Phone Landscape/Tablet Portrait */
 @media (min-width: 48em) {
   .layout {
     grid-template-columns: repeat(6, 7rem);
     grid-template-rows: repeat(8, 7rem);
-    grid-template-areas: 
-      "intro     intro     intro   intro    bbg       bbg"
-      "pic1      pic2      pic3    pic4     imperial  imperial"
-      " os       os        twt     linkedin countries countries"
-      "os        os        gh      insta    countries countries"
-      "about     about     about   about    about     about"
-      "about     about     about   about    about     about"
-      "skydiving skydiving lastfm  music    music     weather"
-      "skydiving skydiving spotify music    music     weather";
-   }
+    grid-template-areas:
+      'intro     intro     intro   intro    bbg       bbg'
+      'pic1      pic2      pic3    pic4     imperial  imperial'
+      ' os       os        twt     linkedin countries countries'
+      'os        os        gh      insta    countries countries'
+      'about     about     about   about    about     about'
+      'about     about     about   about    about     about'
+      'skydiving skydiving lastfm  music    music     emoji1'
+      'skydiving skydiving spotify music    music     emoji2';
+  }
 
   .box {
     padding: 20px 40px;
@@ -311,6 +345,11 @@
   .music {
     padding: 20px;
   }
+
+  .emoji {
+    flex-direction: row;
+    gap: 10px;
+  }
 }
 
 /* Tablet Landscape */
@@ -318,13 +357,12 @@
   .layout {
     grid-template-columns: repeat(8, 7rem);
     grid-template-rows: repeat(6, 7rem);
-    grid-template-areas: 
-      "intro   intro intro intro     bbg       bbg       twt       linkedin"
-      "pic1    pic2  pic3  pic4      imperial  imperial  gh        insta"
-      "os      os    about about     about     about     about     about"
-      "os      os    about about     about     about     about     about"
-      "lastfm  music music countries countries skydiving skydiving weather"
-      "spotify music music countries countries skydiving skydiving weather";  
+    grid-template-areas:
+      'intro   intro intro intro     bbg       bbg       twt       linkedin'
+      'pic1    pic2  pic3  pic4      imperial  imperial  gh        insta'
+      'os      os    about about     about     about     about     about'
+      'os      os    about about     about     about     about     about'
+      'lastfm  music music countries countries skydiving skydiving emoji1'
+      'spotify music music countries countries skydiving skydiving emoji2';
   }
-
 }

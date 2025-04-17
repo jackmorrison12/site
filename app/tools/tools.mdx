@@ -1,26 +1,32 @@
-For this iteration of my site, I wanted to spend more time planning the stack I'd use to build the optimal site.
+I use this site to test out & learn new technologies, and have done so with the previous iterations of my site too.
+I've previously used Jekyll, CRA and Gatsby, which you can read more about on the [Site Archive](/archive) page.
 
-You can see some previous projects written using Jekyll, CRA and Gatsby on the [Site Archive](/archive) page
-
-Here's the stack I decided on:
+Here's the stack I decided on for this iteraton:
 
 ## Framework - Next.js
 
-I went with Next.js because...
+I went with Next.js because I wanted this site to be a mix of static and dynamic pages.
 
-## Styling - CSS Modules & Styled Components in SASS
+Next.js allows all of these things with ease.
 
-Ideally, I'd be styling completely using Styled Components, since they're my preferred method, 
-however because I wanted this site to be made up of as many React Server Components as possible, 
-this wasn't feasible, since Styled Components have to be client-side rendered.
+## Styling - CSS Modules (SCSS) & Styled Components
+
+The majority of this site uses CSS modules, since this site is primarily React Server Components, which don't really
+support CSS-in-JS libraries.
+
+However, some things, e.g. the `<Title />` component you see at the top of this page, use Styled Components. This is because
+I want to pass them props (in this case the title), which isn't supported with CSS modules. The trade off is that
+these components have to be client components.
 
 ## Hosting - Vercel
 
-Being a Next.js site, this is a pretty standard choice
+Being a Next.js site, this is a pretty standard choice.
 
 ## Other useful tools & libraries
 
-- TypeScript
-- React Query
-- ESLint
-- Prettier
+- [TypeScript](https://github.com/microsoft/TypeScript)
+- [React Query](https://tanstack.com/query/v3/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [@ducanh2912/next-pwa](https://www.npmjs.com/package/@ducanh2912/next-pwa)
+- [Zod](https://zod.dev/)

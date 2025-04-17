@@ -57,7 +57,7 @@ const Track = z.object({
 const recentTracksSchema = Track.or(
   z.object({
     recenttracks: z.object({
-      track: z.array(Track),
+      track: Track.or(z.array(Track)),
       '@attr': z.object({
         user: z.string(),
         totalPages: z.coerce.number(),

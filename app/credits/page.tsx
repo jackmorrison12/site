@@ -1,15 +1,16 @@
 import { Title } from '../../components/shared/Title';
+import Credits from './credits.mdx';
 
 export default async function Page() {
   return (
     <>
       <Title value="CREDITS" offset="-551.74" />
-      <p>Credits for the site</p>
+      <Credits />
     </>
   );
 }
 
 export const metadata = {
-  title: 'Live',
-  description: 'Live information',
+  title: 'Credits',
+  description: 'Credits for insipration',
 };
