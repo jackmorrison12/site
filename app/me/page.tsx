@@ -29,7 +29,7 @@ export default async function Page() {
       <div className={styles.layout}>
         <div className={`${styles.box} ${styles.intro}`}>
           <h3>Hey, I&apos;m Jack! 👋</h3>
-          <p>A 24 year old Software Engineer @ Bloomberg</p>
+          <p>A 26 year old Software Engineer @ Bloomberg</p>
         </div>
         <div className={`${styles.pic} ${styles.pic1}`}>
           <Image src={avatar} fill={true} placeholder="blur" alt={'My Avatar'} />
@@ -90,8 +90,8 @@ export default async function Page() {
         <div className={`${styles.box} ${styles.about}`}>
           {/* TODO: This text should change size to fit in the box, not the other way around */}
           <p>
-            Hey 👋 I&apos;m Jack, a Software Engineer from London. I graduated from Imperial a few years ago now, but
-            have been programming since long before then.
+            Hey 👋 I&apos;m Jack, a Software Engineer from the UK, currently living in NY. I graduated from Imperial a
+            few years ago now, but have been programming since long before then.
           </p>
           <br />
           <p>
