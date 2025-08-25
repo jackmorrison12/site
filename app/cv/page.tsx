@@ -76,7 +76,7 @@ export default async function Page() {
             <h2>Education</h2>
             <h3>Imperial College London</h3>
             <h4>MEng Computing</h4>
-            <i>2017-2022</i>
+            <i>2017-2021</i>
             <ul>
               <li>Final Grade: First </li>
               <li>IC Skydiving Secretary &apos;20/21</li>
