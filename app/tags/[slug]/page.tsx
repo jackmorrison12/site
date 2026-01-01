@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 export const generateStaticParams = getTagSlugs;
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const slug = params.slug;
 
   let tag = undefined;
@@ -30,7 +31,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   try {
     const tag = await getTag(params.slug);
     return {

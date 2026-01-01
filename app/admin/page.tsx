@@ -3,7 +3,7 @@
 import { addTweet } from 'data-access/twitter/api/addTweet';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 export default function Page() {
   const session = useSession();
@@ -69,7 +69,7 @@ export default function Page() {
           Add
         </button>
         {mutation.status}
-        {mutation.isLoading ? 'loading' : JSON.stringify(mutation.data)}
+        {mutation.isPending ? 'loading' : JSON.stringify(mutation.data)}
         {mutation.isError && (mutation.error as Error).message}
       </div>
     </>
