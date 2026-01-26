@@ -3,7 +3,7 @@ import { Title } from 'components/shared/Title';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import styles from './not-found.module.scss';
 
@@ -11,9 +11,10 @@ import { archives } from 'content/archives';
 
 export default function NotFound() {
   const pathname = usePathname().slice(0);
-  const { isLoading, isError, data } = useQuery(
-    ['notFound', { pathname }],
-    async () =>
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ['notFound', { pathname }],
+
+    queryFn: async () =>
       (await (await fetch(`/api/checkArchives?path=${pathname}`)).json()) as {
         v0: number;
         v1: number;
@@ -21,7 +22,7 @@ export default function NotFound() {
         v3: number;
         v4: number;
       },
-  );
+  });
 
   if (isLoading) {
     return (

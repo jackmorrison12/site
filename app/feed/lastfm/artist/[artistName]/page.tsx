@@ -10,7 +10,8 @@ function lower(col: AnyPgColumn): SQL {
   return sql`lower(${col})`;
 }
 
-export default async function Page({ params }: { params: { artistName: string } }) {
+export default async function Page(props: { params: Promise<{ artistName: string }> }) {
+  const params = await props.params;
   const artistName = decodeURIComponent(params.artistName);
 
   const topTracks = await db

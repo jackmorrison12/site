@@ -3,7 +3,7 @@
 import { updateLastFmData } from 'app/api/updateLastFmData/updateLastFmData';
 import { signOut, useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 export const RefreshButton = () => {
   const session = useSession();
@@ -15,7 +15,7 @@ export const RefreshButton = () => {
     },
   });
 
-  const text = mutation.isLoading
+  const text = mutation.isPending
     ? 'Loading...'
     : mutation.isError
     ? 'Error refreshing'
