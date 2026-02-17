@@ -41,7 +41,7 @@ export const DoubleImg = ({
   img1Props?: { src: string; alt?: string; height: number; width: number };
   img2Props?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  if (!img1Props || !img2Props) return null;
+  // Removed: if (!img1Props || !img2Props) return null;
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.doubleImgSection}>
