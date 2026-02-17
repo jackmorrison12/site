@@ -21,7 +21,10 @@ export const ImgWithCaption = ({
   children?: ReactNode;
   imgProps?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  // The line 'if (!imgProps) return null;' has been removed as per review comments.
+  // Ensures Image component is only rendered if imgProps and imgProps.src are valid.
+  if (!imgProps || !imgProps.src) {
+    return <></>; // Render empty fragment if imgProps or src is missing
+  }
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
