@@ -21,13 +21,13 @@ export const ImgWithCaption = ({
   children?: ReactNode;
   imgProps?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  if (!imgProps) return null;
+  if (!imgProps) return <></>;
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
       <div className={styles.imageSection}>
         <div className={styles.imageWrapper}>
-          <Image {...imgProps} title={imgProps.alt} objectFit="scale-down" />
+          <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
         </div>
       </div>
     </div>
@@ -46,12 +46,12 @@ export const DoubleImg = ({
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.doubleImgSection}>
         <div className={styles.imageWrapper}>
-          <Image {...img1Props} title={img1Props.alt} />
+          <Image {...img1Props} alt={img1Props.alt || ''} title={img1Props.alt} />
         </div>
       </div>{' '}
       <div className={styles.imageSection}>
         <div className={styles.imageWrapper}>
-          <Image {...img2Props} title={img2Props.alt} />
+          <Image {...img2Props} alt={img2Props.alt || ''} title={img2Props.alt} />
         </div>
       </div>
     </div>
