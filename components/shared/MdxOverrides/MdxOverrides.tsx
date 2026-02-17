@@ -21,7 +21,7 @@ export const ImgWithCaption = ({
   children?: ReactNode;
   imgProps?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  if (!imgProps) return <></>;
+  // The line 'if (!imgProps) return null;' has been removed as per review comments.
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
