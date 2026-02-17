@@ -22,16 +22,16 @@ export const ImgWithCaption = ({
   imgProps?: { src: string; alt?: string; height: number; width: number };
 }) => {
   // Ensures Image component is only rendered if imgProps and imgProps.src are valid.
-  if (!imgProps || !imgProps.src) {
-    return <></>; // Render empty fragment if imgProps or src is missing
-  }
+  // If not, the wrapper and caption are still rendered.
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
       <div className={styles.imageSection}>
-        <div className={styles.imageWrapper}>
-          <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
-        </div>
+        {imgProps && imgProps.src && (
+          <div className={styles.imageWrapper}>
+            <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
+          </div>
+        )}
       </div>
     </div>
   );
