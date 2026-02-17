@@ -19,38 +19,44 @@ export const ImgWithCaption = ({
   imgProps,
 }: {
   children?: ReactNode;
-  imgProps: { src: string; alt?: string; height: number; width: number };
-}) => (
-  <div className={styles.imgCaptionWrapper}>
-    <div className={styles.caption}>{children}</div>
-    <div className={styles.imageSection}>
-      <div className={styles.imageWrapper}>
-        <Image {...imgProps} title={imgProps.alt} objectFit="scale-down" />
+  imgProps?: { src: string; alt?: string; height: number; width: number };
+}) => {
+  if (!imgProps) return null;
+  return (
+    <div className={styles.imgCaptionWrapper}>
+      <div className={styles.caption}>{children}</div>
+      <div className={styles.imageSection}>
+        <div className={styles.imageWrapper}>
+          <Image {...imgProps} title={imgProps.alt} objectFit="scale-down" />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const DoubleImg = ({
   img1Props,
   img2Props,
 }: {
-  img1Props: { src: string; alt?: string; height: number; width: number };
-  img2Props: { src: string; alt?: string; height: number; width: number };
-}) => (
-  <div className={styles.imgCaptionWrapper}>
-    <div className={styles.doubleImgSection}>
-      <div className={styles.imageWrapper}>
-        <Image {...img1Props} title={img1Props.alt} />
-      </div>
-    </div>{' '}
-    <div className={styles.imageSection}>
-      <div className={styles.imageWrapper}>
-        <Image {...img2Props} title={img2Props.alt} />
+  img1Props?: { src: string; alt?: string; height: number; width: number };
+  img2Props?: { src: string; alt?: string; height: number; width: number };
+}) => {
+  if (!img1Props || !img2Props) return null;
+  return (
+    <div className={styles.imgCaptionWrapper}>
+      <div className={styles.doubleImgSection}>
+        <div className={styles.imageWrapper}>
+          <Image {...img1Props} title={img1Props.alt} />
+        </div>
+      </div>{' '}
+      <div className={styles.imageSection}>
+        <div className={styles.imageWrapper}>
+          <Image {...img2Props} title={img2Props.alt} />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const AOverride = ({ children, ...rest }: { children?: ReactNode }) => (
   <a {...rest} className={styles.a}>
