@@ -19,31 +19,31 @@ export function getEducationSlugs(): Array<{ slug: string }> {
 
 export function getEducations(): Education[] {
   return getEducationSlugs()
-    .map((slug) => ({ ...getEducationFrontmatter(slug.slug), slug: slug.slug }))
+    .map((slug) => ({
+      ...getEducationFrontmatter(slug.slug),
+      slug: slug.slug,
+    }))
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 }
 
 export function getEducationFrontmatter(slug: string): Education {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const file = fs.readFileSync(fullPath, 'utf-8');
-
   const { data } = matter(file);
-
   data.slug = slug;
-
   return data as unknown as Education;
 }
 
 export async function getEducation(slug: string): Promise<{ rawMDX: string; frontmatter: Education }> {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const rawMDX = fs.readFileSync(fullPath, 'utf-8');
-
   const { frontmatter } = await compileMDX<Education>({
     source: rawMDX,
-    options: { parseFrontmatter: true },
+    options: {
+      parseFrontmatter: true,
+      blockJS: false,
+    },
   });
-
   frontmatter.slug = slug;
-
   return { rawMDX, frontmatter };
 }
