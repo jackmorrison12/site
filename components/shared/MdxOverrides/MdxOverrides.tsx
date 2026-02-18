@@ -25,7 +25,7 @@ export const ImgWithCaption = ({
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
       <div className={styles.imageSection}>
-        {imgProps?.src && (
+        {imgProps && (
           <div className={styles.imageWrapper}>
             <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
           </div>
@@ -45,14 +45,14 @@ export const DoubleImg = ({
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.doubleImgSection}>
-        {img1Props?.src && (
+        {img1Props && (
           <div className={styles.imageWrapper}>
             <Image {...img1Props} alt={img1Props.alt || ''} title={img1Props.alt} />
           </div>
         )}
       </div>{' '}
       <div className={styles.imageSection}>
-        {img2Props?.src && (
+        {img2Props && (
           <div className={styles.imageWrapper}>
             <Image {...img2Props} alt={img2Props.alt || ''} title={img2Props.alt} />
           </div>
