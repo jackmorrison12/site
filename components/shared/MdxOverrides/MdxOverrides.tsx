@@ -21,17 +21,16 @@ export const ImgWithCaption = ({
   children?: ReactNode;
   imgProps?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  // Ensures Image component is only rendered if imgProps and imgProps.src are valid.
-  // If not, the wrapper and caption are still rendered.
+  if (!imgProps || !imgProps.src) {
+    return <></>;
+  }
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.caption}>{children}</div>
       <div className={styles.imageSection}>
-        {imgProps && imgProps.src && (
-          <div className={styles.imageWrapper}>
-            <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
-          </div>
-        )}
+        <div className={styles.imageWrapper}>
+          <Image {...imgProps} alt={imgProps.alt || ''} title={imgProps.alt} objectFit="scale-down" />
+        </div>
       </div>
     </div>
   );
@@ -44,18 +43,21 @@ export const DoubleImg = ({
   img1Props?: { src: string; alt?: string; height: number; width: number };
   img2Props?: { src: string; alt?: string; height: number; width: number };
 }) => {
-  // Removed: if (!img1Props || !img2Props) return null;
   return (
     <div className={styles.imgCaptionWrapper}>
       <div className={styles.doubleImgSection}>
-        <div className={styles.imageWrapper}>
-          <Image {...img1Props} alt={img1Props.alt || ''} title={img1Props.alt} />
-        </div>
+        {img1Props && img1Props.src && (
+          <div className={styles.imageWrapper}>
+            <Image {...img1Props} alt={img1Props.alt || ''} title={img1Props.alt} />
+          </div>
+        )}
       </div>{' '}
       <div className={styles.imageSection}>
-        <div className={styles.imageWrapper}>
-          <Image {...img2Props} alt={img2Props.alt || ''} title={img2Props.alt} />
-        </div>
+        {img2Props && img2Props.src && (
+          <div className={styles.imageWrapper}>
+            <Image {...img2Props} alt={img2Props.alt || ''} title={img2Props.alt} />
+          </div>
+        )}
       </div>
     </div>
   );
