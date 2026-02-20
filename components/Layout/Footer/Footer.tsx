@@ -6,7 +6,7 @@ import styles from './Footer.module.css';
 import { GitHubIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../../Logos';
 import { socials } from 'content/about-me';
 
-const AnimatedIcon = ({ href, icon: Icon, label, color }: { href: string; icon: React.FC; label: string; color: string }) => {
+const AnimatedIcon = ({ href, icon, label, color }: { href: string; icon: React.ReactNode; label: string; color: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -24,21 +24,15 @@ const AnimatedIcon = ({ href, icon: Icon, label, color }: { href: string; icon: 
       onClick={handleClick}
       style={{
         transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        transform: isClicked 
-          ? 'scale(0.8)' 
-          : isHovered 
-            ? 'scale(1.3) rotate(10deg)' 
-            : 'scale(1)',
-        filter: isHovered 
-          ? `drop-shadow(0 0 12px ${color}) brightness(1.3)` 
-          : 'none',
+        transform: isClicked ? 'scale(0.8)' : isHovered ? 'scale(1.3) rotate(10deg)' : 'scale(1)',
+        filter: isHovered ? `drop-shadow(0 0 12px ${color}) brightness(1.3)` : 'none',
         color: isHovered ? color : 'inherit',
         display: 'inline-flex',
         padding: '8px',
       }}
       aria-label={label}
     >
-      <Icon />
+      {icon}
     </a>
   );
 };
@@ -86,33 +80,13 @@ const Footer = () => (
       <div className={styles.socials}>
         <h4>Socials</h4>
         <div className={styles.iconGrid}>
-          <AnimatedIcon 
-            href={socials.twitter.url} 
-            icon={TwitterIcon} 
-            label="Twitter"
-            color="#1DA1F2"
-          />
-          <AnimatedIcon 
-            href={socials.linkedin.url} 
-            icon={LinkedInIcon} 
-            label="LinkedIn"
-            color="#0A66C2"
-          />
-          <AnimatedIcon 
-            href={socials.github.url} 
-            icon={GitHubIcon} 
-            label="GitHub"
-            color="#6cc644"
-          />
-          <AnimatedIcon 
-            href={socials.instagram.url} 
-            icon={InstagramIcon} 
-            label="Instagram"
-            color="#E1306C"
-          />
+          <AnimatedIcon href={socials.twitter.url} icon={<TwitterIcon />} label="Twitter" color="#1DA1F2" />
+          <AnimatedIcon href={socials.linkedin.url} icon={<LinkedInIcon />} label="LinkedIn" color="#0A66C2" />
+          <AnimatedIcon href={socials.github.url} icon={<GitHubIcon />} label="GitHub" color="#6cc644" />
+          <AnimatedIcon href={socials.instagram.url} icon={<InstagramIcon />} label="Instagram" color="#E1306C" />
         </div>
       </div>
-      <div className={styles.disclaimer}>© {new Date().getFullYear()} Jack Morrison</div>
+      <div className={styles.disclaimer}>&copy; {new Date().getFullYear()} Jack Morrison</div>
     </div>
   </footer>
 );
