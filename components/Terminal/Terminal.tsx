@@ -10,34 +10,61 @@ type CommandHistory = {
 
 const COMMANDS: Record<string, string> = {
   help: `Available commands:
-  help       - Show this help message
-  whoami     - Who is Milo?
-  projects   - List current projects
-  secret     - Reveal a secret
-  clear      - Clear terminal
-  exit       - Close terminal`,
-  
-  whoami: `Milo — Digital Security Companion (with a pulse)
-  Vibe: Security First, Sass Second 🛡️
-  Created: 2026-02-16
-  Mission: Keep Jack's digital life secure and automate the boring stuff`,
-  
-  projects: `Current Projects:
-  • next-mdx-remote v6 migration
-  • Home Assistant automation
-  • Personal site Easter eggs (you found one!)
-  • TIL Bot — pattern extractor
-  • Code Review Helper (in backlog)`,
-  
-  secret: `🎉 You found the secret!
+  help      - Show this help message
+  whoami    - About Jack
+  projects  - List active projects
+  contact   - Get in touch
+  now       - Current status
+  clear     - Clear terminal
+  exit      - Close terminal`,
 
-  Here's a virtual high-five: o/\o
+  whoami: `Jack Morrison
+──────────────────────────────────────
+Software Engineer at Bloomberg
+BSc Computing from Imperial College London
+Based in London, UK
 
-  You typed "/" (backtick) and discovered my hidden CLI!
-  Try the other Easter eggs...
-  
-  Hint: Look for Konami code (↑↑↓↓←→←→BA)`,
-  
+Passions: Home automation, skydiving, open source,
+building things that make life easier.
+
+Type 'projects' to see what I'm working on.`,
+
+  projects: `Active Projects:
+──────────────────────────────────────
+• Personal site (jackmorrison.me) - Next.js, MDX, fun Easter eggs
+• Osti - PDF annotation tool with friends
+• Canvas - University coursework social platform
+• Home Assistant automation - Making my flat smarter
+• Skydiving log - Tracking jumps and progression
+
+Check them out at /projects`,
+
+  contact: `Get in Touch:
+──────────────────────────────────────
+• Twitter: @jsm_99
+• GitHub: github.com/jackmorrison12
+• LinkedIn: jackmorrison12
+• Email: Available on request (type 'projects' for more)`,
+
+  now: `Current Status:
+──────────────────────────────────────
+▶ Working on: Personal site improvements
+▶ Listening to: Check /feed/lastfm
+▶ Current obsession: Home Assistant automations
+▶ Recently: Added fun Easter eggs to this site
+▶ Next: More 3D visualizations and data viz`,
+
+  secret: `🎉 Secret Unlocked!
+──────────────────────────────────────
+You found the hidden terminal!
+
+Other things to try:
+• Konami code (↑↑↓↓←→←→BA)
+• Hover effects on social icons
+• Type 'help' for more commands here
+
+Happy exploring!`,
+
   clear: '__CLEAR__',
   exit: '__EXIT__',
 };
@@ -53,17 +80,14 @@ export const Terminal = () => {
   // Listen for backtick key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Toggle on backtick/grave key
       if (e.key === '`' || e.key === 'Backquote') {
         e.preventDefault();
-        setIsOpen(prev => !prev);
+        setIsOpen((prev) => !prev);
       }
-      // Close on Escape
       if (e.key === 'Escape' && isOpen) {
         setIsOpen(false);
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
@@ -72,7 +96,6 @@ export const Terminal = () => {
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
-      // Scroll to bottom
       if (terminalRef.current) {
         terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
       }
@@ -84,12 +107,13 @@ export const Terminal = () => {
     if (isOpen && showBoot) {
       const timer = setTimeout(() => {
         setShowBoot(false);
-        setHistory([{
-          command: '',
-          response: `MiloOS v1.0.0 Terminal [dev-mode]
-Type 'help' for available commands.`
-        }]);
-      }, 1500);
+        setHistory([
+          {
+            command: '',
+            response: `jackmorrison.me terminal v1.0.0\nType 'help' for available commands.`,
+          },
+        ]);
+      }, 800);
       return () => clearTimeout(timer);
     }
   }, [isOpen, showBoot]);
@@ -97,11 +121,11 @@ Type 'help' for available commands.`
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const cmd = input.trim().toLowerCase();
-    
     if (!cmd) return;
 
-    const response = COMMANDS[cmd] || `Command not found: ${cmd}
-Type 'help' for available commands.`;
+    const response =
+      COMMANDS[cmd] ||
+      `Command not found: ${cmd}\nType 'help' for available commands.`;
 
     if (response === '__CLEAR__') {
       setHistory([]);
@@ -110,9 +134,8 @@ Type 'help' for available commands.`;
       setHistory([]);
       setShowBoot(true);
     } else {
-      setHistory(prev => [...prev, { command: cmd, response }]);
+      setHistory((prev) => [...prev, { command: cmd, response }]);
     }
-
     setInput('');
   };
 
@@ -122,8 +145,8 @@ Type 'help' for available commands.`;
     <div className={styles.overlay}>
       <div className={styles.terminal}>
         <div className={styles.header}>
-          <span className={styles.title}>milo@jackmorrison:~</span>
-          <button 
+          <span className={styles.title}>jack@terminal:~</span>
+          <button
             className={styles.closeBtn}
             onClick={() => {
               setIsOpen(false);
@@ -134,13 +157,10 @@ Type 'help' for available commands.`;
             ×
           </button>
         </div>
-        
         <div className={styles.content} ref={terminalRef}>
           {showBoot ? (
             <div className={styles.bootSequence}>
-              <div className={styles.bootLine}>Initializing MiloOS...</div>
-              <div className={styles.bootLine}>Loading modules...</div>
-              <div className={styles.bootLine}>Mounting filesystem...</div>
+              <div className={styles.bootLine}>Initializing...</div>
             </div>
           ) : (
             <>
@@ -148,16 +168,15 @@ Type 'help' for available commands.`;
                 <div key={i} className={styles.entry}>
                   {entry.command && (
                     <div className={styles.commandLine}>
-                      <span className={styles.prompt}>$</span>
+                      <span className={styles.prompt}>❯</span>
                       <span className={styles.command}>{entry.command}</span>
                     </div>
                   )}
                   <pre className={styles.response}>{entry.response}</pre>
                 </div>
               ))}
-              
               <form onSubmit={handleSubmit} className={styles.inputLine}>
-                <span className={styles.prompt}>$</span>
+                <span className={styles.prompt}>❯</span>
                 <input
                   ref={inputRef}
                   type="text"
@@ -168,12 +187,10 @@ Type 'help' for available commands.`;
                   spellCheck={false}
                   autoComplete="off"
                 />
-                <span className={styles.cursor}>_</span>
               </form>
             </>
           )}
         </div>
-        
         <div className={styles.hint}>
           Press ` (backtick) to toggle • Escape to close
         </div>
