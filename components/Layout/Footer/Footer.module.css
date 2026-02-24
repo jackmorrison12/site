@@ -50,14 +50,24 @@
 
 .icon {
   width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transform: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  color: var(--greyTextContrast);
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .icon:hover {
-  transform: scale(0.95);
-  color: var(--colours_primary_default);
+  transform: scale(1.1);
+  color: var(--accentSolid);
+}
+
+.icon svg {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
 }
 
 .popular {
