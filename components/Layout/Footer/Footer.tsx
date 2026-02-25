@@ -26,7 +26,7 @@ const AnimatedIcon = ({ href, icon, label, color }: { href: string; icon: React.
         transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         transform: isClicked ? 'scale(0.8)' : isHovered ? 'scale(1.3) rotate(10deg)' : 'scale(1)',
         filter: isHovered ? `drop-shadow(0 0 12px ${color}) brightness(1.3)` : 'none',
-        color: isHovered ? color : 'inherit',
+        color: isHovered ? color : undefined,
         display: 'inline-flex',
         padding: '8px',
       }}
