@@ -1,41 +1,21 @@
 'use client';
-
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Footer.module.css';
 import { GitHubIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../../Logos';
 import { socials } from 'content/about-me';
 
-const AnimatedIcon = ({ href, icon, label, color }: { href: string; icon: React.ReactNode; label: string; color: string }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 300);
-  };
-
-  return (
-    <a
-      href={href}
-      className={styles.icon}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      style={{
-        transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        transform: isClicked ? 'scale(0.8)' : isHovered ? 'scale(1.3) rotate(10deg)' : 'scale(1)',
-        filter: isHovered ? `drop-shadow(0 0 12px ${color}) brightness(1.3)` : 'none',
-        color: isHovered ? color : undefined,
-        display: 'inline-flex',
-        padding: '8px',
-      }}
-      aria-label={label}
-    >
-      {icon}
-    </a>
-  );
-};
+const IconLink = ({ href, icon, label, colorClass }: { href: string; icon: React.ReactNode; label: string; colorClass: string }) => (
+  <a
+    href={href}
+    className={`${styles.icon} ${styles[colorClass]}`}
+    aria-label={label}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {icon}
+  </a>
+);
 
 const Footer = () => (
   <footer>
@@ -80,10 +60,10 @@ const Footer = () => (
       <div className={styles.socials}>
         <h4>Socials</h4>
         <div className={styles.iconGrid}>
-          <AnimatedIcon href={socials.twitter.url} icon={<TwitterIcon />} label="Twitter" color="#1DA1F2" />
-          <AnimatedIcon href={socials.linkedin.url} icon={<LinkedInIcon />} label="LinkedIn" color="#0A66C2" />
-          <AnimatedIcon href={socials.github.url} icon={<GitHubIcon />} label="GitHub" color="#6cc644" />
-          <AnimatedIcon href={socials.instagram.url} icon={<InstagramIcon />} label="Instagram" color="#E1306C" />
+          <IconLink href={socials.twitter.url} icon={<TwitterIcon />} label="Twitter" colorClass="twitter" />
+          <IconLink href={socials.linkedin.url} icon={<LinkedInIcon />} label="LinkedIn" colorClass="linkedin" />
+          <IconLink href={socials.github.url} icon={<GitHubIcon />} label="GitHub" colorClass="github" />
+          <IconLink href={socials.instagram.url} icon={<InstagramIcon />} label="Instagram" colorClass="instagram" />
         </div>
       </div>
       <div className={styles.disclaimer}>&copy; {new Date().getFullYear()} Jack Morrison</div>
