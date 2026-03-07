@@ -41,7 +41,6 @@ export async function getJob(slug: string): Promise<{ rawMDX: string; frontmatte
     source: rawMDX,
     options: {
       parseFrontmatter: true,
-      blockJS: false,
     },
   });
   frontmatter.slug = slug;

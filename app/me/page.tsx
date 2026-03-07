@@ -49,7 +49,7 @@ export default async function Page() {
           <Image src={pic4} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
         </div>
         <Link
-          href="/me/timeline#bloomberg"
+          href="/me/experience"
           className={`${styles.box} ${styles.bbg} ${styles.overlayParent} ${styles.clickable}`}
         >
           <BloombergLogo />
@@ -58,7 +58,7 @@ export default async function Page() {
           </div>
         </Link>
         <Link
-          href="/me/timeline#imperial"
+          href="/me/education"
           className={`${styles.box} ${styles.imperial} ${styles.overlayParent}  ${styles.clickable}`}
         >
           <ImperialLogo />
