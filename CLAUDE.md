@@ -52,8 +52,8 @@ This is **Jack Morrison's personal website** — a Next.js 15/16 App Router appl
 │   ├── Projects/           # ProjectHeader, ProjectSummary
 │   ├── icons/              # Icon components
 │   └── shared/             # BackLink, MdxOverrides, Title
-├── content/                # Static MDX content files
-│   ├── about-me/           # Avatar, photos, and about-me data
+├── content/                # Static MDX content files and data
+│   ├── about-me/           # Avatar, photos, socials.ts, skydiving.ts (exported via index.ts)
 │   ├── education/          # Education entries (billericay, imperial, whsb)
 │   ├── jobs/               # Job entries (bloomberg, facebook, etc.)
 │   └── projects/           # Project detail MDX files
@@ -210,7 +210,7 @@ The app is a PWA via `@ducanh2912/next-pwa`:
 ## Code Quality
 
 - **ESLint**: `@typescript-eslint/recommended` + `eslint:recommended` + `plugin:react/recommended` + `@next/next/recommended` + Prettier integration
-- **Prettier**: Auto-formats on commit (via husky + lint-staged pre-commit hook)
+- **Prettier** (`.prettierrc`): `printWidth: 120`, `tabWidth: 2`, `semi: true`, `singleQuote: true`, `trailingComma: "all"` — auto-formats on commit via husky + lint-staged
 - **TypeScript**: Strict mode enabled, `noEmit: true`, `baseUrl: "."`
 - `@typescript-eslint/no-unused-vars` is set to `error` — remove unused imports/variables
 - `react/react-in-jsx-scope` is off (React 17+ JSX transform)
