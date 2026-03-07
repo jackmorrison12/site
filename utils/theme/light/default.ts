@@ -11,17 +11,15 @@ export const DefaultLightTheme: Theme = {
       default: grey[1],
       soft: grey[6],
       softest: grey[9],
-      // TODO: Set these
-      heavy: 'hsl(0, 0%, 4%)',
-      heaviest: 'hsl(0, 0%, 0%)',
+      heavy: 'hsl(0, 0%, 100%)',
+      heaviest: 'hsl(0, 0%, 100%)',
     },
     text: {
       default: grey[12],
-      // TODO: Set these
-      soft: 'hsl(0, 0%, 85.8%)',
+      soft: 'hsl(0, 0%, 43.5%)',
       softest: 'hsl(0, 0%, 56.1%)',
-      heavy: 'hsl(0, 0%, 99.0%)',
-      heaviest: 'hsl(0, 0%, 97.3%)',
+      heavy: 'hsl(0, 0%, 4%)',
+      heaviest: 'hsl(0, 0%, 0%)',
     },
     primary: {
       ...mintGreen,

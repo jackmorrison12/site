@@ -1,11 +1,10 @@
-import { Title } from 'components/shared/Title';
 import { getEducations } from 'content-access/education/education';
 import { getJobs } from 'content-access/jobs/jobs';
+import Modal from '../Modal';
+import { Timeline } from 'app/me/timeline/Timeline';
+import styles from 'app/me/timeline/timeline.module.scss';
 
-import styles from './timeline.module.scss';
-import { Timeline } from './Timeline';
-
-export default async function Page() {
+export default async function TimelineModal() {
   const jobs = getJobs()
     .map((j) => ({ type: 'JOB', ...j } as const))
     .filter((j) => !j.isHidden)
@@ -17,17 +16,11 @@ export default async function Page() {
     .sort((e1, e2) => (new Date(e1.endDate) > new Date(e2.endDate) ? -1 : 1));
 
   return (
-    <>
-      <Title value="TIMELINE" offset="-669.62" />
+    <Modal>
       <h1>💼 Experience</h1>
       <Timeline items={jobs} itemstoDisplay={2} />
       <h1 className={styles.title}>🎓 Education</h1>
       <Timeline items={educations} itemstoDisplay={1} />
-    </>
+    </Modal>
   );
 }
-
-export const metadata = {
-  title: 'Timeline',
-  description: 'Experience and education history',
-};
