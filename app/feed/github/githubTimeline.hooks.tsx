@@ -98,7 +98,6 @@ export const useGithubTimeline = async () => {
         }
         break;
       case 'CommitCommentEvent':
-        // TODO implement commit comment event
         return null;
       case 'CreateEvent':
         {
@@ -150,10 +149,8 @@ export const useGithubTimeline = async () => {
         }
         break;
       case 'ForkEvent':
-        // TODO implement fork events
         return null;
       case 'IssueCommentEvent':
-        // TODO implement issue comment event
         return null;
       case 'IssuesEvent':
         switch (e.payload.action) {
@@ -203,16 +200,12 @@ export const useGithubTimeline = async () => {
               'Reopened an issue in a private repo'
             );
           case 'assigned':
-            // TODO Implement issue assigned
             return null;
           case 'unassigned':
-            // TODO Implement issue unassigned
             return null;
           case 'labeled':
-            // TODO Implement labeled issue
             return null;
           case 'unlabeled':
-            // TODO Implement unlabeled issue
             return null;
         }
         return 'IssuesEvent';
@@ -271,30 +264,22 @@ export const useGithubTimeline = async () => {
               'Reopened a pull request in a private repo'
             );
           case 'assigned':
-            // TODO Implement assigned PR
             return null;
           case 'unassigned':
-            // TODO Implement unassigned PR
             return null;
           case 'labeled':
-            // TODO Implement labeled PR
             return null;
           case 'unlabeled':
-            // TODO Implement unlabeled PR
             return null;
           case 'review_requested':
-            // TODO Implement review requests on PR
             return null;
           case 'review_request_removed':
-            // TODO Implement review request remved from PR
             return null;
           case 'synchronize':
-            // TODO PR synchronize
             return null;
         }
         break;
       case 'PullRequestReviewCommentEvent':
-        // TODO Implement PR review comment
         return null;
       case 'WatchEvent':
         return (

@@ -39,10 +39,10 @@ export default async function Page() {
         <div className={styles.aboutTitle}>
           <h2>About</h2>
         </div>
-        <Link href="/me/timeline#imperial" className={`${styles.logo} ${styles.imperial} ${styles.clickable}`}>
+        <Link href="/me/education" className={`${styles.logo} ${styles.imperial} ${styles.clickable}`}>
           <ImperialLogo />
         </Link>
-        <Link href="/me/timeline#bloomberg" className={`${styles.logo} ${styles.bloomberg} ${styles.clickable}`}>
+        <Link href="/me/experience" className={`${styles.logo} ${styles.bloomberg} ${styles.clickable}`}>
           <BloombergLogo />
         </Link>
         <div className={styles.skydiving}>
