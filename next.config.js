@@ -4,6 +4,9 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   experimental: {
     mdxRs: true,
+    outputFileTracingIncludes: {
+      '/projects/[slug]': ['./public/img/**/*'],
+    },
   },
   compiler: {
     // Enables the styled-components SWC transform
