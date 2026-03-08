@@ -6,6 +6,7 @@ import StyledComponentsRegistry from './registry';
 
 import { Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
+import { headers } from 'next/headers';
 
 const APP_NAME = 'Jack Morrison';
 const APP_DEFAULT_TITLE = 'Jack Morrison';
@@ -18,14 +19,15 @@ const poppins = Poppins({
   display: 'swap',
 });
 
-export default function RootLayout({ children, modal }: { children: ReactNode; modal: ReactNode }) {
+export default async function RootLayout({ children, modal }: { children: ReactNode; modal: ReactNode }) {
+  const isPdfRoute = (await headers()).get('x-is-pdf-route') === 'true';
   return (
     <html lang="en" className={poppins.className} suppressHydrationWarning>
       <body>
         <Providers>
           <StyledComponentsRegistry>
             <GlobalStyle />
-            <Layout>{children}</Layout>
+            {isPdfRoute ? children : <Layout>{children}</Layout>}
             {modal}
           </StyledComponentsRegistry>
         </Providers>
