@@ -41,6 +41,7 @@ export async function getEducation(slug: string): Promise<{ rawMDX: string; fron
     source: rawMDX,
     options: {
       parseFrontmatter: true,
+      blockJS: false,
     },
   });
   frontmatter.slug = slug;

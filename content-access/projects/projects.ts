@@ -41,6 +41,7 @@ export async function getProject(slug: string): Promise<{ rawMDX: string; frontm
     source: rawMDX,
     options: {
       parseFrontmatter: true,
+      blockJS: false,
     },
   });
   frontmatter.slug = `/projects/${slug}`;
