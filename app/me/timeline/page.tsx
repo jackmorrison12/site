@@ -1,5 +1,3 @@
-// TODO: This should be a modal - look at the vercel tutorials
-
 import { Title } from 'components/shared/Title';
 import { getEducations } from 'content-access/education/education';
 import { getJobs } from 'content-access/jobs/jobs';

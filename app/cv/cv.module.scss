@@ -103,6 +103,13 @@
   }
 }
 
+@media print {
+  .overflowNotification,
+  .buttonWrapper {
+    display: none !important;
+  }
+}
+
 .cvWrapper {
   font-family: 'Poppins', sans-serif;
   width: 210mm;

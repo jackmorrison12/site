@@ -2,7 +2,6 @@ import { Title } from 'components/shared/Title';
 import styles from './me.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-// TODO: Update these imports
 import avatar from 'content/about-me/avatar.jpg';
 import pic2 from 'content/about-me/img/g.jpeg';
 import pic3 from 'content/about-me/img/i.jpeg';
@@ -50,7 +49,7 @@ export default async function Page() {
           <Image src={pic4} fill={true} placeholder="blur" objectFit="cover" alt={'Myself and some friends'} />
         </div>
         <Link
-          href="/me/timeline#bloomberg"
+          href="/me/experience"
           className={`${styles.box} ${styles.bbg} ${styles.overlayParent} ${styles.clickable}`}
         >
           <BloombergLogo />
@@ -59,7 +58,7 @@ export default async function Page() {
           </div>
         </Link>
         <Link
-          href="/me/timeline#imperial"
+          href="/me/education"
           className={`${styles.box} ${styles.imperial} ${styles.overlayParent}  ${styles.clickable}`}
         >
           <ImperialLogo />
@@ -67,14 +66,11 @@ export default async function Page() {
             <p className={styles.overlayContent}>I graduated from Imperial in 2021!</p>
           </div>
         </Link>
-        {/* TODO: Add back once OS page is ready */}
-        {/* <Link href="/me/open-source" passHref className={`${styles.box} ${styles.os} ${styles.clickable}`}> */}
         <div className={`${styles.box} ${styles.os}`}>
           <p className={styles.bigNumber}>{NUM_OS}</p>
           <p>open source projects contributed to</p>
           <p className={styles.smallFooter}>(so far... 👨‍💻)</p>
         </div>
-        {/* </Link> */}
         <a href={socials.twitter.url} className={`${styles.icon} ${styles.twt}`}>
           <TwitterIcon />
         </a>
@@ -88,7 +84,6 @@ export default async function Page() {
           <InstagramIcon />
         </a>
         <div className={`${styles.box} ${styles.about}`}>
-          {/* TODO: This text should change size to fit in the box, not the other way around */}
           <p>
             Hey 👋 I&apos;m Jack, a Software Engineer from the UK, currently living in NY. I graduated from Imperial a
             few years ago now, but have been programming since long before then.

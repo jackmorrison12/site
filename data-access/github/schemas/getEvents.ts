@@ -432,7 +432,6 @@ const event = z.object({
       ),
     })
     .partial()
-    // TODO: https://github.com/github/rest-api-description/issues/1318
     .passthrough(),
   public: z.boolean(),
   created_at: z.union([z.string(), z.null()]),

@@ -5,6 +5,9 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  outputFileTracingIncludes: {
+    '/projects/[slug]': ['./public/img/**/*'],
+  },
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,
