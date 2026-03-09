@@ -1,33 +1,24 @@
 import { Title } from '../../components/shared/Title';
 import styles from './cv.module.scss';
 import { SaveFile } from './SaveFile';
-import { ScrollLeftRight } from './ScrollLeftRight';
 import { ClientEvent } from 'utils/analytics/ClientEvent';
 import { CvContent } from './CvContent';
+import { CvScaler } from './CvScaler';
 
 export default async function Page() {
   return (
     <>
       <Title value="CV" offset="-151.03" />
       <div className={styles.overflowNotification}>
-        <p>Looks like my CV is a bit big for this screen!</p>
-        <div className={styles.iconWrapper}>
-          <ClientEvent action="download_cv" category="button_click" label="mobile">
-            <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
-              <button className={styles.downloadButtonMobile}>
-                <SaveFile />
-              </button>
-              <p className={styles.label}>download</p>
-            </a>
-          </ClientEvent>
-          <p>or</p>
-          <div className={styles.labelWrapper}>
-            <div className={styles.scrollButtonMobile}>
-              <ScrollLeftRight />
-            </div>
-            <p className={styles.label}>scroll</p>
-          </div>
-        </div>
+        <p>My CV may be hard to read on mobile - download it as a PDF instead!</p>
+        <ClientEvent action="download_cv" category="button_click" label="mobile">
+          <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
+            <button className={styles.downloadButtonMobile}>
+              <SaveFile />
+            </button>
+            <p className={styles.label}>download</p>
+          </a>
+        </ClientEvent>
       </div>
       <div className={styles.overflowHandler}>
         <div className={styles.buttonWrapper}>
@@ -39,7 +30,9 @@ export default async function Page() {
             </a>
           </ClientEvent>
         </div>
-        <CvContent />
+        <CvScaler>
+          <CvContent />
+        </CvScaler>
       </div>
     </>
   );

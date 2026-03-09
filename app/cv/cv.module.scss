@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .overflowHandler {
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .overflowNotification {
@@ -11,7 +11,7 @@
   text-align: center;
   width: clamp(1px, 100%, 400px);
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .buttonWrapper {
@@ -43,14 +43,6 @@
   }
 }
 
-.iconWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
 .labelWrapper {
   display: flex;
   flex-direction: column;
@@ -61,16 +53,6 @@
 
 .label {
   font-size: var(--fontSizes_tiny);
-}
-
-.scrollButtonMobile {
-  height: 50px;
-  width: 50px;
-
-  svg {
-    padding: 5px;
-    fill: currentColor;
-  }
 }
 
 .downloadButtonMobile {
@@ -90,6 +72,12 @@
     width: 100%;
     padding: 5px;
     fill: currentColor;
+  }
+}
+
+@media (max-width: calc(210mm + (2 * clamp(1rem, 6vw, 3rem)))) {
+  .buttonWrapper {
+    display: none;
   }
 }
 
@@ -113,7 +101,7 @@
 .cvWrapper {
   font-family: 'Poppins', sans-serif;
   width: 210mm;
-  height: 297mm;
+  min-height: 297mm;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
