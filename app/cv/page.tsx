@@ -10,7 +10,7 @@ export default async function Page() {
     <>
       <Title value="CV" offset="-151.03" />
       <div className={styles.overflowNotification}>
-        <p>Looks like my CV is a bit big for this screen!</p>
+        <p>My CV may be hard to read on mobile - download it as a PDF instead!</p>
         <ClientEvent action="download_cv" category="button_click" label="mobile">
           <a href="/files/jack-morrison-cv.pdf" download="jack-morrison-cv.pdf" className={styles.labelWrapper}>
             <button className={styles.downloadButtonMobile}>
