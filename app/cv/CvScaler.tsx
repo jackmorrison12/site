@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 
 const CV_WIDTH_PX = 210 * 3.7795275591; // 210mm at 96dpi
 
@@ -9,8 +9,9 @@ export function CvScaler({ children }: { children: React.ReactNode }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [scaledHeight, setScaledHeight] = useState<number | undefined>(undefined);
+  const [measured, setMeasured] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     const content = contentRef.current;
     if (!container || !content) return;
@@ -20,6 +21,7 @@ export function CvScaler({ children }: { children: React.ReactNode }) {
       const newScale = Math.min(1, containerWidth / CV_WIDTH_PX);
       setScale(newScale);
       setScaledHeight(newScale < 1 ? content.scrollHeight * newScale : undefined);
+      setMeasured(true);
     });
 
     observer.observe(container);
@@ -27,7 +29,7 @@ export function CvScaler({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: scaledHeight, overflow: 'hidden' }}>
+    <div ref={containerRef} style={{ width: '100%', height: scaledHeight, overflow: 'hidden', visibility: measured ? 'visible' : 'hidden' }}>
       <div
         ref={contentRef}
         style={{
