@@ -53,9 +53,6 @@ const TopTrackAsync = async () => {
       href={trackInfo?.track.url ?? albumInfo?.album.url ?? ''}
     >
       <div className={styles.musicText}>
-        {/* TODO: This is a hack to get the image into the before selector, since you can't
-                  pass variables into CSS modules, and I don't want to duplicate the code
-                  into a styled component */}
         <style>{`.music::before { background-image: url(${imageUrl})}`}</style>
         <p className={styles.musicTitle}>Top track this week:</p>
         <div>

@@ -18,7 +18,7 @@ const poppins = Poppins({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children, modal }: { children: ReactNode; modal: ReactNode }) {
   return (
     <html lang="en" className={poppins.className} suppressHydrationWarning>
       <body>
@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <StyledComponentsRegistry>
             <GlobalStyle />
             <Layout>{children}</Layout>
+            {modal}
           </StyledComponentsRegistry>
         </Providers>
       </body>

@@ -19,31 +19,31 @@ export function getJobSlugs(): Array<{ slug: string }> {
 
 export function getJobs(): Job[] {
   return getJobSlugs()
-    .map((slug) => ({ ...getJobFrontmatter(slug.slug), slug: slug.slug }))
+    .map((slug) => ({
+      ...getJobFrontmatter(slug.slug),
+      slug: slug.slug,
+    }))
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 }
 
 export function getJobFrontmatter(slug: string): Job {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const file = fs.readFileSync(fullPath, 'utf-8');
-
   const { data } = matter(file);
-
   data.slug = slug;
-
   return data as unknown as Job;
 }
 
 export async function getJob(slug: string): Promise<{ rawMDX: string; frontmatter: Job }> {
   const fullPath = join(PATH, `${slug}${FILE_EXTN}`);
   const rawMDX = fs.readFileSync(fullPath, 'utf-8');
-
   const { frontmatter } = await compileMDX<Job>({
     source: rawMDX,
-    options: { parseFrontmatter: true },
+    options: {
+      parseFrontmatter: true,
+      blockJS: false,
+    },
   });
-
   frontmatter.slug = slug;
-
   return { rawMDX, frontmatter };
 }

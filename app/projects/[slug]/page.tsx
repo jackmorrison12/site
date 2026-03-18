@@ -13,17 +13,21 @@ export const generateStaticParams = getProjectSlugs;
 export default async function Page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const slug = params.slug;
-
   let project = undefined;
   try {
     project = await getProject(slug);
   } catch {
     return notFound();
   }
-  const { base64: heroOptimised, img: heroImg } = await getPlaiceholder(project.frontmatter.heroImg, { size: 10 });
-  const { base64: bannerOptimised, img: bannerImg } = await getPlaiceholder(project.frontmatter.bannerImg, {
-    size: 10,
-  });
+
+  const { base64: heroOptimised, img: heroImg } = await getPlaiceholder(
+    project.frontmatter.heroImg,
+    { size: 10 }
+  );
+  const { base64: bannerOptimised, img: bannerImg } = await getPlaiceholder(
+    project.frontmatter.bannerImg,
+    { size: 10 },
+  );
 
   const imageProps = {
     hero: {
@@ -46,7 +50,10 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
         <MDXRemote
           source={project.rawMDX}
           components={{ Image, ...mdxOverrides }}
-          options={{ parseFrontmatter: true }}
+          options={{
+            parseFrontmatter: true,
+            blockJS: false,
+          }}
         />
       </TextWrapper>
     </>
