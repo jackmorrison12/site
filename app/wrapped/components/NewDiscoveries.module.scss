@@ -1,0 +1,33 @@
+.container {
+  background-color: var(--colours_primary_background_default);
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.heading {
+  margin: 0 0 16px 0;
+  font-size: var(--fontSizes_large);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background-color: var(--colours_secondary_background_default);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: var(--fontSizes_small);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.count {
+  font-size: var(--fontSizes_tiny);
+  opacity: 0.6;
+  font-weight: var(--fontWeights_thick);
+}
