@@ -1,0 +1,78 @@
+.layout {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'summary   summary'
+    'tracks    tracks'
+    'artists   artists'
+    'monthly   monthly'
+    'obsession obsession'
+    'patterns  patterns'
+    'discover  discover'
+    'trends    trends';
+}
+
+.summary {
+  grid-area: summary;
+}
+
+.tracks {
+  grid-area: tracks;
+}
+
+.artists {
+  grid-area: artists;
+}
+
+.monthly {
+  grid-area: monthly;
+}
+
+.obsession {
+  grid-area: obsession;
+}
+
+.patterns {
+  grid-area: patterns;
+}
+
+.discover {
+  grid-area: discover;
+}
+
+.trends {
+  grid-area: trends;
+}
+
+/* Tablet */
+@media (min-width: 48em) {
+  .layout {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      'summary   summary   summary   summary   summary   summary'
+      'tracks    tracks    tracks    artists   artists   artists'
+      'tracks    tracks    tracks    artists   artists   artists'
+      'monthly   monthly   monthly   monthly   monthly   monthly'
+      'obsession obsession obsession patterns  patterns  patterns'
+      'obsession obsession obsession patterns  patterns  patterns'
+      'discover  discover  discover  trends    trends    trends'
+      'discover  discover  discover  trends    trends    trends';
+  }
+}
+
+/* Desktop */
+@media (min-width: 62em) {
+  .layout {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-areas:
+      'summary   summary   summary   summary   summary   summary   summary   summary'
+      'tracks    tracks    tracks    tracks    artists   artists   artists   artists'
+      'tracks    tracks    tracks    tracks    artists   artists   artists   artists'
+      'monthly   monthly   monthly   monthly   monthly   monthly   monthly   monthly'
+      'obsession obsession obsession patterns  patterns  patterns  patterns  patterns'
+      'obsession obsession obsession patterns  patterns  patterns  patterns  patterns'
+      'discover  discover  discover  discover  trends    trends    trends    trends'
+      'discover  discover  discover  discover  trends    trends    trends    trends';
+  }
+}
