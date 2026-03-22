@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { WeeklyObsession } from '../data.types';
+import { ArtistImage } from './ArtistImage';
 import styles from './ObsessionTracks.module.scss';
 
 const MONTHS = [
@@ -35,15 +35,7 @@ export function ObsessionTracks({ obsessions }: { obsessions: WeeklyObsession[] 
       <div className={styles.list}>
         {obsessions.map((track) => (
           <div key={`${track.id}-${track.weekDate.toISOString()}`} className={styles.card}>
-            {track.imageUrl && (
-              <Image
-                src={track.imageUrl}
-                width={80}
-                height={80}
-                alt={`Cover art for ${track.name}`}
-                className={styles.art}
-              />
-            )}
+            <ArtistImage src={track.imageUrl ?? ''} alt={track.name} size={80} />
             <div className={styles.info}>
               <div className={styles.trackName}>{track.name}</div>
               <div className={styles.artistName}>{track.artist}</div>

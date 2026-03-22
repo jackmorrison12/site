@@ -3,6 +3,8 @@
   padding: 20px;
   border-radius: 10px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading {
@@ -14,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 }
 
 .row {
@@ -22,6 +25,7 @@
   gap: 12px;
   padding: 6px 8px;
   border-radius: 6px;
+  flex: 1;
 
   &:nth-child(even) {
     background-color: var(--colours_secondary_background_default);
@@ -36,18 +40,17 @@
   text-overflow: ellipsis;
 }
 
-.count {
+.counts {
   font-size: var(--fontSizes_small);
   opacity: 0.7;
-  width: 40px;
-  text-align: right;
   flex-shrink: 0;
+  text-align: right;
 }
 
 .change {
   font-size: var(--fontSizes_small);
   font-weight: var(--fontWeights_thick);
-  width: 60px;
+  width: 70px;
   text-align: right;
   flex-shrink: 0;
 }

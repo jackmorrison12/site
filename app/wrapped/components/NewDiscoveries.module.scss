@@ -3,6 +3,8 @@
   padding: 20px;
   border-radius: 10px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading {
@@ -10,24 +12,38 @@
   font-size: var(--fontSizes_large);
 }
 
-.pills {
+.list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
 }
 
-.pill {
-  background-color: var(--colours_secondary_background_default);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: var(--fontSizes_small);
-  display: inline-flex;
+.row {
+  display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.rowAlt {
+  background-color: var(--colours_secondary_background_default);
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .count {
-  font-size: var(--fontSizes_tiny);
-  opacity: 0.6;
+  font-size: var(--fontSizes_small);
   font-weight: var(--fontWeights_thick);
+  flex-shrink: 0;
+  width: 40px;
+  text-align: right;
 }

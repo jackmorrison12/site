@@ -35,10 +35,21 @@
   flex-shrink: 0;
 }
 
-.name {
+.info {
   flex: 1;
   min-width: 0;
+}
+
+.title {
   font-weight: var(--fontWeights_thick);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  font-size: var(--fontSizes_small);
+  opacity: 0.7;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -52,8 +63,12 @@
 
 .bar {
   height: 8px;
-  background-color: var(--colours_secondary_default);
+  background-color: var(--colours_primary_default);
   border-radius: 4px;
+}
+
+.barSecondary {
+  background-color: var(--colours_secondary_default);
 }
 
 .count {

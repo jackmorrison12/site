@@ -20,6 +20,8 @@ export type TrackWithCount = {
 export type ArtistWithCount = {
   artist: string;
   count: number;
+  imageUrl?: string | null;
+  topTrack?: string | null;
 };
 
 export type MonthlyTopArtist = {
@@ -27,6 +29,7 @@ export type MonthlyTopArtist = {
   monthName: string;
   artist: string;
   count: number;
+  imageUrl: string | null;
 };
 
 export type WeeklyObsession = {
@@ -48,4 +51,5 @@ export type ArtistTrend = {
   currentCount: number;
   previousCount: number;
   percentChange: number;
+  imageUrl: string | null;
 };
