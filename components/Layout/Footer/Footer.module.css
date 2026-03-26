@@ -55,11 +55,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--greyTextContrast);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  padding: 8px;
-  text-decoration: none;
-  max-width: none;
 }
 
 .icon:hover {
