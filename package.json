@@ -21,7 +21,7 @@
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.33.0",
+    "drizzle-orm": "^0.45.2",
     "flat": "^5.0.2",
     "gray-matter": "^4.0.3",
     "hamburger-react": "^2.5.2",
