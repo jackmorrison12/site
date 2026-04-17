@@ -25,7 +25,12 @@ export default function Page() {
   });
 
   if (session.data?.user?.email !== 'jack1morrison@sky.com') {
-    return <button onClick={() => signIn('github')}>Sign in</button>;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '200px' }}>
+        <button onClick={() => signIn('github')}>Sign in with GitHub</button>
+        <button onClick={() => signIn('passkey')}>Sign in with Passkey</button>
+      </div>
+    );
   }
 
   return (
