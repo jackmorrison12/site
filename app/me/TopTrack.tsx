@@ -20,7 +20,7 @@ const TopTrackAsync = async () => {
     topTrack = (await getTopTracks({ period: '7day', limit: 1 })).toptracks.track[0];
   } catch {
     return (
-      <Link href="/feed/lastfm" className={`${styles.music} ${styles.clickable} ${styles.musicLoader}`}>
+      <Link href={`/wrapped/${new Date().getFullYear()}`} className={`${styles.music} ${styles.clickable} ${styles.musicLoader}`}>
         <div>Music</div>
       </Link>
     );
@@ -48,9 +48,9 @@ const TopTrackAsync = async () => {
       : '';
 
   return (
-    <a
+    <Link
       className={`${styles.box} ${styles.music} ${styles.clickable} music`}
-      href={trackInfo?.track.url ?? albumInfo?.album.url ?? ''}
+      href={`/wrapped/${new Date().getFullYear()}`}
     >
       <div className={styles.musicText}>
         <style>{`.music::before { background-image: url(${imageUrl})}`}</style>
@@ -61,6 +61,6 @@ const TopTrackAsync = async () => {
           <p className={styles.musicListens}>{topTrack.playcount} listens</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
