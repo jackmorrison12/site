@@ -1,0 +1,28 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.card {
+  background-color: var(--colours_primary_background_default);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.number {
+  font-size: var(--fontSizes_xxl);
+  font-weight: var(--fontWeights_thick);
+}
+
+.label {
+  font-size: var(--fontSizes_tiny);
+  margin-top: 4px;
+}
+
+@media (max-width: 48em) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
