@@ -20,6 +20,7 @@ import { ObsessionTracks } from '../components/ObsessionTracks';
 import { ListeningPatterns } from '../components/ListeningPatterns';
 import { NewDiscoveries } from '../components/NewDiscoveries';
 import { ArtistTrends } from '../components/ArtistTrends';
+import { RefreshButton } from 'app/feed/lastfm/RefreshButton';
 import styles from '../wrapped.module.scss';
 
 export default async function Page(props: { params: Promise<{ year: string }> }) {
@@ -76,13 +77,16 @@ export default async function Page(props: { params: Promise<{ year: string }> })
         <div className={styles.trends}>
           <ArtistTrends trends={trends} />
         </div>
-        {lastSync && (
-          <p className={styles.syncNote}>
-            Last listen synced @{' '}
-            {lastSync.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })},{' '}
-            {lastSync.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
-          </p>
-        )}
+        <div className={styles.syncNote}>
+          {lastSync && (
+            <p>
+              Last listen synced @{' '}
+              {lastSync.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })},{' '}
+              {lastSync.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+            </p>
+          )}
+          <RefreshButton />
+        </div>
       </div>
     </>
   );
