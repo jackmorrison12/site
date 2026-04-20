@@ -81,7 +81,7 @@ export default async function Page(props: { params: Promise<{ year: string }> })
         <div className={styles.syncNote}>
           {lastSync && (
             <p>
-              Last listen synced @ <LocalTime date={lastSync} />
+              Last listen synced <LocalTime date={lastSync} />
             </p>
           )}
           <RefreshButton />
