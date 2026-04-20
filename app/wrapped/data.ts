@@ -39,8 +39,8 @@ export async function getSummaryStats(range: DateRange): Promise<SummaryStats> {
   const result = await db
     .select({
       totalListens: count(listens.id),
-      uniqueTracks: sql<number>`COUNT(DISTINCT ${listens.id})`,
-      uniqueArtists: sql<number>`COUNT(DISTINCT ${tracks.artist})`,
+      uniqueTracks: sql<number>`COUNT(DISTINCT LOWER(${tracks.name}) || '__' || LOWER(${tracks.artist}))`,
+      uniqueArtists: sql<number>`COUNT(DISTINCT LOWER(${tracks.artist}))`,
     })
     .from(listens)
     .innerJoin(tracks, eq(listens.id, tracks.id))
@@ -56,16 +56,16 @@ export async function getSummaryStats(range: DateRange): Promise<SummaryStats> {
 export async function getTopTracks(range: DateRange, limit = 10): Promise<TrackWithCount[]> {
   const result = await db
     .select({
-      name: tracks.name,
-      artist: tracks.artist,
+      name: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.name})`,
+      artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
       count: count(listens.id),
-      id: tracks.id,
-      imageUrl: tracks.imageUrl,
+      id: sql<string>`MIN(${tracks.id})`,
+      imageUrl: sql<string | null>`MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl})`,
     })
     .from(listens)
     .innerJoin(tracks, eq(listens.id, tracks.id))
     .where(dateFilter(range))
-    .groupBy(listens.id, tracks.name, tracks.artist, tracks.id, tracks.imageUrl)
+    .groupBy(sql`LOWER(${tracks.name})`, sql`LOWER(${tracks.artist})`)
     .orderBy(desc(count(listens.id)))
     .limit(limit);
 
@@ -75,29 +75,33 @@ export async function getTopTracks(range: DateRange, limit = 10): Promise<TrackW
 export async function getTopArtists(range: DateRange, limit = 10): Promise<ArtistWithCount[]> {
   const result = await db.execute(sql`
     WITH artist_counts AS (
-      SELECT ${tracks.artist} AS artist, COUNT(*) AS listen_count
+      SELECT
+        LOWER(${tracks.artist}) AS artist_key,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.artist}) AS artist,
+        COUNT(*) AS listen_count
       FROM ${listens}
       INNER JOIN ${tracks} ON ${listens.id} = ${tracks.id}
       WHERE ${listens.time} >= ${range.startDate} AND ${listens.time} < ${range.endDate}
-      GROUP BY ${tracks.artist}
+      GROUP BY LOWER(${tracks.artist})
       ORDER BY listen_count DESC
       LIMIT ${limit}
     ),
     artist_top_tracks AS (
       SELECT
-        ${tracks.artist} AS artist,
-        ${tracks.name} AS track_name,
-        ${tracks.imageUrl} AS image_url,
-        ROW_NUMBER() OVER (PARTITION BY ${tracks.artist} ORDER BY COUNT(*) DESC) AS rn
+        LOWER(${tracks.artist}) AS artist_key,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.name}) AS track_name,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl}) AS image_url,
+        COUNT(*) AS track_count,
+        ROW_NUMBER() OVER (PARTITION BY LOWER(${tracks.artist}) ORDER BY COUNT(*) DESC) AS rn
       FROM ${listens}
       INNER JOIN ${tracks} ON ${listens.id} = ${tracks.id}
       WHERE ${listens.time} >= ${range.startDate} AND ${listens.time} < ${range.endDate}
-        AND ${tracks.artist} IN (SELECT artist FROM artist_counts)
-      GROUP BY ${tracks.artist}, ${tracks.name}, ${tracks.imageUrl}
+        AND LOWER(${tracks.artist}) IN (SELECT artist_key FROM artist_counts)
+      GROUP BY LOWER(${tracks.artist}), LOWER(${tracks.name})
     )
     SELECT ac.artist, ac.listen_count, att.track_name, att.image_url
     FROM artist_counts ac
-    LEFT JOIN artist_top_tracks att ON ac.artist = att.artist AND att.rn = 1
+    LEFT JOIN artist_top_tracks att ON ac.artist_key = att.artist_key AND att.rn = 1
     ORDER BY ac.listen_count DESC
   `);
 
@@ -113,7 +117,8 @@ export async function getTopArtistByMonth(range: DateRange): Promise<MonthlyTopA
   const result = await db.execute(sql`
     WITH monthly_counts AS (
       SELECT
-        ${tracks.artist} AS artist,
+        LOWER(${tracks.artist}) AS artist_key,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.artist}) AS artist,
         EXTRACT(MONTH FROM ${listens.time}) AS month_num,
         COUNT(*) AS listen_count,
         ROW_NUMBER() OVER (
@@ -123,19 +128,19 @@ export async function getTopArtistByMonth(range: DateRange): Promise<MonthlyTopA
       FROM ${listens}
       INNER JOIN ${tracks} ON ${listens.id} = ${tracks.id}
       WHERE ${listens.time} >= ${range.startDate} AND ${listens.time} < ${range.endDate}
-      GROUP BY ${tracks.artist}, EXTRACT(MONTH FROM ${listens.time})
+      GROUP BY LOWER(${tracks.artist}), EXTRACT(MONTH FROM ${listens.time})
     ),
     artist_images AS (
-      SELECT DISTINCT ON (t.artist)
-        t.artist,
+      SELECT DISTINCT ON (LOWER(t.artist))
+        LOWER(t.artist) AS artist_key,
         t.image_url
       FROM ${tracks} t
       WHERE t.image_url IS NOT NULL
-      ORDER BY t.artist, t.id
+      ORDER BY LOWER(t.artist), t.id
     )
     SELECT mc.artist, mc.month_num, mc.listen_count, ai.image_url
     FROM monthly_counts mc
-    LEFT JOIN artist_images ai ON mc.artist = ai.artist
+    LEFT JOIN artist_images ai ON mc.artist_key = ai.artist_key
     WHERE mc.rn = 1
     ORDER BY mc.month_num
   `);
@@ -155,17 +160,17 @@ export async function getTopArtistByMonth(range: DateRange): Promise<MonthlyTopA
 export async function getObsessionTracks(range: DateRange, limit = 5): Promise<WeeklyObsession[]> {
   const result = await db
     .select({
-      name: tracks.name,
-      artist: tracks.artist,
+      name: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.name})`,
+      artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
       count: count(listens.id),
-      id: tracks.id,
-      imageUrl: tracks.imageUrl,
+      id: sql<string>`MIN(${tracks.id})`,
+      imageUrl: sql<string | null>`MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl})`,
       weekDate: sql<string>`date_trunc('week', ${listens.time}::date)`,
     })
     .from(listens)
     .innerJoin(tracks, eq(listens.id, tracks.id))
     .where(dateFilter(range))
-    .groupBy(listens.id, tracks.name, tracks.artist, tracks.id, tracks.imageUrl, sql`date_trunc('week', ${listens.time}::date)`)
+    .groupBy(sql`LOWER(${tracks.name})`, sql`LOWER(${tracks.artist})`, sql`date_trunc('week', ${listens.time}::date)`)
     .orderBy(desc(count(listens.id)))
     .limit(limit);
 
@@ -214,22 +219,26 @@ export async function getListeningPatterns(range: DateRange): Promise<ListeningP
 export async function getNewDiscoveries(range: DateRange, limit = 20): Promise<ArtistWithCount[]> {
   const [currentArtists, previousArtists] = await Promise.all([
     db
-      .select({ artist: tracks.artist, count: count(listens.id), imageUrl: sql<string | null>`MIN(${tracks.imageUrl})` })
+      .select({
+        artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
+        count: count(listens.id),
+        imageUrl: sql<string | null>`MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl})`,
+      })
       .from(listens)
       .innerJoin(tracks, eq(listens.id, tracks.id))
       .where(dateFilter(range))
-      .groupBy(tracks.artist)
+      .groupBy(sql`LOWER(${tracks.artist})`)
       .orderBy(desc(sql`count`)),
     db
-      .select({ artist: tracks.artist })
+      .select({ artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})` })
       .from(listens)
       .innerJoin(tracks, eq(listens.id, tracks.id))
       .where(lt(listens.time, range.startDate))
-      .groupBy(tracks.artist),
+      .groupBy(sql`LOWER(${tracks.artist})`),
   ]);
 
-  const previousArtistSet = new Set(previousArtists.map((a) => a.artist));
-  return currentArtists.filter((a) => !previousArtistSet.has(a.artist)).slice(0, limit);
+  const previousArtistSet = new Set(previousArtists.map((a) => a.artist.toLowerCase()));
+  return currentArtists.filter((a) => !previousArtistSet.has(a.artist.toLowerCase())).slice(0, limit);
 }
 
 export async function getArtistTrends(range: DateRange, limit = 15): Promise<ArtistTrend[]> {
@@ -241,27 +250,34 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
 
   const [currentArtists, previousArtists] = await Promise.all([
     db
-      .select({ artist: tracks.artist, count: count(listens.id), imageUrl: sql<string | null>`MIN(${tracks.imageUrl})` })
+      .select({
+        artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
+        count: count(listens.id),
+        imageUrl: sql<string | null>`MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl})`,
+      })
       .from(listens)
       .innerJoin(tracks, eq(listens.id, tracks.id))
       .where(dateFilter(range))
-      .groupBy(tracks.artist)
+      .groupBy(sql`LOWER(${tracks.artist})`)
       .orderBy(desc(sql`count`)),
     db
-      .select({ artist: tracks.artist, count: count(listens.id) })
+      .select({
+        artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
+        count: count(listens.id),
+      })
       .from(listens)
       .innerJoin(tracks, eq(listens.id, tracks.id))
       .where(dateFilter(previousRange))
-      .groupBy(tracks.artist)
+      .groupBy(sql`LOWER(${tracks.artist})`)
       .orderBy(desc(sql`count`)),
   ]);
 
-  const previousMap = new Map(previousArtists.map((a) => [a.artist, a.count]));
+  const previousMap = new Map(previousArtists.map((a) => [a.artist.toLowerCase(), a.count]));
 
   const trends: ArtistTrend[] = currentArtists
-    .filter((a) => (previousMap.get(a.artist) ?? 0) >= 5)
+    .filter((a) => (previousMap.get(a.artist.toLowerCase()) ?? 0) >= 5)
     .map((a) => {
-      const previousCount = previousMap.get(a.artist)!;
+      const previousCount = previousMap.get(a.artist.toLowerCase())!;
       const percentChange = previousCount > 0 ? ((a.count - previousCount) / previousCount) * 100 : 0;
       return {
         artist: a.artist,
