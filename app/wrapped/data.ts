@@ -274,7 +274,7 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
 
   const previousMap = new Map(previousArtists.map((a) => [a.artist.toLowerCase(), a.count]));
 
-  const trends: ArtistTrend[] = currentArtists
+  const allTrends: ArtistTrend[] = currentArtists
     .filter((a) => (previousMap.get(a.artist.toLowerCase()) ?? 0) >= 5)
     .map((a) => {
       const previousCount = previousMap.get(a.artist.toLowerCase())!;
@@ -286,11 +286,19 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
         percentChange,
         imageUrl: a.imageUrl,
       };
-    })
-    .sort((a, b) => Math.abs(b.percentChange) - Math.abs(a.percentChange))
-    .slice(0, limit);
+    });
 
-  return trends;
+  const half = Math.floor(limit / 2);
+  const rising = allTrends
+    .filter((t) => t.percentChange >= 0)
+    .sort((a, b) => b.percentChange - a.percentChange)
+    .slice(0, half);
+  const falling = allTrends
+    .filter((t) => t.percentChange < 0)
+    .sort((a, b) => a.percentChange - b.percentChange)
+    .slice(0, half);
+
+  return [...rising, ...falling];
 }
 
 export async function getLastSyncTime(): Promise<Date | null> {
