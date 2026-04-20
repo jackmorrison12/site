@@ -21,6 +21,7 @@ import { ListeningPatterns } from '../components/ListeningPatterns';
 import { NewDiscoveries } from '../components/NewDiscoveries';
 import { ArtistTrends } from '../components/ArtistTrends';
 import { RefreshButton } from 'app/feed/lastfm/RefreshButton';
+import { LocalTime } from '../components/LocalTime';
 import styles from '../wrapped.module.scss';
 
 export default async function Page(props: { params: Promise<{ year: string }> }) {
@@ -80,9 +81,7 @@ export default async function Page(props: { params: Promise<{ year: string }> })
         <div className={styles.syncNote}>
           {lastSync && (
             <p>
-              Last listen synced @{' '}
-              {lastSync.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })},{' '}
-              {lastSync.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+              Last listen synced @ <LocalTime date={lastSync} />
             </p>
           )}
           <RefreshButton />
