@@ -9,6 +9,7 @@ import {
   getListeningPatterns,
   getNewDiscoveries,
   getArtistTrends,
+  getLastSyncTime,
 } from '../data';
 import type { DateRange } from '../data.types';
 import { SummaryCards } from '../components/SummaryCards';
@@ -34,16 +35,18 @@ export default async function Page(props: { params: Promise<{ year: string }> })
     endDate: new Date(year + 1, 0, 1),
   };
 
-  const [summary, topTracks, topArtists, monthlyTop, obsessions, patterns, discoveries, trends] = await Promise.all([
-    getSummaryStats(range),
-    getTopTracks(range),
-    getTopArtists(range),
-    getTopArtistByMonth(range),
-    getObsessionTracks(range),
-    getListeningPatterns(range),
-    getNewDiscoveries(range),
-    getArtistTrends(range),
-  ]);
+  const [summary, topTracks, topArtists, monthlyTop, obsessions, patterns, discoveries, trends, lastSync] =
+    await Promise.all([
+      getSummaryStats(range),
+      getTopTracks(range),
+      getTopArtists(range),
+      getTopArtistByMonth(range),
+      getObsessionTracks(range),
+      getListeningPatterns(range),
+      getNewDiscoveries(range),
+      getArtistTrends(range),
+      getLastSyncTime(),
+    ]);
 
   return (
     <>
@@ -73,6 +76,13 @@ export default async function Page(props: { params: Promise<{ year: string }> })
         <div className={styles.trends}>
           <ArtistTrends trends={trends} />
         </div>
+        {lastSync && (
+          <p className={styles.syncNote}>
+            Last listen synced @{' '}
+            {lastSync.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })},{' '}
+            {lastSync.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+          </p>
+        )}
       </div>
     </>
   );

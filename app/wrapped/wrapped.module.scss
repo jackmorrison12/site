@@ -10,7 +10,16 @@
     'obsession obsession'
     'patterns  patterns'
     'discover  discover'
-    'trends    trends';
+    'trends    trends'
+    'sync      sync';
+}
+
+.syncNote {
+  grid-area: sync;
+  text-align: center;
+  opacity: 0.5;
+  font-size: var(--fontSizes_small);
+  margin: 8px 0 0;
 }
 
 .summary {
@@ -57,7 +66,8 @@
       'obsession obsession obsession patterns  patterns  patterns'
       'obsession obsession obsession patterns  patterns  patterns'
       'discover  discover  discover  trends    trends    trends'
-      'discover  discover  discover  trends    trends    trends';
+      'discover  discover  discover  trends    trends    trends'
+      'sync      sync      sync      sync      sync      sync';
   }
 }
 
@@ -73,6 +83,7 @@
       'obsession obsession obsession patterns  patterns  patterns  patterns  patterns'
       'obsession obsession obsession patterns  patterns  patterns  patterns  patterns'
       'discover  discover  discover  discover  trends    trends    trends    trends'
-      'discover  discover  discover  discover  trends    trends    trends    trends';
+      'discover  discover  discover  discover  trends    trends    trends    trends'
+      'sync      sync      sync      sync      sync      sync      sync      sync';
   }
 }

@@ -276,3 +276,8 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
 
   return trends;
 }
+
+export async function getLastSyncTime(): Promise<Date | null> {
+  const row = (await db.select({ time: listens.time }).from(listens).orderBy(desc(listens.time)).limit(1))[0];
+  return row?.time ?? null;
+}
