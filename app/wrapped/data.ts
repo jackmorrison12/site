@@ -212,12 +212,6 @@ export async function getListeningPatterns(range: DateRange): Promise<ListeningP
 }
 
 export async function getNewDiscoveries(range: DateRange, limit = 20): Promise<ArtistWithCount[]> {
-  const duration = range.endDate.getTime() - range.startDate.getTime();
-  const previousRange: DateRange = {
-    startDate: new Date(range.startDate.getTime() - duration),
-    endDate: range.startDate,
-  };
-
   const [currentArtists, previousArtists] = await Promise.all([
     db
       .select({ artist: tracks.artist, count: count(listens.id), imageUrl: sql<string | null>`MIN(${tracks.imageUrl})` })
@@ -230,7 +224,7 @@ export async function getNewDiscoveries(range: DateRange, limit = 20): Promise<A
       .select({ artist: tracks.artist })
       .from(listens)
       .innerJoin(tracks, eq(listens.id, tracks.id))
-      .where(dateFilter(previousRange))
+      .where(lt(listens.time, range.startDate))
       .groupBy(tracks.artist),
   ]);
 
@@ -265,7 +259,7 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
   const previousMap = new Map(previousArtists.map((a) => [a.artist, a.count]));
 
   const trends: ArtistTrend[] = currentArtists
-    .filter((a) => previousMap.has(a.artist))
+    .filter((a) => (previousMap.get(a.artist) ?? 0) >= 5)
     .map((a) => {
       const previousCount = previousMap.get(a.artist)!;
       const percentChange = previousCount > 0 ? ((a.count - previousCount) / previousCount) * 100 : 0;

@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/updateLastFmData",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/updateLastFmData?backfill=2",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
