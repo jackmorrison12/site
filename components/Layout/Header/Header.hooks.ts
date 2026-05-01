@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-const MOBILE_NAV_AUTOCLOSE_DELAY_MS = 550;
+const MOBILE_NAV_AUTOCLOSE_DELAY_MS = 450;
 
 export const useHeader = () => {
   const pathname = usePathname();
