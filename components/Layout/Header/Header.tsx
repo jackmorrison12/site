@@ -15,26 +15,12 @@ import { ThemePicker } from './ThemePicker';
 const isLinkActive = (link: HeaderLink, pathname: string | null) =>
   link.url === '/' ? pathname === link.url : !!pathname?.includes(link.url);
 
-const NavLinks = ({
-  pathname,
-  layoutId,
-  onNavigate,
-}: {
-  pathname: string | null;
-  layoutId: string;
-  onNavigate?: () => void;
-}) => (
+const NavLinks = ({ pathname, layoutId }: { pathname: string | null; layoutId: string }) => (
   <>
     {headerLinks.map((link) => {
       const active = isLinkActive(link, pathname);
       return (
-        <Link
-          href={link.url}
-          key={link.url}
-          className={styles.link}
-          data-active={active}
-          onClick={onNavigate}
-        >
+        <Link href={link.url} key={link.url} className={styles.link} data-active={active}>
           {active && (
             <motion.span
               layoutId={layoutId}
@@ -97,11 +83,7 @@ const Header = ({ title }: HeaderProps) => {
               style={{ overflow: 'hidden' }}
             >
               <div className={styles.mobileNavInner}>
-                <NavLinks
-                  pathname={_.pathname}
-                  layoutId="navPillMobile"
-                  onNavigate={() => _.setNavViewable(false)}
-                />
+                <NavLinks pathname={_.pathname} layoutId="navPillMobile" />
               </div>
             </motion.nav>
           )}
