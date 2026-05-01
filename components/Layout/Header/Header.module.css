@@ -3,62 +3,96 @@
   padding-right: 5px;
 }
 
-.title {
+.bar {
   display: grid;
-  grid-template-columns: 10fr auto auto;
-  grid-template-rows: auto;
-  /* background-color: var(--greyBgSubtle); */
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
   padding: 5px;
+  gap: 8px;
+}
+
+.brand {
+  margin: 0;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: end;
+}
+
+.hamburgerWrapper {
+  display: flex;
   align-items: center;
 }
 
-.nav {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
-  justify-items: center;
-  column-gap: 40px;
-  padding-bottom: 5px;
+.desktopNav {
+  display: none;
+}
+
+.mobileNav {
+  width: 100%;
+}
+
+.mobileNavInner {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 8px;
+  gap: 2px;
 }
 
 .link {
+  position: relative;
   text-decoration-line: none;
-  width: 100%;
+  color: var(--greyText);
+  padding: 6px 12px;
+  border-radius: 8px;
   text-align: center;
-  height: 100%;
-  padding: 5px;
-  border-radius: 5px;
+  display: inline-block;
+  transition: color 0.2s ease;
 }
 
 .link:hover {
-  background-color: var(--greyBgHover);
+  color: var(--colours_primary_text_default);
 }
 
-.activeLink {
-  background-color: var(--greyBgActive);
+.link[data-active='true'] {
+  color: var(--colours_primary_text_default);
 }
 
-/* Phone Landscape/Tablet Portrait */
+.linkInner {
+  position: relative;
+  z-index: 1;
+}
+
+.pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background-color: var(--colours_primary_background_active);
+  z-index: 0;
+}
+
+/* Tablet+ : desktop nav inline, hamburger hidden */
 @media (min-width: 48em) {
-  .nav {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .header {
     padding-left: 20px;
     padding-right: 20px;
   }
-}
 
-/* Tablet Landscape */
-@media (min-width: 62em) {
-  .nav {
-    grid-template-columns: repeat(4, 1fr);
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
-}
 
-/* Laptop/Desktop */
-@media (min-width: 75em) {
-  .nav {
-    grid-template-columns: repeat(4, 1fr);
+  .hamburgerWrapper {
+    display: none;
+  }
+
+  .mobileNav {
+    display: none;
   }
 }
