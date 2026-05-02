@@ -17,28 +17,23 @@
 
 .popoutWrapper {
   position: absolute;
-  top: calc(100% - 0.25rem);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  width: 0;
+  height: 0;
   z-index: 10;
-}
-
-.popout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.65rem;
-  padding-top: 0.5rem;
+  pointer-events: none;
 }
 
 .satellite {
+  position: absolute;
+  left: -0.925rem;
+  top: -0.925rem;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  pointer-events: auto;
 }
 
 .circle {
