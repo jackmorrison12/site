@@ -15,24 +15,30 @@
   z-index: 2;
 }
 
-.orbit {
+.popoutWrapper {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+  top: calc(100% - 0.25rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.popout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
 }
 
 .satellite {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -0.625rem;
-  margin-top: -0.625rem;
-  pointer-events: auto;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circle {

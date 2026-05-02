@@ -2,35 +2,52 @@
 import { useTheme } from 'next-themes';
 import { FC, useEffect, useRef, useState } from 'react';
 import { event } from 'nextjs-google-analytics';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react';
 import { themes, getThemeByName } from '../../../utils/theme/';
 import type { Theme } from '../../../utils/theme/theme.types';
 import styles from './ThemePicker.module.css';
-
-const ORBIT_RADIUS = 28;
-const SLINGSHOT_MS = 450;
 
 type ThemeName = (typeof themes)[number]['themeName'];
 
 const swatchStyle = (theme: Theme) => ({
   borderColor: theme.colours.primary.default,
   backgroundColor: theme.colours.background.default,
+  boxShadow: `0 0 0 0.3rem ${theme.colours.secondary.default}`,
 });
+
+const containerVariants: Variants = {
+  open: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.04 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.04, staggerDirection: -1 },
+  },
+};
+
+const itemVariants: Variants = {
+  open: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 420, damping: 14 },
+  },
+  closed: {
+    scale: 0,
+    opacity: 0,
+    y: -10,
+    transition: { duration: 0.14, ease: 'easeIn' },
+  },
+};
 
 export const ThemePicker: FC = () => {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
-  const [pickedName, setPickedName] = useState<ThemeName | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
   }, []);
 
   useEffect(() => {
@@ -55,22 +72,9 @@ export const ThemePicker: FC = () => {
   const otherThemes = themes.filter((t) => t.themeName !== resolvedTheme);
 
   const onSelect = (name: ThemeName) => {
-    if (pickedName) return;
-    event('change_theme', {
-      category: 'dropdown_select',
-      label: name,
-    });
-    if (reducedMotion) {
-      setTheme(name);
-      setOpen(false);
-      return;
-    }
-    setPickedName(name);
-    timeoutRef.current = setTimeout(() => {
-      setTheme(name);
-      setPickedName(null);
-      setOpen(false);
-    }, SLINGSHOT_MS);
+    event('change_theme', { category: 'dropdown_select', label: name });
+    setTheme(name);
+    setOpen(false);
   };
 
   if (!mounted) {
@@ -90,11 +94,6 @@ export const ThemePicker: FC = () => {
     );
   }
 
-  const secondary = currentTheme.colours.secondary.default;
-  const idleShadow = `0 0 0 0.3rem ${secondary}`;
-  const pulseShadow = [idleShadow, `0 0 0 0.55rem ${secondary}`, idleShadow];
-  const isPulsing = !open && !pickedName && !reducedMotion;
-
   return (
     <div ref={wrapperRef} className={styles.circleWrapper}>
       <button
@@ -102,80 +101,46 @@ export const ThemePicker: FC = () => {
         aria-label={open ? 'Close theme picker' : 'Open theme picker'}
         aria-expanded={open}
         className={`${styles.center} ${styles.clickable}`}
-        onClick={() => !pickedName && setOpen((v) => !v)}
+        onClick={() => setOpen((v) => !v)}
       >
         <motion.div
           className={styles.circle}
           style={swatchStyle(currentTheme)}
-          animate={
-            pickedName
-              ? { opacity: 0, scale: 0.6, boxShadow: idleShadow }
-              : isPulsing
-                ? { opacity: 1, scale: 1, boxShadow: pulseShadow }
-                : { opacity: 1, scale: 1, boxShadow: idleShadow }
-          }
-          transition={
-            pickedName
-              ? { duration: 0.2 }
-              : isPulsing
-                ? { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
-                : { duration: 0.2 }
-          }
-          whileHover={pickedName || open ? undefined : { scale: 1.1 }}
-          whileTap={pickedName || open ? undefined : { scale: 0.94 }}
+          whileHover={reducedMotion ? undefined : { scale: 1.1 }}
+          whileTap={reducedMotion ? undefined : { scale: 0.94 }}
+          transition={{ type: 'spring', stiffness: 360, damping: 18 }}
         />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="orbit"
-            className={styles.orbit}
-            animate={reducedMotion ? undefined : { rotate: 360 }}
-            transition={reducedMotion ? undefined : { duration: 9, repeat: Infinity, ease: 'linear' }}
-          >
-            {otherThemes.map((t, i) => {
-              const angle = (i / otherThemes.length) * 2 * Math.PI - Math.PI / 2;
-              const x = Math.cos(angle) * ORBIT_RADIUS;
-              const y = Math.sin(angle) * ORBIT_RADIUS;
-              const isPicked = pickedName === t.themeName;
-              const animateProps = isPicked
-                ? { x: 0, y: 0, scale: 1.15, opacity: 1 }
-                : pickedName
-                  ? { x, y, scale: 0, opacity: 0 }
-                  : { x, y, scale: 1, opacity: 1 };
-              const transitionProps = isPicked
-                ? { type: 'spring' as const, stiffness: 260, damping: 11 }
-                : pickedName
-                  ? { duration: 0.2 }
-                  : { type: 'spring' as const, stiffness: 320, damping: 18 };
-              return (
+      <div className={styles.popoutWrapper}>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              key="popout"
+              className={styles.popout}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={containerVariants}
+            >
+              {otherThemes.map((t) => (
                 <motion.button
                   type="button"
                   key={t.themeName}
                   aria-label={`Switch to ${t.themeName} theme`}
                   className={styles.satellite}
-                  initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
-                  animate={animateProps}
-                  exit={{ scale: 0, opacity: 0, transition: { duration: 0.15 } }}
-                  whileHover={pickedName ? undefined : { scale: 1.25 }}
-                  whileTap={pickedName ? undefined : { scale: 0.9 }}
-                  transition={transitionProps}
+                  variants={itemVariants}
+                  whileHover={reducedMotion ? undefined : { scale: 1.2, rotate: 8 }}
+                  whileTap={reducedMotion ? undefined : { scale: 0.85 }}
                   onClick={() => onSelect(t.themeName)}
                 >
-                  <div
-                    className={styles.circle}
-                    style={{
-                      ...swatchStyle(t.theme),
-                      boxShadow: `0 0 0 0.3rem ${t.theme.colours.secondary.default}`,
-                    }}
-                  />
+                  <div className={styles.circle} style={swatchStyle(t.theme)} />
                 </motion.button>
-              );
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
