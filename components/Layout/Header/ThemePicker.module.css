@@ -17,23 +17,27 @@
 
 .popoutWrapper {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  z-index: 10;
+  inset: 0;
   pointer-events: none;
+  z-index: 10;
 }
 
 .satellite {
   position: absolute;
-  left: -0.925rem;
-  top: -0.925rem;
+  left: 50%;
+  top: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: -0.625rem;
+  margin-top: -0.625rem;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circle {

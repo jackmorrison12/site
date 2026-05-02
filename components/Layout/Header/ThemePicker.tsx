@@ -11,9 +11,9 @@ type ThemeName = (typeof themes)[number]['themeName'];
 type ThemeEntry = (typeof themes)[number];
 
 const ARC_POSITIONS = [
-  { x: -26, y: 22 },
-  { x: 0, y: 30 },
-  { x: 26, y: 22 },
+  { x: -30, y: 38 },
+  { x: 0, y: 50 },
+  { x: 30, y: 38 },
 ];
 
 const SLINGSHOT_MS = 420;
