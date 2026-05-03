@@ -8,7 +8,8 @@ import type { Palette, ThemeName } from '../../../utils/theme/exportedThemes';
 import type { Theme } from '../../../utils/theme/theme.types';
 import styles from './ThemePicker.module.css';
 
-const SATELLITE_FAN_DEG = 100;
+const SATELLITE_FAN_DEG = 90;
+const SATELLITE_START_DEG = 90;
 const INNER_ARC_RADIUS = 56;
 const OUTER_ARC_RADIUS = 100;
 const SATELLITE_DELAY_STEP = 0.05;
@@ -17,9 +18,8 @@ const computeArcPositions = (count: number, radius: number) => {
   if (count === 0) return [];
   if (count === 1) return [{ x: 0, y: radius }];
   const step = SATELLITE_FAN_DEG / (count - 1);
-  const start = 90 + SATELLITE_FAN_DEG / 2;
   return Array.from({ length: count }, (_, i) => {
-    const rad = ((start - i * step) * Math.PI) / 180;
+    const rad = ((SATELLITE_START_DEG + i * step) * Math.PI) / 180;
     return {
       x: radius * Math.cos(rad),
       y: radius * Math.sin(rad),
