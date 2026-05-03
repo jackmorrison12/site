@@ -1,3 +1,45 @@
+.circleWrapper {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.popoutWrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.satellite {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: -0.625rem;
+  margin-top: -0.625rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .circle {
   border: 0.3rem solid;
   height: 1.25rem;
@@ -5,11 +47,6 @@
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   width: 1.25rem;
-}
-
-.circleWrapper {
-  display: flex;
-  flex-direction: row;
 }
 
 .clickable {
