@@ -4,26 +4,25 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { event } from 'nextjs-google-analytics';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { themes, getThemeByName } from '../../../utils/theme/';
-import type { Mode, Palette, ThemeName } from '../../../utils/theme/exportedThemes';
+import type { Palette, ThemeName } from '../../../utils/theme/exportedThemes';
 import type { Theme } from '../../../utils/theme/theme.types';
 import styles from './ThemePicker.module.css';
 
-const SATELLITE_RADIUS = 44;
-const SATELLITE_BASE_ANGLE = 90;
-const SATELLITE_STEP_DEG = 50;
-const SATELLITE_MAX_SPREAD = 160;
+const SATELLITE_FAN_DEG = 100;
+const INNER_ARC_RADIUS = 56;
+const OUTER_ARC_RADIUS = 100;
+const SATELLITE_DELAY_STEP = 0.05;
 
-const computeSatellitePositions = (count: number): Array<{ x: number; y: number }> => {
+const computeArcPositions = (count: number, radius: number) => {
   if (count === 0) return [];
-  if (count === 1) return [{ x: 0, y: SATELLITE_RADIUS }];
-  const spread = Math.min(SATELLITE_MAX_SPREAD, (count - 1) * SATELLITE_STEP_DEG);
-  const start = SATELLITE_BASE_ANGLE - spread / 2;
-  const step = spread / (count - 1);
+  if (count === 1) return [{ x: 0, y: radius }];
+  const step = SATELLITE_FAN_DEG / (count - 1);
+  const start = 90 + SATELLITE_FAN_DEG / 2;
   return Array.from({ length: count }, (_, i) => {
-    const rad = ((start + i * step) * Math.PI) / 180;
+    const rad = ((start - i * step) * Math.PI) / 180;
     return {
-      x: SATELLITE_RADIUS * Math.cos(rad),
-      y: SATELLITE_RADIUS * Math.sin(rad),
+      x: radius * Math.cos(rad),
+      y: radius * Math.sin(rad),
     };
   });
 };
@@ -39,6 +38,19 @@ const uniquePalettes: Palette[] = (() => {
   });
   return out;
 })();
+
+type ThemeEntry = (typeof themes)[number];
+
+const lightThemes: ThemeEntry[] = uniquePalettes
+  .map((p) => themes.find((t) => t.palette === p && t.mode === 'light'))
+  .filter((t): t is ThemeEntry => t !== undefined);
+
+const darkThemes: ThemeEntry[] = uniquePalettes
+  .map((p) => themes.find((t) => t.palette === p && t.mode === 'dark'))
+  .filter((t): t is ThemeEntry => t !== undefined);
+
+const lightPositions = computeArcPositions(lightThemes.length, INNER_ARC_RADIUS);
+const darkPositions = computeArcPositions(darkThemes.length, OUTER_ARC_RADIUS);
 
 const paletteTheme = (palette: Palette): Theme => themes.find((t) => t.palette === palette)!.theme;
 
@@ -57,20 +69,19 @@ const ringRotationFor = (palette: Palette) => {
   return -((idx + 0.5) * segment);
 };
 
-const findThemeName = (palette: Palette, mode: Mode): ThemeName | undefined =>
-  themes.find((t) => t.palette === palette && t.mode === mode)?.themeName;
-
 const PALETTE_LABELS: Record<Palette, string> = {
   mint: 'Mint & orange',
   pink: 'Pink & blue',
   orange: 'Orange & teal',
 };
 
-const SunIcon: FC = () => (
+const themeLabel = (entry: ThemeEntry) => `${PALETTE_LABELS[entry.palette]} (${entry.mode})`;
+
+const SunIcon: FC<{ size?: number }> = ({ size = 14 }) => (
   <svg
     viewBox="0 0 24 24"
-    width="14"
-    height="14"
+    width={size}
+    height={size}
     fill="none"
     stroke="currentColor"
     strokeWidth="2.2"
@@ -83,11 +94,11 @@ const SunIcon: FC = () => (
   </svg>
 );
 
-const MoonIcon: FC = () => (
+const MoonIcon: FC<{ size?: number }> = ({ size = 14 }) => (
   <svg
     viewBox="0 0 24 24"
-    width="14"
-    height="14"
+    width={size}
+    height={size}
     fill="none"
     stroke="currentColor"
     strokeWidth="2.2"
@@ -137,9 +148,6 @@ export const ThemePicker: FC = () => {
   const currentPalette = currentEntry.palette;
   const currentMode = currentEntry.mode;
   const currentTheme = getThemeByName(currentEntry.themeName);
-
-  const otherPalettes = uniquePalettes.filter((p) => p !== currentPalette);
-  const satellitePositions = computeSatellitePositions(otherPalettes.length);
   const ringRotation = ringRotationFor(currentPalette);
 
   const triggerCelebrate = () => {
@@ -149,45 +157,45 @@ export const ThemePicker: FC = () => {
     celebrateTimeoutRef.current = setTimeout(() => setCelebrate(false), 450);
   };
 
-  const onSelectPalette = (palette: Palette) => {
-    const target = findThemeName(palette, currentMode);
-    if (!target) return;
-    event('change_theme', { category: 'palette_select', label: target });
-    setTheme(target);
+  const onSelectTheme = (themeName: ThemeName) => {
+    if (themeName === resolvedTheme) {
+      setOpen(false);
+      return;
+    }
+    event('change_theme', { category: 'satellite_select', label: themeName });
+    setTheme(themeName);
     setOpen(false);
     triggerCelebrate();
   };
 
-  const onToggleMode = () => {
-    const targetMode: Mode = currentMode === 'light' ? 'dark' : 'light';
-    const target = findThemeName(currentPalette, targetMode);
-    if (!target) return;
-    event('change_theme', { category: 'mode_toggle', label: target });
-    setTheme(target);
-    triggerCelebrate();
-  };
-
-  const modeButtonStyle = {
+  const centerStyle = {
     backgroundColor: currentTheme.colours.primary.default,
     color: currentTheme.colours.primary.text.contrast,
   };
 
+  const allSatellites = [
+    ...lightThemes.map((entry, i) => ({ entry, pos: lightPositions[i], delay: i * SATELLITE_DELAY_STEP })),
+    ...darkThemes.map((entry, i) => ({
+      entry,
+      pos: darkPositions[i],
+      delay: (lightThemes.length + i) * SATELLITE_DELAY_STEP,
+    })),
+  ];
+
   if (!mounted) {
     return (
       <div className={styles.circleWrapper}>
-        <button type="button" className={styles.ringButton} aria-label="Open palette picker">
+        <button type="button" className={styles.triggerButton} aria-label="Open theme picker">
           <div className={styles.ring} style={{ background: ringGradient }} />
-        </button>
-        <button
-          type="button"
-          className={styles.modeButton}
-          aria-label="Toggle light/dark mode"
-          style={{
-            backgroundColor: 'var(--colours_primary_default)',
-            color: 'var(--colours_primary_text_contrast)',
-          }}
-        >
-          <SunIcon />
+          <div
+            className={styles.centerIndicator}
+            style={{
+              backgroundColor: 'var(--colours_primary_default)',
+              color: 'var(--colours_primary_text_contrast)',
+            }}
+          >
+            <SunIcon />
+          </div>
         </button>
       </div>
     );
@@ -195,36 +203,26 @@ export const ThemePicker: FC = () => {
 
   return (
     <div ref={wrapperRef} className={styles.circleWrapper}>
-        <motion.button
-          type="button"
-          aria-label={open ? 'Close palette picker' : `Open palette picker (current: ${PALETTE_LABELS[currentPalette]})`}
-          aria-expanded={open}
-          className={styles.ringButton}
-          onClick={() => setOpen((v) => !v)}
-          whileHover={reducedMotion ? undefined : { scale: 1.05 }}
-          whileTap={reducedMotion ? undefined : { scale: 0.97 }}
-        >
-          <motion.div
-            className={styles.ring}
-            style={{ background: ringGradient }}
-            animate={{ rotate: reducedMotion ? 0 : ringRotation }}
-            transition={{ type: 'spring', stiffness: 200, damping: 26 }}
-          />
-        </motion.button>
-
-        <motion.button
-          type="button"
-          aria-label={`Switch to ${currentMode === 'light' ? 'dark' : 'light'} mode`}
-          className={styles.modeButton}
-          onClick={onToggleMode}
-          style={modeButtonStyle}
-          animate={celebrate ? { scale: [1, 1.25, 1] } : { scale: 1 }}
-          transition={
-            celebrate ? { duration: 0.45, ease: 'easeOut' } : { type: 'spring', stiffness: 360, damping: 18 }
-          }
-          whileHover={reducedMotion || celebrate ? undefined : { scale: 1.1 }}
-          whileTap={reducedMotion || celebrate ? undefined : { scale: 0.94 }}
-        >
+      <motion.button
+        type="button"
+        aria-label={open ? 'Close theme picker' : 'Open theme picker'}
+        aria-expanded={open}
+        className={styles.triggerButton}
+        onClick={() => setOpen((v) => !v)}
+        animate={celebrate ? { scale: [1, 1.18, 1] } : { scale: 1 }}
+        transition={
+          celebrate ? { duration: 0.45, ease: 'easeOut' } : { type: 'spring', stiffness: 360, damping: 18 }
+        }
+        whileHover={reducedMotion || celebrate ? undefined : { scale: 1.05 }}
+        whileTap={reducedMotion || celebrate ? undefined : { scale: 0.96 }}
+      >
+        <motion.div
+          className={styles.ring}
+          style={{ background: ringGradient }}
+          animate={{ rotate: reducedMotion ? 0 : ringRotation }}
+          transition={{ type: 'spring', stiffness: 200, damping: 26 }}
+        />
+        <div className={styles.centerIndicator} style={centerStyle}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={currentMode}
@@ -237,41 +235,62 @@ export const ThemePicker: FC = () => {
               {currentMode === 'light' ? <SunIcon /> : <MoonIcon />}
             </motion.span>
           </AnimatePresence>
-        </motion.button>
-
-        <div className={styles.popoutWrapper}>
-          <AnimatePresence>
-            {open &&
-              otherPalettes.map((p, i) => {
-                const pos = satellitePositions[i] ?? { x: 0, y: SATELLITE_RADIUS };
-                return (
-                  <motion.button
-                    type="button"
-                    key={p}
-                    aria-label={`Switch to ${PALETTE_LABELS[p]} palette`}
-                    className={styles.satellite}
-                    initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
-                    animate={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
-                    exit={{ x: 0, y: 0, scale: 0, opacity: 0, transition: { duration: 0.18 } }}
-                    whileHover={reducedMotion ? undefined : { scale: 1.2, rotate: 8 }}
-                    whileTap={reducedMotion ? undefined : { scale: 0.9 }}
-                    transition={{
-                      type: 'spring',
-                      stiffness: 380,
-                      damping: 16,
-                      delay: i * 0.06,
-                    }}
-                    onClick={() => onSelectPalette(p)}
-                  >
-                    <div
-                      className={styles.satelliteSwatch}
-                      style={{ backgroundColor: paletteTheme(p).colours.primary.default }}
-                    />
-                  </motion.button>
-                );
-              })}
-          </AnimatePresence>
         </div>
+      </motion.button>
+
+      <div className={styles.popoutWrapper}>
+        <AnimatePresence>
+          {open &&
+            allSatellites.map(({ entry, pos, delay }) => {
+              const isActive = entry.themeName === resolvedTheme;
+              return (
+                <motion.button
+                  type="button"
+                  key={entry.themeName}
+                  aria-label={`Switch to ${themeLabel(entry)}`}
+                  aria-pressed={isActive}
+                  className={styles.satellite}
+                  initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                  animate={{ x: pos.x, y: pos.y, scale: 1, opacity: 1 }}
+                  exit={{ x: 0, y: 0, scale: 0, opacity: 0, transition: { duration: 0.18 } }}
+                  whileHover={reducedMotion ? undefined : { scale: 1.12 }}
+                  whileTap={reducedMotion ? undefined : { scale: 0.92 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 380,
+                    damping: 18,
+                    delay,
+                  }}
+                  onClick={() => onSelectTheme(entry.themeName)}
+                >
+                  {isActive && !reducedMotion && (
+                    <motion.div
+                      className={styles.activePing}
+                      style={{ borderColor: entry.theme.colours.primary.default }}
+                      animate={{ scale: [1, 1.6], opacity: [0.7, 0] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
+                    />
+                  )}
+                  <motion.div
+                    className={`${styles.satelliteSwatch} ${isActive ? styles.activeSwatch : ''}`}
+                    style={{
+                      backgroundColor: entry.theme.colours.primary.default,
+                      color: entry.theme.colours.primary.text.contrast,
+                    }}
+                    animate={isActive && !reducedMotion ? { scale: [1, 1.08, 1] } : { scale: 1 }}
+                    transition={
+                      isActive && !reducedMotion
+                        ? { duration: 1.6, repeat: Infinity, ease: 'easeInOut' }
+                        : { duration: 0.2 }
+                    }
+                  >
+                    {entry.mode === 'light' ? <SunIcon size={12} /> : <MoonIcon size={12} />}
+                  </motion.div>
+                </motion.button>
+              );
+            })}
+        </AnimatePresence>
       </div>
+    </div>
   );
 };

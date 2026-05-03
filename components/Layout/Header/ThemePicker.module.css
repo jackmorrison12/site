@@ -1,15 +1,10 @@
-.wrapper {
-  display: flex;
-  align-items: center;
-}
-
 .circleWrapper {
   position: relative;
   width: 3rem;
   height: 3rem;
 }
 
-.ringButton {
+.triggerButton {
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -18,32 +13,28 @@
   padding: 0;
   cursor: pointer;
   z-index: 1;
+  display: grid;
+  place-items: center;
 }
 
 .ring {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
   pointer-events: none;
   mask: radial-gradient(circle, transparent 0 calc(50% - 0.25rem), black calc(50% - 0.24rem) 50%);
   -webkit-mask: radial-gradient(circle, transparent 0 calc(50% - 0.25rem), black calc(50% - 0.24rem) 50%);
 }
 
-.modeButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.centerIndicator {
   width: 1.85rem;
   height: 1.85rem;
-  margin-top: -0.925rem;
-  margin-left: -0.925rem;
   border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  z-index: 2;
   display: grid;
   place-items: center;
-  padding: 0;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
 }
 
 .modeIcon {
@@ -64,10 +55,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-left: -0.75rem;
-  margin-top: -0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -1.375rem;
+  margin-top: -1.375rem;
   background: none;
   border: none;
   padding: 0;
@@ -78,7 +69,31 @@
 }
 
 .satelliteSwatch {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.activeSwatch {
+  box-shadow:
+    0 0 0 2px var(--colours_background_default),
+    0 0 0 4px currentColor;
+}
+
+.activePing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: -0.875rem;
+  margin-left: -0.875rem;
+  border-radius: 50%;
+  border: 2px solid;
+  pointer-events: none;
+  z-index: 1;
 }
