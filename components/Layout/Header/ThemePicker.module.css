@@ -83,17 +83,3 @@
     0 0 0 2px var(--colours_background_default),
     0 0 0 4px currentColor;
 }
-
-.activePing {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1.75rem;
-  height: 1.75rem;
-  margin-top: -0.875rem;
-  margin-left: -0.875rem;
-  border-radius: 50%;
-  border: 2px solid;
-  pointer-events: none;
-  z-index: 1;
-}

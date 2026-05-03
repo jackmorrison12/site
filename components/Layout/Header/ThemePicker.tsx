@@ -263,14 +263,6 @@ export const ThemePicker: FC = () => {
                   }}
                   onClick={() => onSelectTheme(entry.themeName)}
                 >
-                  {isActive && !reducedMotion && (
-                    <motion.div
-                      className={styles.activePing}
-                      style={{ borderColor: entry.theme.colours.primary.default }}
-                      animate={{ scale: [1, 1.6], opacity: [0.7, 0] }}
-                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
-                    />
-                  )}
                   <motion.div
                     className={`${styles.satelliteSwatch} ${isActive ? styles.activeSwatch : ''}`}
                     style={{
