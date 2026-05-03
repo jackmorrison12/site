@@ -9,11 +9,40 @@ import styles from './ThemePicker.module.css';
 
 type ThemeName = (typeof themes)[number]['themeName'];
 
-const ARC_POSITIONS = [
-  { x: -34, y: 30 },
-  { x: 0, y: 44 },
-  { x: 34, y: 30 },
-];
+const SATELLITE_RADIUS = 44;
+const SATELLITE_BASE_ANGLE = 90;
+const SATELLITE_STEP_DEG = 50;
+const SATELLITE_MAX_SPREAD = 160;
+
+const computeSatellitePositions = (count: number): Array<{ x: number; y: number }> => {
+  if (count === 0) return [];
+  if (count === 1) return [{ x: 0, y: SATELLITE_RADIUS }];
+  const spread = Math.min(SATELLITE_MAX_SPREAD, (count - 1) * SATELLITE_STEP_DEG);
+  const start = SATELLITE_BASE_ANGLE - spread / 2;
+  const step = spread / (count - 1);
+  return Array.from({ length: count }, (_, i) => {
+    const rad = ((start + i * step) * Math.PI) / 180;
+    return {
+      x: SATELLITE_RADIUS * Math.cos(rad),
+      y: SATELLITE_RADIUS * Math.sin(rad),
+    };
+  });
+};
+
+const ringGradient = (() => {
+  const segment = 360 / themes.length;
+  const stops = themes
+    .map((t, i) => `${t.theme.colours.primary.default} ${i * segment}deg ${(i + 1) * segment}deg`)
+    .join(', ');
+  return `conic-gradient(from 0deg, ${stops})`;
+})();
+
+const ringRotationFor = (themeName: ThemeName | undefined) => {
+  const idx = themes.findIndex((t) => t.themeName === themeName);
+  if (idx < 0) return 0;
+  const segment = 360 / themes.length;
+  return -((idx + 0.5) * segment);
+};
 
 const swatchStyle = (theme: Theme) => ({
   borderColor: theme.colours.primary.default,
@@ -57,6 +86,8 @@ export const ThemePicker: FC = () => {
 
   const currentTheme = getThemeByName(resolvedTheme as ThemeName);
   const otherThemes = themes.filter((t) => t.themeName !== resolvedTheme);
+  const satellitePositions = computeSatellitePositions(otherThemes.length);
+  const ringRotation = ringRotationFor(resolvedTheme as ThemeName);
 
   const onSelect = (name: ThemeName) => {
     event('change_theme', { category: 'dropdown_select', label: name });
@@ -72,6 +103,7 @@ export const ThemePicker: FC = () => {
   if (!mounted) {
     return (
       <div className={styles.circleWrapper}>
+        <div className={styles.ring} style={{ background: ringGradient }} />
         <button className={styles.clickable}>
           <div
             className={styles.circle}
@@ -88,6 +120,13 @@ export const ThemePicker: FC = () => {
 
   return (
     <div ref={wrapperRef} className={styles.circleWrapper}>
+      <motion.div
+        className={styles.ring}
+        style={{ background: ringGradient }}
+        animate={{ rotate: reducedMotion ? 0 : ringRotation }}
+        transition={{ type: 'spring', stiffness: 200, damping: 26 }}
+        whileHover={reducedMotion ? undefined : { scale: 1.05 }}
+      />
       <button
         type="button"
         aria-label={open ? 'Close theme picker' : 'Open theme picker'}
@@ -113,7 +152,7 @@ export const ThemePicker: FC = () => {
         <AnimatePresence>
           {open &&
             otherThemes.map((t, i) => {
-              const pos = ARC_POSITIONS[i] ?? ARC_POSITIONS[0];
+              const pos = satellitePositions[i] ?? { x: 0, y: SATELLITE_RADIUS };
               return (
                 <motion.button
                   type="button"
