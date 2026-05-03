@@ -80,6 +80,6 @@
 
 .activeSwatch {
   box-shadow:
-    0 0 0 2px var(--colours_background_default),
-    0 0 0 4px currentColor;
+    0 0 0 2px hsl(0, 0%, 100%),
+    0 0 0 4px hsla(0, 0%, 0%, 0.35);
 }
