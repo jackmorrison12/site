@@ -1,6 +1,5 @@
 import { DefaultThemeWithoutColours } from '../default';
 import { generateSpectrum, Theme } from '../theme.types';
-import { grey } from './colours/grey';
 import { orange } from './colours/orange';
 import { teal } from './colours/teal';
 
@@ -8,18 +7,18 @@ export const GreenOrangeLightTheme: Theme = {
   ...DefaultThemeWithoutColours,
   colours: {
     background: {
-      default: grey[1],
-      soft: grey[6],
-      softest: grey[9],
-      heavy: 'hsl(0, 0%, 100%)',
-      heaviest: 'hsl(0, 0%, 100%)',
+      default: teal[1],
+      soft: teal[6],
+      softest: teal[9],
+      heavy: 'hsl(168, 100%, 100%)',
+      heaviest: 'hsl(168, 100%, 100%)',
     },
     text: {
-      default: grey[12],
-      soft: 'hsl(0, 0%, 43.5%)',
-      softest: 'hsl(0, 0%, 56.1%)',
-      heavy: 'hsl(0, 0%, 4%)',
-      heaviest: 'hsl(0, 0%, 0%)',
+      default: teal[12],
+      soft: 'hsl(166, 30%, 43.5%)',
+      softest: 'hsl(166, 20%, 56.1%)',
+      heavy: 'hsl(168, 60%, 4%)',
+      heaviest: 'hsl(168, 60%, 0%)',
     },
     primary: {
       ...orange,
@@ -29,6 +28,6 @@ export const GreenOrangeLightTheme: Theme = {
       ...teal,
       ...generateSpectrum(teal),
     },
-    legacyGrey: { ...grey },
+    legacyGrey: { ...teal },
   },
 };
