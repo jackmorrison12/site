@@ -1,7 +1,7 @@
 .circleWrapper {
   position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .triggerButton {
@@ -27,8 +27,8 @@
 }
 
 .centerIndicator {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   border-radius: 50%;
   display: grid;
   place-items: center;
