@@ -264,10 +264,13 @@ export const ThemePicker: FC = () => {
                   onClick={() => onSelectTheme(entry.themeName)}
                 >
                   <motion.div
-                    className={`${styles.satelliteSwatch} ${isActive ? styles.activeSwatch : ''}`}
+                    className={styles.satelliteSwatch}
                     style={{
                       backgroundColor: entry.theme.colours.primary.default,
                       color: entry.theme.colours.primary.text.contrast,
+                      boxShadow: isActive
+                        ? `0 0 0 2px ${entry.theme.colours.secondary[1]}, 0 0 0 4px ${entry.theme.colours.secondary[12]}`
+                        : undefined,
                     }}
                     animate={isActive && !reducedMotion ? { scale: [1, 1.08, 1] } : { scale: 1 }}
                     transition={
