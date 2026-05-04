@@ -194,7 +194,7 @@ export const ThemePicker: FC = () => {
               color: 'var(--colours_primary_text_contrast)',
             }}
           >
-            <SunIcon size={11} />
+            <SunIcon size={12} />
           </div>
         </button>
       </div>
@@ -232,7 +232,7 @@ export const ThemePicker: FC = () => {
               exit={reducedMotion ? { opacity: 0 } : { opacity: 0, rotate: 90 }}
               transition={{ duration: 0.2 }}
             >
-              {currentMode === 'light' ? <SunIcon size={11} /> : <MoonIcon size={11} />}
+              {currentMode === 'light' ? <SunIcon size={12} /> : <MoonIcon size={12} />}
             </motion.span>
           </AnimatePresence>
         </div>
