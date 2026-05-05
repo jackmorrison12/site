@@ -20,11 +20,19 @@ type ChipDef = {
 const CHIPS: ChipDef[] = [
   { id: 'cap', emoji: '🎓', label: 'Education', pos: { top: '0%', left: '50%', transform: 'translate(-50%, -40%)' } },
   { id: 'plane', emoji: '✈️', label: 'Travel', pos: { top: '6%', right: '4%' } },
-  { id: 'phone', emoji: '📱', label: 'Socials', pos: { top: '40%', right: '4%' } },
-  { id: 'parachute', emoji: '🪂', label: 'Skydiving', pos: { top: '62%', right: '8%' } },
+  { id: 'pin', emoji: '📍', label: 'Location', pos: { top: '40%', right: '4%' } },
+  { id: 'parachute', emoji: '🪂', label: 'Skydiving', pos: { top: '27%', right: '66%' } },
   { id: 'shirt', emoji: '💼', label: 'Work', pos: { top: '78%', left: '50%', transform: 'translateX(-50%)' } },
   { id: 'keyboard', emoji: '⌨️', label: 'Open source', pos: { bottom: '3%', left: '6%' } },
-  { id: 'pin', emoji: '📍', label: 'Location', pos: { bottom: '3%', right: '6%' } },
+];
+
+const PHONE_APPS: { color: string; label: string }[] = [
+  { color: 'hsl(203, 89%, 53%)', label: 'X' },
+  { color: '#1f1f1f', label: 'GH' },
+  { color: 'hsl(201, 100%, 35%)', label: 'in' },
+  { color: '#bc318f', label: 'IG' },
+  { color: 'hsl(3, 94%, 43%)', label: 'fm' },
+  { color: 'hsl(141, 73%, 42%)', label: '♫' },
 ];
 
 
@@ -100,9 +108,15 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
                   <path d="M17.9768 23.3534C16.2922 22.3001 14.0726 22.812 13.0194 24.4966C11.9661 26.1813 12.4779 28.4009 14.1626 29.4541L23.2114 35.1116C24.896 36.1648 27.1156 35.653 28.1689 33.9683C29.2221 32.2837 28.7103 30.0641 27.0256 29.0109L17.9768 23.3534ZM13.8673 25.0268C14.6278 23.8104 16.2303 23.4408 17.4467 24.2013L26.4955 29.8588C27.7119 30.6193 28.0814 32.2218 27.3209 33.4382C26.5604 34.6546 24.9579 35.0241 23.7415 34.2637L14.6927 28.6062C13.4763 27.8457 13.1068 26.2431 13.8673 25.0268Z" />
                 </g>
                 <g className={styles.notes} aria-hidden="true">
-                  <text x="-6" y="6" fontSize="10" fill="var(--colours_primary_default)">♪</text>
-                  <text x="-12" y="-6" fontSize="12" fill="var(--colours_primary_default)">♫</text>
-                  <text x="2" y="-14" fontSize="9" fill="var(--colours_primary_default)">♩</text>
+                  <text x="-6" y="6" fontSize="10" fill="var(--colours_primary_default)">
+                    ♪
+                  </text>
+                  <text x="-12" y="-6" fontSize="12" fill="var(--colours_primary_default)">
+                    ♫
+                  </text>
+                  <text x="2" y="-14" fontSize="9" fill="var(--colours_primary_default)">
+                    ♩
+                  </text>
                 </g>
               </svg>
             ) : (
@@ -125,14 +139,86 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
                   <path d="M110.023 43.1773C111.708 42.124 113.928 42.6358 114.981 44.3205C116.034 46.0052 115.522 48.2247 113.838 49.278L104.789 54.9354C103.104 55.9887 100.885 55.4769 99.8314 53.7922C98.7781 52.1075 99.2899 49.888 100.975 48.8347L110.023 43.1773ZM114.133 44.8506C113.372 43.6343 111.77 43.2647 110.554 44.0252L101.505 49.6826C100.288 50.4431 99.9188 52.0457 100.679 53.2621C101.44 54.4784 103.042 54.848 104.259 54.0875L113.308 48.4301C114.524 47.6696 114.893 46.067 114.133 44.8506Z" />
                 </g>
                 <g className={styles.notes} aria-hidden="true">
-                  <text x="60" y="6" fontSize="10" fill="var(--colours_primary_default)">♪</text>
-                  <text x="62" y="-6" fontSize="12" fill="var(--colours_primary_default)">♫</text>
-                  <text x="48" y="-14" fontSize="9" fill="var(--colours_primary_default)">♩</text>
+                  <text x="60" y="6" fontSize="10" fill="var(--colours_primary_default)">
+                    ♪
+                  </text>
+                  <text x="62" y="-6" fontSize="12" fill="var(--colours_primary_default)">
+                    ♫
+                  </text>
+                  <text x="48" y="-14" fontSize="9" fill="var(--colours_primary_default)">
+                    ♩
+                  </text>
                 </g>
               </svg>
             )}
           </button>
         ))}
+
+        {/* iPhone in bottom-right — replaces the old "Socials" chip */}
+        <button
+          type="button"
+          aria-label="Socials"
+          aria-pressed={active === 'phone'}
+          className={`${styles.phone} ${active === 'phone' ? styles.phoneActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'phone' ? null : 'phone');
+          }}
+        >
+          <svg viewBox="0 0 64 130" className={styles.phoneSvg} aria-hidden="true">
+            {/* outer body — picks up theme primary via currentColor */}
+            <rect className={styles.phoneBody} x="0" y="0" width="64" height="130" rx="11" ry="11" />
+            {/* darker bezel band */}
+            <rect className={styles.phoneFrame} x="2" y="2" width="60" height="126" rx="9" ry="9" />
+            {/* black frame around screen */}
+            <rect className={styles.phoneInnerFrame} x="3.5" y="3.5" width="57" height="123" rx="7.5" ry="7.5" />
+            {/* screen */}
+            <rect className={styles.phoneScreen} x="5" y="5" width="54" height="120" rx="6.5" ry="6.5" />
+            {/* dynamic island */}
+            <rect className={styles.phoneIsland} x="24" y="9" width="16" height="4.5" rx="2.25" ry="2.25" />
+
+            {/* screen content — visible when lit */}
+            <g className={styles.phoneScreenContent}>
+              {/* status bar time */}
+              <text x="11" y="22" className={styles.phoneTime}>
+                9:41
+              </text>
+              {/* signal dots */}
+              <circle cx="49" cy="19" r="0.9" className={styles.phoneStatusDot} />
+              <circle cx="51.5" cy="19" r="0.9" className={styles.phoneStatusDot} />
+              <circle cx="54" cy="19" r="0.9" className={styles.phoneStatusDot} />
+
+              {/* 2×3 app grid */}
+              {PHONE_APPS.map((app, i) => {
+                const col = i % 2;
+                const row = Math.floor(i / 2);
+                const x = 13 + col * 21;
+                const y = 38 + row * 22;
+                return (
+                  <g key={app.label} className={styles.phoneApp} style={{ transitionDelay: `${0.08 + i * 0.05}s` }}>
+                    <rect x={x} y={y} width="14" height="14" rx="3.5" ry="3.5" fill={app.color} />
+                    <text x={x + 7} y={y + 9.5} className={styles.phoneAppLabel}>
+                      {app.label}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* home indicator */}
+              <rect x="22" y="118" width="20" height="1.5" rx="0.75" ry="0.75" className={styles.phoneHomeBar} />
+            </g>
+
+            {/* side buttons — left side has silent toggle + volume up/down */}
+            <rect className={styles.phoneSideButton} x="-0.5" y="22" width="1.5" height="6" rx="0.5" />
+            <rect className={styles.phoneSideButton} x="-0.5" y="34" width="1.5" height="11" rx="0.5" />
+            <rect className={styles.phoneSideButton} x="-0.5" y="48" width="1.5" height="11" rx="0.5" />
+            {/* power button on the right */}
+            <rect className={styles.phoneSideButton} x="63" y="32" width="1.5" height="16" rx="0.5" />
+
+            {/* faint screen glow when lit */}
+            <rect className={styles.phoneGlow} x="5" y="5" width="54" height="120" rx="6.5" ry="6.5" />
+          </svg>
+        </button>
 
         {/* hotspot chips */}
         <div className={styles.overlay}>

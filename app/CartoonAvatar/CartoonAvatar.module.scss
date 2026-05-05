@@ -263,11 +263,10 @@
 .chip_cap        { animation-delay: 0s; }
 .chip_plane      { animation-delay: 0.4s; }
 .chip_headphones { animation-delay: 0.8s; }
-.chip_phone      { animation-delay: 1.2s; }
-.chip_parachute  { animation-delay: 1.6s; }
-.chip_shirt      { animation-delay: 2.0s; }
-.chip_keyboard   { animation-delay: 2.4s; }
-.chip_pin        { animation-delay: 2.8s; }
+.chip_parachute  { animation-delay: 1.2s; }
+.chip_shirt      { animation-delay: 1.6s; }
+.chip_keyboard   { animation-delay: 2.0s; }
+.chip_pin        { animation-delay: 2.4s; }
 
 /* Plane chip drifts horizontally too */
 .chip_plane {
@@ -281,4 +280,167 @@
   50% {
     translate: -10px -4px;
   }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  iPhone — bottom-right of the avatar, replaces the old socials chip        */
+/* -------------------------------------------------------------------------- */
+
+.phone {
+  position: absolute;
+  width: 13.5%;
+  aspect-ratio: 64 / 130;
+  bottom: 2%;
+  right: 4%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
+  transform: rotate(-14deg);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.35s;
+  animation: phoneBob 4.2s ease-in-out infinite 1.2s;
+  transform-origin: 80% 80%;
+
+  &:hover {
+    transform: rotate(-8deg) translateY(-4px) scale(1.06);
+    filter: drop-shadow(0 9px 14px rgba(0, 0, 0, 0.35))
+      drop-shadow(0 0 14px color-mix(in srgb, var(--colours_primary_default) 55%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 14px;
+  }
+}
+
+.phoneActive {
+  transform: rotate(-6deg) translateY(-5px) scale(1.08);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.38))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+  animation: none;
+}
+
+@keyframes phoneBob {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+.phoneSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.phoneBody {
+  fill: currentColor;
+}
+
+.phoneFrame {
+  fill: color-mix(in srgb, currentColor 65%, #000);
+}
+
+.phoneInnerFrame {
+  fill: #0a0a0a;
+}
+
+.phoneScreen {
+  fill: #060912;
+  transition: fill 0.4s ease;
+}
+
+.phone:hover .phoneScreen,
+.phoneActive .phoneScreen {
+  fill: #0d1428;
+}
+
+.phoneIsland {
+  fill: #000;
+}
+
+.phoneSideButton {
+  fill: color-mix(in srgb, currentColor 55%, #000);
+}
+
+/* faint glow rectangle layered over the screen, off by default */
+.phoneGlow {
+  fill: color-mix(in srgb, var(--colours_primary_default) 35%, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.phone:hover .phoneGlow,
+.phoneActive .phoneGlow {
+  opacity: 0.6;
+}
+
+/* status bar + apps + home bar — all hidden until lit */
+.phoneScreenContent {
+  pointer-events: none;
+}
+
+.phoneTime,
+.phoneStatusDot,
+.phoneApp,
+.phoneHomeBar {
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.5, 1.7, 0.4, 1);
+}
+
+.phoneApp {
+  transform: scale(0.4);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.phone:hover .phoneTime,
+.phone:hover .phoneStatusDot,
+.phone:hover .phoneHomeBar,
+.phoneActive .phoneTime,
+.phoneActive .phoneStatusDot,
+.phoneActive .phoneHomeBar {
+  opacity: 0.9;
+}
+
+.phone:hover .phoneApp,
+.phoneActive .phoneApp {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.phoneTime {
+  fill: #fff;
+  font-size: 4.5px;
+  font-family: inherit;
+  font-weight: var(--fontWeights_thick);
+}
+
+.phoneAppLabel {
+  fill: #fff;
+  font-size: 5.5px;
+  font-family: inherit;
+  font-weight: var(--fontWeights_thick);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.phoneStatusDot {
+  fill: #fff;
+}
+
+.phoneHomeBar {
+  fill: #fff;
 }

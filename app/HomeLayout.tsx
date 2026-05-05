@@ -35,6 +35,7 @@ export const HomeLayout = ({ topTrackSlot }: Props) => {
 
   const litAreas = active ? HOTSPOT_TO_AREAS[active] : [];
   const mark = (area: string) => (litAreas.includes(area) ? styles.activeMark : '');
+  const age = new Date().getFullYear() - 1999;
 
   return (
     <div className={styles.page}>
@@ -48,7 +49,7 @@ export const HomeLayout = ({ topTrackSlot }: Props) => {
       <div className={styles.layout}>
         <div className={`${styles.box} ${styles.intro}`}>
           <h3>Hey, I&apos;m Jack! 👋</h3>
-          <p>A 26 year old Software Engineer @ Bloomberg</p>
+          <p>A {age} year old Software Engineer @ Bloomberg</p>
         </div>
         <div className={`${styles.pic} ${styles.pic1}`}>
           <Image src={avatar} fill={true} placeholder="blur" alt="My Avatar" />
