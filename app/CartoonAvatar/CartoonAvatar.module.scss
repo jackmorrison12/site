@@ -1,0 +1,284 @@
+.parallaxRoot {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.4, 0.1, 0.4, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.floater {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: float 4.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.baseImg {
+  object-fit: contain !important;
+  user-select: none;
+  pointer-events: none;
+}
+
+.halo {
+  position: absolute;
+  inset: 8% 8% 12% 8%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--colours_primary_default) 30%, transparent),
+    transparent 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(12px);
+  animation: haloPulse 4s ease-in-out infinite;
+}
+
+@keyframes haloPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  AirPods — each pod independently positioned                               */
+/* -------------------------------------------------------------------------- */
+
+.airpod {
+  position: absolute;
+  width: 3.75%;
+  aspect-ratio: 50 / 80;
+  z-index: 4;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.3s;
+  animation: hpBob 1.6s ease-in-out infinite;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.06);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 10px color-mix(in srgb, hsl(24, 94%, 50%) 60%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+}
+
+/* Left pod — moved -100px left, -160px up from previous @ 560×420 */
+.airpodLeft {
+  top: 34%;
+  left: 41%;
+}
+
+/* Right pod — moved -300px up from previous @ 560×420 */
+.airpodRight {
+  top: 40.5%;
+  left: 67%;
+}
+
+.airpodActive {
+  animation: none;
+  transform: translateY(-4px) scale(1.06);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 0 14px color-mix(in srgb, hsl(24, 94%, 50%) 70%, transparent));
+
+  .notes text {
+    animation: noteRise 1.6s ease-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(3) {
+      animation-delay: 1s;
+    }
+  }
+}
+
+.airpodSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+@keyframes hpBob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.notes text {
+  opacity: 0;
+}
+
+.airpod:hover .notes text {
+  animation: noteRise 1.6s ease-out infinite;
+}
+
+.airpod:hover .notes text:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.airpod:hover .notes text:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes noteRise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Hotspot chips                                                             */
+/* -------------------------------------------------------------------------- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.chip {
+  position: absolute;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  background: var(--colours_primary_background_default);
+  border: 2px solid var(--colours_text_default);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: var(--fontSizes_tiny);
+  font-weight: var(--fontWeights_thick);
+  color: var(--colours_text_default);
+  box-shadow: 2px 3px 0 var(--colours_text_default);
+  transition: transform 0.25s cubic-bezier(0.5, 1.6, 0.4, 1), box-shadow 0.25s, background 0.25s;
+  font-family: inherit;
+  white-space: nowrap;
+  animation: chipFloat 3.6s ease-in-out infinite;
+  z-index: 5;
+
+  &:hover {
+    transform: translate(-1px, -2px) scale(1.06);
+    box-shadow: 4px 5px 0 var(--colours_primary_default);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 3px;
+  }
+}
+
+.chipEmoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.chipLabel {
+  font-size: var(--fontSizes_tiny);
+}
+
+@media (max-width: 48em) {
+  .chipLabel {
+    display: none;
+  }
+  .chip {
+    padding: 6px 8px;
+  }
+}
+
+.chipActive {
+  background: var(--colours_primary_default);
+  color: var(--colours_primary_background_default);
+  transform: scale(1.1);
+  box-shadow: 4px 5px 0 var(--colours_text_default), 0 0 24px color-mix(in srgb, var(--colours_primary_default) 50%, transparent);
+  animation: chipPulse 1.4s ease-in-out infinite;
+
+  &:hover {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes chipFloat {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@keyframes chipPulse {
+  0%, 100% {
+    box-shadow: 4px 5px 0 var(--colours_text_default), 0 0 18px color-mix(in srgb, var(--colours_primary_default) 50%, transparent);
+  }
+  50% {
+    box-shadow: 4px 5px 0 var(--colours_text_default), 0 0 28px color-mix(in srgb, var(--colours_primary_default) 75%, transparent);
+  }
+}
+
+/* Stagger chip float so they don't all bob in sync */
+.chip_cap        { animation-delay: 0s; }
+.chip_plane      { animation-delay: 0.4s; }
+.chip_headphones { animation-delay: 0.8s; }
+.chip_phone      { animation-delay: 1.2s; }
+.chip_parachute  { animation-delay: 1.6s; }
+.chip_shirt      { animation-delay: 2.0s; }
+.chip_keyboard   { animation-delay: 2.4s; }
+.chip_pin        { animation-delay: 2.8s; }
+
+/* Plane chip drifts horizontally too */
+.chip_plane {
+  animation: planeDrift 8s ease-in-out infinite;
+}
+
+@keyframes planeDrift {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: -10px -4px;
+  }
+}
