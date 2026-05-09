@@ -10,8 +10,10 @@ import {
   getNewDiscoveries,
   getArtistTrends,
   getLastSyncTime,
+  yearRange,
+  reportTz,
 } from '../data';
-import type { DateRange } from '../data.types';
+import { TzNote } from '../components/TzNote';
 import { SummaryCards } from '../components/SummaryCards';
 import { TopTracks } from '../components/TopTracks';
 import { TopArtists } from '../components/TopArtists';
@@ -32,23 +34,30 @@ export default async function Page(props: { params: Promise<{ year: string }> })
     notFound();
   }
 
-  const range: DateRange = {
-    startDate: new Date(year, 0, 1),
-    endDate: new Date(year + 1, 0, 1),
-  };
+  const range = yearRange(year);
+  const tz = reportTz(year);
 
   const [summary, topTracks, topArtists, monthlyTop, obsessions, patterns, discoveries, trends, lastSync] =
     await Promise.all([
       getSummaryStats(range),
       getTopTracks(range),
       getTopArtists(range),
-      getTopArtistByMonth(range),
-      getObsessionTracks(range),
-      getListeningPatterns(range),
+      getTopArtistByMonth(range, tz),
+      getObsessionTracks(range, tz),
+      getListeningPatterns(range, tz),
       getNewDiscoveries(range),
       getArtistTrends(range),
       getLastSyncTime(),
     ]);
+
+  if (summary.totalListens === 0) {
+    return (
+      <>
+        <Title value="WRAPPED" offset="-311.71" />
+        <p className={styles.empty}>No listens recorded for {year}.</p>
+      </>
+    );
+  }
 
   return (
     <>
@@ -85,6 +94,9 @@ export default async function Page(props: { params: Promise<{ year: string }> })
             </p>
           )}
           <RefreshButton />
+        </div>
+        <div className={styles.tzNoteFooter}>
+          <TzNote tz={tz} year={year} />
         </div>
       </div>
     </>
