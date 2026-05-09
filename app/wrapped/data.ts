@@ -31,6 +31,22 @@ const MONTH_NAMES = [
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+export type ReportTz = 'America/New_York' | 'Europe/London';
+
+// I lived in London until March 2024; from 2024 onwards in NY.
+export function reportTz(year: number): ReportTz {
+  return year >= 2024 ? 'America/New_York' : 'Europe/London';
+}
+
+export function yearRange(year: number): DateRange {
+  // Jan 1 is always standard time: UTC-5 for NY, UTC+0 for London.
+  const offset = reportTz(year) === 'America/New_York' ? 5 : 0;
+  return {
+    startDate: new Date(Date.UTC(year, 0, 1, offset)),
+    endDate: new Date(Date.UTC(year + 1, 0, 1, offset)),
+  };
+}
+
 function dateFilter(range: DateRange) {
   return and(gte(listens.time, range.startDate), lt(listens.time, range.endDate));
 }
@@ -39,7 +55,7 @@ export async function getSummaryStats(range: DateRange): Promise<SummaryStats> {
   const result = await db
     .select({
       totalListens: count(listens.id),
-      uniqueTracks: sql<number>`COUNT(DISTINCT LOWER(${tracks.name}) || '__' || LOWER(${tracks.artist}))`,
+      uniqueTracks: sql<number>`COUNT(DISTINCT (LOWER(${tracks.name}), LOWER(${tracks.artist})))`,
       uniqueArtists: sql<number>`COUNT(DISTINCT LOWER(${tracks.artist}))`,
     })
     .from(listens)
@@ -113,22 +129,23 @@ export async function getTopArtists(range: DateRange, limit = 10): Promise<Artis
   }));
 }
 
-export async function getTopArtistByMonth(range: DateRange): Promise<MonthlyTopArtist[]> {
+export async function getTopArtistByMonth(range: DateRange, tz: string): Promise<MonthlyTopArtist[]> {
+  const tzLit = sql.raw(`'${tz}'`);
   const result = await db.execute(sql`
     WITH monthly_counts AS (
       SELECT
         LOWER(${tracks.artist}) AS artist_key,
         MODE() WITHIN GROUP (ORDER BY ${tracks.artist}) AS artist,
-        EXTRACT(MONTH FROM ${listens.time}) AS month_num,
+        EXTRACT(MONTH FROM ${listens.time} AT TIME ZONE ${tzLit}) AS month_num,
         COUNT(*) AS listen_count,
         ROW_NUMBER() OVER (
-          PARTITION BY EXTRACT(MONTH FROM ${listens.time})
+          PARTITION BY EXTRACT(MONTH FROM ${listens.time} AT TIME ZONE ${tzLit})
           ORDER BY COUNT(*) DESC
         ) AS rn
       FROM ${listens}
       INNER JOIN ${tracks} ON ${listens.id} = ${tracks.id}
       WHERE ${listens.time} >= ${range.startDate} AND ${listens.time} < ${range.endDate}
-      GROUP BY LOWER(${tracks.artist}), EXTRACT(MONTH FROM ${listens.time})
+      GROUP BY LOWER(${tracks.artist}), EXTRACT(MONTH FROM ${listens.time} AT TIME ZONE ${tzLit})
     ),
     artist_images AS (
       SELECT DISTINCT ON (LOWER(t.artist))
@@ -157,31 +174,58 @@ export async function getTopArtistByMonth(range: DateRange): Promise<MonthlyTopA
   });
 }
 
-export async function getObsessionTracks(range: DateRange, limit = 5): Promise<WeeklyObsession[]> {
-  const result = await db
-    .select({
-      name: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.name})`,
-      artist: sql<string>`MODE() WITHIN GROUP (ORDER BY ${tracks.artist})`,
-      count: count(listens.id),
-      id: sql<string>`MIN(${tracks.id})`,
-      imageUrl: sql<string | null>`MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl})`,
-      weekDate: sql<string>`date_trunc('week', ${listens.time}::date)`,
-    })
-    .from(listens)
-    .innerJoin(tracks, eq(listens.id, tracks.id))
-    .where(dateFilter(range))
-    .groupBy(sql`LOWER(${tracks.name})`, sql`LOWER(${tracks.artist})`, sql`date_trunc('week', ${listens.time}::date)`)
-    .orderBy(desc(count(listens.id)))
-    .limit(limit);
+export async function getObsessionTracks(range: DateRange, tz: string, limit = 5): Promise<WeeklyObsession[]> {
+  const tzLit = sql.raw(`'${tz}'`);
+  const result = await db.execute(sql`
+    WITH weekly_counts AS (
+      SELECT
+        LOWER(${tracks.name}) AS name_key,
+        LOWER(${tracks.artist}) AS artist_key,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.name}) AS name,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.artist}) AS artist,
+        MIN(${tracks.id}) AS id,
+        MODE() WITHIN GROUP (ORDER BY ${tracks.imageUrl}) AS image_url,
+        to_char(date_trunc('week', ${listens.time} AT TIME ZONE ${tzLit}), 'YYYY-MM-DD') AS week_date,
+        COUNT(*) AS listen_count
+      FROM ${listens}
+      INNER JOIN ${tracks} ON ${listens.id} = ${tracks.id}
+      WHERE ${listens.time} >= ${range.startDate} AND ${listens.time} < ${range.endDate}
+      GROUP BY LOWER(${tracks.name}), LOWER(${tracks.artist}), to_char(date_trunc('week', ${listens.time} AT TIME ZONE ${tzLit}), 'YYYY-MM-DD')
+    ),
+    ranked AS (
+      SELECT
+        name, artist, id, image_url, week_date, listen_count,
+        ROW_NUMBER() OVER (PARTITION BY name_key, artist_key ORDER BY listen_count DESC) AS rn
+      FROM weekly_counts
+    )
+    SELECT name, artist, id, image_url, week_date, listen_count
+    FROM ranked
+    WHERE rn = 1
+    ORDER BY listen_count DESC
+    LIMIT ${limit}
+  `);
 
-  return result.map((row) => ({
-    ...row,
-    weekDate: new Date(row.weekDate),
+  return (
+    result.rows as {
+      name: string;
+      artist: string;
+      id: string;
+      image_url: string | null;
+      week_date: string;
+      listen_count: string;
+    }[]
+  ).map((row) => ({
+    name: row.name,
+    artist: row.artist,
+    id: row.id,
+    imageUrl: row.image_url,
+    weekDate: new Date(row.week_date),
+    count: Number(row.listen_count),
   }));
 }
 
-export async function getListeningPatterns(range: DateRange): Promise<ListeningPatterns> {
-  const localTime = sql`${listens.time} AT TIME ZONE 'America/New_York'`;
+export async function getListeningPatterns(range: DateRange, tz: string): Promise<ListeningPatterns> {
+  const localTime = sql`${listens.time} AT TIME ZONE ${sql.raw(`'${tz}'`)}`;
   const [byDayResult, byHourResult] = await Promise.all([
     db
       .select({
@@ -275,9 +319,13 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
   const previousMap = new Map(previousArtists.map((a) => [a.artist.toLowerCase(), a.count]));
 
   const allTrends: ArtistTrend[] = currentArtists
-    .filter((a) => (previousMap.get(a.artist.toLowerCase()) ?? 0) >= 5)
+    .filter((a) => {
+      const previousCount = previousMap.get(a.artist.toLowerCase()) ?? 0;
+      if (previousCount === 0) return false;
+      return previousCount >= 5 || a.count - previousCount >= 20;
+    })
     .map((a) => {
-      const previousCount = previousMap.get(a.artist.toLowerCase())!;
+      const previousCount = previousMap.get(a.artist.toLowerCase()) ?? 0;
       const percentChange = previousCount > 0 ? ((a.count - previousCount) / previousCount) * 100 : 0;
       return {
         artist: a.artist,

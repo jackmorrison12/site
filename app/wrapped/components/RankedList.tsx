@@ -19,7 +19,7 @@ export function RankedList({
   items: RankedItem[];
   barColor?: 'primary' | 'secondary';
 }) {
-  const maxCount = items[0]?.count ?? 1;
+  const maxCount = Math.max(...items.map((i) => i.count), 1);
 
   return (
     <div className={styles.container}>

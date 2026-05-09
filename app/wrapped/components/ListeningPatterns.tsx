@@ -6,6 +6,7 @@ import styles from './ListeningPatterns.module.scss';
 
 export function ListeningPatterns({ patterns }: { patterns: ListeningPatternsType }) {
   const maxDay = Math.max(...patterns.byDay.map((d) => d.count), 1);
+  const peakDay = patterns.byDay.reduce((max, d) => (d.count > max.count ? d : max), patterns.byDay[0]);
 
   // Fill in missing hours with zero counts so all 24 bars render
   const hourMap = new Map(patterns.byHour.map((h) => [h.hour, h.count]));
@@ -33,7 +34,10 @@ export function ListeningPatterns({ patterns }: { patterns: ListeningPatternsTyp
             >
               {hoveredDay === day.day && <span className={styles.tooltip}>{day.count.toLocaleString()}</span>}
               <div className={styles.barWrapper}>
-                <div className={styles.bar} style={{ height: `${(day.count / maxDay) * 100}%` }} />
+                <div
+                  className={`${styles.bar} ${day.day === peakDay?.day ? styles.barPeak : ''}`}
+                  style={{ height: `${(day.count / maxDay) * 100}%` }}
+                />
               </div>
               <span className={styles.barLabel}>{day.dayName.slice(0, 3)}</span>
             </div>

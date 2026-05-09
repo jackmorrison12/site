@@ -1,3 +1,9 @@
+.empty {
+  text-align: center;
+  color: var(--colours_text_soft);
+  margin: 40px 0;
+}
+
 .layout {
   display: grid;
   gap: 10px;
@@ -11,15 +17,22 @@
     'patterns  patterns'
     'discover  discover'
     'trends    trends'
-    'sync      sync';
+    'sync      sync'
+    'tznote    tznote';
 }
 
 .syncNote {
   grid-area: sync;
   text-align: center;
-  opacity: 0.5;
+  color: var(--colours_text_soft);
   font-size: var(--fontSizes_small);
   margin: 8px 0 0;
+}
+
+.tzNoteFooter {
+  grid-area: tznote;
+  text-align: center;
+  margin: -8px 0 8px;
 }
 
 .summary {
@@ -67,7 +80,8 @@
       'obsession obsession obsession patterns  patterns  patterns'
       'discover  discover  discover  trends    trends    trends'
       'discover  discover  discover  trends    trends    trends'
-      'sync      sync      sync      sync      sync      sync';
+      'sync      sync      sync      sync      sync      sync'
+      'tznote    tznote    tznote    tznote    tznote    tznote';
   }
 }
 
@@ -84,6 +98,7 @@
       'obsession obsession obsession patterns  patterns  patterns  patterns  patterns'
       'discover  discover  discover  discover  trends    trends    trends    trends'
       'discover  discover  discover  discover  trends    trends    trends    trends'
-      'sync      sync      sync      sync      sync      sync      sync      sync';
+      'sync      sync      sync      sync      sync      sync      sync      sync'
+      'tznote    tznote    tznote    tznote    tznote    tznote    tznote    tznote';
   }
 }
