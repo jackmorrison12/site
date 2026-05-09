@@ -275,9 +275,13 @@ export async function getArtistTrends(range: DateRange, limit = 15): Promise<Art
   const previousMap = new Map(previousArtists.map((a) => [a.artist.toLowerCase(), a.count]));
 
   const allTrends: ArtistTrend[] = currentArtists
-    .filter((a) => (previousMap.get(a.artist.toLowerCase()) ?? 0) >= 5)
+    .filter((a) => {
+      const previousCount = previousMap.get(a.artist.toLowerCase()) ?? 0;
+      if (previousCount === 0) return false;
+      return previousCount >= 5 || a.count - previousCount >= 20;
+    })
     .map((a) => {
-      const previousCount = previousMap.get(a.artist.toLowerCase())!;
+      const previousCount = previousMap.get(a.artist.toLowerCase()) ?? 0;
       const percentChange = previousCount > 0 ? ((a.count - previousCount) / previousCount) * 100 : 0;
       return {
         artist: a.artist,
