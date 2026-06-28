@@ -259,28 +259,6 @@
   }
 }
 
-/* Stagger chip float so they don't all bob in sync */
-.chip_cap        { animation-delay: 0s; }
-.chip_plane      { animation-delay: 0.4s; }
-.chip_headphones { animation-delay: 0.8s; }
-.chip_parachute  { animation-delay: 1.2s; }
-.chip_shirt      { animation-delay: 1.6s; }
-.chip_keyboard   { animation-delay: 2.0s; }
-.chip_pin        { animation-delay: 2.4s; }
-
-/* Plane chip drifts horizontally too */
-.chip_plane {
-  animation: planeDrift 8s ease-in-out infinite;
-}
-
-@keyframes planeDrift {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: -10px -4px;
-  }
-}
 
 /* -------------------------------------------------------------------------- */
 /*  iPhone — bottom-right of the avatar, replaces the old socials chip        */
@@ -443,4 +421,758 @@
 
 .phoneHomeBar {
   fill: #fff;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Graduation cap — sits on top of the head, replaces "Education" chip       */
+/* -------------------------------------------------------------------------- */
+
+.cap {
+  position: absolute;
+  width: 14%;
+  aspect-ratio: 48 / 48;
+  top: -2%;
+  left: 50%;
+  transform: translate(-50%, -42%) rotate(-10deg);
+  z-index: 6;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.25));
+  transform-origin: 50% 80%;
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.35s;
+
+  &:hover {
+    transform: translate(-50%, -48%) rotate(-4deg) scale(1.08);
+    filter: drop-shadow(0 6px 9px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 0 12px color-mix(in srgb, var(--colours_primary_default) 60%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.capActive {
+  transform: translate(-50%, -50%) rotate(-2deg) scale(1.1);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+
+  .capWobble {
+    animation: capToss 1.6s ease-in-out infinite;
+  }
+
+  .capTassel {
+    animation: tasselSwing 1s ease-in-out infinite;
+  }
+}
+
+.capSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.capWobble {
+  transform-box: fill-box;
+  transform-origin: 50% 80%;
+  animation: capSway 4s ease-in-out infinite;
+}
+
+.capTop {
+  fill: currentColor;
+}
+
+.capBand {
+  fill: color-mix(in srgb, currentColor 60%, #000);
+}
+
+.capString {
+  fill: #ffffff;
+}
+
+.capTassel {
+  fill: #face53;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: tasselSwing 3s ease-in-out infinite;
+}
+
+.cap:hover .capTassel {
+  animation-duration: 0.8s;
+}
+
+@keyframes capSway {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes capToss {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(3deg);
+  }
+}
+
+@keyframes tasselSwing {
+  0%, 100% {
+    transform: rotate(-12deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Plane — top-right, replaces "Travel" chip                                 */
+/* -------------------------------------------------------------------------- */
+
+.plane {
+  position: absolute;
+  width: 18%;
+  aspect-ratio: 512 / 512;
+  top: 0%;
+  right: -2%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25));
+  transform: rotate(-10deg);
+  transform-origin: 70% 50%;
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+  animation: planeDrift 7s ease-in-out infinite;
+
+  &:hover {
+    transform: rotate(-4deg) translate(-6px, -3px) scale(1.08);
+    filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 12px color-mix(in srgb, var(--colours_primary_default) 60%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.planeActive {
+  transform: rotate(-2deg) translate(-8px, -5px) scale(1.1);
+  filter: drop-shadow(0 9px 14px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 18px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+  animation: none;
+}
+
+.planeSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.planeBob {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: planeRock 2.4s ease-in-out infinite;
+}
+
+.planeBody {
+  fill: #ffffff;
+}
+
+.planeWing {
+  fill: currentColor;
+}
+
+.planeTail {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+.planeNose {
+  fill: color-mix(in srgb, currentColor 70%, #fff);
+}
+
+.planeStrut {
+  fill: color-mix(in srgb, currentColor 80%, #000);
+}
+
+.planeStrutAccent {
+  fill: color-mix(in srgb, #ffffff 80%, currentColor);
+}
+
+.planeWindows circle {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+@keyframes planeDrift {
+  0%, 100% {
+    transform: rotate(-10deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(-8deg) translate(-8px, -4px);
+  }
+}
+
+@keyframes planeRock {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* contrail — short string of fading dots behind the plane */
+.contrail {
+  position: absolute;
+  right: 78%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--colours_primary_default) 70%, transparent);
+    animation: contrailPuff 1.6s ease-out infinite;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 0.15s;
+    width: 5px;
+    height: 5px;
+  }
+  span:nth-child(3) {
+    animation-delay: 0.3s;
+    width: 4px;
+    height: 4px;
+  }
+  span:nth-child(4) {
+    animation-delay: 0.45s;
+    width: 3px;
+    height: 3px;
+  }
+}
+
+.plane:hover .contrail,
+.planeActive .contrail {
+  opacity: 1;
+}
+
+@keyframes contrailPuff {
+  0% {
+    opacity: 0.8;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-18px) scale(0.5);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Statue of Liberty — mid-right, replaces "Location" chip                   */
+/* -------------------------------------------------------------------------- */
+
+.liberty {
+  position: absolute;
+  width: 11%;
+  aspect-ratio: 494 / 1275;
+  top: 28%;
+  right: -2%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.28));
+  transform-origin: 50% 100%;
+  transition: transform 0.45s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.45s;
+  animation: libertySway 6s ease-in-out infinite;
+
+  &:hover {
+    transform: scale(1.06) translateY(-3px);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 0 14px color-mix(in srgb, var(--colours_primary_default) 55%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 6px;
+    border-radius: 12px;
+  }
+}
+
+.libertyActive {
+  transform: scale(1.08) translateY(-4px);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.38))
+    drop-shadow(0 0 20px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+  animation: libertySwayActive 3s ease-in-out infinite;
+
+  .libertyTorch {
+    opacity: 1;
+    animation: torchFlicker 1.6s ease-in-out infinite;
+  }
+}
+
+.libertyBody {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url('/img/avatar/liberty.svg') no-repeat center / contain;
+  mask: url('/img/avatar/liberty.svg') no-repeat center / contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  pointer-events: none;
+}
+
+/* Soft torch glow positioned over the statue's raised arm */
+.libertyTorch {
+  position: absolute;
+  width: 55%;
+  aspect-ratio: 1;
+  top: 4%;
+  right: 6%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    #ffd166 0%,
+    color-mix(in srgb, #ffb02e 80%, transparent) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.liberty:hover .libertyTorch {
+  opacity: 0.95;
+  animation: torchFlicker 1.6s ease-in-out infinite;
+}
+
+@keyframes libertySway {
+  0%, 100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+@keyframes libertySwayActive {
+  0%, 100% {
+    transform: scale(1.08) translateY(-4px) rotate(-1.2deg);
+  }
+  50% {
+    transform: scale(1.08) translateY(-4px) rotate(1.2deg);
+  }
+}
+
+@keyframes torchFlicker {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  35% {
+    opacity: 0.75;
+    transform: scale(0.94);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Work badge — lanyard ID on the chest, replaces "Work" chip                */
+/* -------------------------------------------------------------------------- */
+
+.badge {
+  position: absolute;
+  width: 16%;
+  aspect-ratio: 1;
+  top: 52%;
+  left: 16%;
+  z-index: 4;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  transform-origin: 50% 0%;
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+
+  &:hover {
+    transform: translateY(2px) scale(1.06);
+    filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 0 12px color-mix(in srgb, var(--colours_primary_default) 60%, transparent));
+
+    .badgeDangle {
+      animation: badgeDangle 1.4s ease-in-out infinite;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.badgeActive {
+  transform: translateY(3px) scale(1.08);
+  filter: drop-shadow(0 9px 14px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 18px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+
+  .badgeDangle {
+    animation: badgeDangle 1.1s ease-in-out infinite;
+  }
+}
+
+.badgeSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.badgeDangle {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: badgeDangleIdle 5s ease-in-out infinite;
+}
+
+.badgeStrap {
+  fill: currentColor;
+}
+
+.badgeCard {
+  fill: #ffffff;
+}
+
+.badgeOutline {
+  fill: color-mix(in srgb, currentColor 50%, #000);
+}
+
+.badgeNamePlate {
+  fill: color-mix(in srgb, currentColor 30%, #fff);
+}
+
+.badgePhoto {
+  fill: #f1ed7b;
+}
+
+.badgeHead {
+  fill: color-mix(in srgb, currentColor 50%, #000);
+}
+
+.badgeLine {
+  fill: color-mix(in srgb, currentColor 35%, #fff);
+}
+
+.badgeRing {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+@keyframes badgeDangleIdle {
+  0%, 100% {
+    transform: rotate(-1.2deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+
+@keyframes badgeDangle {
+  0%, 100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Laptop — bottom-left, replaces "Open source" chip                          */
+/* -------------------------------------------------------------------------- */
+
+.laptop {
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 109.908 / 86.388;
+  bottom: 2%;
+  left: 2%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.28));
+  transform: rotate(-4deg);
+  transform-origin: 50% 100%;
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+  animation: laptopBob 4.5s ease-in-out infinite;
+
+  &:hover {
+    transform: rotate(-2deg) translateY(-4px) scale(1.06);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 0 14px color-mix(in srgb, var(--colours_primary_default) 55%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.laptopActive {
+  transform: rotate(-1deg) translateY(-6px) scale(1.08);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.36))
+    drop-shadow(0 0 20px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+  animation: none;
+}
+
+.laptopSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.laptopFrame {
+  fill: color-mix(in srgb, currentColor 55%, #000);
+}
+
+.laptopScreen {
+  fill: color-mix(in srgb, currentColor 65%, #000);
+  transition: fill 0.4s ease;
+}
+
+.laptop:hover .laptopScreen,
+.laptopActive .laptopScreen {
+  fill: color-mix(in srgb, currentColor 35%, #000);
+}
+
+.laptopDeck {
+  fill: #e4e7e7;
+}
+
+.laptopNotch {
+  fill: #c9d1d1;
+}
+
+.laptopLogo {
+  fill: #fbfbfb;
+}
+
+.laptopCode rect {
+  fill: color-mix(in srgb, currentColor 75%, #fff);
+  opacity: 0;
+  transform: translateX(-8px);
+  transform-box: fill-box;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.5, 1.6, 0.4, 1);
+}
+
+.laptop:hover .laptopCode rect,
+.laptopActive .laptopCode rect {
+  opacity: 0.95;
+  transform: translateX(0);
+}
+
+.laptopCode rect:nth-child(1) { transition-delay: 0.05s; }
+.laptopCode rect:nth-child(2) { transition-delay: 0.1s; }
+.laptopCode rect:nth-child(3) { transition-delay: 0.15s; }
+.laptopCode rect:nth-child(4) { transition-delay: 0.2s; }
+.laptopCode rect:nth-child(5) { transition-delay: 0.25s; }
+.laptopCode rect:nth-child(6) { transition-delay: 0.3s; }
+
+.laptopGlow {
+  fill: color-mix(in srgb, var(--colours_primary_default) 40%, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.laptop:hover .laptopGlow,
+.laptopActive .laptopGlow {
+  opacity: 0.6;
+}
+
+@keyframes laptopBob {
+  0%, 100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-3px);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Skydiver — top-left, replaces "Skydiving" chip                            */
+/* -------------------------------------------------------------------------- */
+
+.skydiver {
+  position: absolute;
+  width: 16%;
+  aspect-ratio: 1;
+  top: 16%;
+  left: -2%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+  animation: skydiverDrift 6s ease-in-out infinite;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.08);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 0 14px color-mix(in srgb, var(--colours_primary_default) 60%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.skydiverActive {
+  transform: translateY(-5px) scale(1.1);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 20px color-mix(in srgb, var(--colours_primary_default) 75%, transparent));
+  animation: none;
+
+  .skydiverSwing {
+    animation: skydiverSwingActive 1.6s ease-in-out infinite;
+  }
+}
+
+.skydiverSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.skydiverSwing {
+  transform-box: fill-box;
+  transform-origin: 33% 30%;
+  animation: skydiverSwing 3.5s ease-in-out infinite;
+}
+
+.skydiverLines path {
+  fill: color-mix(in srgb, currentColor 45%, #000);
+}
+
+.skydiverCanopyBack {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+.skydiverPanelDark {
+  fill: currentColor;
+}
+
+.skydiverPanelLight {
+  fill: color-mix(in srgb, currentColor 40%, #fff);
+}
+
+.skydiverFigure path {
+  /* default text/dark figure colour */
+}
+
+.skydiverHelmet {
+  fill: #292f33;
+}
+
+.skydiverGloveOuter {
+  fill: #ffac33;
+}
+
+.skydiverBody {
+  fill: #f4900c;
+}
+
+.skydiverFootAccent {
+  fill: #ffac33;
+}
+
+.skydiverGoggle {
+  fill: #99aab5;
+}
+
+.skydiverGoggleLens {
+  fill: #88c9f9;
+}
+
+@keyframes skydiverDrift {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(4px) rotate(2deg);
+  }
+}
+
+@keyframes skydiverSwing {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes skydiverSwingActive {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
 }

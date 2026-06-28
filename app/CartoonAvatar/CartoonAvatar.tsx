@@ -17,14 +17,7 @@ type ChipDef = {
   pos: React.CSSProperties;
 };
 
-const CHIPS: ChipDef[] = [
-  { id: 'cap', emoji: '🎓', label: 'Education', pos: { top: '0%', left: '50%', transform: 'translate(-50%, -40%)' } },
-  { id: 'plane', emoji: '✈️', label: 'Travel', pos: { top: '6%', right: '4%' } },
-  { id: 'pin', emoji: '📍', label: 'Location', pos: { top: '40%', right: '4%' } },
-  { id: 'parachute', emoji: '🪂', label: 'Skydiving', pos: { top: '27%', right: '66%' } },
-  { id: 'shirt', emoji: '💼', label: 'Work', pos: { top: '78%', left: '50%', transform: 'translateX(-50%)' } },
-  { id: 'keyboard', emoji: '⌨️', label: 'Open source', pos: { bottom: '3%', left: '6%' } },
-];
+const CHIPS: ChipDef[] = [];
 
 const PHONE_APPS: { color: string; label: string }[] = [
   { color: 'hsl(203, 89%, 53%)', label: 'X' },
@@ -217,6 +210,317 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
 
             {/* faint screen glow when lit */}
             <rect className={styles.phoneGlow} x="5" y="5" width="54" height="120" rx="6.5" ry="6.5" />
+          </svg>
+        </button>
+
+        {/* Graduation cap — sits on top of head, replaces the old "Education" chip */}
+        <button
+          type="button"
+          aria-label="Education"
+          aria-pressed={active === 'cap'}
+          className={`${styles.cap} ${active === 'cap' ? styles.capActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'cap' ? null : 'cap');
+          }}
+        >
+          <svg viewBox="0 0 48 48" className={styles.capSvg} aria-hidden="true">
+            <g className={styles.capWobble}>
+              {/* mortarboard underside (head band) */}
+              <path
+                className={styles.capBand}
+                d="M24.5,34h0C15.94,34,9,30.154,9,24V14H40V24C40,29.171,33.06,34,24.5,34Z"
+              />
+              {/* mortarboard top */}
+              <path
+                className={styles.capTop}
+                d="M46.171,9.991,27.3.764a7.518,7.518,0,0,0-6.6,0L1.829,9.991a3.26,3.26,0,0,0,.15,5.927L4.5,17l16.543,7.079a7.517,7.517,0,0,0,5.914,0L43.5,17l2.521-1.078A3.26,3.26,0,0,0,46.171,9.991Z"
+              />
+              {/* tassel string */}
+              <path
+                className={styles.capString}
+                d="M40,38a1,1,0,0,1-1-1V19.361L24.918,12.14a1,1,0,1,1,.914-1.78L41,18.139V37A1,1,0,0,1,40,38Z"
+              />
+              {/* center button */}
+              <ellipse className={styles.capBand} cx="24.5" cy="11" rx="4.5" ry="3" />
+              {/* gold tassel ball */}
+              <circle className={styles.capTassel} cx="40" cy="39" r="4" />
+            </g>
+          </svg>
+        </button>
+
+        {/* Plane — top-right corner, replaces the old "Travel" chip */}
+        <button
+          type="button"
+          aria-label="Travel"
+          aria-pressed={active === 'plane'}
+          className={`${styles.plane} ${active === 'plane' ? styles.planeActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'plane' ? null : 'plane');
+          }}
+        >
+          <span className={styles.contrail} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </span>
+          <svg viewBox="0 0 512 512" className={styles.planeSvg} aria-hidden="true">
+            <g className={styles.planeBob}>
+              {/* fuselage */}
+              <path
+                className={styles.planeBody}
+                d="M440.894,254.178L440.894,254.178c-17.885-17.102-41.681-26.639-66.426-26.622l-263.522,0.189
+                  c-9.882,0.007-19.156-4.775-24.881-12.83l-38.534-54.214c-1.894-2.663-4.959-4.244-8.227-4.242l-21.073,0.015
+                  c-6.779,0.004-11.622,6.563-9.633,13.044l28.153,91.707c11.982,39.033,48.048,65.668,88.879,65.638l356.752-0.256
+                  c11.868-0.009,21.484-9.637,21.475-21.505l0,0c-0.007-10.134-6.456-19.144-16.047-22.417l0,0
+                  C470.288,276.704,454.278,266.976,440.894,254.178z"
+              />
+              {/* tail accent */}
+              <path
+                className={styles.planeTail}
+                d="M47.532,160.703c-1.893-2.663-4.959-4.244-8.227-4.242l-21.073,0.015
+                  c-6.779,0.004-11.622,6.563-9.633,13.044l3.951,12.869l50.371-0.036L47.532,160.703z"
+              />
+              {/* wing */}
+              <path
+                className={styles.planeWing}
+                d="M110.947,227.747c-9.882,0.007-19.156-4.775-24.881-12.83l-23.145-32.563l-50.371,0.036
+                  l24.202,78.837c4.758,15.499,13.322,29.031,24.464,39.728c13.628-28.051,36.923-50.576,66.007-63.082l23.612-10.154L110.947,227.747
+                  z"
+              />
+              {/* nose accent */}
+              <path
+                className={styles.planeNose}
+                d="M440.894,254.178c-2.636-2.521-5.416-4.857-8.294-7.044l-27.326,0.02
+                  c-3.608,0.002-6.532,2.929-6.528,6.538l0.008,11.029c0.003,3.609,2.931,6.532,6.538,6.53l57.886-0.041
+                  C455.169,266.382,447.692,260.679,440.894,254.178z"
+              />
+              {/* row of windows */}
+              <g className={styles.planeWindows}>
+                <circle cx="131" cy="259" r="6" />
+                <circle cx="168" cy="259" r="6" />
+                <circle cx="204" cy="259" r="6" />
+                <circle cx="240" cy="259" r="6" />
+                <circle cx="277" cy="259" r="6" />
+                <circle cx="313" cy="259" r="6" />
+              </g>
+              {/* landing-gear / wing strut */}
+              <path
+                className={styles.planeStrut}
+                d="M251.779,355.508l-41.976,0.03c-9.597,0.007-17.382-7.768-17.389-17.365l-0.007-9.002
+                  c-0.007-9.597,7.768-17.382,17.365-17.389l41.976-0.03c5.376-0.004,9.736,4.35,9.74,9.726l0.017,24.289
+                  C261.509,351.144,257.154,355.504,251.779,355.508z"
+              />
+              <path
+                className={styles.planeStrutAccent}
+                d="M291.406,284.087c7.632-0.005,13.823,6.177,13.829,13.809s-6.177,13.824-13.809,13.829
+                  l-116.302,0.084c-7.632,0.005-13.823-6.177-13.829-13.809c-0.005-7.632,6.177-13.823,13.809-13.829L291.406,284.087z"
+              />
+            </g>
+          </svg>
+        </button>
+
+        {/* Statue of Liberty — mid-right, replaces the old "Location" chip */}
+        <button
+          type="button"
+          aria-label="Location"
+          aria-pressed={active === 'pin'}
+          className={`${styles.liberty} ${active === 'pin' ? styles.libertyActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'pin' ? null : 'pin');
+          }}
+        >
+          <span className={styles.libertyTorch} aria-hidden="true" />
+          <span className={styles.libertyBody} aria-hidden="true" />
+        </button>
+
+        {/* Work badge — lanyard ID dangling on the chest, replaces the old "Work" chip */}
+        <button
+          type="button"
+          aria-label="Work"
+          aria-pressed={active === 'shirt'}
+          className={`${styles.badge} ${active === 'shirt' ? styles.badgeActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'shirt' ? null : 'shirt');
+          }}
+        >
+          <svg viewBox="0 0 1024 1024" className={styles.badgeSvg} aria-hidden="true">
+            <g className={styles.badgeDangle}>
+              {/* lanyard strap left */}
+              <path
+                className={styles.badgeStrap}
+                d="M591.2 396.8L776 81.6C735.2 60.8 692 44 647.2 32L432.8 396.8h158.4z"
+              />
+              {/* lanyard strap right (mirror) */}
+              <path
+                className={styles.badgeStrap}
+                d="M591.2 396.8L376.8 32c-44.8 12-88 28.8-128.8 49.6l184.8 314.4h158.4z"
+              />
+              {/* card body */}
+              <path
+                className={styles.badgeCard}
+                d="M363.2 992h296.8c54.4 0 99.2-44 99.2-99.2V431.2c0-54.4-44-99.2-99.2-99.2H363.2C308.8 332 264 376 264 431.2v461.6c0.8 55.2 44.8 99.2 99.2 99.2z"
+              />
+              {/* name plate at top of card */}
+              <rect className={styles.badgeNamePlate} x="388" y="372" width="248" height="50" rx="25" />
+              {/* photo placeholder circle */}
+              <circle className={styles.badgePhoto} cx="512" cy="620.8" r="148.8" />
+              {/* photo head */}
+              <circle className={styles.badgeHead} cx="512" cy="583" r="56" />
+              {/* photo body */}
+              <path
+                className={styles.badgeHead}
+                d="M569.6 682.4c-15.2 18.4-35.2 32-57.6 32-23.2 0-42.4-12.8-57.6-32-25.6 7.2-45.6 19.2-55.2 35.2 27.2 32 68 52 112.8 52 45.6 0 85.6-20 112.8-52-9.6-16-29.6-28-55.2-35.2z"
+              />
+              {/* info lines */}
+              <rect className={styles.badgeLine} x="355" y="827" width="312" height="16" rx="8" />
+              <rect className={styles.badgeLine} x="355" y="906" width="312" height="16" rx="8" />
+              {/* card outline */}
+              <path
+                className={styles.badgeOutline}
+                d="M660.8 1000H363.2C304 1000 256 952 256 892.8V431.2c0-59.2 48-107.2 107.2-107.2h296.8c59.2 0 107.2 48 107.2 107.2v461.6c0 59.2-48 107.2-106.4 107.2zM363.2 340c-50.4 0-91.2 40.8-91.2 91.2v461.6c0 50.4 40.8 91.2 91.2 91.2h296.8c50.4 0 91.2-40.8 91.2-91.2V431.2c0-50.4-40.8-91.2-91.2-91.2H363.2z"
+              />
+            </g>
+            {/* ring at the top where lanyard meets */}
+            <circle className={styles.badgeRing} cx="512" cy="32" r="14" />
+          </svg>
+        </button>
+
+        {/* Laptop — bottom-left, replaces the old "Open source" chip */}
+        <button
+          type="button"
+          aria-label="Open source"
+          aria-pressed={active === 'keyboard'}
+          className={`${styles.laptop} ${active === 'keyboard' ? styles.laptopActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'keyboard' ? null : 'keyboard');
+          }}
+        >
+          <svg viewBox="0 0 109.908 86.388" className={styles.laptopSvg} aria-hidden="true">
+            <g transform="translate(-649.324 -1577.937)">
+              {/* screen frame */}
+              <path
+                className={styles.laptopFrame}
+                d="M746.076,1577.937h-83.6a2.252,2.252,0,0,0-2.24,2.244v56.543h88.076v-56.543A2.245,2.245,0,0,0,746.076,1577.937Zm.186,56.332h-83.97v-53.184h83.97Z"
+              />
+              {/* screen */}
+              <rect
+                className={styles.laptopScreen}
+                width="83.969"
+                height="53.184"
+                transform="translate(662.292 1581.085)"
+              />
+              {/* screen content — animated lines of code */}
+              <g className={styles.laptopCode}>
+                <rect className={styles.laptopCodeLine} x="666" y="1588" width="34" height="3" rx="1.5" />
+                <rect className={styles.laptopCodeLine} x="666" y="1595" width="48" height="3" rx="1.5" />
+                <rect className={styles.laptopCodeLine} x="672" y="1602" width="40" height="3" rx="1.5" />
+                <rect className={styles.laptopCodeLine} x="672" y="1609" width="58" height="3" rx="1.5" />
+                <rect className={styles.laptopCodeLine} x="666" y="1616" width="30" height="3" rx="1.5" />
+                <rect className={styles.laptopCodeLine} x="672" y="1623" width="44" height="3" rx="1.5" />
+              </g>
+              {/* glow over screen */}
+              <rect
+                className={styles.laptopGlow}
+                width="83.969"
+                height="53.184"
+                transform="translate(662.292 1581.085)"
+              />
+              {/* keyboard deck */}
+              <path
+                className={styles.laptopDeck}
+                d="M759.232,1639.962a.84.84,0,0,1-.845.84H650.162a.837.837,0,0,1-.838-.84v-2.4a.837.837,0,0,1,.838-.836H758.387a.84.84,0,0,1,.845.836Z"
+              />
+              {/* trackpad notch */}
+              <path
+                className={styles.laptopNotch}
+                d="M695.832,1636.724v.652a.841.841,0,0,0,.84.836h15.21a.843.843,0,0,0,.838-.836v-.652Z"
+              />
+              {/* apple logo dot */}
+              <circle className={styles.laptopLogo} cx="704.277" cy="1579.505" r="0.6" />
+            </g>
+          </svg>
+        </button>
+
+        {/* Skydiver — top-left, replaces the old "Skydiving" chip */}
+        <button
+          type="button"
+          aria-label="Skydiving"
+          aria-pressed={active === 'parachute'}
+          className={`${styles.skydiver} ${active === 'parachute' ? styles.skydiverActive : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onActiveChange(active === 'parachute' ? null : 'parachute');
+          }}
+        >
+          <svg viewBox="0 0 36 36" className={styles.skydiverSvg} aria-hidden="true">
+            <g className={styles.skydiverSwing}>
+              {/* canopy lines */}
+              <g className={styles.skydiverLines}>
+                <path d="M11.945 32.885a.501.501 0 0 1-.45-.28L.652 10.624a.5.5 0 1 1 .899-.443l10.843 21.98a.501.501 0 0 1-.449.724z" />
+                <path d="M11.944 32.885a.503.503 0 0 1-.481-.358L4.042 7.612a.502.502 0 1 1 .962-.286l7.421 24.914a.501.501 0 0 1-.481.645z" />
+                <path d="M11.944 32.885a.502.502 0 0 1-.5-.462L9.214 4.428a.502.502 0 0 1 1-.08l2.23 27.995a.502.502 0 0 1-.46.54l-.04.002z" />
+                <path d="M11.945 32.885a.502.502 0 0 1-.259-.931l21-12.64a.501.501 0 1 1 .517.859l-21 12.64a.506.506 0 0 1-.258.072z" />
+                <path d="M11.944 32.885a.5.5 0 0 1-.327-.882l19.705-16.957a.502.502 0 0 1 .654.761L12.271 32.763a.494.494 0 0 1-.327.122z" />
+                <path d="M11.944 32.885a.503.503 0 0 1-.399-.806L28.546 9.726a.503.503 0 0 1 .799.607L12.344 32.687a.505.505 0 0 1-.4.198z" />
+              </g>
+              {/* canopy — dark red back */}
+              <path
+                className={styles.skydiverCanopyBack}
+                d="M33.25 20.343s-3.106-3.669-15.62-7.34S.521 10.741.521 10.741S-1.158-4.917 20.982 1.578S33.25 20.343 33.25 20.343z"
+              />
+              {/* canopy panels — light/dark stripes */}
+              <path
+                className={styles.skydiverPanelLight}
+                d="M7.156 10.73c1.122.135 2.402.336 3.854.626L11.09.012C9.606.046 8.327.244 7.228.565L7.156 10.73zm16.935 4.463a50.98 50.98 0 0 1 3.581 1.555l5.431-8.593c-.752-.864-1.721-1.721-2.951-2.552l-6.061 9.59z"
+              />
+              <path
+                className={styles.skydiverPanelDark}
+                d="M24.091 15.193l6.061-9.59c-2.163-1.461-5.128-2.84-9.17-4.026S13.7-.05 11.09.011l-.08 11.344c1.907.38 4.095.907 6.62 1.647a77.56 77.56 0 0 1 6.461 2.191z"
+              />
+              {/* skydiver body — figure with arms/legs out */}
+              <g className={styles.skydiverFigure}>
+                <path
+                  className={styles.skydiverGloveOuter}
+                  d="M14.531 28.329c-.174.592-.851 1.497-1.758 1.231s-.988-1.393-.815-1.985s.511-1.742 1.798-1.365s.949 1.527.775 2.119z"
+                />
+                <path
+                  className={styles.skydiverHelmet}
+                  d="M13.783 26.115c-1.729-.507-2.329 1.149-2.03 1.65c.299.502.64.04 1.463.282c.823.241.861.814 1.384.553c.522-.26.913-1.977-.817-2.485z"
+                />
+                <path
+                  className={styles.skydiverGoggle}
+                  d="M14.665 28.462a.753.753 0 1 1-1.447-.425c.117-.4.472-.411.872-.294c.399.118.692.319.575.719z"
+                />
+                <path
+                  className={styles.skydiverGoggleLens}
+                  d="M14.398 28.425a.489.489 0 0 1-.605.331a.489.489 0 0 1-.331-.605c.076-.258.305-.266.564-.19c.258.076.448.206.372.464z"
+                />
+                <path
+                  className={styles.skydiverGoggle}
+                  d="M13.219 28.038a.753.753 0 1 1-1.447-.425c.117-.4.472-.411.872-.294s.693.319.575.719z"
+                />
+                <path
+                  className={styles.skydiverGoggleLens}
+                  d="M12.952 28.001a.489.489 0 0 1-.605.331a.489.489 0 0 1-.331-.605c.076-.258.305-.266.564-.19s.448.206.372.464z"
+                />
+                {/* body */}
+                <path
+                  className={styles.skydiverBody}
+                  d="M15.799 29.523c-.095-.427-.489-.521-.633-.196c-.144.325-.214 1.356-.214 1.356s-.337-.915-.656-1.37l-.031-.047a.778.778 0 0 0-.157-.167l-.02-.013c-.246-.206-.596-.356-1.034-.485s-.813-.191-1.132-.151h-.024a.8.8 0 0 0-.222.056c-.018.006-.034.015-.052.022c-.514.21-1.292.799-1.292.799s.498-.906.552-1.257c.054-.351-.328-.485-.639-.177c-.31.308-1.13 2.047-1.011 2.449c.119.402.788.23 1.217.097l.198-.064c-.07.395-.111.863-.02 1.321c-.887 1.998-.811 3.811-.411 3.928c.616.181 1.137-2.356 1.44-2.267c.303.089-.524 2.461.092 2.642c.4.117 1.339-1.323 1.671-3.484c.324-.337.542-.752.697-1.123c.045.055.091.113.132.161c.29.344.759.85 1.077.576c.318-.272.567-2.179.472-2.606z"
+                />
+                {/* foot accent */}
+                <path
+                  className={styles.skydiverFootAccent}
+                  d="M13.093 32.695l-2.284-.67a.264.264 0 0 1 .149-.507l2.284.67a.264.264 0 0 1-.149.507z"
+                />
+              </g>
+            </g>
           </svg>
         </button>
 
