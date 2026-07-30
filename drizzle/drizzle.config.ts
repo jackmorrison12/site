@@ -1,12 +1,16 @@
 import 'drizzle/envConfig';
 import { defineConfig } from 'drizzle-kit';
 
+const url = process.env.POSTGRES_URL;
+
+if (!url) {
+  throw new Error(
+    'POSTGRES_URL is not set. Drizzle Kit needs a connection string — pull it with `vercel env pull .env.local` or export it before running drizzle-kit.',
+  );
+}
+
 export default defineConfig({
   schema: './drizzle/schema.ts',
   dialect: 'postgresql',
-  dbCredentials: {
-    url:
-      process.env.POSTGRES_URL ??
-      'postgres://default:d8ZmBa2MpLrO@ep-still-snowflake-98407531-pooler.eu-central-1.postgres.vercel-storage.com/verceldb',
-  },
+  dbCredentials: { url },
 });
