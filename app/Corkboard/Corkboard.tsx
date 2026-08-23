@@ -138,7 +138,7 @@ export const Corkboard = ({
       {!active && (
         <span className={styles.gapHint} aria-hidden="true">
           <span className={`${styles.pin} ${styles.pinWhite}`} />
-          <span className={styles.gapHintScrap}>psst… click my stuff ☝</span>
+          <span className={styles.gapHintScrap}>psst… click things on the board ☝</span>
         </span>
       )}
     </div>
