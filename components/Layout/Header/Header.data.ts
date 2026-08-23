@@ -7,11 +7,6 @@ export const headerLinks: HeaderLink[] = [
     url: '/',
   },
   {
-    name: 'Me',
-    emoji: '👨‍💻',
-    url: '/me',
-  },
-  {
     name: 'CV',
     emoji: '📄',
     url: '/cv',

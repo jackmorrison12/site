@@ -5,7 +5,7 @@ import { Providers } from './providers';
 import StyledComponentsRegistry from './registry';
 import { Analytics } from '@vercel/analytics/next';
 
-import { Poppins } from 'next/font/google';
+import { Caveat, Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
 
 const APP_NAME = 'Jack Morrison';
@@ -19,9 +19,17 @@ const poppins = Poppins({
   display: 'swap',
 });
 
+// Handwriting accent for the corkboard (notes, polaroid captions, doodles)
+const caveat = Caveat({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-caveat',
+});
+
 export default function RootLayout({ children, modal }: { children: ReactNode; modal: ReactNode }) {
   return (
-    <html lang="en" className={poppins.className} suppressHydrationWarning>
+    <html lang="en" className={`${poppins.className} ${caveat.variable}`} suppressHydrationWarning>
       <body>
         <Providers>
           <StyledComponentsRegistry>

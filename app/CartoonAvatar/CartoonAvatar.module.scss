@@ -1,0 +1,968 @@
+.parallaxRoot {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.4, 0.1, 0.4, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.floater {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.baseImg {
+  object-fit: contain !important;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  AirPods — each pod independently positioned                               */
+/* -------------------------------------------------------------------------- */
+
+.airpod {
+  position: absolute;
+  width: 3.75%;
+  aspect-ratio: 50 / 80;
+  z-index: 4;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.3s;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.06);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+}
+
+/* Left pod — in the left ear */
+.airpodLeft {
+  top: 34%;
+  left: 41%;
+}
+
+/* Right pod — in the right ear */
+.airpodRight {
+  top: 40.5%;
+  left: 67%;
+}
+
+.airpodActive {
+  animation: none;
+  transform: translateY(-4px) scale(1.06);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+
+  .notes text {
+    animation: noteRise 1.6s ease-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(3) {
+      animation-delay: 1s;
+    }
+  }
+}
+
+.airpodSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.notes text {
+  opacity: 0;
+}
+
+.airpod:hover .notes text {
+  animation: noteRise 1.6s ease-out infinite;
+}
+
+.airpod:hover .notes text:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.airpod:hover .notes text:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes noteRise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  iPhone — bottom-right of the avatar, replaces the old socials chip        */
+/* -------------------------------------------------------------------------- */
+
+.phone {
+  position: absolute;
+  width: 13.5%;
+  aspect-ratio: 64 / 130;
+  bottom: 2%;
+  right: 4%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
+  transform: rotate(-14deg);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.35s;
+  transform-origin: 80% 80%;
+
+  &:hover {
+    transform: rotate(-8deg) translateY(-4px) scale(1.06);
+    filter: drop-shadow(0 9px 14px rgba(0, 0, 0, 0.35));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 14px;
+  }
+}
+
+.phoneActive {
+  transform: rotate(-6deg) translateY(-5px) scale(1.08);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.38));
+  animation: none;
+}
+
+.phoneSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.phoneBody {
+  fill: currentColor;
+}
+
+.phoneFrame {
+  fill: color-mix(in srgb, currentColor 65%, #000);
+}
+
+.phoneInnerFrame {
+  fill: #0a0a0a;
+}
+
+.phoneScreen {
+  fill: #060912;
+  transition: fill 0.4s ease;
+}
+
+.phone:hover .phoneScreen,
+.phoneActive .phoneScreen {
+  fill: #0d1428;
+}
+
+.phoneIsland {
+  fill: #000;
+}
+
+.phoneSideButton {
+  fill: color-mix(in srgb, currentColor 55%, #000);
+}
+
+/* faint glow rectangle layered over the screen, off by default */
+.phoneGlow {
+  fill: color-mix(in srgb, var(--colours_primary_default) 35%, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.phone:hover .phoneGlow,
+.phoneActive .phoneGlow {
+  opacity: 0.6;
+}
+
+/* status bar + apps + home bar — all hidden until lit */
+.phoneScreenContent {
+  pointer-events: none;
+}
+
+.phoneTime,
+.phoneStatusDot,
+.phoneApp,
+.phoneHomeBar {
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.5, 1.7, 0.4, 1);
+}
+
+.phoneApp {
+  transform: scale(0.4);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.phone:hover .phoneTime,
+.phone:hover .phoneStatusDot,
+.phone:hover .phoneHomeBar,
+.phoneActive .phoneTime,
+.phoneActive .phoneStatusDot,
+.phoneActive .phoneHomeBar {
+  opacity: 0.9;
+}
+
+.phone:hover .phoneApp,
+.phoneActive .phoneApp {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.phoneTime {
+  fill: #fff;
+  font-size: 4.5px;
+  font-family: inherit;
+  font-weight: var(--fontWeights_thick);
+}
+
+.phoneAppLabel {
+  fill: #fff;
+  font-size: 5.5px;
+  font-family: inherit;
+  font-weight: var(--fontWeights_thick);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.phoneStatusDot {
+  fill: #fff;
+}
+
+.phoneHomeBar {
+  fill: #fff;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Graduation cap — sits on top of the head, replaces "Education" chip       */
+/* -------------------------------------------------------------------------- */
+
+.cap {
+  position: absolute;
+  width: 14%;
+  aspect-ratio: 48 / 48;
+  top: -2%;
+  left: 54%;
+  transform: translate(-50%, -16%) rotate(-10deg);
+  z-index: 6;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.25));
+  transform-origin: 50% 80%;
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.35s;
+
+  &:hover {
+    transform: translate(-50%, -20%) rotate(-4deg) scale(1.08);
+    filter: drop-shadow(0 6px 9px rgba(0, 0, 0, 0.32));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.capActive {
+  transform: translate(-50%, -22%) rotate(-2deg) scale(1.1);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+
+  .capWobble {
+    animation: capToss 1.6s ease-in-out infinite;
+  }
+
+  .capTassel {
+    animation: tasselSwing 1s ease-in-out infinite;
+  }
+}
+
+.capSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.capWobble {
+  transform-box: fill-box;
+  transform-origin: 50% 80%;
+}
+
+.capTop {
+  fill: currentColor;
+}
+
+.capBand {
+  fill: color-mix(in srgb, currentColor 60%, #000);
+}
+
+.capString {
+  fill: #ffffff;
+}
+
+.capTassel {
+  fill: #face53;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+.cap:hover .capTassel {
+  animation-duration: 0.8s;
+}
+
+@keyframes capToss {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(3deg);
+  }
+}
+
+@keyframes tasselSwing {
+  0%, 100% {
+    transform: rotate(-12deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Boarding pass — top-right, the "Travel" hotspot                           */
+/* -------------------------------------------------------------------------- */
+
+.boardingPass {
+  position: absolute;
+  width: 27%;
+  aspect-ratio: 10 / 3.4;
+  top: 9%;
+  right: -14%;
+  z-index: 5;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  background: hsl(46, 60%, 97%);
+  border: none;
+  border-top: 4px solid var(--colours_primary_default);
+  rotate: -5deg;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), box-shadow 0.35s;
+
+  &:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.32);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+  }
+}
+
+.boardingPassActive {
+  transform: scale(1.07) translateY(-3px);
+  box-shadow: 0 11px 22px rgba(0, 0, 0, 0.38);
+}
+
+.bpMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4%;
+  padding: 3% 4%;
+  border-right: 2px dashed hsl(220, 15%, 70%);
+  text-align: left;
+}
+
+.bpLabel {
+  font-size: clamp(0.42rem, 0.55vw, 0.55rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(220, 10%, 45%);
+  white-space: nowrap;
+}
+
+.bpRoute {
+  font-family: var(--font-caveat), cursive;
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.35vw, 1.35rem);
+  line-height: 1;
+  color: hsl(220, 22%, 22%);
+  white-space: nowrap;
+}
+
+.bpName {
+  font-size: clamp(0.42rem, 0.55vw, 0.55rem);
+  letter-spacing: 0.08em;
+  color: hsl(220, 10%, 45%);
+  white-space: nowrap;
+}
+
+.bpStub {
+  width: 26%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4% 3%;
+}
+
+.bpBarcode {
+  width: 55%;
+  height: 82%;
+  background: repeating-linear-gradient(
+    to bottom,
+    hsl(220, 22%, 25%) 0 2px,
+    transparent 2px 4px,
+    hsl(220, 22%, 25%) 4px 5px,
+    transparent 5px 8px
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Postcard from NYC — mid-right, the "Location" hotspot                     */
+/* -------------------------------------------------------------------------- */
+
+.postcard {
+  position: absolute;
+  width: 21%;
+  aspect-ratio: 3 / 2;
+  top: 42%;
+  right: -13%;
+  z-index: 5;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background: hsl(46, 60%, 97%);
+  border: 5px solid;
+  border-image: repeating-linear-gradient(45deg, #c0392b 0 7px, hsl(46, 60%, 97%) 7px 14px, #2c5f9e 14px 21px, hsl(46, 60%, 97%) 21px 28px) 5;
+  rotate: 4deg;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), box-shadow 0.35s;
+
+  &:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+  }
+}
+
+.postcardActive {
+  transform: scale(1.07) translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.38);
+}
+
+.postcardStamp {
+  position: absolute;
+  top: 5%;
+  right: 4%;
+  width: 22%;
+  aspect-ratio: 0.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.8rem, 1.3vw, 1.3rem);
+  background: hsl(46, 45%, 92%);
+  border: 1.5px dashed hsl(210, 20%, 55%);
+  rotate: 3deg;
+}
+
+.postcardText {
+  position: absolute;
+  left: 6%;
+  right: 30%;
+  top: 12%;
+  text-align: left;
+  font-family: var(--font-caveat), cursive;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.35vw, 1.4rem);
+  line-height: 1;
+  color: hsl(220, 22%, 25%);
+  rotate: -2deg;
+}
+
+.postcardLine {
+  position: absolute;
+  left: 8%;
+  right: 12%;
+  bottom: 26%;
+  height: 1.5px;
+  background: hsl(220, 15%, 70%);
+}
+
+.postcardLineShort {
+  bottom: 12%;
+  right: 34%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Work badge — lanyard ID on the chest, replaces "Work" chip                */
+/* -------------------------------------------------------------------------- */
+
+.badge {
+  position: absolute;
+  width: 15%;
+  aspect-ratio: 1;
+  top: 42%;
+  left: -1.5%;
+  z-index: 4;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  transform-origin: 50% 0%;
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+
+  &:hover {
+    transform: translateY(2px) scale(1.06);
+    filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.32));
+
+    .badgeDangle {
+      animation: badgeDangle 1.4s ease-in-out infinite;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.badgeActive {
+  transform: translateY(3px) scale(1.08);
+  filter: drop-shadow(0 9px 14px rgba(0, 0, 0, 0.35));
+
+  .badgeDangle {
+    animation: badgeDangle 1.1s ease-in-out infinite;
+  }
+}
+
+.badgeSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.badgeDangle {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+.badgeStrap {
+  fill: currentColor;
+}
+
+.badgeCard {
+  fill: #ffffff;
+}
+
+.badgeOutline {
+  fill: color-mix(in srgb, currentColor 50%, #000);
+}
+
+.badgeNamePlate {
+  fill: color-mix(in srgb, currentColor 30%, #fff);
+}
+
+.badgePhoto {
+  fill: #f1ed7b;
+}
+
+.badgeHead {
+  fill: color-mix(in srgb, currentColor 50%, #000);
+}
+
+.badgeLine {
+  fill: color-mix(in srgb, currentColor 35%, #fff);
+}
+
+.badgeRing {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+@keyframes badgeDangle {
+  0%, 100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  GitHub contribution printout — top-left, "Coding" hotspot                 */
+/* -------------------------------------------------------------------------- */
+
+.ghPaper {
+  position: absolute;
+  width: 21%;
+  bottom: 1%;
+  left: -1.5%;
+  z-index: 4;
+  cursor: pointer;
+  padding: 6% 1.2% 1%;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background: hsl(46, 60%, 97%);
+  border: none;
+  rotate: -3deg;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
+  transition: transform 0.35s cubic-bezier(0.5, 1.6, 0.4, 1), box-shadow 0.35s;
+  container-type: inline-size;
+
+  &:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.32);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+  }
+}
+
+.ghPaperActive {
+  transform: scale(1.07) translateY(-3px);
+  box-shadow: 0 11px 22px rgba(0, 0, 0, 0.38);
+}
+
+.ghCaption {
+  display: block;
+  margin-top: 4px;
+  /* sized against the paper itself so it never outgrows it */
+  font-size: 6.2cqw;
+  letter-spacing: 0.02em;
+  color: hsl(220, 10%, 40%);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Skydiver — top-left, replaces "Skydiving" chip                            */
+/* -------------------------------------------------------------------------- */
+
+.skydiver {
+  position: absolute;
+  width: 16%;
+  aspect-ratio: 1;
+  top: 16%;
+  left: -2%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--colours_primary_default);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  transition: transform 0.4s cubic-bezier(0.5, 1.6, 0.4, 1), filter 0.4s;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.08);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32));
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--colours_primary_default);
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+}
+
+.skydiverActive {
+  transform: translateY(-5px) scale(1.1);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
+  animation: none;
+
+  .skydiverSwing {
+    animation: skydiverSwingActive 1.6s ease-in-out infinite;
+  }
+}
+
+.skydiverSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.skydiverSwing {
+  transform-box: fill-box;
+  transform-origin: 33% 30%;
+}
+
+.skydiverLines path {
+  fill: color-mix(in srgb, currentColor 45%, #000);
+}
+
+.skydiverCanopyBack {
+  fill: color-mix(in srgb, currentColor 70%, #000);
+}
+
+.skydiverPanelDark {
+  fill: currentColor;
+}
+
+.skydiverPanelLight {
+  fill: color-mix(in srgb, currentColor 40%, #fff);
+}
+
+.skydiverFigure path {
+  /* default text/dark figure colour */
+}
+
+.skydiverHelmet {
+  fill: #292f33;
+}
+
+.skydiverGloveOuter {
+  fill: #ffac33;
+}
+
+.skydiverBody {
+  fill: #f4900c;
+}
+
+.skydiverFootAccent {
+  fill: #ffac33;
+}
+
+.skydiverGoggle {
+  fill: #99aab5;
+}
+
+.skydiverGoggleLens {
+  fill: #88c9f9;
+}
+
+@keyframes skydiverSwingActive {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Reduced motion — freeze the ambient float/bob/sway and the cursor tilt    */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallaxRoot {
+    transform: none !important;
+  }
+
+  .parallaxRoot,
+  .parallaxRoot * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Hung from the corkboard — pushpin + gentle pendulum sway                  */
+/* -------------------------------------------------------------------------- */
+
+.hung {
+  transform-origin: 50% -4px;
+}
+
+.hung::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin-left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  --pin-c: hsl(4, 72%, 46%);
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--pin-c) 45%, white),
+    var(--pin-c) 55%,
+    color-mix(in srgb, var(--pin-c) 50%, black)
+  );
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.38), inset 0 -2px 3px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Mixed pin colours — like a real pin box */
+.boardingPass.hung::before {
+  --pin-c: hsl(150, 45%, 38%);
+}
+
+.ghPaper.hung::before {
+  --pin-c: hsl(215, 70%, 48%);
+}
+
+.skydiver.hung::before {
+  --pin-c: hsl(45, 90%, 52%);
+}
+
+.phone.hung::before {
+  --pin-c: hsl(0, 0%, 88%);
+}
+
+.badge.hung::before {
+  --pin-c: hsl(0, 0%, 88%);
+}
+
+/* Wide board — spread the pinned objects out across the empty cork
+   (positions are relative to the avatar area; negatives reach the bare board) */
+@media (min-width: 75em) {
+  /* Skydiver drifts down above the phone */
+  .skydiver {
+    top: auto;
+    left: auto;
+    bottom: 51%;
+    right: -3%;
+  }
+
+  .boardingPass {
+    top: -27%;
+    right: 30%;
+  }
+
+  .postcard {
+    top: -16%;
+    right: -11%;
+    width: 22%;
+  }
+
+  .badge {
+    top: 24%;
+    left: 4%;
+  }
+
+  .phone {
+    bottom: 3%;
+    right: -7%;
+  }
+
+  /* Contribution printout takes the top-left corner */
+  .ghPaper {
+    top: -30%;
+    left: 2%;
+    bottom: auto;
+    width: 25%;
+  }
+}
+
+/* Stacked layouts — the avatar spans the full board width, so there's no bare
+   cork to spread onto. Ring the props around him instead, alternating sides top
+   to bottom so neither edge ends up carrying all the weight:
+
+     gh printout  ·  cap  ·  boarding pass
+     postcard     ·        ·  skydiver
+     badge        ·  phone ·
+*/
+@media (max-width: 74.99em) {
+  .ghPaper {
+    top: 2%;
+    bottom: auto;
+    left: -2%;
+    width: 32%;
+  }
+
+  .postcard {
+    top: 41%;
+    right: auto;
+    left: -2%;
+    width: 26%;
+  }
+
+  .badge {
+    top: auto;
+    bottom: 2%;
+    left: 3%;
+    width: 18%;
+  }
+
+  .boardingPass {
+    top: 3%;
+    right: -2%;
+    width: 32%;
+  }
+
+  /* the parachute drifts down beside him rather than sitting on his shoulder —
+     high enough that the canopy clears the phone below it */
+  .skydiver {
+    top: 25%;
+    left: auto;
+    right: -1%;
+    width: 21%;
+  }
+
+  .phone {
+    bottom: 2%;
+    right: 3%;
+    width: 15%;
+  }
+}
