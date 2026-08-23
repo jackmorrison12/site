@@ -19,6 +19,12 @@ const num = (v: unknown) => Number(v ?? 0);
 const str = (v: unknown) => (v == null ? null : String(v));
 
 /**
+ * Last.fm serves the same artwork from more than one host and at more than one
+ * size, so two URLs can be the same picture. The filename is its identity.
+ */
+const coverKey = (url: string) => url.slice(url.lastIndexOf('/') + 1);
+
+/**
  * Every month of listening history in one pass per statistic. Computing all ~94
  * months costs about as much as computing one, so the feed never paginates queries.
  */
@@ -32,18 +38,33 @@ export async function getMusicMonths(): Promise<Map<string, MusicMonth>> {
       FROM listens l JOIN tracks t ON l.id = t.id
       GROUP BY 1`),
 
+    // Every cover the top artist was heard on, most-played first — the artist
+    // tile takes the first of them the track tile isn't already showing.
     db.execute(sql`
       WITH m AS (
         SELECT ${MONTH_OF('l.time')} AS mon,
                LOWER(t.artist) AS akey,
                MODE() WITHIN GROUP (ORDER BY t.artist) AS artist,
-               MODE() WITHIN GROUP (ORDER BY t.image_url) AS img,
                COUNT(*) AS n,
                ROW_NUMBER() OVER (PARTITION BY ${MONTH_OF('l.time')} ORDER BY COUNT(*) DESC) AS rn
         FROM listens l JOIN tracks t ON l.id = t.id
         GROUP BY 1, 2
+      ),
+      c AS (
+        SELECT ${MONTH_OF('l.time')} AS mon,
+               LOWER(t.artist) AS akey,
+               t.image_url AS img,
+               COUNT(*) AS n
+        FROM listens l JOIN tracks t ON l.id = t.id
+        WHERE t.image_url IS NOT NULL AND t.image_url <> ''
+        GROUP BY 1, 2, 3
+      ),
+      i AS (
+        SELECT mon, akey, array_agg(img ORDER BY n DESC, img) AS imgs FROM c GROUP BY 1, 2
       )
-      SELECT to_char(mon,'YYYY-MM') AS mon, artist, n, img FROM m WHERE rn = 1`),
+      SELECT to_char(m.mon,'YYYY-MM') AS mon, m.artist, m.n, i.imgs
+      FROM m LEFT JOIN i ON i.mon = m.mon AND i.akey = m.akey
+      WHERE m.rn = 1`),
 
     // "First time I ever heard this artist" — one MIN() over all history beats
     // re-scanning the past for every month.
@@ -108,9 +129,16 @@ export async function getMusicMonths(): Promise<Map<string, MusicMonth>> {
     m.tracks = num(r.tracks);
   }
 
+  // Kept aside until the obsession rows are in, so the two tiles can be compared.
+  const artistCovers = new Map<string, string[]>();
+
   for (const r of top.rows as Row[]) {
     const artist = str(r.artist);
-    if (artist) ensure(String(r.mon)).topArtist = { name: artist, count: num(r.n), imageUrl: str(r.img) };
+    if (!artist) continue;
+
+    const covers = Array.isArray(r.imgs) ? (r.imgs as string[]).filter(Boolean) : [];
+    artistCovers.set(String(r.mon), covers);
+    ensure(String(r.mon)).topArtist = { name: artist, count: num(r.n), imageUrl: covers[0] ?? null };
   }
 
   for (const r of discovery.rows as Row[]) {
@@ -134,6 +162,21 @@ export async function getMusicMonths(): Promise<Map<string, MusicMonth>> {
     if (track && artist) {
       ensure(String(r.mon)).obsession = { track, artist, count: num(r.n), imageUrl: str(r.img) };
     }
+  }
+
+  /*
+    The most-played track is usually by the top artist, and its cover is then the
+    artist's most-heard one too — so both tiles reach for the same picture and the
+    card looks like it is showing it twice. Drop the artist to their next cover
+    when that happens; if they only ever had the one, the tiles match and that is
+    honest.
+  */
+  for (const [key, m] of months) {
+    const taken = m.obsession?.imageUrl;
+    if (!taken || !m.topArtist?.imageUrl || coverKey(m.topArtist.imageUrl) !== coverKey(taken)) continue;
+
+    const alternative = (artistCovers.get(key) ?? []).find((img) => coverKey(img) !== coverKey(taken));
+    if (alternative) m.topArtist.imageUrl = alternative;
   }
 
   // Fill sparkline gaps, derive the busiest day, and badge the all-time record.
