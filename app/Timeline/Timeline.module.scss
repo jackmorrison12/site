@@ -261,10 +261,6 @@
   grid-column: span 2;
 }
 
-.h2 {
-  grid-row: span 2;
-}
-
 .tile {
   display: flex;
   flex-direction: column;
@@ -345,11 +341,24 @@
   margin-top: 5px;
 }
 
-/* Top artist: the artwork fills the tile, the name sits over it. */
-.artistTile {
+/*
+  Artwork tiles — top artist, most-played track. Album art and artist shots are
+  square, so the tile is too: one column wide, with the row span that leaves it
+  the tallest thing in its band. Anything less and the band overshoots the
+  square, leaving a gap underneath it; the two share a row on narrow screens, so
+  there they need no span at all.
+*/
+.artTile {
   position: relative;
   justify-content: flex-end;
   gap: 10px;
+  aspect-ratio: 1;
+}
+
+@media (min-width: 48em) {
+  .artTile {
+    grid-row: span 2;
+  }
 }
 
 .hasCover {
@@ -357,21 +366,21 @@
   overflow: hidden;
 }
 
-.artistCover {
+.artCover {
   object-fit: cover;
 }
 
-.artistScrim {
+.artScrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.4) 45%, rgb(0 0 0 / 0.05) 100%);
 }
 
-.artistText {
+.artText {
   position: relative;
 }
 
-.hasCover .artistText {
+.hasCover .artText {
   padding: 12px 14px;
 }
 
@@ -387,24 +396,58 @@
   opacity: 0.82;
 }
 
-.artistArt {
+.artFallback {
   display: block;
   border-radius: 10px;
   overflow: hidden;
   align-self: flex-start;
 }
 
-.artistArt img,
-.artistArt > div {
-  width: 100%;
-  height: 100%;
+/* The label sits above the plot, the axis key below it. */
+.sparkTile {
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.sparkBody {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex: 1;
+  min-height: 34px;
+  margin-top: 2px;
+}
+
+/* Y key: the busiest day at the top of the plot, zero on the baseline. */
+.sparkScale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: var(--colours_text_soft);
+  font-size: var(--fontSizes_tiny);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
+/* X key: the first and last day the plot spans. */
+.sparkFoot {
+  display: flex;
+  justify-content: space-between;
+  /* Clear the y key, so the day numbers line up with the ends of the plot. */
+  padding-left: calc(2ch + 6px);
+  color: var(--colours_text_soft);
+  font-size: var(--fontSizes_tiny);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
 }
 
 .spark {
   width: 100%;
   flex: 1;
-  min-height: 30px;
-  margin-top: 6px;
+  min-width: 0;
   align-self: stretch;
   overflow: visible;
 }
@@ -422,9 +465,17 @@
   opacity: 0.16;
 }
 
+.sparkBase {
+  stroke: var(--colours_text_soft);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+
 .heatWrap {
   display: flex;
-  align-items: flex-end;
+  flex: 1;
+  /* Centred, so the count and the calendar share whatever height the row takes. */
+  align-items: center;
   gap: 12px;
   justify-content: space-between;
 }
@@ -435,7 +486,6 @@
   grid-template-rows: repeat(7, 9px);
   grid-auto-columns: 9px;
   gap: 2px;
-  align-self: flex-end;
 }
 
 .heatCell {

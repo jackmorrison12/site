@@ -55,15 +55,19 @@ export const TextTile = ({
   </div>
 );
 
-/** The month's artist, with their artwork filling the tile behind the name. */
-export const ArtistTile = ({
+/**
+ * A square tile with artwork filling it and the title over the top — used for
+ * the month's artist and its most-played track. Square because every piece of
+ * artwork behind it is, so any other ratio crops it.
+ */
+export const ArtworkTile = ({
   label,
-  name,
+  title,
   note,
   imageUrl,
 }: {
   label: string;
-  name: string;
+  title: string;
   note: string;
   imageUrl: string | null;
 }) => {
@@ -71,51 +75,81 @@ export const ArtistTile = ({
   const cover = imageUrl && !failed;
 
   return (
-    <div className={cx(styles.tile, styles.artistTile, styles.w2, styles.h2, cover && styles.hasCover)}>
+    <div className={cx(styles.tile, styles.artTile, cover && styles.hasCover)}>
       {cover && (
         <>
           <Image
-            className={styles.artistCover}
+            className={styles.artCover}
             src={imageUrl}
             alt=""
             fill
-            sizes="(min-width: 48em) 50vw, 100vw"
+            sizes="(min-width: 48em) 25vw, 50vw"
             onError={() => setFailed(true)}
           />
-          <span className={styles.artistScrim} />
+          <span className={styles.artScrim} />
         </>
       )}
       {!cover && (
-        <span className={styles.artistArt}>
-          <ArtistImage src="" alt={name} size={88} />
+        <span className={styles.artFallback}>
+          <ArtistImage src="" alt={title} size={72} />
         </span>
       )}
-      <span className={styles.artistText}>
-        <span className={styles.textValue} title={name}>
-          {name}
+      <span className={styles.artText}>
+        <span className={styles.textValue} title={title}>
+          {title}
         </span>
-        <span className={styles.note}>{note}</span>
+        <span className={styles.note} title={note}>
+          {note}
+        </span>
         <span className={styles.label}>{label}</span>
       </span>
     </div>
   );
 };
 
-/** Listens per day across the month. */
+/** 1st, 2nd, 3rd, 4th — for the days at either end of the sparkline. */
+const ordinal = (n: number) => {
+  const suffix = n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th';
+  return `${n}${suffix}`;
+};
+
+/**
+ * Listens per day across the month, with a key: the y-axis runs 0 → the month's
+ * busiest day, the x-axis the 1st → the last day, so the shape has a scale.
+ */
 export const SparkTile = ({ label, values }: { label: string; values: number[] }) => {
   if (values.length < 2) return null;
 
   const max = Math.max(...values, 1);
   const step = 100 / (values.length - 1);
-  const points = values.map((v, i) => `${(i * step).toFixed(2)},${(24 - (v / max) * 22).toFixed(2)}`);
+  const points = values.map((v, i) => `${(i * step).toFixed(2)},${(24 - (v / max) * 23).toFixed(2)}`);
 
   return (
-    <div className={cx(styles.tile, styles.w2)}>
+    <div className={cx(styles.tile, styles.w2, styles.sparkTile)}>
       <span className={styles.label}>{label}</span>
-      <svg className={styles.spark} viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true">
-        <polygon className={styles.sparkArea} points={`0,24 ${points.join(' ')} 100,24`} />
-        <polyline className={styles.sparkLine} points={points.join(' ')} vectorEffect="non-scaling-stroke" />
-      </svg>
+
+      <span className={styles.sparkBody}>
+        <span className={styles.sparkScale} aria-hidden="true">
+          <span>{max}</span>
+          <span>0</span>
+        </span>
+        <svg
+          className={styles.spark}
+          viewBox="0 0 100 24"
+          preserveAspectRatio="none"
+          role="img"
+          aria-label={`${label}: peak of ${max} on the busiest day`}
+        >
+          <polygon className={styles.sparkArea} points={`0,24 ${points.join(' ')} 100,24`} />
+          <polyline className={styles.sparkLine} points={points.join(' ')} vectorEffect="non-scaling-stroke" />
+          <line className={styles.sparkBase} x1="0" y1="24" x2="100" y2="24" vectorEffect="non-scaling-stroke" />
+        </svg>
+      </span>
+
+      <span className={styles.sparkFoot} aria-hidden="true">
+        <span>{ordinal(1)}</span>
+        <span>{ordinal(values.length)}</span>
+      </span>
     </div>
   );
 };

@@ -3,78 +3,82 @@
 import { ReactNode } from 'react';
 import * as motion from 'motion/react-client';
 import type { MonthSummary } from 'data-access/feed/feed.types';
-import { ArtistTile, HeatTile, SparkTile, StatTile, TextTile } from './Tiles';
+import { ArtworkTile, HeatTile, SparkTile, StatTile } from './Tiles';
 import styles from './Timeline.module.scss';
 
-const MAX_TILES = 7;
+/*
+  Enough to fill the grid on a full month: four rows of four, with the two square
+  artwork tiles each two rows deep.
+*/
+const MAX_TILES = 12;
 
 const hour12 = (h: number) => {
   const suffix = h < 12 ? 'am' : 'pm';
   return `${h % 12 === 0 ? 12 : h % 12}${suffix}`;
 };
 
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
 /**
- * The headline numbers first, then a tile for every other source that has data,
- * then whatever else is interesting. Dense grid flow closes any gaps left over.
+ * Order is the layout: auto-flow places these row by row into the four-column
+ * grid, which puts the top artist top-left and the most-played track low and to
+ * the right — they carry the same picture often enough that any two artwork
+ * tiles near each other read as a duplicate. Dense flow closes whatever gap a
+ * missing source leaves behind.
  */
 function selectTiles(m: MonthSummary): ReactNode[] {
   const { music, github, trakt } = m;
 
-  const headline: (ReactNode | null)[] = [
+  const tiles: (ReactNode | null)[] = [
+    // Top band: the artist, two headline counts and the month's watching.
     music?.topArtist ? (
-      <ArtistTile
+      <ArtworkTile
         key="artist"
         label="Top artist"
-        name={music.topArtist.name}
-        note={`${music.topArtist.count.toLocaleString()} plays`}
+        title={music.topArtist.name}
+        note={plural(music.topArtist.count, 'play')}
         imageUrl={music.topArtist.imageUrl}
       />
     ) : null,
     music ? <StatTile key="listens" label="Listens" value={music.listens.toLocaleString()} accent="primary" /> : null,
     music ? <StatTile key="artists" label="Artists" value={String(music.artists)} /> : null,
-  ];
-
-  const sources: (ReactNode | null)[] = [
+    trakt && trakt.episodes > 0 ? (
+      <StatTile key="episodes" label="TV episodes" value={String(trakt.episodes)} accent="secondary" />
+    ) : null,
     github ? (
       <HeatTile
         key="heat"
-        label="Contributions"
+        label="GitHub contributions"
         value={String(github.contributions)}
         levels={github.levels}
         offset={new Date(Date.UTC(m.year, m.month, 1)).getUTCDay()}
       />
     ) : null,
-    trakt && trakt.episodes + trakt.movies > 0 ? (
-      <StatTile
-        key="trakt"
-        label="Episodes"
-        value={String(trakt.episodes)}
-        note={trakt.movies ? `+ ${trakt.movies} film${trakt.movies > 1 ? 's' : ''}` : undefined}
-        accent="secondary"
-      />
+    trakt && trakt.movies > 0 ? (
+      <StatTile key="films" label="Films" value={String(trakt.movies)} accent="secondary" />
     ) : null,
-  ];
 
-  const extras: (ReactNode | null)[] = [
-    music && music.perDay.length > 1 ? <SparkTile key="spark" label="Listens per day" values={music.perDay} /> : null,
+    // Lower band: the track, with the rest of the month's music around it.
     !m.isDawn && music && music.discoveries > 0 ? (
       <StatTile key="new" label="New artists" value={String(music.discoveries)} />
     ) : null,
     music?.peakHour ? <StatTile key="hour" label="Peak hour" value={hour12(music.peakHour.hour)} /> : null,
-    music?.obsession && music.obsession.count >= 20 ? (
-      <TextTile
+    music?.obsession ? (
+      <ArtworkTile
         key="obsession"
-        label="On repeat"
-        value={music.obsession.track}
-        note={`${music.obsession.count} plays · ${music.obsession.artist}`}
-        wide
+        label="Most played"
+        title={music.obsession.track}
+        note={`${music.obsession.artist} · ${plural(music.obsession.count, 'play')}`}
+        imageUrl={music.obsession.imageUrl}
       />
     ) : null,
-    // Last resort, and it closes the gap on months that have fewer tiles to show.
+    // Last resorts, and they close the gaps on months that have fewer tiles.
     music ? <StatTile key="tracks" label="Tracks" value={String(music.tracks)} /> : null,
+    music && music.perDay.length > 1 ? <SparkTile key="spark" label="Listens per day" values={music.perDay} /> : null,
+    github ? <StatTile key="activeDays" label="Days on GitHub" value={String(github.activeDays)} /> : null,
   ];
 
-  return [...headline, ...sources, ...extras].filter(Boolean).slice(0, MAX_TILES) as ReactNode[];
+  return tiles.filter(Boolean).slice(0, MAX_TILES) as ReactNode[];
 }
 
 export const MonthCard = ({ month }: { month: MonthSummary }) => (
