@@ -568,7 +568,9 @@
 /* -------------------------------------------------------------------------- */
 
 .board {
-  padding: 18px 16px 22px;
+  /* The generous bottom padding reserves clear cork for the feed's pinned scrap
+     (see app/Timeline) — the desktop layout below resets padding to 0. */
+  padding: 18px 16px 96px;
   display: flex;
   flex-direction: column;
   gap: 18px;

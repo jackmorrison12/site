@@ -5,7 +5,8 @@ import { desc, sql } from 'drizzle-orm';
 import { db } from 'drizzle/db';
 import { listens, tracks } from 'drizzle/schema';
 import _ from 'lodash';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { FEED_CACHE_TAG } from 'data-access/feed/getMonthSummaries';
 
 const DAY = 1000 * 60 * 60 * 24;
 const DEFAULT_FROM = new Date('2024-01-01');
@@ -69,6 +70,8 @@ export const updateLastFmData = async ({ days }: { days?: number }) => {
   }
 
   revalidatePath('/feed/lastfm');
+  // The homepage timeline is cached as one whole-history computation.
+  revalidateTag(FEED_CACHE_TAG, 'max');
 
   return { total, totalPages };
 };

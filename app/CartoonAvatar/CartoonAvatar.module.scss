@@ -897,8 +897,10 @@
   }
 
   .badge {
-    top: 24%;
-    left: 4%;
+    /* Sits high and slightly in from the edge so the feed's pinned scrap has
+       clear cork below it (see app/Timeline) without crowding the shoulder. */
+    top: 16%;
+    left: 9%;
   }
 
   .phone {

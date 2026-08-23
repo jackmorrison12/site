@@ -103,6 +103,7 @@ There are **no tests** in this project. Validation is done via `type-check` and 
 | `GITHUB_SECRET` | GitHub OAuth App client secret (NextAuth) |
 | `LASTFM_API_KEY` | Last.fm API key for music data |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics measurement ID |
+| `FEED_MOCK_SOURCES` | Dev only. Set to `1` to render stand-in GitHub/Trakt data in the homepage timeline while those tables don't exist yet. Never writes to the database; real tables always win. |
 
 The app degrades gracefully without `POSTGRES_URL` — `drizzle/db.ts` exports a mock DB object that returns empty arrays.
 
