@@ -291,7 +291,19 @@
   flex-direction: column;
   gap: 10px;
   min-height: 0;
+  /* nothing here is ever meant to scroll sideways; the rotated logo blocks on
+     the Bloomberg and Imperial cards push their corners ~1px past the edge,
+     which was enough to raise a horizontal bar */
+  overflow-x: hidden;
+  /* vertically it stays scrollable for short viewports, but a native bar down
+     a paper index card breaks the illusion — and fractional grid rows were
+     summoning one on the socials card for a single pixel */
   overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Story content */
