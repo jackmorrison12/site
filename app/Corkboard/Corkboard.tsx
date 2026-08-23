@@ -53,12 +53,7 @@ export const Corkboard = ({
 
   return (
     <div className={styles.board}>
-      <div className={styles.avatarArea}>
-        {children}
-        <span className={styles.doodle} style={{ left: '56%', top: '74%' }}>
-          that&apos;s me ↑
-        </span>
-      </div>
+      <div className={styles.avatarArea}>{children}</div>
 
       {/* wait: the old card leaves before the new one drops in, so only ever
           one #story-card exists (the hotspots' aria-controls target) */}
