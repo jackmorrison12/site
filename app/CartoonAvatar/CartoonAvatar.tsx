@@ -325,10 +325,10 @@ export const CartoonAvatar = ({ active, onActiveChange, contributionsSlot }: Pro
           </svg>
         </button>
 
-        {/* GitHub contribution-graph printout — bottom-left, the "Open source" hotspot */}
+        {/* GitHub contribution-graph printout — top-left, the "Coding" hotspot */}
         <button
           type="button"
-          aria-label="Open source"
+          aria-label="Coding"
           aria-controls="story-card"
           data-hotspot="keyboard"
           aria-pressed={active === 'keyboard'}

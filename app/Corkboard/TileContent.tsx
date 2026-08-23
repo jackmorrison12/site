@@ -18,7 +18,7 @@ import { FT_IN_MARATHON, NUM_COUNTRIES, NUM_SKYDIVES, socials } from 'content/ab
 
 export const TILE_LABELS: Record<HotspotId, string> = {
   headphones: 'Music',
-  keyboard: 'Open source',
+  keyboard: 'Coding',
   shirt: 'Work',
   cap: 'Education',
   pin: 'Location',
@@ -49,7 +49,7 @@ export const TileContent = ({ active, musicStatsSlot, contributionsCardSlot }: P
     case 'keyboard':
       return (
         <div className={styles.contentBlock}>
-          <h2>Open source</h2>
+          <h2>Coding</h2>
           {contributionsCardSlot}
           <a href={socials.github.url} className={styles.iconRow} target="_blank" rel="noreferrer">
             <span className={styles.iconChip} style={{ background: 'black', color: 'white' }}>
