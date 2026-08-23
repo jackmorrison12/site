@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { getTopTracks } from '../data-access/lastfm/api/getTopTracks';
 import { getTrackInfo } from '../data-access/lastfm/api/getTrackInfo';
-import styles from './home.module.scss';
+import styles from './Corkboard/Corkboard.module.scss';
 import { getAlbumInfo } from '../data-access/lastfm/api/getAlbumInfo';
 import Link from 'next/link';
 

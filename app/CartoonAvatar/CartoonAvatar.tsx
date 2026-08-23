@@ -1,23 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { ReactNode } from 'react';
 import styles from './CartoonAvatar.module.scss';
 import { HotspotId } from './CartoonAvatar.types';
 
 type Props = {
   active: HotspotId | null;
   onActiveChange: (id: HotspotId | null) => void;
+  /** Server-rendered GitHub contribution grid pinned to the printout. */
+  contributionsSlot: ReactNode;
 };
-
-type ChipDef = {
-  id: HotspotId;
-  emoji: string;
-  label: string;
-  pos: React.CSSProperties;
-};
-
-const CHIPS: ChipDef[] = [];
 
 const PHONE_APPS: { color: string; label: string }[] = [
   { color: 'hsl(203, 89%, 53%)', label: 'X' },
@@ -29,30 +22,9 @@ const PHONE_APPS: { color: string; label: string }[] = [
 ];
 
 
-export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = rootRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x, y });
-  };
-
-  const handleLeave = () => setTilt({ x: 0, y: 0 });
-
+export const CartoonAvatar = ({ active, onActiveChange, contributionsSlot }: Props) => {
   return (
-    <div
-      ref={rootRef}
-      className={styles.parallaxRoot}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      style={{
-        transform: `perspective(1200px) rotateX(${tilt.y * -6}deg) rotateY(${tilt.x * 8}deg)`,
-      }}
-    >
+    <div className={styles.parallaxRoot}>
       <div className={styles.floater}>
         <Image
           src="/img/avatar_icon.png"
@@ -63,15 +35,14 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
           className={styles.baseImg}
         />
 
-        {/* faded halo */}
-        <div className={styles.halo} aria-hidden="true" />
-
         {/* AirPods — each pod independently positioned; both click → viewing panel */}
         {(['airpodLeft', 'airpodRight'] as const).map((side, idx) => (
           <button
             key={side}
             type="button"
             aria-label={idx === 0 ? 'Music' : undefined}
+            aria-controls={idx === 0 ? 'story-card' : undefined}
+            data-hotspot={idx === 0 ? 'headphones' : undefined}
             aria-hidden={idx === 1}
             tabIndex={idx === 1 ? -1 : 0}
             aria-pressed={active === 'headphones'}
@@ -151,8 +122,10 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
         <button
           type="button"
           aria-label="Socials"
+          aria-controls="story-card"
+          data-hotspot="phone"
           aria-pressed={active === 'phone'}
-          className={`${styles.phone} ${active === 'phone' ? styles.phoneActive : ''}`}
+          className={`${styles.phone} ${styles.hung} ${active === 'phone' ? styles.phoneActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'phone' ? null : 'phone');
@@ -217,6 +190,8 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
         <button
           type="button"
           aria-label="Education"
+          aria-controls="story-card"
+          data-hotspot="cap"
           aria-pressed={active === 'cap'}
           className={`${styles.cap} ${active === 'cap' ? styles.capActive : ''}`}
           onClick={(e) => {
@@ -249,100 +224,60 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
           </svg>
         </button>
 
-        {/* Plane — top-right corner, replaces the old "Travel" chip */}
+        {/* Boarding pass — top-right, the "Travel" hotspot */}
         <button
           type="button"
           aria-label="Travel"
+          aria-controls="story-card"
+          data-hotspot="plane"
           aria-pressed={active === 'plane'}
-          className={`${styles.plane} ${active === 'plane' ? styles.planeActive : ''}`}
+          className={`${styles.boardingPass} ${styles.hung} ${active === 'plane' ? styles.boardingPassActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'plane' ? null : 'plane');
           }}
         >
-          <span className={styles.contrail} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
+          <span className={styles.bpMain} aria-hidden="true">
+            <span className={styles.bpLabel}>Boarding pass</span>
+            <span className={styles.bpRoute}>LHR ✈ JFK</span>
+            <span className={styles.bpName}>MORRISON / JACK · 27F</span>
           </span>
-          <svg viewBox="0 0 512 512" className={styles.planeSvg} aria-hidden="true">
-            <g className={styles.planeBob}>
-              {/* fuselage */}
-              <path
-                className={styles.planeBody}
-                d="M440.894,254.178L440.894,254.178c-17.885-17.102-41.681-26.639-66.426-26.622l-263.522,0.189
-                  c-9.882,0.007-19.156-4.775-24.881-12.83l-38.534-54.214c-1.894-2.663-4.959-4.244-8.227-4.242l-21.073,0.015
-                  c-6.779,0.004-11.622,6.563-9.633,13.044l28.153,91.707c11.982,39.033,48.048,65.668,88.879,65.638l356.752-0.256
-                  c11.868-0.009,21.484-9.637,21.475-21.505l0,0c-0.007-10.134-6.456-19.144-16.047-22.417l0,0
-                  C470.288,276.704,454.278,266.976,440.894,254.178z"
-              />
-              {/* tail accent */}
-              <path
-                className={styles.planeTail}
-                d="M47.532,160.703c-1.893-2.663-4.959-4.244-8.227-4.242l-21.073,0.015
-                  c-6.779,0.004-11.622,6.563-9.633,13.044l3.951,12.869l50.371-0.036L47.532,160.703z"
-              />
-              {/* wing */}
-              <path
-                className={styles.planeWing}
-                d="M110.947,227.747c-9.882,0.007-19.156-4.775-24.881-12.83l-23.145-32.563l-50.371,0.036
-                  l24.202,78.837c4.758,15.499,13.322,29.031,24.464,39.728c13.628-28.051,36.923-50.576,66.007-63.082l23.612-10.154L110.947,227.747
-                  z"
-              />
-              {/* nose accent */}
-              <path
-                className={styles.planeNose}
-                d="M440.894,254.178c-2.636-2.521-5.416-4.857-8.294-7.044l-27.326,0.02
-                  c-3.608,0.002-6.532,2.929-6.528,6.538l0.008,11.029c0.003,3.609,2.931,6.532,6.538,6.53l57.886-0.041
-                  C455.169,266.382,447.692,260.679,440.894,254.178z"
-              />
-              {/* row of windows */}
-              <g className={styles.planeWindows}>
-                <circle cx="131" cy="259" r="6" />
-                <circle cx="168" cy="259" r="6" />
-                <circle cx="204" cy="259" r="6" />
-                <circle cx="240" cy="259" r="6" />
-                <circle cx="277" cy="259" r="6" />
-                <circle cx="313" cy="259" r="6" />
-              </g>
-              {/* landing-gear / wing strut */}
-              <path
-                className={styles.planeStrut}
-                d="M251.779,355.508l-41.976,0.03c-9.597,0.007-17.382-7.768-17.389-17.365l-0.007-9.002
-                  c-0.007-9.597,7.768-17.382,17.365-17.389l41.976-0.03c5.376-0.004,9.736,4.35,9.74,9.726l0.017,24.289
-                  C261.509,351.144,257.154,355.504,251.779,355.508z"
-              />
-              <path
-                className={styles.planeStrutAccent}
-                d="M291.406,284.087c7.632-0.005,13.823,6.177,13.829,13.809s-6.177,13.824-13.809,13.829
-                  l-116.302,0.084c-7.632,0.005-13.823-6.177-13.829-13.809c-0.005-7.632,6.177-13.823,13.809-13.829L291.406,284.087z"
-              />
-            </g>
-          </svg>
+          <span className={styles.bpStub} aria-hidden="true">
+            <span className={styles.bpBarcode} />
+          </span>
         </button>
 
-        {/* Statue of Liberty — mid-right, replaces the old "Location" chip */}
+        {/* Postcard from NYC — mid-right, the "Location" hotspot */}
         <button
           type="button"
           aria-label="Location"
+          aria-controls="story-card"
+          data-hotspot="pin"
           aria-pressed={active === 'pin'}
-          className={`${styles.liberty} ${active === 'pin' ? styles.libertyActive : ''}`}
+          className={`${styles.postcard} ${styles.hung} ${active === 'pin' ? styles.postcardActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'pin' ? null : 'pin');
           }}
         >
-          <span className={styles.libertyTorch} aria-hidden="true" />
-          <span className={styles.libertyBody} aria-hidden="true" />
+          <span className={styles.postcardStamp} aria-hidden="true">
+            🗽
+          </span>
+          <span className={styles.postcardText} aria-hidden="true">
+            Greetings from&nbsp;NYC!
+          </span>
+          <span className={styles.postcardLine} aria-hidden="true" />
+          <span className={`${styles.postcardLine} ${styles.postcardLineShort}`} aria-hidden="true" />
         </button>
 
-        {/* Work badge — lanyard ID dangling on the chest, replaces the old "Work" chip */}
+        {/* Work badge — full lanyard hung from its own pushpin on the cork */}
         <button
           type="button"
           aria-label="Work"
+          aria-controls="story-card"
+          data-hotspot="shirt"
           aria-pressed={active === 'shirt'}
-          className={`${styles.badge} ${active === 'shirt' ? styles.badgeActive : ''}`}
+          className={`${styles.badge} ${styles.hung} ${active === 'shirt' ? styles.badgeActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'shirt' ? null : 'shirt');
@@ -390,69 +325,33 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
           </svg>
         </button>
 
-        {/* Laptop — bottom-left, replaces the old "Open source" chip */}
+        {/* GitHub contribution-graph printout — bottom-left, the "Open source" hotspot */}
         <button
           type="button"
           aria-label="Open source"
+          aria-controls="story-card"
+          data-hotspot="keyboard"
           aria-pressed={active === 'keyboard'}
-          className={`${styles.laptop} ${active === 'keyboard' ? styles.laptopActive : ''}`}
+          className={`${styles.ghPaper} ${styles.hung} ${active === 'keyboard' ? styles.ghPaperActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'keyboard' ? null : 'keyboard');
           }}
         >
-          <svg viewBox="0 0 109.908 86.388" className={styles.laptopSvg} aria-hidden="true">
-            <g transform="translate(-649.324 -1577.937)">
-              {/* screen frame */}
-              <path
-                className={styles.laptopFrame}
-                d="M746.076,1577.937h-83.6a2.252,2.252,0,0,0-2.24,2.244v56.543h88.076v-56.543A2.245,2.245,0,0,0,746.076,1577.937Zm.186,56.332h-83.97v-53.184h83.97Z"
-              />
-              {/* screen */}
-              <rect
-                className={styles.laptopScreen}
-                width="83.969"
-                height="53.184"
-                transform="translate(662.292 1581.085)"
-              />
-              {/* screen content — animated lines of code */}
-              <g className={styles.laptopCode}>
-                <rect className={styles.laptopCodeLine} x="666" y="1588" width="34" height="3" rx="1.5" />
-                <rect className={styles.laptopCodeLine} x="666" y="1595" width="48" height="3" rx="1.5" />
-                <rect className={styles.laptopCodeLine} x="672" y="1602" width="40" height="3" rx="1.5" />
-                <rect className={styles.laptopCodeLine} x="672" y="1609" width="58" height="3" rx="1.5" />
-                <rect className={styles.laptopCodeLine} x="666" y="1616" width="30" height="3" rx="1.5" />
-                <rect className={styles.laptopCodeLine} x="672" y="1623" width="44" height="3" rx="1.5" />
-              </g>
-              {/* glow over screen */}
-              <rect
-                className={styles.laptopGlow}
-                width="83.969"
-                height="53.184"
-                transform="translate(662.292 1581.085)"
-              />
-              {/* keyboard deck */}
-              <path
-                className={styles.laptopDeck}
-                d="M759.232,1639.962a.84.84,0,0,1-.845.84H650.162a.837.837,0,0,1-.838-.84v-2.4a.837.837,0,0,1,.838-.836H758.387a.84.84,0,0,1,.845.836Z"
-              />
-              {/* trackpad notch */}
-              <path
-                className={styles.laptopNotch}
-                d="M695.832,1636.724v.652a.841.841,0,0,0,.84.836h15.21a.843.843,0,0,0,.838-.836v-.652Z"
-              />
-              {/* apple logo dot */}
-              <circle className={styles.laptopLogo} cx="704.277" cy="1579.505" r="0.6" />
-            </g>
-          </svg>
+          {contributionsSlot}
+          <span className={styles.ghCaption} aria-hidden="true">
+            github.com/jackmorrison12
+          </span>
         </button>
 
         {/* Skydiver — top-left, replaces the old "Skydiving" chip */}
         <button
           type="button"
           aria-label="Skydiving"
+          aria-controls="story-card"
+          data-hotspot="parachute"
           aria-pressed={active === 'parachute'}
-          className={`${styles.skydiver} ${active === 'parachute' ? styles.skydiverActive : ''}`}
+          className={`${styles.skydiver} ${styles.hung} ${active === 'parachute' ? styles.skydiverActive : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             onActiveChange(active === 'parachute' ? null : 'parachute');
@@ -524,31 +423,6 @@ export const CartoonAvatar = ({ active, onActiveChange }: Props) => {
           </svg>
         </button>
 
-        {/* hotspot chips */}
-        <div className={styles.overlay}>
-          {CHIPS.map((chip) => {
-            const isActive = active === chip.id;
-            return (
-              <button
-                key={chip.id}
-                type="button"
-                aria-label={chip.label}
-                aria-pressed={isActive}
-                className={`${styles.chip} ${isActive ? styles.chipActive : ''} ${styles[`chip_${chip.id}`] ?? ''}`}
-                style={chip.pos}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onActiveChange(active === chip.id ? null : chip.id);
-                }}
-              >
-                <span className={styles.chipEmoji} aria-hidden="true">
-                  {chip.emoji}
-                </span>
-                <span className={styles.chipLabel}>{chip.label}</span>
-              </button>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
