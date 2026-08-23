@@ -491,30 +491,61 @@
 .gapHintScrap {
   display: block;
   position: relative;
-  background: var(--paper);
-  padding: 12px 18px 14px;
-  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.28));
+  padding: 16px 24px 18px;
+  /* paper stock: faint fibre grain, plus soft shading down the long edges so
+     the sheet reads as a physical thing rather than a flat swatch */
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(102deg, rgba(0, 0, 0, 0.05) 0%, transparent 18%, transparent 82%, rgba(0, 0, 0, 0.06) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='120' filter='url(%23p)' opacity='0.09'/></svg>");
+  background-size: 100% 100%, 120px 120px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  /* torn on all four edges — many shallow, uneven bites, so it reads as paper
+     fibre rather than the handful of deep notches this had before */
   clip-path: polygon(
-    2% 12%,
-    11% 2%,
-    32% 7%,
-    49% 0%,
-    68% 6%,
-    86% 1%,
-    99% 10%,
-    100% 86%,
-    89% 97%,
-    69% 91%,
-    50% 100%,
-    29% 93%,
-    11% 99%,
-    0% 88%
+    1% 8%,
+    6% 2%,
+    11% 9%,
+    17% 1%,
+    23% 8%,
+    30% 2%,
+    36% 9%,
+    43% 1.5%,
+    50% 8%,
+    57% 2%,
+    64% 9%,
+    71% 1%,
+    78% 8.5%,
+    85% 2%,
+    92% 9%,
+    97% 3%,
+    99.5% 9%,
+    98.5% 48%,
+    99.6% 91%,
+    95% 97%,
+    89% 91%,
+    83% 98%,
+    76% 92%,
+    69% 99%,
+    62% 91.5%,
+    55% 98%,
+    48% 92%,
+    41% 99%,
+    34% 91%,
+    27% 98%,
+    20% 92%,
+    13% 99%,
+    7% 92%,
+    2% 97%,
+    0.3% 50%,
+    1.4% 12%
   );
   font-family: var(--font-caveat), cursive;
-  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.4rem);
   font-weight: 600;
   color: var(--ink);
   text-align: center;
+  white-space: nowrap;
   rotate: -3deg;
 }
 
@@ -628,8 +659,11 @@
     display: block;
     position: absolute;
     top: 55%;
-    right: 24.5%;
-    width: 17%;
+    /* sized to the text (it must not wrap), then centred on the gap: the right
+       edge lands at 67% and translateX pushes it back by half its own width */
+    right: 33%;
+    transform: translateX(50%);
+    width: max-content;
     pointer-events: none;
   }
 }
