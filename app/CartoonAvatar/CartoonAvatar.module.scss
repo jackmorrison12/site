@@ -915,17 +915,54 @@
   }
 }
 
-/* On stacked layouts the avatar spans the full board width — keep the
-   postcard inside the frame */
-@media (max-width: 75em) {
+/* Stacked layouts — the avatar spans the full board width, so there's no bare
+   cork to spread onto. Ring the props around him instead, alternating sides top
+   to bottom so neither edge ends up carrying all the weight:
+
+     gh printout  ·  cap  ·  boarding pass
+     postcard     ·        ·  skydiver
+     badge        ·  phone ·
+*/
+@media (max-width: 74.99em) {
+  .ghPaper {
+    top: 2%;
+    bottom: auto;
+    left: -2%;
+    width: 32%;
+  }
+
   .postcard {
-    right: -1%;
-    top: 38%;
+    top: 41%;
+    right: auto;
+    left: -2%;
+    width: 26%;
+  }
+
+  .badge {
+    top: auto;
+    bottom: 2%;
+    left: 3%;
+    width: 18%;
   }
 
   .boardingPass {
+    top: 3%;
+    right: -2%;
+    width: 32%;
+  }
+
+  /* the parachute drifts down beside him rather than sitting on his shoulder —
+     high enough that the canopy clears the phone below it */
+  .skydiver {
+    top: 25%;
+    left: auto;
     right: -1%;
-    top: 10%;
-    width: 30%;
+    width: 21%;
+  }
+
+  .phone {
+    bottom: 2%;
+    right: 3%;
+    width: 15%;
   }
 }

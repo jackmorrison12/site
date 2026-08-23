@@ -63,10 +63,10 @@ export const TileContent = ({ active, musicStatsSlot, contributionsCardSlot }: P
     case 'shirt':
       return (
         <Link href="/me/experience" className={styles.contentLink}>
-          <div className={styles.heroLogoDark}>
+          {/* the logo is the heading — no <h2> needed, so it carries the name itself */}
+          <div className={styles.heroLogoDark} role="img" aria-label="Bloomberg">
             <BloombergLogo />
           </div>
-          <h2>Bloomberg</h2>
           <p>Software Engineer in New York since 2021, working in our AI Augmented Development team.</p>
           <span className={styles.cta}>See my full experience →</span>
         </Link>
@@ -75,10 +75,9 @@ export const TileContent = ({ active, musicStatsSlot, contributionsCardSlot }: P
     case 'cap':
       return (
         <Link href="/me/education" className={styles.contentLink}>
-          <div className={styles.heroLogoLight}>
+          <div className={styles.heroLogoLight} role="img" aria-label="Imperial College London">
             <ImperialLogo />
           </div>
-          <h2>Imperial College London</h2>
           <p>MEng Computing, 2017 – 2021. Graduated with First Class Honours.</p>
           <span className={styles.cta}>Education timeline →</span>
         </Link>
