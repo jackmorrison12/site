@@ -438,7 +438,10 @@
 
 .socialsList {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* fit as many columns as the card can actually hold — a hard 1fr 1fr made
+     the longest handles (@jackmorrison12) blow the columns past the card on
+     narrow phones, where this drops to a single column instead */
+  grid-template-columns: repeat(auto-fit, minmax(8.75rem, 1fr));
   gap: 8px;
   margin-top: 4px;
 }
@@ -455,6 +458,9 @@
   font-weight: var(--fontWeights_thick);
   transition: transform 0.2s ease;
   rotate: -0.5deg;
+  /* grid items default to min-width: auto, which refuses to shrink below the
+     handle's width; without this the track overflows rather than narrowing */
+  min-width: 0;
 
   &:nth-child(even) {
     rotate: 0.75deg;
@@ -468,6 +474,14 @@
     width: 16px;
     height: 16px;
     flex: none;
+  }
+
+  /* last resort if a handle ever outgrows even a full-width row */
+  span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
