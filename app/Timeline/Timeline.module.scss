@@ -1,0 +1,479 @@
+/* The month timeline below the corkboard. */
+
+.feed {
+  /* Yarn takes the theme's accent so it recolours with the palette. */
+  --yarn: var(--colours_secondary_9);
+  --yarn-dark: color-mix(in srgb, var(--yarn) 55%, black);
+  --yarn-light: color-mix(in srgb, var(--yarn) 60%, white);
+  --strand: 6px;
+  --gutter: 34px;
+
+  /*
+    The strand hangs off a scrap pinned to the corkboard above, so these reach up
+    into that component's space. The feed starts exactly at the board's bottom
+    edge, so --hang is measured straight up from there.
+
+    Below 75em the board is a flex column and the scrap sits in the clear bottom
+    padding it reserves (see Corkboard.module.scss).
+  */
+  --hang: 82px;
+  --hanger-h: 50px;
+
+  /* One pin face, used by the pushpin above and by every month pin below. */
+  --pin-face:
+    radial-gradient(circle at 32% 26%, rgb(255 255 255 / 0.95) 0 12%, rgb(255 255 255 / 0) 22%),
+    radial-gradient(
+      circle at 38% 32%,
+      color-mix(in srgb, var(--yarn) 30%, white),
+      var(--yarn) 52%,
+      color-mix(in srgb, var(--yarn) 45%, black) 82%,
+      color-mix(in srgb, var(--yarn) 25%, black)
+    );
+  --pin-shadow:
+    0 3px 4px rgb(0 0 0 / 0.4),
+    inset 0 -2px 3px rgb(0 0 0 / 0.3),
+    inset 0 1px 2px rgb(255 255 255 / 0.25);
+
+  /* The twisted-fibre surface, shared by the strand and its tail. */
+  --yarn-tex:
+    repeating-linear-gradient(
+      125deg,
+      rgb(0 0 0 / 0.34) 0 1.5px,
+      rgb(0 0 0 / 0) 1.5px 3px,
+      rgb(255 255 255 / 0.3) 3px 4.5px,
+      rgb(0 0 0 / 0) 4.5px 6.5px
+    ),
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--yarn) 55%, black) 0%,
+      var(--yarn) 42%,
+      color-mix(in srgb, var(--yarn) 60%, white) 64%,
+      color-mix(in srgb, var(--yarn) 45%, black) 100%
+    );
+
+  position: relative;
+  padding: clamp(1.75rem, 5vw, 3rem) 0 clamp(3rem, 8vw, 5rem);
+}
+
+/*
+  From 75em the board is pinned in place and its height tracks the viewport, so a
+  fixed offset cannot stay put — mirror the board's height and position the scrap
+  as a fraction of it. --board-h must match `height` on .board in Corkboard.
+
+  It hangs in the cork between the lanyard and the shoulder. That band was too
+  narrow to trust (.avatarArea is capped by `max-width: 50%`, so the avatar scales
+  with width as well as height and the lanyard drifts a couple of percent), so the
+  lanyard was raised to `top: 16%` in CartoonAvatar to open it up.
+*/
+@media (min-width: 75em) {
+  .feed {
+    --board-h: clamp(560px, calc(100dvh - 150px), 820px);
+    --hang: calc(var(--board-h) * 0.420);
+    --hanger-h: 48px;
+  }
+}
+
+/* The scrap pinned to the board that the whole strand hangs from. */
+.hanger {
+  position: absolute;
+  top: calc(-1 * var(--hang));
+  left: 2px;
+  width: 172px;
+  height: var(--hanger-h);
+  z-index: 1;
+}
+
+.scrap {
+  position: absolute;
+  inset: 6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px 11px 26px;
+  text-align: left;
+  transform: rotate(-2.5deg);
+  transform-origin: 15px 4px;
+  background: hsl(46, 60%, 97%);
+  color: hsl(220, 22%, 20%);
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.32);
+  /* A torn lower edge rather than a clean rectangle. */
+  clip-path: polygon(
+    0 0, 100% 0, 100% 82%, 94% 96%, 88% 84%, 81% 97%, 74% 86%, 67% 98%, 60% 87%,
+    53% 97%, 46% 86%, 39% 98%, 32% 87%, 25% 97%, 18% 85%, 11% 96%, 5% 84%, 0 95%
+  );
+}
+
+/* Pushpin: domed head, a glint, and a shadow cast down the paper. */
+.pin {
+  position: absolute;
+  top: 0;
+  left: calc(var(--gutter) / 2 - 2px);
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  border-radius: 50%;
+  background: var(--pin-face);
+  box-shadow: var(--pin-shadow);
+  z-index: 2;
+}
+
+.months {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+/*
+  One continuous strand, hanging from the scrap above and dangling past the last
+  card. Drawn as a single element rather than per row, so the twist never seams.
+*/
+.yarn {
+  position: absolute;
+  /* Starts up at the pin and runs behind the scrap, so the torn edge can't leave a gap. */
+  top: calc(-1 * var(--hang) + 8px);
+  bottom: clamp(3rem, 8vw, 5rem);
+  left: calc(var(--gutter) / 2 - var(--strand) / 2);
+  width: var(--strand);
+  border-radius: calc(var(--strand) / 2);
+  background-image: var(--yarn-tex);
+  filter: drop-shadow(1px 1px 1.5px rgb(0 0 0 / 0.32));
+  z-index: 0;
+}
+
+/* The loose end, kicking out slightly and fraying away. */
+.yarn::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: var(--strand);
+  height: 34px;
+  border-radius: calc(var(--strand) / 2);
+  background-image: inherit;
+  transform: rotate(8deg);
+  transform-origin: top center;
+  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+}
+
+.rail {
+  position: relative;
+}
+
+.rail {
+  position: relative;
+}
+
+/* Each month is pinned to the board through the strand. */
+.monthPin {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  --pin-size: 13px;
+  width: var(--pin-size);
+  height: var(--pin-size);
+  margin-left: calc(var(--pin-size) / -2);
+  border-radius: 50%;
+  background: var(--pin-face);
+  box-shadow: var(--pin-shadow);
+  z-index: 1;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 clamp(10px, 1.8vw, 16px);
+  padding: clamp(14px, 2.2vw, 20px);
+  border-radius: 18px;
+  background: var(--colours_background_soft);
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.month {
+  margin: 0;
+  font-size: var(--fontSizes_h5);
+  font-weight: var(--fontWeights_thickest);
+  letter-spacing: 0.06em;
+}
+
+.year {
+  margin-left: 6px;
+  color: var(--colours_text_soft);
+  font-weight: var(--fontWeights_default);
+  letter-spacing: 0.08em;
+}
+
+.soFar,
+.record {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: var(--fontSizes_tiny);
+  letter-spacing: 0.06em;
+}
+
+.soFar {
+  background: var(--colours_primary_background_default);
+  color: var(--colours_primary_text_default);
+}
+
+.record {
+  background: var(--colours_secondary_background_default);
+  color: var(--colours_secondary_text_default);
+}
+
+/* Bento: tiles claim different amounts of space, dense flow closes the gaps. */
+.bento {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(82px, auto);
+  grid-auto-flow: dense;
+}
+
+@media (min-width: 48em) {
+  .bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+.w2 {
+  grid-column: span 2;
+}
+
+.h2 {
+  grid-row: span 2;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--colours_background_default);
+}
+
+/* Colour earns its place on the headline numbers. */
+.tonePrimary {
+  background: var(--colours_primary_background_default);
+
+  .statValue {
+    color: var(--colours_primary_text_default);
+  }
+
+  .label {
+    color: var(--colours_primary_text_default);
+    opacity: 0.75;
+  }
+}
+
+.toneSecondary {
+  background: var(--colours_secondary_background_default);
+
+  .statValue {
+    color: var(--colours_secondary_text_default);
+  }
+
+  .label {
+    color: var(--colours_secondary_text_default);
+    opacity: 0.75;
+  }
+}
+
+.label {
+  display: block;
+  color: var(--colours_text_soft);
+  font-size: var(--fontSizes_tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.statValue {
+  display: block;
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  font-weight: var(--fontWeights_thickest);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.textValue {
+  font-size: var(--fontSizes_default);
+  font-weight: var(--fontWeights_thick);
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.note {
+  display: block;
+  margin-top: 3px;
+  color: var(--colours_text_soft);
+  font-size: var(--fontSizes_tiny);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statValue + .label,
+.textValue + .label {
+  margin-top: 5px;
+}
+
+/* Top artist: the artwork fills the tile, the name sits over it. */
+.artistTile {
+  position: relative;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.hasCover {
+  padding: 0;
+  overflow: hidden;
+}
+
+.artistCover {
+  object-fit: cover;
+}
+
+.artistScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.4) 45%, rgb(0 0 0 / 0.05) 100%);
+}
+
+.artistText {
+  position: relative;
+}
+
+.hasCover .artistText {
+  padding: 12px 14px;
+}
+
+/* The scrim is dark in every theme, so this text is always light. */
+.hasCover .textValue,
+.hasCover .note,
+.hasCover .label {
+  color: hsl(0, 0%, 100%);
+}
+
+.hasCover .note,
+.hasCover .label {
+  opacity: 0.82;
+}
+
+.artistArt {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  align-self: flex-start;
+}
+
+.artistArt img,
+.artistArt > div {
+  width: 100%;
+  height: 100%;
+}
+
+.spark {
+  width: 100%;
+  flex: 1;
+  min-height: 30px;
+  margin-top: 6px;
+  align-self: stretch;
+  overflow: visible;
+}
+
+.sparkLine {
+  fill: none;
+  stroke: var(--colours_primary_text_default);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.sparkArea {
+  fill: var(--colours_primary_text_default);
+  opacity: 0.16;
+}
+
+.heatWrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.heat {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 9px);
+  grid-auto-columns: 9px;
+  gap: 2px;
+  align-self: flex-end;
+}
+
+.heatCell {
+  border-radius: 2px;
+  background: var(--colours_primary_background_active);
+
+  &[data-empty] {
+    background: transparent;
+  }
+
+  &[data-level='1'] {
+    background: var(--colours_primary_7);
+  }
+  &[data-level='2'] {
+    background: var(--colours_primary_9);
+  }
+  &[data-level='3'] {
+    background: var(--colours_primary_10);
+  }
+  &[data-level='4'] {
+    background: var(--colours_primary_text_default);
+  }
+}
+
+.sentinel {
+  height: 1px;
+}
+
+.loading {
+  padding: 14px 0 0 var(--gutter);
+  color: var(--colours_text_soft);
+  font-size: var(--fontSizes_small);
+}
+
+.skeleton {
+  height: 220px;
+  margin: 0 0 clamp(10px, 1.8vw, 16px);
+  border-radius: 18px;
+  background: var(--colours_background_soft);
+  opacity: 0.6;
+}
