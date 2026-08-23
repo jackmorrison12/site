@@ -9,6 +9,10 @@ export const {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      // GitHub now returns an RFC 9207 `iss` param on the OAuth callback. Auth.js only
+      // validates it against `provider.issuer`, falling back to "https://authjs.dev",
+      // so without this the callback fails with CallbackRouteError.
+      issuer: 'https://github.com/login/oauth',
     }),
   ],
 });
