@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import styles from './Corkboard/Corkboard.module.scss';
-import { getListeningPatterns, getSummaryStats, getTopArtists } from './wrapped/data';
+import { getListeningPatterns, getSummaryStats, getTopArtists, reportTz, yearRange } from './wrapped/data';
 
 const formatHour = (hour: number) => {
   const suffix = hour < 12 ? 'am' : 'pm';
@@ -16,7 +16,8 @@ export const MusicStats = () => (
 
 const MusicStatsAsync = async () => {
   const year = new Date().getFullYear();
-  const range = { startDate: new Date(year, 0, 1), endDate: new Date(year + 1, 0, 1) };
+  const range = yearRange(year);
+  const tz = reportTz(year);
 
   // The stats need the listens database; if it's unreachable the card falls
   // back to the one thing that's true without it.
@@ -27,7 +28,7 @@ const MusicStatsAsync = async () => {
     const [summary, topArtists, patterns] = await Promise.all([
       getSummaryStats(range),
       getTopArtists(range, 1),
-      getListeningPatterns(range),
+      getListeningPatterns(range, tz),
     ]);
     const peak = patterns.byHour.reduce<{ hour: number; count: number } | null>(
       (best, row) => (!best || row.count > best.count ? row : best),
