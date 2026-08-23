@@ -3,6 +3,7 @@ import { Layout } from '../components/Layout';
 import { GlobalStyle } from '../utils/styles/globalStyles';
 import { Providers } from './providers';
 import StyledComponentsRegistry from './registry';
+import { Analytics } from '@vercel/analytics/next';
 
 import { Caveat, Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -37,6 +38,7 @@ export default function RootLayout({ children, modal }: { children: ReactNode; m
             {modal}
           </StyledComponentsRegistry>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
