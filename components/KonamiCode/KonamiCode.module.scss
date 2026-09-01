@@ -1,0 +1,233 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 20, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.terminal {
+  width: 90%;
+  max-width: 700px;
+  height: 80vh;
+  background: #0d1117;
+  border: 2px solid #238636;
+  border-radius: 8px;
+  box-shadow:
+    0 0 30px rgba(35, 134, 54, 0.4),
+    inset 0 0 20px rgba(35, 134, 54, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  background: #161b22;
+  border-bottom: 2px solid #238636;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #7ee787;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #484f58;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #da3633;
+    color: white;
+  }
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #e6edf3;
+  text-align: center;
+
+  h2 {
+    color: #7ee787;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #8b949e;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hint {
+    color: #238636;
+    font-style: italic;
+  }
+}
+
+.playBtn,
+.menuBtn {
+  background: #238636;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s;
+  font-family: inherit;
+
+  &:hover {
+    background: #2ea043;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(35, 134, 54, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.menuBtn {
+  background: #484f58;
+  margin-left: 1rem;
+
+  &:hover {
+    background: #6e7681;
+    box-shadow: 0 0 15px rgba(110, 118, 129, 0.5);
+  }
+}
+
+.game {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.score {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #7ee787;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(126, 231, 135, 0.5);
+}
+
+.player {
+  position: absolute;
+  bottom: 5%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px #7ee787);
+  transition: left 0.1s ease-out;
+}
+
+.star {
+  position: absolute;
+  font-size: 1.5rem;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 8px #ffd700);
+  animation: twinkle 0.5s ease infinite alternate;
+}
+
+@keyframes twinkle {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.particle {
+  position: absolute;
+  font-size: 1rem;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(13, 17, 23, 0.95);
+  border: 2px solid #da3633;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(218, 54, 51, 0.4);
+
+  h2 {
+    color: #da3633;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #7ee787;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.instructions {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #484f58;
+  font-size: 0.9rem;
+}
+
+.footer {
+  background: #161b22;
+  border-top: 1px solid #238636;
+  padding: 8px 16px;
+  text-align: center;
+  color: #484f58;
+  font-size: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .terminal {
+    width: 95%;
+    height: 70vh;
+  }
+
+  .menu h2 {
+    font-size: 1.4rem;
+  }
+
+  .player {
+    font-size: 2rem;
+  }
+}
