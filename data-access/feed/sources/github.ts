@@ -73,7 +73,12 @@ export async function getGithubMonths(): Promise<Map<string, GithubMonth>> {
     })),
   );
 
-  await attachRepos(months);
+  // Top repo is a nice-to-have: if it fails, keep the contribution numbers.
+  try {
+    await attachRepos(months);
+  } catch (err) {
+    console.error('Failed to attach GitHub repos to the feed', err);
+  }
   return months;
 }
 
@@ -82,14 +87,18 @@ async function attachRepos(months: Map<string, GithubMonth>) {
   if (!(await tableExists('github_events'))) return;
 
   const res = await db.execute(sql`
-    WITH r AS (
-      SELECT to_char(date_trunc('month', created_at), 'YYYY-MM') AS mon,
+    WITH e AS (
+      SELECT to_char(date_trunc('month', created_at), 'YYYY-MM') AS mon, repo_name
+      FROM github_events
+    ),
+    r AS (
+      SELECT mon,
              repo_name,
              COUNT(*) AS n,
-             ROW_NUMBER() OVER (PARTITION BY date_trunc('month', created_at) ORDER BY COUNT(*) DESC) AS rn,
-             COUNT(*) OVER (PARTITION BY date_trunc('month', created_at)) AS repos
-      FROM github_events
-      GROUP BY 1, 2
+             ROW_NUMBER() OVER (PARTITION BY mon ORDER BY COUNT(*) DESC, repo_name) AS rn,
+             COUNT(*) OVER (PARTITION BY mon) AS repos
+      FROM e
+      GROUP BY mon, repo_name
     )
     SELECT mon, repo_name, n, repos FROM r WHERE rn = 1`);
 
