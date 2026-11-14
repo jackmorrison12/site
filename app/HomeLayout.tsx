@@ -12,6 +12,7 @@ type Props = {
   musicStatsSlot: ReactNode;
   contributionsSlot: ReactNode;
   contributionsCardSlot: ReactNode;
+  feedSlot: ReactNode;
 };
 
 export const HomeLayout = ({
@@ -19,6 +20,7 @@ export const HomeLayout = ({
   musicStatsSlot,
   contributionsSlot,
   contributionsCardSlot,
+  feedSlot,
 }: Props) => {
   // A story stays up until you pick another object or click the same one again.
   const [active, setActive] = useState<HotspotId | null>(null);
@@ -35,6 +37,7 @@ export const HomeLayout = ({
         >
           <CartoonAvatar active={active} onActiveChange={setActive} contributionsSlot={contributionsSlot} />
         </Corkboard>
+        {feedSlot}
       </div>
     </MotionConfig>
   );

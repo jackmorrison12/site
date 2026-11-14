@@ -3,6 +3,7 @@ import 'server-only';
 import { count, desc, eq, gte, and, lt, sql } from 'drizzle-orm';
 import { db } from 'drizzle/db';
 import { listens, tracks } from 'drizzle/schema';
+import { januaryUtcOffset, reportTz } from 'utils/reportTz';
 import type {
   DateRange,
   SummaryStats,
@@ -31,16 +32,12 @@ const MONTH_NAMES = [
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-export type ReportTz = 'America/New_York' | 'Europe/London';
-
-// I lived in London until March 2024; from 2024 onwards in NY.
-export function reportTz(year: number): ReportTz {
-  return year >= 2024 ? 'America/New_York' : 'Europe/London';
-}
+export type { ReportTz } from 'utils/reportTz';
+export { reportTz };
 
 export function yearRange(year: number): DateRange {
   // Jan 1 is always standard time: UTC-5 for NY, UTC+0 for London.
-  const offset = reportTz(year) === 'America/New_York' ? 5 : 0;
+  const offset = januaryUtcOffset(reportTz(year));
   return {
     startDate: new Date(Date.UTC(year, 0, 1, offset)),
     endDate: new Date(Date.UTC(year + 1, 0, 1, offset)),
