@@ -1,0 +1,32 @@
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.country {
+  fill: var(--colours_secondary_background_default);
+  stroke: var(--colours_background_default);
+  stroke-width: 0.5;
+}
+
+.visited {
+  fill: var(--colours_primary_background_active);
+}
+
+.route {
+  fill: none;
+  stroke: var(--colours_primary_text_default);
+  stroke-linecap: round;
+  opacity: 0.55;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.place {
+  fill: var(--colours_secondary_default);
+  stroke: var(--colours_background_default);
+  stroke-width: 1;
+}
